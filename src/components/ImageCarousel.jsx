@@ -1,18 +1,28 @@
-import React from 'react'
-import Slider from 'react-animated-slider';
-import 'react-animated-slider/build/horizontal.css';
-
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 
 export default function ImageCarousel() {
- const images = ["public/img/test3.jpg", "public/img/test2.webp", "public/img/testimonials.png"];
-
   return (
-    <Slider autoplay={3000}>
-{
-    images.map((item,index)=>{
-        return <img key={index} src={item}/>
-    })
-}
-</Slider>
-  )
+    <Carousel
+      autoPlay="true"
+      infiniteLoop="true"
+      showArrows={false}
+      showStatus={false}
+      showIndicators={false}
+      showThumbs={false}
+      width={400}
+    >
+      <img
+        className="rounded-xl shadow-xl border"
+        src="public/img/test2.webp"
+      />
+
+      <img className="rounded-xl shadow-xl border" src="public/img/test3.jpg" />
+
+      <img
+        className="rounded-xl shadow-xl border"
+        src="public/img/testimonials.png"
+      />
+    </Carousel>
+  );
 }
