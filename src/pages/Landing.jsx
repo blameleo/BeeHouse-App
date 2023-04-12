@@ -20,7 +20,7 @@ export default function Landing() {
   });
 
   return (
-    <div className="bg-yellow-500">
+    <div className="bg-yellow-500 h-screen">
       <div className="px-10 bg-yellow-500   pb-40">
         <Navbar />
         <div className="grid sm:grid-cols-2 place-items-center pt-20  h-96">
@@ -36,7 +36,7 @@ export default function Landing() {
         </div>
       </div>
 
-      <div className="bg-yellow-500 flex justify-around items-center  text-2xl w-4/6 mx-auto h-28 text-gray-700 font-semibold">
+      <div className="bg-yellow-500 flex justify-around items-center  text-2xl w-4/6 h-auto mx-auto  text-gray-700 font-semibold">
         <p>Trusted by :</p>
         <IoLogoAmazon />
         <SiNetflix />
