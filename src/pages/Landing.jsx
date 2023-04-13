@@ -23,14 +23,14 @@ export default function Landing() {
     <div className="bg-yellow-500 h-screen">
       <div className="px-10 bg-yellow-500   pb-40">
         <Navbar />
-        <div className="grid sm:grid-cols-2 place-items-center pt-20  h-96">
-          <div className=" h-32 w-full">
+        <div className="grid sm:grid-cols-2 gap-y-20 sm:gap-y-0 place-items-center pt-20  h-96 border">
+          <div className=" h-32 w-full border">
             <p className="font-volkhorn sm:text-6xl text-3xl">
               {text}
               <Cursor cursorColor="white" />
             </p>
           </div>
-          <div className="">
+          <div className="border border-red-500 ">
             <ImageCarousel />
           </div>
         </div>

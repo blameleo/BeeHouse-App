@@ -1,14 +1,11 @@
 import React from "react";
 import Button from "./Button";
-import { FaForumbee } from "react-icons/fa";
+import Logo from "./Logo";
 
 export default function Navbar() {
   return (
     <nav className="py-3 flex justify-between">
-      <div className="flex items-start">
-        <FaForumbee className="text-3xl pr-1 "/>
-        <h1 className="font-volkhorn bg-yellow-500 text-3xl ">BeeHouse.</h1>
-      </div>
+<Logo/>
 
       <div className="flex items-center  w-32 justify-between">
         <Button name="Sign in" />

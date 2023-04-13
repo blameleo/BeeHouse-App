@@ -10,10 +10,10 @@ export default function ImageCarousel() {
       showStatus={false}
       showIndicators={false}
       showThumbs={false}
-      width={400}
+      width={300}
     >
       <img
-        className="rounded-xl shadow-xl border"
+        className="rounded-xl shadow-xl border "
         src="public/img/test2.webp"
       />
 
