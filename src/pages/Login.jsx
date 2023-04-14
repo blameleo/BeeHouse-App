@@ -12,20 +12,32 @@ export default function Login() {
           <form className="flex flex-col justify-around h-4/6 w-10/12 sm:w-4/12">
             <div>
               <h1 className="text-left font-bold text-lg mb-2">Login</h1>
-              <p className="text-left text-gray-400">Please enter your details</p>
+              <p className="text-left text-gray-400">
+                Please enter your details
+              </p>
             </div>
             <div className="flex flex-col">
               <label htmlFor="" className="text-sm">
                 Email
               </label>
-              <input placeholder="Enter your email" type="email" name="" className="border rounded placeholder:text-sm placeholder:pl-3" />
+              <input
+                placeholder="Enter your email"
+                type="email"
+                name=""
+                className="border rounded placeholder:text-sm placeholder:pl-3"
+              />
             </div>
 
             <div className="flex flex-col">
               <label htmlFor="" className="text-sm">
                 Password
               </label>
-              <input placeholder="********" type="password" name="" className="border rounded h-8 placeholder:text-sm placeholder:pl-3" />
+              <input
+                placeholder="********"
+                type="password"
+                name=""
+                className="border rounded h-8 placeholder:text-sm placeholder:pl-3"
+              />
             </div>
 
             <a href="" className="text-xs text-right text-yellow-500">
@@ -57,7 +69,7 @@ export default function Login() {
         <img
           src="public/img/model1.jpg"
           alt=""
-          className="w-full h-full object-contain"
+          className="w-full h-full sm:object-contain lg:object-fill "
         />
       </div>
     </div>
