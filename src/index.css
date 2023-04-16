@@ -1,3 +1,24 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Vollkorn:wght@900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.font-nunito {
+    font-family: nunito, sans-serif;
+  }
+
+  .font-volkhorn {
+    font-family: 'Vollkorn', serif;
+  }
+
+
+  body{
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
