@@ -6,8 +6,17 @@ import { IoLogoAmazon, IoLogoSass } from "react-icons/io5";
 import { SiNetflix } from "react-icons/si";
 import { SiUbereats } from "react-icons/si";
 import { GoLogoGithub } from "react-icons/go";
+import Popup from "../components/Popup";
+
+
 
 export default function Landing() {
+  
+ const [openPopup, setOpenPopup]= useState(false)
+
+  
+  
+
   // const images = ["public/img/test3.jpg", "public/img/test2.webp", "public/img/testimonials.png"];
   const [text, count] = useTypewriter({
     words: [
@@ -19,10 +28,13 @@ export default function Landing() {
     delaySpeed: 2000,
   });
 
+ 
   return (
     <div className="bg-yellow-500 h-screen">
       <div className="px-10 bg-yellow-500   pb-40">
-        <Navbar />
+        <Navbar
+      
+        />
         <div className="grid sm:grid-cols-2 gap-y-20 sm:gap-y-0 place-items-center pt-20  h-96 ">
           <div className=" h-32 w-full ">
             <p className="font-volkhorn sm:text-6xl text-3xl">
@@ -44,6 +56,13 @@ export default function Landing() {
         <IoLogoSass />
         <GoLogoGithub />
       </div>
+      <Popup
+        openPopup={openPopup}
+        setOpenPopup={setOpenPopup}
+      >
+
+      </Popup>
+      
     </div>
   );
 }
