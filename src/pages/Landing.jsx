@@ -8,14 +8,17 @@ import { SiUbereats } from "react-icons/si";
 import { GoLogoGithub } from "react-icons/go";
 import Popup from "../components/Popup";
 
-
+import { Audio } from "react-loader-spinner";
 
 export default function Landing() {
-  
- const [openPopup, setOpenPopup]= useState(false)
+  const [openPopup, setOpenPopup] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  
-  
+  useEffect(() => {
+    setInterval(() => {
+      setLoading(false);
+    }, 1000);
+  });
 
   // const images = ["public/img/test3.jpg", "public/img/test2.webp", "public/img/testimonials.png"];
   const [text, count] = useTypewriter({
@@ -28,13 +31,22 @@ export default function Landing() {
     delaySpeed: 2000,
   });
 
- 
   return (
-    <div className="bg-yellow-500 h-screen">
+    <div     className='bg-yellow-500 h-screen'
+    >
+ {loading ? <div className="flex justify-center h-screen items-center">
+  <Audio
+    height = "80"
+    width = "80"
+    radius = "9"
+    color = 'black'
+    ariaLabel = 'three-dots-loading'     
+    wrapperStyle
+    wrapperClass
+  />
+ </div>  : <div className="bg-yellow-500 h-screen">
       <div className="px-10 bg-yellow-500   pb-40">
-        <Navbar
-      
-        />
+        <Navbar />
         <div className="grid sm:grid-cols-2 gap-y-20 sm:gap-y-0 place-items-center pt-20  h-96 ">
           <div className=" h-32 w-full ">
             <p className="font-volkhorn sm:text-6xl text-3xl">
@@ -56,13 +68,9 @@ export default function Landing() {
         <IoLogoSass />
         <GoLogoGithub />
       </div>
-      <Popup
-        openPopup={openPopup}
-        setOpenPopup={setOpenPopup}
-      >
-
-      </Popup>
-      
+      <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}></Popup>
+    </div>}
     </div>
+   
   );
 }
