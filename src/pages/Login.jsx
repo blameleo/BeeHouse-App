@@ -1,15 +1,37 @@
-import React from "react";
+import React , {useState} from "react";
 import Logo from "../components/Logo";
 import Button from "../components/Button";
+import {   useNavigate} from "react-router-dom";
+import { UserAuth } from "../context/AuthContext";
+
 
 export default function Login() {
+  const [email,setEmail] = useState("")
+  const [password,setPassword] = useState("")
+  const [error,setError] = useState("")
+  const navigate = useNavigate()
+
+
+  const {logIn} = UserAuth()
+
+  const  handleSubmit = async (e) => {
+   e.preventDefault()
+   setError("")
+   try {
+     await logIn(email,password)
+     navigate('/home')
+   } catch (e) {
+     setError(e.message)
+     console.log(error);
+   }
+ }
   return (
     <div className="grid sm:grid-cols-3 h-screen  ">
       <div className="  h-screen col-span-2 p-2 ">
         <Logo />
 
         <div className="flex justify-center items-center h-5/6 ">
-          <form className="flex flex-col justify-around h-4/6 w-10/12 sm:w-4/12">
+          <form onSubmit={handleSubmit} className="flex flex-col justify-around h-4/6 w-10/12 sm:w-4/12">
             <div>
               <h1 className="text-left font-bold text-lg mb-2">Login</h1>
               <p className="text-left text-gray-400">
@@ -25,6 +47,8 @@ export default function Login() {
                 type="email"
                 name=""
                 className="border rounded placeholder:text-sm placeholder:pl-3"
+                onChange={(e)=>setEmail(e.target.value)}
+
               />
             </div>
 
@@ -37,6 +61,8 @@ export default function Login() {
                 type="password"
                 name=""
                 className="border rounded h-8 placeholder:text-sm placeholder:pl-3"
+                onChange={(e)=>setPassword(e.target.value)}
+
               />
             </div>
 
