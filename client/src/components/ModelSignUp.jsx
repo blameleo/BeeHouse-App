@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import RegistrationButton from "./RegistrationButton";
-import { UserAuth } from "../context/AuthContext";
-import  { useNavigate} from "react-router-dom"
-import { db } from "../firebase";
-import { collection,addDoc } from "firebase/firestore";
-
-
-location
-
+import { useNavigate } from "react-router-dom";
 
 function ModelSignUp() {
   const [modelSignUpData, setModelSignUpData] = useState({
@@ -17,17 +10,9 @@ function ModelSignUp() {
     password: "",
     confirmPassword: "",
   });
-  const [error, setError] = useState("");
-  const [info, setInfo] = useState("")
 
+  const navigate = useNavigate();
 
-  const usersCollectionRef = collection(db, "users")
-
-const navigate = useNavigate()
-
-
-
-  const { createUser } = UserAuth();
   const handleChange = (e) => {
     setModelSignUpData((prev) => {
       return {
@@ -39,26 +24,6 @@ const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    setError("");
-    try {
-      await createUser(modelSignUpData.email, modelSignUpData.password);
-      await addDoc(usersCollectionRef,modelSignUpData)
-      setModelSignUpData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
-      setInfo('user created succesfully')
-
-      navigate('/login')
- 
-    } catch (e) {
-      setError(e.message);
-      console.log(error);
-    }
   };
   return (
     <form className=" " onSubmit={handleSubmit}>
@@ -132,7 +97,7 @@ const navigate = useNavigate()
         className=" mb-5  border p-2 w-96  border-1 border-black rounded-md  "
       />
       <br></br>
-      <p className="text-center text-xs text-green-500">{info}</p>
+      {/* <p className="text-center text-xs text-green-500">{info}</p> */}
 
       <div className="flex justify-center mt-7">
         <RegistrationButton label="Sign up" />

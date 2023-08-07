@@ -12,16 +12,13 @@ export default function ImageCarousel() {
       showThumbs={false}
       width={300}
     >
-      <img
-        className="rounded-xl shadow-xl border "
-        src="public/img/test2.webp"
-      />
+      <img className="rounded-xl shadow-xl border " src="/img/test2.webp" />
 
-      <img className="rounded-xl shadow-xl border" src="public/img/test3.jpg" />
+      <img className="rounded-xl shadow-xl border" src="/img/test3.jpg" />
 
       <img
         className="rounded-xl shadow-xl border"
-        src="public/img/testimonials.png"
+        src="/img/testimonials.png"
       />
     </Carousel>
   );
