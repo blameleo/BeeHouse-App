@@ -1,6 +1,9 @@
 import React from "react";
 // import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import SecNavbar from "../components/SecNavbar";
+import SearchBar from "../components/SearchBar";
 
 export default function Home() {
   // const { user, logOut } = UserAuth();
@@ -15,14 +18,9 @@ export default function Home() {
   //   }
   // };
   return (
-    <div className="grid place-items-center">
-      <h1 className="text-green-700 text-center py-5">
-        you logged in succesfully
-      </h1>
-      <p>User Email: {user?.email} </p>
-      <button onClick={handleLogout} className="border p-2 border-black w-32 ">
-        log out{" "}
-      </button>
+    <div className="">
+      <SecNavbar />
+      <SearchBar />
     </div>
   );
 }
