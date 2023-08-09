@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { BsSearch, BsGeoAlt } from "react-icons/bs";
+import { BsSearch, BsGeoAlt, BsFillFunnelFill } from "react-icons/bs";
+import { GiBee } from "react-icons/gi";
 
 export default function SearchBar() {
   const [expandedInputs, setExpandedInputs] = useState({});
@@ -22,15 +23,17 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="bg-yellow-500 py-10 grid place-items-center px-6">
+    <div className=" bg-gray-800 text-yellow-500 py-10 grid place-items-center  px-6">
       <form
         action=""
-        className={`flex    ${isInputExpanded("designer") ? "" : ""}`}
+        className={`flex  items-center  ${
+          isInputExpanded("designer") ? "" : ""
+        }`}
       >
         <div
-          className={`flex items-center transition-all duration-100 ease-in-out delay-75  w-[200px]   border-gray-800 ${
+          className={`flex  items-center transition-all duration-100 ease-in-out delay-75  w-[200px]   border-gray-800 ${
             isInputExpanded("designer")
-              ? " w-[700px]"
+              ? " md:w-[700px] w-[250px]"
               : isInputExpanded("workLocation")
               ? "w-[50px]"
               : isInputExpanded("experience")
@@ -40,11 +43,11 @@ export default function SearchBar() {
               : ""
           }`}
         >
-          <div className="border p-2 rounded-full border-gray-700">
+          <div className="border p-2 rounded-full border-yellow-500">
             <BsSearch />
           </div>
           <input
-            className={`ml-2 placeholder:text-gray-600 outline-none  bg-yellow-500 h-10 ${
+            className={`ml-2 placeholder:text-gray-400 outline-none  bg-gray-800 h-10 ${
               isInputExpanded("workLocation")
                 ? "hidden"
                 : isInputExpanded("experience")
@@ -60,7 +63,7 @@ export default function SearchBar() {
           />
         </div>
         <div
-          className={`flex pl-4 items-center border-l transition-all delay-75 duration-100 ease-in-out border-gray-800 ${
+          className={`md:flex hidden pl-4 items-center border-l transition-all delay-75 duration-100 ease-in-out border-gray-400 ${
             isInputExpanded("designer")
               ? "pl-0 border-none"
               : isInputExpanded("workLocation")
@@ -72,11 +75,11 @@ export default function SearchBar() {
               : ""
           }`}
         >
-          <div className="border p-2 rounded-full border-gray-700">
+          <div className="border p-2 rounded-full border-yellow-500">
             <BsGeoAlt />
           </div>
           <input
-            className={`ml-2 placeholder:text-gray-600 outline-none  bg-yellow-500 h-10 ${
+            className={`ml-2 placeholder:text-gray-400 outline-none  bg-gray-800 h-10 ${
               isInputExpanded("designer")
                 ? "hidden"
                 : isInputExpanded("experience")
@@ -93,7 +96,7 @@ export default function SearchBar() {
         </div>
 
         <div
-          className={`flex pl-4 items-center transition-all delay-75 duration-100 ease-in-out border-l border-gray-800 ${
+          className={`md:flex hidden pl-4 items-center transition-all delay-75 duration-100 ease-in-out border-l border-gray-400 ${
             isInputExpanded("designer")
               ? "pl-2  border-none"
               : isInputExpanded("workLocation")
@@ -105,11 +108,11 @@ export default function SearchBar() {
               : ""
           }`}
         >
-          <div className="border p-2 rounded-full border-gray-700">
+          <div className="border p-2 rounded-full border-yellow-500">
             <BsGeoAlt />
           </div>
           <input
-            className={`ml-2 placeholder:text-gray-600 outline-none  bg-yellow-500 h-10 ${
+            className={`ml-2 placeholder:text-gray-400 outline-none  bg-gray-800 h-10 ${
               isInputExpanded("designer")
                 ? "hidden"
                 : isInputExpanded("workLocation")
@@ -126,7 +129,7 @@ export default function SearchBar() {
         </div>
 
         <div
-          className={`flex pl-4 items-center border-l transition-all delay-75 duration-100 ease-in-ou border-gray-800 ${
+          className={`md:flex hidden pl-4 items-center border-l transition-all delay-75 duration-100 ease-in-ou border-gray-400 ${
             isInputExpanded("designer")
               ? "pl-2 border-none"
               : isInputExpanded("workLocation")
@@ -138,11 +141,11 @@ export default function SearchBar() {
               : ""
           }`}
         >
-          <div className="border p-2 rounded-full border-gray-700">
+          <div className="border p-2 rounded-full border-yellow-500">
             <BsGeoAlt />
           </div>
           <input
-            className={`ml-2 placeholder:text-gray-600 outline-none  bg-yellow-500 h-10 ${
+            className={`ml-2 placeholder:text-gray-400 outline-none  bg-gray-800 h-10 ${
               isInputExpanded("designer")
                 ? "hidden"
                 : isInputExpanded("workLocation")
@@ -158,10 +161,10 @@ export default function SearchBar() {
           />
         </div>
 
-        <div className="flex-col border items-start ">
+        <div className="hidden lg:block mr-6">
           <label
             for="small-range"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-700"
+            className="block mb-2 ml-4 text-sm font-medium text-gray-400 dark:text-gray-300"
           >
             Pay range
           </label>
@@ -169,9 +172,11 @@ export default function SearchBar() {
             id="small-range"
             type="range"
             value="50"
-            className="w-[200px] ml-4 h-1   bg-gray-200 rounded-lg appearance-none cursor-pointer range-sm dark:bg-gray-800"
+            className="w-[170px] ml-4 h-1   bg-gray-200 rounded-lg appearance-none cursor-pointer range-sm dark:bg-gray-800"
           />
         </div>
+        <BsFillFunnelFill className="md:hidden block mr-2 text-[20px] text-gray-500" />
+        <GiBee className="text-[35px] cursor-pointer hover:text-gray-400" />
       </form>
     </div>
   );
