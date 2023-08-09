@@ -6,9 +6,7 @@ function Jobs() {
   return (
     <div className="mt-44   bg-[url('/img/beehive-bg1.jpeg')] bg-contain bg-no   flex justify-between ">
       <div className=" w-[400px] hidden md:block h-screen p-5">
-        <div className="grid place-items-center border border-black h-[200px] rounded-xl mb-4">
-          ads go here
-        </div>
+        <div className=" h-[200px] rounded-xl mb-4 bg-[url('/img/adpic.jpg')] bg-cover bg-no-repeat"></div>
 
         <div className="grid place-items-center border border-black h-[350px] rounded-xl">
           <h1>filter goes here</h1>
