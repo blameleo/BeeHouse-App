@@ -23,7 +23,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div className=" bg-gray-800 text-yellow-500 py-10 grid place-items-center  px-6">
+    <div className=" bg-black fixed z-20 w-full top-12 text-yellow-500 py-10 grid place-items-center  px-6">
       <form
         action=""
         className={`flex  items-center  ${
@@ -47,7 +47,7 @@ export default function SearchBar() {
             <BsSearch />
           </div>
           <input
-            className={`ml-2 placeholder:text-gray-400 outline-none  bg-gray-800 h-10 ${
+            className={`ml-2 placeholder:text-gray-400 outline-none  bg-black h-10 ${
               isInputExpanded("workLocation")
                 ? "hidden"
                 : isInputExpanded("experience")
@@ -79,7 +79,7 @@ export default function SearchBar() {
             <BsGeoAlt />
           </div>
           <input
-            className={`ml-2 placeholder:text-gray-400 outline-none  bg-gray-800 h-10 ${
+            className={`ml-2 placeholder:text-gray-400 outline-none  bg-black h-10 ${
               isInputExpanded("designer")
                 ? "hidden"
                 : isInputExpanded("experience")
@@ -112,7 +112,7 @@ export default function SearchBar() {
             <BsGeoAlt />
           </div>
           <input
-            className={`ml-2 placeholder:text-gray-400 outline-none  bg-gray-800 h-10 ${
+            className={`ml-2 placeholder:text-gray-400 outline-none  bg-black h-10 ${
               isInputExpanded("designer")
                 ? "hidden"
                 : isInputExpanded("workLocation")
@@ -145,7 +145,7 @@ export default function SearchBar() {
             <BsGeoAlt />
           </div>
           <input
-            className={`ml-2 placeholder:text-gray-400 outline-none  bg-gray-800 h-10 ${
+            className={`ml-2 placeholder:text-gray-400 outline-none  bg-black h-10 ${
               isInputExpanded("designer")
                 ? "hidden"
                 : isInputExpanded("workLocation")
@@ -172,7 +172,7 @@ export default function SearchBar() {
             id="small-range"
             type="range"
             value="50"
-            className="w-[170px] ml-4 h-1   bg-gray-200 rounded-lg appearance-none cursor-pointer range-sm dark:bg-gray-800"
+            className="w-[170px] ml-4 h-1  bg-gray-200 rounded-lg appearance-none cursor-pointer range-sm dark:bg-gray-800"
           />
         </div>
         <BsFillFunnelFill className="md:hidden block mr-2 text-[20px] text-gray-500" />

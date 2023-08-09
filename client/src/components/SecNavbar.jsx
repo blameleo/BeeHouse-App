@@ -4,7 +4,7 @@ import { BsGeoAlt, BsGear, BsBell } from "react-icons/bs";
 import { GiTreeBeehive } from "react-icons/gi";
 function SecNavbar() {
   return (
-    <div className="bg-gray-800 text-yellow-500 flex items-center justify-between p-4 w-full">
+    <div className="bg-black fixed top-0 z-30 text-yellow-500 flex items-center justify-between p-4 w-full">
       <div className="flex items-center ">
         <Logo />
 
@@ -24,10 +24,10 @@ function SecNavbar() {
         <div className="flex  w-[140px] justify-around items-center">
           <div className="bg-[url('/img/profilepic.jpeg')] w-7 h-7  rounded-full bg-cover bg-no-repeat"></div>
 
-          <div className="border rounded-full  border-yellow-200 w-7 h-7 grid place-items-center">
+          <div className="border rounded-full  border-yellow-500 w-7 h-7 grid place-items-center">
             <BsGear />
           </div>
-          <div className="border rounded-full  border-yellow-200 w-7 h-7 grid place-items-center">
+          <div className="border rounded-full  border-yellow-500 w-7 h-7 grid place-items-center">
             <BsBell />
           </div>
         </div>

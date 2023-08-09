@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import SecNavbar from "../components/SecNavbar";
 import SearchBar from "../components/SearchBar";
+import Jobs from "../components/Jobs";
 
 export default function Home() {
   // const { user, logOut } = UserAuth();
@@ -18,9 +19,10 @@ export default function Home() {
   //   }
   // };
   return (
-    <div className="">
+    <div>
       <SecNavbar />
       <SearchBar />
+      <Jobs />
     </div>
   );
 }
