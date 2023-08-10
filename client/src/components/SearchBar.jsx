@@ -57,7 +57,7 @@ export default function SearchBar() {
                 : ""
             }`}
             type="text"
-            placeholder="Designer"
+            placeholder="Search gig by title"
             onClick={() => handleInputClick("designer")}
             onBlur={() => handleInputBlur("designer")}
           />
@@ -89,7 +89,7 @@ export default function SearchBar() {
                 : ""
             }`}
             type="text"
-            placeholder="work location"
+            placeholder=" location"
             onClick={() => handleInputClick("workLocation")}
             onBlur={() => handleInputBlur("workLocation")}
           />
@@ -122,13 +122,13 @@ export default function SearchBar() {
                 : ""
             }`}
             type="text"
-            placeholder="Experience"
+            placeholder="company"
             onClick={() => handleInputClick("experience")}
             onBlur={() => handleInputBlur("experience")}
           />
         </div>
 
-        <div
+        {/* <div
           className={`md:flex hidden pl-4 items-center border-l transition-all delay-75 duration-100 ease-in-ou border-gray-400 ${
             isInputExpanded("designer")
               ? "pl-2 border-none"
@@ -159,7 +159,7 @@ export default function SearchBar() {
             onClick={() => handleInputClick("perMonth")}
             onBlur={() => handleInputBlur("perMonth")}
           />
-        </div>
+        </div> */}
 
         <div className="hidden lg:block mr-6">
           <label
