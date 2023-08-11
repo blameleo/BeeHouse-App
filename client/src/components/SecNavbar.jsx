@@ -68,12 +68,11 @@ function SecNavbar() {
                     aria-labelledby="dropdownDefaultButton"
                   >
                     <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-purple-600 dark:hover:text-white"
-                      >
-                        Settings
-                      </a>
+                      <Link to="/settings">
+                        <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-purple-600 dark:hover:text-white">
+                          Settings
+                        </a>
+                      </Link>
                     </li>
 
                     <li>
