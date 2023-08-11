@@ -32,45 +32,47 @@ export default function Landing() {
   });
 
   return (
-    <div     className='bg-yellow-500 h-screen'
-    >
- {loading ? <div className="flex justify-center h-screen items-center">
-  <Audio
-    height = "80"
-    width = "80"
-    radius = "9"
-    color = 'black'
-    ariaLabel = 'three-dots-loading'     
-    wrapperStyle
-    wrapperClass
-  />
- </div>  : <div className="bg-yellow-500 h-screen">
-      <div className="px-10 bg-yellow-500   pb-40">
-        <Navbar />
-        <div className="grid sm:grid-cols-2 gap-y-20 sm:gap-y-0 place-items-center pt-20  h-96 ">
-          <div className=" h-32 w-full ">
-            <p className="font-volkhorn sm:text-6xl text-3xl">
-              {text}
-              <Cursor cursorColor="white" />
-            </p>
-          </div>
-          <div className=" ">
-            <ImageCarousel />
-          </div>
+    <div className="bg-yellow-500 h-screen">
+      {loading ? (
+        <div className="flex justify-center h-screen items-center">
+          <Audio
+            height="80"
+            width="80"
+            radius="9"
+            color="black"
+            ariaLabel="three-dots-loading"
+            wrapperStyle
+            wrapperClass
+          />
         </div>
-      </div>
+      ) : (
+        <div className="bg-yellow-500 h-screen">
+          <div className="px-10 bg-yellow-500   pb-40">
+            <Navbar />
+            <div className="grid sm:grid-cols-2 gap-y-20 sm:gap-y-0 place-items-center pt-20  h-96 ">
+              <div className=" h-32 w-full ">
+                <p className="font-volkhorn sm:text-6xl text-3xl">
+                  {text}
+                  <Cursor cursorColor="white" />
+                </p>
+              </div>
+              <div className=" ">
+                <ImageCarousel />
+              </div>
+            </div>
+          </div>
 
-      <div className="bg-yellow-500 flex justify-around items-center  text-2xl w-4/6 h-auto mx-auto  text-gray-700 font-semibold">
-        <p>Trusted by :</p>
-        <IoLogoAmazon />
-        <SiNetflix />
-        <SiUbereats />
-        <IoLogoSass />
-        <GoLogoGithub />
-      </div>
-      <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}></Popup>
-    </div>}
+          <div className="bg-yellow-500 flex justify-around items-center  text-2xl w-4/6 h-auto mx-auto  text-gray-700 font-semibold">
+            <p>Trusted by :</p>
+            <IoLogoAmazon />
+            <SiNetflix />
+            <SiUbereats />
+            <IoLogoSass />
+            <GoLogoGithub />
+          </div>
+          <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}></Popup>
+        </div>
+      )}
     </div>
-   
   );
 }

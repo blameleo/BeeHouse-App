@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import RegistrationButton from "./RegistrationButton";
 import { UserAuth } from "../context/AuthContext";
 import  { useNavigate} from "react-router-dom"
+import { db } from "../firebase";
+import { collection,addDoc } from "firebase/firestore";
 
 
-
-
+location
 
 
 function ModelSignUp() {
@@ -18,6 +19,9 @@ function ModelSignUp() {
   });
   const [error, setError] = useState("");
   const [info, setInfo] = useState("")
+
+
+  const usersCollectionRef = collection(db, "users")
 
 const navigate = useNavigate()
 
@@ -39,6 +43,7 @@ const navigate = useNavigate()
     setError("");
     try {
       await createUser(modelSignUpData.email, modelSignUpData.password);
+      await addDoc(usersCollectionRef,modelSignUpData)
       setModelSignUpData({
         firstName: "",
         lastName: "",
