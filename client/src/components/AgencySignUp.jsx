@@ -1,24 +1,22 @@
 import React from "react";
 import RegistrationButton from "../components/RegistrationButton";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function AgencySignUp() {
   const [agencySignUpData, setAgencySignUpData] = React.useState({
     agencyName: "",
     email: "",
+    type: "agency",
     location: "",
     password: "",
     confirmPassword: "",
   });
 
   const [error, setError] = React.useState("");
-  const [info, setInfo] = React.useState("");
-
-  const usersCollectionRef = collection(db, "users");
 
   const navigate = useNavigate();
 
-  const { createUser } = UserAuth();
   const handleChange = (e) => {
     setAgencySignUpData((prev) => {
       return {
@@ -30,20 +28,10 @@ function AgencySignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setError("");
     try {
-      await createUser(agencySignUpData.email, agencySignUpData.password);
-      await addDoc(usersCollectionRef, agencySignUpData);
-      setAgencySignUpData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
-      setInfo("Agency profile successfully created ");
-
-      navigate("/login");
+      await axios.post("http://localhost:4000/auth/register", agencySignUpData);
+      alert("User is registered");
+      navigate("/agency");
     } catch (e) {
       setError(e.message);
       console.log(error);

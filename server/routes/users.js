@@ -7,7 +7,8 @@ const UserModel = require("../models/User.js");
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
-  const { email, password, firstName, lastName, type } = req.body;
+  const { email, password, firstName, lastName, type, agencyName, location } =
+    req.body;
   const user = await UserModel.findOne({ email });
   if (user) {
     return res.json({ message: "user already exists!" });
@@ -19,6 +20,8 @@ router.post("/register", async (req, res) => {
     password: hashedPassword,
     firstName,
     lastName,
+    agencyName,
+    location,
     type,
   });
   await newUser.save();
