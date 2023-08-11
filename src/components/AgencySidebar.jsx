@@ -1,11 +1,13 @@
 import React from 'react'
 import Logo from './Logo'
+import {FaForumbee} from 'react-icons/fa'
 
 function AgencySidebar() {
   return (
-    <div className='w-[250px] bg-white z-10 shadow-2xl h-screen rounded rounded-tr-[120px] '>
+    <div className='w-[250px] hidden md:block bg-white z-10 shadow-2xl h-screen  rounded-tr-[120px] '>
         <div className='mt-3 ml-2'>
-        <Logo agencystyle=""/>
+        <Logo />
+       
         </div>
         
         <nav className=" text-black w-1/6 py-4 px-2 ">
