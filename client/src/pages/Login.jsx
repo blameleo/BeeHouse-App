@@ -4,6 +4,8 @@ import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 // import { UserAuth } from "../context/AuthContext";
 import { Audio } from "react-loader-spinner";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -11,6 +13,7 @@ export default function Login() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [_, setCookies] = useCookies(["access_token"]);
 
   useEffect(() => {
     setInterval(() => {
@@ -20,7 +23,20 @@ export default function Login() {
 
   // const { logIn } = UserAuth();
 
-  const handleSubmit = async (e) => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:4000/auth/login", {
+        email,
+        password,
+      });
+      setCookies("access_token", response.data.token);
+      window.localStorage.setItem("userID", response.data.userID);
+      navigate("/home");
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div className="">
       {/* {loading ? (

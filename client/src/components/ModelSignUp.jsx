@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import RegistrationButton from "./RegistrationButton";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function ModelSignUp() {
   const [modelSignUpData, setModelSignUpData] = useState({
     firstName: "",
     lastName: "",
+    type: "model",
     email: "",
     password: "",
     confirmPassword: "",
@@ -24,6 +26,13 @@ function ModelSignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      await axios.post("http://localhost:4000/auth/register", modelSignUpData);
+      alert("User is registered");
+      navigate("/login");
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <form className=" " onSubmit={handleSubmit}>
