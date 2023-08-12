@@ -13,7 +13,7 @@ export default function Login() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [_, setCookies] = useCookies(["access_token"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
   useEffect(() => {
     setInterval(() => {
@@ -30,9 +30,16 @@ export default function Login() {
         email,
         password,
       });
-      setCookies("access_token", response.data.token);
-      window.localStorage.setItem("userID", response.data.userID);
-      navigate("/home");
+      console.log(response);
+      setCookie("Email", response.data.email);
+      setCookie("UserId", response.data.userId);
+      setCookie("AuthToken", response.data.token);
+
+      if (response.data.type === "model") {
+        navigate("/home");
+      } else if (response.data.type === "agency") {
+        navigate("/agency");
+      }
     } catch (error) {
       console.error(error);
     }

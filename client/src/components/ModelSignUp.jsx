@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import RegistrationButton from "./RegistrationButton";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 function ModelSignUp() {
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [modelSignUpData, setModelSignUpData] = useState({
-    
-    
     type: "model",
     email: "",
     password: "",
@@ -27,17 +27,23 @@ function ModelSignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:4000/auth/register", modelSignUpData);
+      const response = await axios.post(
+        "http://localhost:4000/auth/register",
+        modelSignUpData
+      );
+
+      console.log(response);
+      setCookie("Email", response.data.email);
+      setCookie("UserId", response.data.userId);
+      setCookie("AuthToken", response.data.token);
       alert("User is registered");
-      navigate("/login");
+      // navigate("/modelonboarding");
     } catch (error) {
       console.error(error);
     }
   };
   return (
     <form className=" " onSubmit={handleSubmit}>
-     
-
       <label className="font-volkhorn" htmlFor="">
         Email:
       </label>
