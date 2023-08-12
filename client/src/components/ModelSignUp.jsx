@@ -5,8 +5,8 @@ import axios from "axios";
 
 function ModelSignUp() {
   const [modelSignUpData, setModelSignUpData] = useState({
-    firstName: "",
-    lastName: "",
+    
+    
     type: "model",
     email: "",
     password: "",
@@ -36,33 +36,7 @@ function ModelSignUp() {
   };
   return (
     <form className=" " onSubmit={handleSubmit}>
-      <label className="font-volkhorn" htmlFor="">
-        Firstname:
-      </label>
-      <br></br>
-      <input
-        value={modelSignUpData.firstName}
-        name="firstName"
-        onChange={handleChange}
-        type="text"
-        className="mb-5 border p-2 w-96  border-1 border-black rounded-md  "
-        placeholder="Firstname"
-      />
-      <br></br>
-
-      <label className="font-volkhorn" htmlFor="">
-        Lastname:
-      </label>
-      <br></br>
-      <input
-        value={modelSignUpData.lastName}
-        name="lastName"
-        onChange={handleChange}
-        type="text"
-        className="mb-5  border p-2 w-96  border-1 border-black rounded-md  "
-        placeholder="Lastname"
-      />
-      <br></br>
+     
 
       <label className="font-volkhorn" htmlFor="">
         Email:

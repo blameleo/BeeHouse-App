@@ -5,10 +5,10 @@ import axios from "axios";
 
 function AgencySignUp() {
   const [agencySignUpData, setAgencySignUpData] = React.useState({
-    agencyName: "",
+   
     email: "",
     type: "agency",
-    location: "",
+   
     password: "",
     confirmPassword: "",
   });
@@ -41,19 +41,10 @@ function AgencySignUp() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="">
-        <label className="font-volkhorn" htmlFor="">
-          Agency Name:
-        </label>
-        <br></br>
-        <input
-          type="text"
-          name="agencyName"
-          className="mb-5 border p-2 w-96  border-1 border-black rounded-md"
-          onChange={handleChange}
-          value={agencySignUpData.agencyName}
-          placeholder="Agency Name"
-        />
-        <br></br>
+        
+        
+       
+        
 
         <label className="font-volkhorn" htmlFor="">
           Email:
@@ -67,20 +58,9 @@ function AgencySignUp() {
           value={agencySignUpData.email}
           placeholder="Email"
         />
-        <br></br>
+        
 
-        <label className="font-volkhorn" htmlFor="">
-          Location:
-        </label>
-        <br></br>
-        <input
-          name="location"
-          type="text"
-          onChange={handleChange}
-          value={agencySignUpData.location}
-          placeholder="Location"
-          className="mb-5  border p-2 w-96  border-1 border-black rounded-md  "
-        />
+       
         <br></br>
 
         <label className="font-volkhorn" htmlFor="">
