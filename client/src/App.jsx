@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Agency from "./pages/Agency";
 import "./App.css";
+import ModelOnboardingPage from "./pages/ModelOnboardingPage";
 // import { AuthContextProvider } from "./context/AuthContext";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/agency" element={<Agency />} />
+          <Route path="/modelonboard" element={<ModelOnboardingPage/>}/>
         </Routes>
       </BrowserRouter>
       {/* </AuthContextProvider> */}
