@@ -32,7 +32,7 @@ function AgencySignUp() {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/auth/register",
+        "http://localhost:4000/register",
         agencySignUpData
       );
       alert("User is registered");

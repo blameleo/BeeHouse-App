@@ -28,7 +28,7 @@ function ModelSignUp() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:4000/auth/register",
+        "http://localhost:4000/register",
         modelSignUpData
       );
 
