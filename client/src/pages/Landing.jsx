@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
 import ImageCarousel from "../components/ImageCarousel";
 import { IoLogoAmazon, IoLogoSass } from "react-icons/io5";
+import ModelOnboardingpage from "./ModelOnboardingPage";
 import { SiNetflix } from "react-icons/si";
 import { SiUbereats } from "react-icons/si";
 import { GoLogoGithub } from "react-icons/go";

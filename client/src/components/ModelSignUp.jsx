@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import RegistrationButton from "./RegistrationButton";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 function ModelSignUp() {
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [modelSignUpData, setModelSignUpData] = useState({
-    firstName: "",
-    lastName: "",
+    type: "model",
     email: "",
     password: "",
     confirmPassword: "",
@@ -24,37 +26,24 @@ function ModelSignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/register",
+        modelSignUpData
+      );
+
+      console.log(response);
+      setCookie("Email", response.data.email);
+      setCookie("UserId", response.data.userId);
+      setCookie("AuthToken", response.data.token);
+      alert("User is registered");
+      // navigate("/modelonboarding");
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <form className=" " onSubmit={handleSubmit}>
-      <label className="font-volkhorn" htmlFor="">
-        Firstname:
-      </label>
-      <br></br>
-      <input
-        value={modelSignUpData.firstName}
-        name="firstName"
-        onChange={handleChange}
-        type="text"
-        className="mb-5 border p-2 w-96  border-1 border-black rounded-md  "
-        placeholder="Firstname"
-      />
-      <br></br>
-
-      <label className="font-volkhorn" htmlFor="">
-        Lastname:
-      </label>
-      <br></br>
-      <input
-        value={modelSignUpData.lastName}
-        name="lastName"
-        onChange={handleChange}
-        type="text"
-        className="mb-5  border p-2 w-96  border-1 border-black rounded-md  "
-        placeholder="Lastname"
-      />
-      <br></br>
-
       <label className="font-volkhorn" htmlFor="">
         Email:
       </label>

@@ -10,7 +10,7 @@ const port = 4000;
 
 app.use(express.json());
 app.use(cors());
-app.use("/auth", userRouter);
+app.use("/", userRouter);
 
 mongoose.connect(process.env.MONGODB_URL);
 
