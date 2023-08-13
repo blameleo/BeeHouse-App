@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react'
 import Logo from '../components/Logo'
 
@@ -169,3 +170,12 @@ function ModelOnboardingPage() {
 }
 
 export default ModelOnboardingPage
+=======
+import React from "react";
+
+function ModelOnboardingPage() {
+  return <div>ModelOnboardingPage</div>;
+}
+
+export default ModelOnboardingPage;
+>>>>>>> e750a6030c569e86bdfd1c8abc6fd00484e5338a

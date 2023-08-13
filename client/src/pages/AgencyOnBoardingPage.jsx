@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react'
 
 function AgencyOnBoardingPage() {
@@ -28,3 +29,10 @@ function AgencyOnBoardingPage() {
 }
 
 export default AgencyOnBoardingPage
+=======
+import React from "react";
+
+export default function AgencyOnboardingPage() {
+  return <div>AgencyOnboardingPage</div>;
+}
+>>>>>>> e750a6030c569e86bdfd1c8abc6fd00484e5338a
