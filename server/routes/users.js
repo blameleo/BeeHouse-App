@@ -2,8 +2,23 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { v4: uuidv4 } = require("uuid");
+const multer = require("multer");
+const path = require("path");
 
 const UserModel = require("../models/User.js");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/"); // Save files to the "uploads" directory
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    const extname = path.extname(file.originalname);
+    cb(null, file.fieldname + "-" + uniqueSuffix + extname);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 const router = express.Router();
 
@@ -60,37 +75,55 @@ router.get("/users", async (req, res) => {
   }
 });
 
-router.put("/user", async (req, res) => {
-  const formData = req.body;
-  console.log(formData);
-  // const users = await UserModel.find();
+router.put(
+  "/user",
+  upload.fields([
+    { name: "displayPicUrl", maxCount: 1 },
+    { name: "idCardUrl", maxCount: 1 },
+    { name: "imageUrl1", maxCount: 1 },
+    { name: "imageUrl2", maxCount: 1 },
+    { name: "imageUrl3", maxCount: 1 },
+  ]),
+  async (req, res) => {
+    const formData = req.body;
+    console.log(formData);
+    // const users = await UserModel.find();
 
-  const query = { user_id: formData.user_id };
-  const updatedDocument = {
-    $set: {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      agencyName: formData.agencyName,
-      dob_day: formData.dob_day,
-      dob_month: formData.dob_month,
-      dob_year: formData.dob_year,
-      height: formData.height,
-      about: formData.about,
-      complexion: formData.complexion,
-      telephone: formData.telephone,
-      stature: formData.stature,
-      businessCerUrl: formData.businessCertUrl,
-      idCardUrl: formData.idCardUrl,
-      displayPicUrl: formData.displayPicUrl,
-      imageUrl1: formData.imageUrl1,
-      imageUrl2: formData.imageUrl2,
-      imageUrl3: formData.imageUrl3,
-      location: formData.location,
-    },
-  };
+    const query = { user_id: formData.user_id };
 
-  const insertedUser = await UserModel.updateOne(query, updatedDocument);
-  res.send(insertedUser);
-});
+    const displayPicUrl = req.files["displayPicUrl"][0].path;
+    const idCardUrl = req.files["idCardUrl"][0].path;
+    const imageUrl1 = req.files["imageUrl1"][0].path;
+    const imageUrl2 = req.files["imageUrl2"][0].path;
+    const imageUrl3 = req.files["imageUrl3"][0].path;
+
+    const updatedDocument = {
+      $set: {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        agencyName: formData.agencyName,
+        gender: formData.gender,
+        dob_day: formData.dob_day,
+        dob_month: formData.dob_month,
+        dob_year: formData.dob_year,
+        height: formData.height,
+        about: formData.about,
+        complexion: formData.complexion,
+        telephone: formData.telephone,
+        stature: formData.stature,
+        businessCerUrl: formData.businessCertUrl,
+        idCardUrl: idCardUrl,
+        displayPicUrl: displayPicUrl,
+        imageUrl1: imageUrl1,
+        imageUrl2: imageUrl2,
+        imageUrl3: imageUrl3,
+        location: formData.location,
+      },
+    };
+
+    const insertedUser = await UserModel.updateOne(query, updatedDocument);
+    res.send(insertedUser);
+  }
+);
 
 module.exports.userRouter = router;
