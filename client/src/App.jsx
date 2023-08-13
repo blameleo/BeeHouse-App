@@ -17,7 +17,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/agency" element={<Agency />} />
-          <Route path="/modelonboard" element={<ModelOnboardingPage/>}/>
+          <Route path="/modelonboarding" element={<ModelOnboardingPage/>}/>
         </Routes>
       </BrowserRouter>
       {/* </AuthContextProvider> */}
