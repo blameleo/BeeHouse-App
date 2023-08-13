@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 import React from 'react'
 
 function AgencyOnBoardingPage() {
   return (
-    <div className='bg-gray-900'>
+    <div className=''>
         <form action="">
         <label htmlFor="">Agency name:</label>
         <input name='Agency name' type="text" />
@@ -29,10 +28,3 @@ function AgencyOnBoardingPage() {
 }
 
 export default AgencyOnBoardingPage
-=======
-import React from "react";
-
-export default function AgencyOnboardingPage() {
-  return <div>AgencyOnboardingPage</div>;
-}
->>>>>>> e750a6030c569e86bdfd1c8abc6fd00484e5338a
