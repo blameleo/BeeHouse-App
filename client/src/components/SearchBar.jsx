@@ -176,7 +176,7 @@ export default function SearchBar() {
           />
         </div>
         <BsFillFunnelFill className="md:hidden block mr-2 text-[20px] text-gray-500" />
-        <GiBee className="text-[35px] cursor-pointer hover:text-gray-400" />
+        <GiBee className="text-[35px] cursor-pointer hover:text-purple-600" />
       </form>
     </div>
   );

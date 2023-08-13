@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 // import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+
 import Navbar from "../components/Navbar";
 import SecNavbar from "../components/SecNavbar";
 import SearchBar from "../components/SearchBar";

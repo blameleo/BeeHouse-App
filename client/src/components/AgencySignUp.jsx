@@ -2,13 +2,15 @@ import React from "react";
 import RegistrationButton from "../components/RegistrationButton";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 function AgencySignUp() {
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+
   const [agencySignUpData, setAgencySignUpData] = React.useState({
-   
     email: "",
     type: "agency",
-   
+
     password: "",
     confirmPassword: "",
   });
@@ -29,9 +31,15 @@ function AgencySignUp() {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:4000/auth/register", agencySignUpData);
+      const response = await axios.post(
+        "http://localhost:4000/register",
+        agencySignUpData
+      );
       alert("User is registered");
-      navigate("/agency");
+      setCookie("Email", response.data.email);
+      setCookie("UserId", response.data.userId);
+      setCookie("AuthToken", response.data.token);
+      navigate("/agencyonboarding");
     } catch (e) {
       setError(e.message);
       console.log(error);
@@ -41,11 +49,6 @@ function AgencySignUp() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="">
-        
-        
-       
-        
-
         <label className="font-volkhorn" htmlFor="">
           Email:
         </label>
@@ -58,9 +61,7 @@ function AgencySignUp() {
           value={agencySignUpData.email}
           placeholder="Email"
         />
-        
 
-       
         <br></br>
 
         <label className="font-volkhorn" htmlFor="">
