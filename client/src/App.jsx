@@ -23,6 +23,7 @@ function App() {
           <Route path="/settings" element={<ModelSettings />} />
           <Route path="/modelonboarding" element={<ModelOnboardingPage />} />
           <Route path="/agencyonboarding" element={<AgencyOnboardingPage />} />
+          <Route path="/modelonboarding" element={<ModelOnboardingPage/>}/>
         </Routes>
       </BrowserRouter>
       {/* </AuthContextProvider> */}
