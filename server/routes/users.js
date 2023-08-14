@@ -92,12 +92,6 @@ router.put(
 
       const query = { user_id: formData.user_id };
 
-      const displayPicUrl = req.files["displayPicUrl"][0].path;
-      const idCardUrl = req.files["idCardUrl"][0].path;
-      const imageUrl1 = req.files["imageUrl1"][0].path;
-      const imageUrl2 = req.files["imageUrl2"][0].path;
-      const imageUrl3 = req.files["imageUrl3"][0].path;
-
       const updatedDocument = {
         $set: {
           firstName: formData.firstName,
@@ -113,14 +107,38 @@ router.put(
           telephone: formData.telephone,
           stature: formData.stature,
           businessCerUrl: formData.businessCertUrl,
-          idCardUrl: idCardUrl,
-          displayPicUrl: displayPicUrl,
-          imageUrl1: imageUrl1,
-          imageUrl2: imageUrl2,
-          imageUrl3: imageUrl3,
+          idCardUrl: "",
+          displayPicUrl: "",
+          imageUrl1: "",
+          imageUrl2: "",
+          imageUrl3: "",
           location: formData.location,
         },
       };
+      if (req.files["displayPicUrl"]) {
+        const displayPicUrl = req.files["displayPicUrl"][0].path;
+        updatedDocument.$set.displayPicUrl = displayPicUrl;
+      }
+
+      if (req.files["idCardUrl"]) {
+        const idCardUrl = req.files["idCardUrl"][0].path;
+        updatedDocument.$set.idCardUrl = idCardUrl;
+      }
+
+      if (req.files["imageUrl1"]) {
+        const imageUrl1 = req.files["imageUrl1"][0].path;
+        updatedDocument.$set.imageUrl1 = imageUrl1;
+      }
+
+      if (req.files["imageUrl2"]) {
+        const imageUrl2 = req.files["imageUrl2"][0].path;
+        updatedDocument.$set.imageUrl2 = imageUrl2;
+      }
+
+      if (req.files["imageUrl3"]) {
+        const imageUrl3 = req.files["imageUrl3"][0].path;
+        updatedDocument.$set.imageUrl3 = imageUrl3;
+      }
 
       const insertedUser = await UserModel.updateOne(query, updatedDocument);
       res
