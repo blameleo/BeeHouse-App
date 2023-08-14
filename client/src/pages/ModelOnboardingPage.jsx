@@ -3,6 +3,7 @@ import Logo from "../components/Logo";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { FaForumbee } from "react-icons/fa";
+import SecNavbar from "../components/SecNavbar";
 
 function ModelOnboardingPage() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
@@ -185,11 +186,12 @@ function ModelOnboardingPage() {
   };
   return (
     <div className="bg-neutral-950 font-volkhorn ">
-      <div className=" px-5 py-5  flex">
+      {/* <div className=" px-5 py-5  flex">
         <FaForumbee className="text-yellow-500 mr-1 text-3xl" />
         <h1 className="text-yellow-500 text-3xl">BeeHouse</h1>
-      </div>
-      <div className="flex justify-center mb-12">
+      </div> */}
+      <SecNavbar />
+      <div className="flex justify-center mt-10">
         <h1 className=" font-volkhorn text-4xl text-yellow-500 mt-12 text-bold">
           Create Account{" "}
         </h1>
