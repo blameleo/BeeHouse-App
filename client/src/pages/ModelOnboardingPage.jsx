@@ -12,9 +12,9 @@ function ModelOnboardingPage() {
     lastName: "",
     gender: "",
     phoneNumber: "",
-    dobDay: '',
-    dobMonth: '',
-    dobYear: '',
+    dobDay: "",
+    dobMonth: "",
+    dobYear: "",
     height: "",
     location: "",
     complexion: "",
@@ -132,43 +132,44 @@ function ModelOnboardingPage() {
           </label>
           <br></br>
           <input
-          className="border mb-5 outline-none px-3 border-yellow-500 bg-neutral-950 mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg"
-          type="tel" 
-          placeholder='+233 Phone Number'
-          name="phoneNumber"
-          value={formData.phoneNumber}
-          onChange={handleInputChange}
-          id="phoneNumber"
-          pattern="[0-9]*" 
-          minLength="10" 
-          maxLength="15" 
-          
-/>
+            className="border mb-5 outline-none px-3 border-yellow-500 bg-neutral-950 mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg"
+            type="tel"
+            placeholder="+233 Phone Number"
+            name="phoneNumber"
+            value={formData.phoneNumber}
+            onChange={handleInputChange}
+            id="phoneNumber"
+            pattern="[0-9]*"
+            minLength="10"
+            maxLength="15"
+          />
 
           <br></br>
 
-          <label className="mt-5" htmlFor="">Date of Birth:</label>
+          <label className="mt-5" htmlFor="">
+            Date of Birth:
+          </label>
           <br></br>
-          <div className='flex'>
-            <div className='mr-2'>
+          <div className="flex">
+            <div className="mr-2">
               <label>Day:</label>
               <br />
               <input
                 className="border outline-none px-3 border-yellow-500 bg-neutral-950 mt-1 w-20 h-14 rounded rounded-lg"
                 type="number"
-                placeholder='Day'
+                placeholder="Day"
                 name="dobDay"
                 value={formData.dobDay}
                 onChange={handleInputChange}
               />
             </div>
-            <div className='mr-2'>
+            <div className="mr-2">
               <label>Month:</label>
               <br />
               <input
                 className="border outline-none px-3 border-yellow-500 bg-neutral-950 mt-1 w-20 h-14 rounded rounded-lg"
                 type="number"
-                placeholder='Month'
+                placeholder="Month"
                 name="dobMonth"
                 value={formData.dobMonth}
                 onChange={handleInputChange}
@@ -180,7 +181,7 @@ function ModelOnboardingPage() {
               <input
                 className="border px-3 outline-none border-yellow-500 bg-neutral-950 mt-1 w-24 h-14 rounded rounded-lg"
                 type="number"
-                placeholder='Year'
+                placeholder="Year"
                 name="dobYear"
                 value={formData.dobYear}
                 onChange={handleInputChange}
@@ -256,7 +257,9 @@ function ModelOnboardingPage() {
             </li>
           </ul>
 
-          <label htmlFor="stature" className="font-volkhorn">Stature :</label>
+          <label htmlFor="stature" className="font-volkhorn">
+            Stature :
+          </label>
           <ul className="grid grid-cols-3 gap-x-5 pb-20  max-w-md ">
             <li className="relative">
               <input
@@ -292,7 +295,6 @@ function ModelOnboardingPage() {
               </label>
             </li>
 
-
             <li className="relative">
               <input
                 className="sr-only peer"
@@ -311,8 +313,6 @@ function ModelOnboardingPage() {
             </li>
           </ul>
         </div>
-
-        
 
         <br></br>
         <div>
@@ -407,12 +407,15 @@ function ModelOnboardingPage() {
             </div>
           </div>
         </div>
-        
       </form>
       <div className="flex justify-center pb-10">
-      <button onClick={handleSubmit} className='mr-5 mt-5 bg-yellow-500 border border-2 border-black h-[40px] w-[100px]'>Submit</button>
+        <button
+          onClick={handleSubmit}
+          className="mr-5 mt-5 bg-yellow-500 border border-2 border-black h-[40px] w-[100px]"
+        >
+          Submit
+        </button>
       </div>
-     
     </div>
   );
 }
