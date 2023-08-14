@@ -61,7 +61,7 @@ function ModelOnboardingPage() {
           <br></br>
 
           <input
-            className=" border px-3 border-yellow-500 outline-none bg-neutral-950  mt-1 w-[400px]  md:w-[500px] h-14 rounded rounded-lg "
+            className=" border px-3 border-yellow-500 outline-none bg-black  mt-1 w-[400px]  md:w-[500px] h-14 rounded rounded-lg "
             type="text"
             onChange={handleInputChange}
             value={formData.firstName}
@@ -74,7 +74,7 @@ function ModelOnboardingPage() {
           <label htmlFor="">Last Name :</label>
           <br />
           <input
-            className=" border px-3 border-yellow-500 outline-none bg-neutral-950  mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg "
+            className=" border px-3 border-yellow-500 outline-none bg-black  mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg "
             placeholder="last name"
             type="text"
             onChange={handleInputChange}
@@ -102,7 +102,7 @@ function ModelOnboardingPage() {
               />
               <label
                 className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-2 peer-checked:border-transparent"
-                HtmlFor="male"
+                htmlFor="male"
               >
                 Male
               </label>
@@ -119,7 +119,7 @@ function ModelOnboardingPage() {
               />
               <label
                 className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-2 peer-checked:border-transparent"
-                HtmlFor="female"
+                htmlFor="female"
               >
                 Female
               </label>
@@ -132,7 +132,7 @@ function ModelOnboardingPage() {
           </label>
           <br></br>
           <input
-          className="border mb-5 outline-none px-3 border-yellow-500 bg-neutral-950 mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg"
+          className="border mb-5 outline-none px-3 border-yellow-500 bg-black  mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg"
           type="tel" 
           placeholder='+233 Phone Number'
           name="phoneNumber"
@@ -154,9 +154,9 @@ function ModelOnboardingPage() {
               <label>Day:</label>
               <br />
               <input
-                className="border outline-none px-3 border-yellow-500 bg-neutral-950 mt-1 w-20 h-14 rounded rounded-lg"
+                className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14 rounded rounded-lg"
                 type="number"
-                placeholder='Day'
+                placeholder='DD'
                 name="dobDay"
                 value={formData.dobDay}
                 onChange={handleInputChange}
@@ -166,9 +166,9 @@ function ModelOnboardingPage() {
               <label>Month:</label>
               <br />
               <input
-                className="border outline-none px-3 border-yellow-500 bg-neutral-950 mt-1 w-20 h-14 rounded rounded-lg"
+                className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14 rounded rounded-lg"
                 type="number"
-                placeholder='Month'
+                placeholder='MM'
                 name="dobMonth"
                 value={formData.dobMonth}
                 onChange={handleInputChange}
@@ -178,9 +178,9 @@ function ModelOnboardingPage() {
               <label>Year:</label>
               <br />
               <input
-                className="border px-3 outline-none border-yellow-500 bg-neutral-950 mt-1 w-24 h-14 rounded rounded-lg"
+                className="border px-3 outline-none border-yellow-500 bg-black  mt-1 w-24 h-14 rounded rounded-lg"
                 type="number"
-                placeholder='Year'
+                placeholder='YYYY'
                 name="dobYear"
                 value={formData.dobYear}
                 onChange={handleInputChange}
@@ -194,7 +194,7 @@ function ModelOnboardingPage() {
           </label>
           <br></br>
           <input
-            className=" outline-none border px-3 border-yellow-500 bg-neutral-950  mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg "
+            className=" outline-none border px-3 border-yellow-500 bg-black   mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg "
             type="number"
             placeholder="height"
             onChange={handleInputChange}
@@ -207,7 +207,7 @@ function ModelOnboardingPage() {
           <label htmlFor="">Location:</label>
           <br></br>
           <input
-            className=" outline-none border px-3 border-yellow-500 mb-3 bg-neutral-950  mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg "
+            className=" outline-none border px-3 border-yellow-500 mb-3 bg-black   mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg "
             type="text"
             placeholder="Location"
             onChange={handleInputChange}
@@ -232,7 +232,7 @@ function ModelOnboardingPage() {
               />
               <label
                 className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-2 peer-checked:border-transparent"
-                HtmlFor="dark"
+                htmlFor="dark"
               >
                 Dark
               </label>
@@ -249,7 +249,7 @@ function ModelOnboardingPage() {
               />
               <label
                 className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-2 peer-checked:border-transparent"
-                HtmlFor="fair"
+                htmlFor="fair"
               >
                 Fair
               </label>
@@ -269,7 +269,7 @@ function ModelOnboardingPage() {
               />
               <label
                 className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-2 peer-checked:border-transparent"
-                HtmlFor="slim"
+                htmlFor="slim"
               >
                 Slim
               </label>
@@ -286,7 +286,7 @@ function ModelOnboardingPage() {
               />
               <label
                 className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-2 peer-checked:border-transparent"
-                HtmlFor="Average"
+                htmlFor="Average"
               >
                 Average
               </label>
@@ -304,7 +304,7 @@ function ModelOnboardingPage() {
               />
               <label
                 className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-2 peer-checked:border-transparent"
-                HtmlFor="chubby"
+                htmlFor="chubby"
               >
                 Chubby
               </label>
@@ -321,7 +321,7 @@ function ModelOnboardingPage() {
           <div className="flex items-center">
             <label
               htmlFor="upload"
-              className="relative rounded bg-neutral-950 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
+              className="relative rounded bg-neutral-550 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
             >
               <span className="text-gray-400 text-3xl">+</span>
             </label>
@@ -409,8 +409,14 @@ function ModelOnboardingPage() {
         </div>
         
       </form>
+
+      
       <div className="flex justify-center pb-10">
-      <button onClick={handleSubmit} className='mr-5 mt-5 bg-yellow-500 border border-2 border-black h-[40px] w-[100px]'>Submit</button>
+      <button onClick={handleSubmit} className='mr-5 mt-5 bg-yellow-500 border border-2 border-black h-[50px] rounded-lg w-[150px]'>Continue</button>
+      </div>
+
+      <div className="flex text-white text-xl hover:text-blue-500 justify-center pb-5">
+        <h1>Already have an account? Log in</h1>
       </div>
      
     </div>
