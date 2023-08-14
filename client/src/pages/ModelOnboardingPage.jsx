@@ -8,6 +8,7 @@ function ModelOnboardingPage() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [displayPic, setDisplayPic] = useState(null);
   const [idCardPic, setIdCardPic] = useState(null);
+  const [info, setInfo] = useState(null);
 
   const [image1, setImage1] = useState(null);
 
@@ -98,11 +99,14 @@ function ModelOnboardingPage() {
     formData.append("imageUrl3", image3);
     console.log(formInfo);
     try {
-      axios.put("http://localhost:4000/user", formInfo, {
+      const response = await axios.put("http://localhost:4000/user", formInfo, {
         headers: {
           "Content-Type": "multipart/form-data", // Important: Set the correct Content-Type header
         },
       });
+
+      console.log(response.data.message);
+      setInfo(response.data.message);
     } catch (err) {
       console.log(err);
     }
@@ -488,7 +492,7 @@ function ModelOnboardingPage() {
       </div>
 
       <div className="flex text-white text-xl hover:text-blue-500 justify-center pb-5">
-        <h1>Already have an account? Log in</h1>
+        <h1>{info}</h1>
       </div>
     </div>
   );
