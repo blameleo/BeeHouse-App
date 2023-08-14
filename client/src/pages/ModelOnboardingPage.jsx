@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../components/Logo";
 import axios from "axios";
 import { useCookies } from "react-cookie";
@@ -6,15 +6,24 @@ import { FaForumbee } from "react-icons/fa";
 
 function ModelOnboardingPage() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-  const [formData, setFormData] = React.useState({
+  const [displayPic, setDisplayPic] = useState(null);
+  const [idCardPic, setIdCardPic] = useState(null);
+
+  const [image1, setImage1] = useState(null);
+
+  const [image2, setImage2] = useState(null);
+
+  const [image3, setImage3] = useState(null);
+
+  const [formInfo, setFormInfo] = React.useState({
     user_id: cookies.UserId,
     firstName: "",
     lastName: "",
     gender: "",
-    phoneNumber: "",
-    dobDay: "",
-    dobMonth: "",
-    dobYear: "",
+    telephone: "",
+    dob_day: "",
+    dob_month: "",
+    dob_year: "",
     height: "",
     location: "",
     complexion: "",
@@ -28,15 +37,75 @@ function ModelOnboardingPage() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prevData) => ({
+    setFormInfo((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
 
+  const handleIdCardChange = (event) => {
+    const selectedFile5 = event.target.files[0];
+    setIdCardPic(selectedFile5);
+    setFormInfo((prevData) => ({
+      ...prevData,
+      idCardUrl: selectedFile5,
+    }));
+  };
+
+  const handleDisplayPicChange = (event) => {
+    const selectedFile4 = event.target.files[0];
+    setDisplayPic(selectedFile4);
+    setFormInfo((prevData) => ({
+      ...prevData,
+      displayPicUrl: selectedFile4,
+    }));
+  };
+
+  const handleImage1Change = (event) => {
+    const selectedFile1 = event.target.files[0];
+    setImage1(selectedFile1);
+    setFormInfo((prevData) => ({
+      ...prevData,
+      imageUrl1: selectedFile1,
+    }));
+  };
+
+  const handleImage2Change = (event) => {
+    const selectedFile2 = event.target.files[0];
+    setImage2(selectedFile2);
+    setFormInfo((prevData) => ({
+      ...prevData,
+      imageUrl2: selectedFile2,
+    }));
+  };
+
+  const handleImage3Change = (event) => {
+    const selectedFile3 = event.target.files[0];
+    setImage3(selectedFile3);
+    setFormInfo((prevData) => ({
+      ...prevData,
+      imageUrl3: selectedFile3,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    const formData = new FormData();
+    formData.append("displayPicUrl", displayPic);
+    formData.append("idCardUrl", idCardPic);
+    formData.append("imageUrl1", image1);
+    formData.append("imageUrl2", image2);
+    formData.append("imageUrl3", image3);
+    console.log(formInfo);
+    try {
+      axios.put("http://localhost:4000/user", formInfo, {
+        headers: {
+          "Content-Type": "multipart/form-data", // Important: Set the correct Content-Type header
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div className="bg-neutral-950 font-volkhorn ">
@@ -64,7 +133,7 @@ function ModelOnboardingPage() {
             className=" border px-3 border-yellow-500 outline-none bg-black  mt-1 w-[400px]  md:w-[500px] h-14 rounded rounded-lg "
             type="text"
             onChange={handleInputChange}
-            value={formData.firstName}
+            value={formInfo.firstName}
             placeholder="First Name"
             name="firstName"
             id=""
@@ -79,7 +148,7 @@ function ModelOnboardingPage() {
             type="text"
             onChange={handleInputChange}
             name="lastName"
-            value={formData.lastName}
+            value={formInfo.lastName}
             id=""
           />
           <br></br>
@@ -135,10 +204,10 @@ function ModelOnboardingPage() {
             className="border mb-5 outline-none px-3 border-yellow-500 bg-black  mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg"
             type="tel"
             placeholder="+233 Phone Number"
-            name="phoneNumber"
-            value={formData.phoneNumber}
+            name="telephone"
+            value={formInfo.telephone}
             onChange={handleInputChange}
-            id="phoneNumber"
+            id="telephone"
             pattern="[0-9]*"
             minLength="10"
             maxLength="15"
@@ -158,8 +227,8 @@ function ModelOnboardingPage() {
                 className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14 rounded rounded-lg"
                 type="number"
                 placeholder="DD"
-                name="dobDay"
-                value={formData.dobDay}
+                name="dob_day"
+                value={formInfo.dob_day}
                 onChange={handleInputChange}
               />
             </div>
@@ -170,8 +239,8 @@ function ModelOnboardingPage() {
                 className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14 rounded rounded-lg"
                 type="number"
                 placeholder="MM"
-                name="dobMonth"
-                value={formData.dobMonth}
+                name="dob_month"
+                value={formInfo.dob_month}
                 onChange={handleInputChange}
               />
             </div>
@@ -182,8 +251,8 @@ function ModelOnboardingPage() {
                 className="border px-3 outline-none border-yellow-500 bg-black  mt-1 w-24 h-14 rounded rounded-lg"
                 type="number"
                 placeholder="YYYY"
-                name="dobYear"
-                value={formData.dobYear}
+                name="dob_year"
+                value={formInfo.dob_year}
                 onChange={handleInputChange}
               />
             </div>
@@ -200,7 +269,7 @@ function ModelOnboardingPage() {
             placeholder="height"
             onChange={handleInputChange}
             name="height"
-            value={formData.height}
+            value={formInfo.height}
             id=""
           />
           <br></br>
@@ -212,7 +281,7 @@ function ModelOnboardingPage() {
             type="text"
             placeholder="Location"
             onChange={handleInputChange}
-            value={formData.location}
+            value={formInfo.location}
             name="location"
             id=""
           />
@@ -320,17 +389,17 @@ function ModelOnboardingPage() {
           <br></br>
           <div className="flex items-center">
             <label
-              htmlFor="upload"
-              className="relative rounded bg-neutral-550 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
+              htmlFor="upload1"
+              className="relative rounded bg-neutral-550 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
             >
               <span className="text-gray-400 text-3xl">+</span>
             </label>
             <input
               type="file"
-              id="upload"
+              id="upload1"
               name="idCardUrl"
               className="hidden"
-              onChange={handleInputChange}
+              onChange={handleIdCardChange}
             />
           </div>
           <br></br>
@@ -339,16 +408,16 @@ function ModelOnboardingPage() {
           <br></br>
           <div className="flex items-center">
             <label
-              htmlFor="upload"
+              htmlFor="upload2"
               className="relative rounded bg-neutral-950 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
             >
               ß<span className="text-gray-400 text-3xl">+</span>
             </label>
             <input
               type="file"
-              id="upload"
+              id="upload2"
               className="hidden"
-              onChange={handleInputChange}
+              onChange={handleDisplayPicChange}
               name="displayPicUrl"
             />
           </div>
@@ -360,15 +429,15 @@ function ModelOnboardingPage() {
           <div className="flex ">
             <div className="flex items-center mr-5">
               <label
-                htmlFor="upload"
+                htmlFor="upload3"
                 className="relative rounded bg-neutral-950 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
               >
                 <span className="text-gray-400 text-3xl">+</span>
               </label>
               <input
                 type="file"
-                id="upload"
-                onChange={handleInputChange}
+                id="upload3"
+                onChange={handleImage1Change}
                 className="hidden"
                 name="imageUrl1"
               />
@@ -376,32 +445,32 @@ function ModelOnboardingPage() {
 
             <div className="flex items-center mr-5">
               <label
-                htmlFor="upload"
+                htmlFor="upload4"
                 className="relative rounded bg-neutral-950 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
               >
                 <span className="text-gray-400 text-3xl">+</span>
               </label>
               <input
                 type="file"
-                id="upload"
+                id="upload4"
                 className="hidden"
-                onChange={handleInputChange}
+                onChange={handleImage2Change}
                 name="imageUrl1"
               />
             </div>
 
             <div className="flex items-center">
               <label
-                htmlFor="upload"
+                htmlFor="upload5"
                 className="relative rounded bg-neutral-950 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
               >
                 <span className="text-gray-400 text-3xl">+</span>
               </label>
               <input
                 type="file"
-                id="upload"
+                id="upload5"
                 className="hidden"
-                onChange={handleInputChange}
+                onChange={handleImage3Change}
                 name="imageUrl2"
               />
             </div>
