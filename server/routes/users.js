@@ -85,45 +85,47 @@ router.put(
     { name: "imageUrl3", maxCount: 1 }, // One file for imageUrl1 field
   ]),
   async (req, res) => {
-    const formData = req.body;
-    console.log(formData);
-    // const users = await UserModel.find();
-
-    const query = { user_id: formData.user_id };
-
-    const displayPicUrl = req.files["displayPicUrl"][0].path;
-    const idCardUrl = req.files["idCardUrl"][0].path;
-    const imageUrl1 = req.files["imageUrl1"][0].path;
-    const imageUrl2 = req.files["imageUrl2"][0].path;
-    const imageUrl3 = req.files["imageUrl3"][0].path;
-
-    const updatedDocument = {
-      $set: {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        agencyName: formData.agencyName,
-        gender: formData.gender,
-        dob_day: formData.dob_day,
-        dob_month: formData.dob_month,
-        dob_year: formData.dob_year,
-        height: formData.height,
-        about: formData.about,
-        complexion: formData.complexion,
-        telephone: formData.telephone,
-        stature: formData.stature,
-        businessCerUrl: formData.businessCertUrl,
-        idCardUrl: idCardUrl,
-        displayPicUrl: displayPicUrl,
-        imageUrl1: imageUrl1,
-        imageUrl2: imageUrl2,
-        imageUrl3: imageUrl3,
-        location: formData.location,
-      },
-    };
-
     try {
+      const formData = req.body;
+      console.log(formData);
+      // const users = await UserModel.find();
+
+      const query = { user_id: formData.user_id };
+
+      const displayPicUrl = req.files["displayPicUrl"][0].path;
+      const idCardUrl = req.files["idCardUrl"][0].path;
+      const imageUrl1 = req.files["imageUrl1"][0].path;
+      const imageUrl2 = req.files["imageUrl2"][0].path;
+      const imageUrl3 = req.files["imageUrl3"][0].path;
+
+      const updatedDocument = {
+        $set: {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          agencyName: formData.agencyName,
+          gender: formData.gender,
+          dob_day: formData.dob_day,
+          dob_month: formData.dob_month,
+          dob_year: formData.dob_year,
+          height: formData.height,
+          about: formData.about,
+          complexion: formData.complexion,
+          telephone: formData.telephone,
+          stature: formData.stature,
+          businessCerUrl: formData.businessCertUrl,
+          idCardUrl: idCardUrl,
+          displayPicUrl: displayPicUrl,
+          imageUrl1: imageUrl1,
+          imageUrl2: imageUrl2,
+          imageUrl3: imageUrl3,
+          location: formData.location,
+        },
+      };
+
       const insertedUser = await UserModel.updateOne(query, updatedDocument);
-      res.send(insertedUser);
+      res
+        .status(201)
+        .json({ message: "user profile updated", data: insertedUser });
     } catch (error) {
       console.log(error);
     }
