@@ -4,8 +4,8 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { FaForumbee } from "react-icons/fa";
 import SecNavbar from "../components/SecNavbar";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+// import DatePicker from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
 
 function ModelOnboardingPage() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
