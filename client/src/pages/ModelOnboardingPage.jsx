@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Logo from "../components/Logo";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { FaForumbee } from "react-icons/fa";
 import SecNavbar from "../components/SecNavbar";
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css';
 
 function ModelOnboardingPage() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [displayPic, setDisplayPic] = useState(null);
   const [idCardPic, setIdCardPic] = useState(null);
   const [info, setInfo] = useState(null);
+  
 
   const [image1, setImage1] = useState(null);
 
   const [image2, setImage2] = useState(null);
 
   const [image3, setImage3] = useState(null);
-  const [imagePreviews, setImagePreviews] = useState({
+const [imagePreviews, setImagePreviews] = useState({
     displayPicUrl: null,
     idCardUrl: null,
     imageUrl1: null,
@@ -44,6 +47,13 @@ function ModelOnboardingPage() {
     imageUrl3: "",
   });
 
+  const handleSelectChange = (name, value) => {
+    setFormInfo((prevFormInfo) => ({
+      ...prevFormInfo,
+      [name]: value,
+    }));
+  };
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormInfo((prevData) => ({
@@ -51,6 +61,12 @@ function ModelOnboardingPage() {
       [name]: value,
     }));
   };
+  const days = Array.from({ length: 31 }, (_, i) => (i + 1).toString());
+  const months = Array.from({ length: 12 }, (_, i) => (i + 1).toString());
+  const years = Array.from({ length: 65 }, (_, i) => (2023 - i).toString());
+
+  
+  
 
   const handleIdCardChange = (event) => {
     const selectedFile5 = event.target.files[0];
@@ -71,28 +87,6 @@ function ModelOnboardingPage() {
     reader.readAsDataURL(selectedFile5);
   };
 
-  // useEffect(() => {
-  //   let fileReader,
-  //     isCancel = false;
-  //   if (idCardPic) {
-  //     fileReader = new FileReader();
-  //     fileReader.onload = (e) => {
-  //       const { result } = e.target;
-  //       if (result && !isCancel) {
-  //         setImagePreview(result);
-  //       }
-  //     };
-  //     fileReader.readAsDataURL(idCardPic);
-  //   }
-
-  //   return () => {
-  //     isCancel = true;
-  //     if (fileReader && fileReader.readyState === 1) {
-  //       fileReader.abort();
-  //     }
-  //   };
-  // }, [imagePreview]);
-
   const handleDisplayPicChange = (event) => {
     const selectedFile4 = event.target.files[0];
     setDisplayPic(selectedFile4);
@@ -100,7 +94,7 @@ function ModelOnboardingPage() {
       ...prevData,
       displayPicUrl: selectedFile4,
     }));
-    const reader = new FileReader();
+const reader = new FileReader();
     reader.onload = (e) => {
       setImagePreviews((prevPreviews) => ({
         ...prevPreviews,
@@ -135,7 +129,7 @@ function ModelOnboardingPage() {
       ...prevData,
       imageUrl2: selectedFile2,
     }));
-    const reader = new FileReader();
+const reader = new FileReader();
     reader.onload = (e) => {
       setImagePreviews((prevPreviews) => ({
         ...prevPreviews,
@@ -152,7 +146,7 @@ function ModelOnboardingPage() {
       ...prevData,
       imageUrl3: selectedFile3,
     }));
-    const reader = new FileReader();
+const reader = new FileReader();
     reader.onload = (e) => {
       setImagePreviews((prevPreviews) => ({
         ...prevPreviews,
@@ -185,7 +179,7 @@ function ModelOnboardingPage() {
     }
   };
   return (
-    <div className="bg-neutral-950 font-volkhorn ">
+    <div className="bg-black font-volkhorn ">
       {/* <div className=" px-5 py-5  flex">
         <FaForumbee className="text-yellow-500 mr-1 text-3xl" />
         <h1 className="text-yellow-500 text-3xl">BeeHouse</h1>
@@ -299,40 +293,61 @@ function ModelOnboardingPage() {
           <br></br>
           <div className="flex">
             <div className="mr-2">
-              <label>Day:</label>
-              <br />
-              <input
+              
+             
+              <select
                 className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14 rounded rounded-lg"
-                type="number"
-                placeholder="DD"
+                type="date"
+                placeholderText="DD"
                 name="dob_day"
-                value={formInfo.dob_day}
-                onChange={handleInputChange}
-              />
+                onChange={(e) => handleSelectChange('dob_day', e.target.value)}
+              >
+                 <option className="h-40" value="">DD</option>
+                {days.map((day) => (
+                <option key={day} value={day}>
+                 {day}
+               </option>
+          ))}
+                </select>
             </div>
             <div className="mr-2">
-              <label>Month:</label>
-              <br />
-              <input
+              
+             
+              <select
                 className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14 rounded rounded-lg"
-                type="number"
-                placeholder="MM"
+                type="date"
+                placeholderText="MM"
                 name="dob_month"
-                value={formInfo.dob_month}
-                onChange={handleInputChange}
-              />
+               value={formInfo.dob_month}
+               onChange={(e) => handleSelectChange('dob_month', e.target.value)}
+              >
+                <option value="" >MM</option>
+          {months.map((month) => (
+            <option key={month} value={month}>
+              {month}
+            </option>
+          ))}
+              </select>
             </div>
             <div>
-              <label>Year:</label>
-              <br />
-              <input
-                className="border px-3 outline-none border-yellow-500 bg-black  mt-1 w-24 h-14 rounded rounded-lg"
-                type="number"
-                placeholder="YYYY"
+              
+              
+              <select
+                className="border px-2 py-1 outline-none border-yellow-500 bg-black  mt-1 w-24 h-14 rounded rounded-lg"
+                type="date"
+                placeholderText="YYYY"
                 name="dob_year"
-                value={formInfo.dob_year}
-                onChange={handleInputChange}
-              />
+               value={formInfo.dob_year}
+               onChange={(e) => handleSelectChange('dob_year', e.target.value)}
+              >
+                <option value="" className="h-14">YYYY</option>
+          {years.map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
+              </select>
+            
             </div>
           </div>
           <br></br>
@@ -470,15 +485,15 @@ function ModelOnboardingPage() {
               htmlFor="upload1"
               className="relative rounded bg-neutral-550 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
             >
-              {imagePreviews.idCardUrl ? (
+{imagePreviews.idCardUrl ? (
                 <img
                   src={imagePreviews.idCardUrl}
                   alt="Preview"
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <span className="text-gray-400 text-3xl">+</span>
-              )}{" "}
+              <span className="text-gray-400 text-3xl">+</span>
+)}{" "}
             </label>
             <input
               type="file"
@@ -505,7 +520,7 @@ function ModelOnboardingPage() {
                 />
               ) : (
                 <span className="text-gray-400 text-3xl">+</span>
-              )}
+)}
             </label>
             <input
               type="file"
@@ -526,15 +541,15 @@ function ModelOnboardingPage() {
                 htmlFor="upload3"
                 className="relative rounded bg-neutral-950 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
               >
-                {imagePreviews.imageUrl1 ? (
+{imagePreviews.imageUrl1 ? (
                   <img
                     src={imagePreviews.imageUrl1}
                     alt="Preview"
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <span className="text-gray-400 text-3xl">+</span>
-                )}{" "}
+                <span className="text-gray-400 text-3xl">+</span>
+)}{" "}
               </label>
               <input
                 type="file"
@@ -550,15 +565,15 @@ function ModelOnboardingPage() {
                 htmlFor="upload4"
                 className="relative rounded bg-neutral-950 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
               >
-                {imagePreviews.imageUrl2 ? (
+{imagePreviews.imageUrl2 ? (
                   <img
                     src={imagePreviews.imageUrl2}
                     alt="Preview"
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <span className="text-gray-400 text-3xl">+</span>
-                )}
+                <span className="text-gray-400 text-3xl">+</span>
+)}
               </label>
               <input
                 type="file"
@@ -574,15 +589,15 @@ function ModelOnboardingPage() {
                 htmlFor="upload5"
                 className="relative rounded bg-neutral-950 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
               >
-                {imagePreviews.imageUrl3 ? (
+{imagePreviews.imageUrl3 ? (
                   <img
                     src={imagePreviews.imageUrl3}
                     alt="Preview"
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <span className="text-gray-400 text-3xl">+</span>
-                )}{" "}
+                <span className="text-gray-400 text-3xl">+</span>
+)}{" "}
               </label>
               <input
                 type="file"
