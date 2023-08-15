@@ -298,7 +298,7 @@ const reader = new FileReader();
               <select
                 className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14 rounded rounded-lg"
                 type="date"
-                placeholderText="DD"
+                placeholder="DD"
                 name="dob_day"
                 onChange={(e) => handleSelectChange('dob_day', e.target.value)}
               >
@@ -316,7 +316,7 @@ const reader = new FileReader();
               <select
                 className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14 rounded rounded-lg"
                 type="date"
-                placeholderText="MM"
+                placeholder="MM"
                 name="dob_month"
                value={formInfo.dob_month}
                onChange={(e) => handleSelectChange('dob_month', e.target.value)}
@@ -331,22 +331,23 @@ const reader = new FileReader();
             </div>
             <div>
               
-              
+            
               <select
-                className="border px-2 py-1 outline-none border-yellow-500 bg-black  mt-1 w-24 h-14 rounded rounded-lg"
+                className="border px-2 py-1 outline-none border-yellow-500 bg-black select-dropdown  mt-1 w-24 h-14 rounded rounded-lg"
                 type="date"
-                placeholderText="YYYY"
+                placeholder="YYYY"
                 name="dob_year"
                value={formInfo.dob_year}
                onChange={(e) => handleSelectChange('dob_year', e.target.value)}
               >
-                <option value="" className="h-14">YYYY</option>
+                <option value="" >YYYY</option>
           {years.map((year) => (
             <option key={year} value={year}>
               {year}
             </option>
           ))}
               </select>
+              
             
             </div>
           </div>
