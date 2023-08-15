@@ -167,7 +167,7 @@ export default function AgencyOnBoardingPage() {
           <div className="">
             <label
               htmlFor="upload1"
-              className="relative rounded bg-neutral-550 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
+              className="relative rounded-xl p-2 bg-neutral-550 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
             >
               {imagePreviews.displayPicUrl ? (
                 <img
@@ -194,7 +194,7 @@ export default function AgencyOnBoardingPage() {
           <div className="flex items-center">
             <label
               htmlFor="upload2"
-              className="relative rounded bg-neutral-950 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
+              className="relative rounded-xl p-2 bg-neutral-950 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
             >
               {imagePreviews.businessCerUrl ? (
                 <img

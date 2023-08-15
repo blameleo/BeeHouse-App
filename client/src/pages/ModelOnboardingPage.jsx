@@ -468,7 +468,7 @@ function ModelOnboardingPage() {
           <div className="flex items-center">
             <label
               htmlFor="upload1"
-              className="relative rounded bg-neutral-550 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
+              className="relative rounded-xl p-2 bg-neutral-550 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
             >
               {imagePreviews.idCardUrl ? (
                 <img
@@ -495,7 +495,7 @@ function ModelOnboardingPage() {
           <div className="flex items-center">
             <label
               htmlFor="upload2"
-              className="relative rounded bg-neutral-950 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
+              className="relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 order border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
             >
               {imagePreviews.displayPicUrl ? (
                 <img
@@ -524,7 +524,7 @@ function ModelOnboardingPage() {
             <div className="flex items-center mr-5">
               <label
                 htmlFor="upload3"
-                className="relative rounded bg-neutral-950 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
+                className="relative rounded-xl p-2 bg-neutral-950 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
               >
                 {imagePreviews.imageUrl1 ? (
                   <img
@@ -548,7 +548,7 @@ function ModelOnboardingPage() {
             <div className="flex items-center mr-5">
               <label
                 htmlFor="upload4"
-                className="relative rounded bg-neutral-950 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
+                className="relative rounded-xl p-2  bg-neutral-950 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
               >
                 {imagePreviews.imageUrl2 ? (
                   <img
@@ -572,7 +572,7 @@ function ModelOnboardingPage() {
             <div className="flex items-center">
               <label
                 htmlFor="upload5"
-                className="relative rounded bg-neutral-950 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
+                className="relative rounded-xl p-2 bg-neutral-950 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
               >
                 {imagePreviews.imageUrl3 ? (
                   <img
@@ -599,7 +599,7 @@ function ModelOnboardingPage() {
       <div className="flex justify-center pb-10">
         <button
           onClick={handleSubmit}
-          className="mr-5 mt-5 bg-yellow-500 border border-2 border-black h-[50px] rounded-lg w-[150px]"
+          className="mr-5 mt-5 bg-yellow-500  border-2 border-black h-[50px] rounded-lg w-[150px]"
         >
           Continue
         </button>
