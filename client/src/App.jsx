@@ -6,7 +6,7 @@ import Agency from "./pages/Agency";
 import "./App.css";
 import ModelSettings from "./pages/ModelSettings";
 import ModelOnboardingPage from "./pages/ModelOnboardingPage";
-import AgencyOnboardingPage from "./pages/AgencyOnboardingPage";
+import AgencyOnboardingPage from "./pages/AgencyOnBoardingPage";
 
 // import { AuthContextProvider } from "./context/AuthContext";
 
