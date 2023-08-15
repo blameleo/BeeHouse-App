@@ -4,13 +4,15 @@ const bcrypt = require("bcrypt");
 const { v4: uuidv4 } = require("uuid");
 const multer = require("multer");
 const path = require("path");
+const app = express();
 
 const UserModel = require("../models/User.js");
 const router = express.Router();
+// app.use(express.static("public"));
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "images");
+    cb(null, "public/images");
   },
   filename: function (req, file, cb) {
     console.log(file);
@@ -24,28 +26,31 @@ const upload = multer({ storage: storage });
 
 router.post("/register", async (req, res) => {
   const { email, password, type } = req.body;
+
   const user = await UserModel.findOne({ email });
   if (user) {
-    return res.json({ message: "user already exists!" });
+    return res
+      .status(409)
+      .json({ message: "User with this email already exists" });
+  } else {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const generatedUserId = uuidv4();
+    const newUser = new UserModel({
+      user_id: generatedUserId,
+      email,
+      password: hashedPassword,
+      type,
+    });
+    await newUser.save();
+
+    const token = jwt.sign(newUser.toJSON(), "secret");
+    res.status(200).json({
+      token,
+      userId: generatedUserId,
+      email: email,
+      message: "User registered successfully",
+    });
   }
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const generatedUserId = uuidv4();
-  const newUser = new UserModel({
-    user_id: generatedUserId,
-    email,
-    password: hashedPassword,
-    type,
-  });
-  await newUser.save();
-
-  const token = jwt.sign(newUser.toJSON(), "secret");
-  res.json({
-    token,
-    userId: generatedUserId,
-    email: email,
-    message: "User registered successfully",
-  });
 });
 
 router.post("/login", async (req, res) => {

@@ -10,6 +10,8 @@ const port = 4000;
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static("public"));
+// app.use("/images", express.static("images"));
 app.use("/", userRouter);
 
 mongoose.connect(process.env.MONGODB_URL);

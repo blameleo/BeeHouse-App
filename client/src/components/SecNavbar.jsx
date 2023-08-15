@@ -57,15 +57,13 @@ function SecNavbar() {
 
   console.log(user);
 
+  const newUrl = user?.displayPicUrl?.replace("public/", "");
+  console.log(newUrl);
+
   return (
     <div className="bg-black fixed top-0 z-30 text-yellow-500 flex items-center justify-between p-4 w-full">
       <div className=" ">
         <Logo />
-        {/* <img
-          src="/server/images/displayPicUrl-1692064256856-489055357.jpeg"
-          alt=""
-          className="h-32 border border-white"
-        /> */}
 
         {/* <div className="ml-4  w-[300px] md:flex hidden  text-md text-yellow-500">
           <a href="">Messages</a>
@@ -75,7 +73,7 @@ function SecNavbar() {
       <div className="sm:flex  hidden w-[400px] justify-between">
         <div className="lg:flex hidden items-center  ">
           <BsGeoAlt className="text-white" />
-          <p className="ml-2">Accra,Gh</p>
+          {user && <p className="ml-2">welcome {user?.firstName}</p>}
         </div>
 
         <div className="flex  w-[190px] justify-around items-center">
@@ -84,7 +82,12 @@ function SecNavbar() {
             onClick={toggleDropdown}
             ref={dropdownRef}
           >
-            <div className="bg-[url('/img/profilepic.jpeg')] w-8 h-8  rounded-full bg-cover bg-no-repeat cursor-pointer relative">
+            <div className="relative">
+              <img
+                src={`http://localhost:4000/${newUrl}`}
+                alt=""
+                className="w-8 h-8 rounded-full object-cover"
+              />
               {isOpen && (
                 <div
                   id="dropdown"
@@ -115,6 +118,7 @@ function SecNavbar() {
                 </div>
               )}
             </div>
+
             <BsFillCaretDownFill className="ml-1 text-xs" />
           </div>
 
