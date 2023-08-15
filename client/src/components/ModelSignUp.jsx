@@ -3,9 +3,12 @@ import RegistrationButton from "./RegistrationButton";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import Loader from "./Loader";
 
 function ModelSignUp() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [loading, setLoading] = useState(null);
+  const [info, setInfo] = useState(null);
   const [modelSignUpData, setModelSignUpData] = useState({
     type: "model",
     email: "",
@@ -25,6 +28,7 @@ function ModelSignUp() {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const response = await axios.post(
@@ -36,62 +40,76 @@ function ModelSignUp() {
       setCookie("Email", response.data.email);
       setCookie("UserId", response.data.userId);
       setCookie("AuthToken", response.data.token);
-      alert("User is registered");
+      // alert("User is registered");
       // navigate("/modelonboarding");
+      if (response.status === 200) {
+        setLoading(false);
+        // navigate("/modelonboarding");
+      }
     } catch (error) {
-      console.error(error);
+      setLoading(false);
+
+      setInfo(error.response.data.message);
     }
   };
   return (
-    <form className=" " onSubmit={handleSubmit}>
-      <label className="font-volkhorn" htmlFor="">
-        Email:
-      </label>
-      <br></br>
-      <input
-        value={modelSignUpData.email}
-        name="email"
-        onChange={handleChange}
-        type="email"
-        placeholder="Email"
-        className="mb-5  border p-2 w-96  border-1 border-black rounded-md  "
-      />
-      <br></br>
+    <div>
+      <form className=" " onSubmit={handleSubmit}>
+        {loading ? (
+          <Loader loaderStyle="w-[400px] h-[400px] flex justify-center items-center" />
+        ) : (
+          <div>
+            <label className="font-volkhorn" htmlFor="">
+              Email:
+            </label>
+            <br></br>
+            <input
+              value={modelSignUpData.email}
+              name="email"
+              onChange={handleChange}
+              type="email"
+              placeholder="Email"
+              className="mb-5  border p-2 w-96  border-1 border-black rounded-md  "
+            />
+            <br></br>
 
-      <label className="font-volkhorn" htmlFor="">
-        Password:
-      </label>
-      <br></br>
-      <input
-        value={modelSignUpData.password}
-        name="password"
-        onChange={handleChange}
-        type="password"
-        placeholder="Password"
-        className="mb-5  border p-2 w-96  border-1 border-black rounded-md  "
-      />
+            <label className="font-volkhorn" htmlFor="">
+              Password:
+            </label>
+            <br></br>
+            <input
+              value={modelSignUpData.password}
+              name="password"
+              onChange={handleChange}
+              type="password"
+              placeholder="Password"
+              className="mb-5  border p-2 w-96  border-1 border-black rounded-md  "
+            />
 
-      <br></br>
-      <label className="font-volkhorn" htmlFor="">
-        Confirm Password:
-      </label>
-      <br></br>
-      <input
-        value={modelSignUpData.confirmPassword}
-        name="confirmPassword"
-        onChange={handleChange}
-        type="password"
-        id=""
-        placeholder="Confirm Password"
-        className=" mb-5  border p-2 w-96  border-1 border-black rounded-md  "
-      />
-      <br></br>
-      {/* <p className="text-center text-xs text-green-500">{info}</p> */}
-
-      <div className="flex justify-center mt-7">
-        <RegistrationButton label="Sign up" />
-      </div>
-    </form>
+            <br></br>
+            <label className="font-volkhorn" htmlFor="">
+              Confirm Password:
+            </label>
+            <br></br>
+            <input
+              value={modelSignUpData.confirmPassword}
+              name="confirmPassword"
+              onChange={handleChange}
+              type="password"
+              id=""
+              placeholder="Confirm Password"
+              className=" mb-5  border p-2 w-96  border-1 border-black rounded-md  "
+            />
+            <br></br>
+            {/* <p className="text-center text-xs text-green-500">{info}</p> */}
+            <p className="text-red-500">{info}</p>
+            <div className="flex justify-center mt-7">
+              <RegistrationButton label="Sign up" />
+            </div>
+          </div>
+        )}
+      </form>
+    </div>
   );
 }
 

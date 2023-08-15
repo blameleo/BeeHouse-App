@@ -4,22 +4,21 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { FaForumbee } from "react-icons/fa";
 import SecNavbar from "../components/SecNavbar";
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function ModelOnboardingPage() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [displayPic, setDisplayPic] = useState(null);
   const [idCardPic, setIdCardPic] = useState(null);
   const [info, setInfo] = useState(null);
-  
 
   const [image1, setImage1] = useState(null);
 
   const [image2, setImage2] = useState(null);
 
   const [image3, setImage3] = useState(null);
-const [imagePreviews, setImagePreviews] = useState({
+  const [imagePreviews, setImagePreviews] = useState({
     displayPicUrl: null,
     idCardUrl: null,
     imageUrl1: null,
@@ -65,9 +64,6 @@ const [imagePreviews, setImagePreviews] = useState({
   const months = Array.from({ length: 12 }, (_, i) => (i + 1).toString());
   const years = Array.from({ length: 65 }, (_, i) => (2023 - i).toString());
 
-  
-  
-
   const handleIdCardChange = (event) => {
     const selectedFile5 = event.target.files[0];
     setIdCardPic(selectedFile5);
@@ -94,7 +90,7 @@ const [imagePreviews, setImagePreviews] = useState({
       ...prevData,
       displayPicUrl: selectedFile4,
     }));
-const reader = new FileReader();
+    const reader = new FileReader();
     reader.onload = (e) => {
       setImagePreviews((prevPreviews) => ({
         ...prevPreviews,
@@ -129,7 +125,7 @@ const reader = new FileReader();
       ...prevData,
       imageUrl2: selectedFile2,
     }));
-const reader = new FileReader();
+    const reader = new FileReader();
     reader.onload = (e) => {
       setImagePreviews((prevPreviews) => ({
         ...prevPreviews,
@@ -146,7 +142,7 @@ const reader = new FileReader();
       ...prevData,
       imageUrl3: selectedFile3,
     }));
-const reader = new FileReader();
+    const reader = new FileReader();
     reader.onload = (e) => {
       setImagePreviews((prevPreviews) => ({
         ...prevPreviews,
@@ -174,6 +170,7 @@ const reader = new FileReader();
 
       console.log(response.data.message);
       setInfo(response.data.message);
+      navigate("/home");
     } catch (err) {
       console.log(err);
     }
@@ -293,61 +290,60 @@ const reader = new FileReader();
           <br></br>
           <div className="flex">
             <div className="mr-2">
-              
-             
               <select
                 className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14 rounded rounded-lg"
                 type="date"
                 placeholderText="DD"
                 name="dob_day"
-                onChange={(e) => handleSelectChange('dob_day', e.target.value)}
+                onChange={(e) => handleSelectChange("dob_day", e.target.value)}
               >
-                 <option className="h-40" value="">DD</option>
+                <option className="h-40" value="">
+                  DD
+                </option>
                 {days.map((day) => (
-                <option key={day} value={day}>
-                 {day}
-               </option>
-          ))}
-                </select>
+                  <option key={day} value={day}>
+                    {day}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="mr-2">
-              
-             
               <select
                 className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14 rounded rounded-lg"
                 type="date"
                 placeholderText="MM"
                 name="dob_month"
-               value={formInfo.dob_month}
-               onChange={(e) => handleSelectChange('dob_month', e.target.value)}
+                value={formInfo.dob_month}
+                onChange={(e) =>
+                  handleSelectChange("dob_month", e.target.value)
+                }
               >
-                <option value="" >MM</option>
-          {months.map((month) => (
-            <option key={month} value={month}>
-              {month}
-            </option>
-          ))}
+                <option value="">MM</option>
+                {months.map((month) => (
+                  <option key={month} value={month}>
+                    {month}
+                  </option>
+                ))}
               </select>
             </div>
             <div>
-              
-              
               <select
                 className="border px-2 py-1 outline-none border-yellow-500 bg-black  mt-1 w-24 h-14 rounded rounded-lg"
                 type="date"
                 placeholderText="YYYY"
                 name="dob_year"
-               value={formInfo.dob_year}
-               onChange={(e) => handleSelectChange('dob_year', e.target.value)}
+                value={formInfo.dob_year}
+                onChange={(e) => handleSelectChange("dob_year", e.target.value)}
               >
-                <option value="" className="h-14">YYYY</option>
-          {years.map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
-          ))}
+                <option value="" className="h-14">
+                  YYYY
+                </option>
+                {years.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
               </select>
-            
             </div>
           </div>
           <br></br>
@@ -483,17 +479,17 @@ const reader = new FileReader();
           <div className="flex items-center">
             <label
               htmlFor="upload1"
-              className="relative rounded bg-neutral-550 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
+              className="relative rounded-xl p-2 bg-neutral-550 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
             >
-{imagePreviews.idCardUrl ? (
+              {imagePreviews.idCardUrl ? (
                 <img
                   src={imagePreviews.idCardUrl}
                   alt="Preview"
                   className="w-full h-full object-cover"
                 />
               ) : (
-              <span className="text-gray-400 text-3xl">+</span>
-)}{" "}
+                <span className="text-gray-400 text-3xl">+</span>
+              )}{" "}
             </label>
             <input
               type="file"
@@ -510,7 +506,7 @@ const reader = new FileReader();
           <div className="flex items-center">
             <label
               htmlFor="upload2"
-              className="relative rounded bg-neutral-950 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
+              className="relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 order border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
             >
               {imagePreviews.displayPicUrl ? (
                 <img
@@ -520,7 +516,7 @@ const reader = new FileReader();
                 />
               ) : (
                 <span className="text-gray-400 text-3xl">+</span>
-)}
+              )}
             </label>
             <input
               type="file"
@@ -539,17 +535,17 @@ const reader = new FileReader();
             <div className="flex items-center mr-5">
               <label
                 htmlFor="upload3"
-                className="relative rounded bg-neutral-950 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
+                className="relative rounded-xl p-2 bg-neutral-950 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
               >
-{imagePreviews.imageUrl1 ? (
+                {imagePreviews.imageUrl1 ? (
                   <img
                     src={imagePreviews.imageUrl1}
                     alt="Preview"
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                <span className="text-gray-400 text-3xl">+</span>
-)}{" "}
+                  <span className="text-gray-400 text-3xl">+</span>
+                )}{" "}
               </label>
               <input
                 type="file"
@@ -563,17 +559,17 @@ const reader = new FileReader();
             <div className="flex items-center mr-5">
               <label
                 htmlFor="upload4"
-                className="relative rounded bg-neutral-950 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
+                className="relative rounded-xl p-2  bg-neutral-950 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
               >
-{imagePreviews.imageUrl2 ? (
+                {imagePreviews.imageUrl2 ? (
                   <img
                     src={imagePreviews.imageUrl2}
                     alt="Preview"
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                <span className="text-gray-400 text-3xl">+</span>
-)}
+                  <span className="text-gray-400 text-3xl">+</span>
+                )}
               </label>
               <input
                 type="file"
@@ -587,17 +583,17 @@ const reader = new FileReader();
             <div className="flex items-center">
               <label
                 htmlFor="upload5"
-                className="relative rounded bg-neutral-950 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
+                className="relative rounded-xl p-2 bg-neutral-950 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
               >
-{imagePreviews.imageUrl3 ? (
+                {imagePreviews.imageUrl3 ? (
                   <img
                     src={imagePreviews.imageUrl3}
                     alt="Preview"
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                <span className="text-gray-400 text-3xl">+</span>
-)}{" "}
+                  <span className="text-gray-400 text-3xl">+</span>
+                )}{" "}
               </label>
               <input
                 type="file"
@@ -614,7 +610,7 @@ const reader = new FileReader();
       <div className="flex justify-center pb-10">
         <button
           onClick={handleSubmit}
-          className="mr-5 mt-5 bg-yellow-500 border border-2 border-black h-[50px] rounded-lg w-[150px]"
+          className="mr-5 mt-5 bg-yellow-500  border-2 border-black h-[50px] rounded-lg w-[150px]"
         >
           Continue
         </button>
