@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../components/Logo";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { FaForumbee } from "react-icons/fa";
+import SecNavbar from "../components/SecNavbar";
 
 function ModelOnboardingPage() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
@@ -15,6 +16,13 @@ function ModelOnboardingPage() {
   const [image2, setImage2] = useState(null);
 
   const [image3, setImage3] = useState(null);
+  const [imagePreviews, setImagePreviews] = useState({
+    displayPicUrl: null,
+    idCardUrl: null,
+    imageUrl1: null,
+    imageUrl2: null,
+    imageUrl3: null,
+  });
 
   const [formInfo, setFormInfo] = useState({
     user_id: cookies.UserId,
@@ -47,11 +55,43 @@ function ModelOnboardingPage() {
   const handleIdCardChange = (event) => {
     const selectedFile5 = event.target.files[0];
     setIdCardPic(selectedFile5);
+
     setFormInfo((prevData) => ({
       ...prevData,
       idCardUrl: selectedFile5,
     }));
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setImagePreviews((prevPreviews) => ({
+        ...prevPreviews,
+        idCardUrl: e.target.result,
+      }));
+    };
+    reader.readAsDataURL(selectedFile5);
   };
+
+  // useEffect(() => {
+  //   let fileReader,
+  //     isCancel = false;
+  //   if (idCardPic) {
+  //     fileReader = new FileReader();
+  //     fileReader.onload = (e) => {
+  //       const { result } = e.target;
+  //       if (result && !isCancel) {
+  //         setImagePreview(result);
+  //       }
+  //     };
+  //     fileReader.readAsDataURL(idCardPic);
+  //   }
+
+  //   return () => {
+  //     isCancel = true;
+  //     if (fileReader && fileReader.readyState === 1) {
+  //       fileReader.abort();
+  //     }
+  //   };
+  // }, [imagePreview]);
 
   const handleDisplayPicChange = (event) => {
     const selectedFile4 = event.target.files[0];
@@ -60,6 +100,14 @@ function ModelOnboardingPage() {
       ...prevData,
       displayPicUrl: selectedFile4,
     }));
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setImagePreviews((prevPreviews) => ({
+        ...prevPreviews,
+        displayPicUrl: e.target.result,
+      }));
+    };
+    reader.readAsDataURL(selectedFile4);
   };
 
   const handleImage1Change = (event) => {
@@ -69,6 +117,15 @@ function ModelOnboardingPage() {
       ...prevData,
       imageUrl1: selectedFile1,
     }));
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setImagePreviews((prevPreviews) => ({
+        ...prevPreviews,
+        imageUrl1: e.target.result,
+      }));
+    };
+    reader.readAsDataURL(selectedFile1);
   };
 
   const handleImage2Change = (event) => {
@@ -78,6 +135,14 @@ function ModelOnboardingPage() {
       ...prevData,
       imageUrl2: selectedFile2,
     }));
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setImagePreviews((prevPreviews) => ({
+        ...prevPreviews,
+        imageUrl2: e.target.result,
+      }));
+    };
+    reader.readAsDataURL(selectedFile2);
   };
 
   const handleImage3Change = (event) => {
@@ -87,6 +152,14 @@ function ModelOnboardingPage() {
       ...prevData,
       imageUrl3: selectedFile3,
     }));
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setImagePreviews((prevPreviews) => ({
+        ...prevPreviews,
+        imageUrl3: e.target.result,
+      }));
+    };
+    reader.readAsDataURL(selectedFile3);
   };
 
   const handleSubmit = async (e) => {
@@ -113,11 +186,12 @@ function ModelOnboardingPage() {
   };
   return (
     <div className="bg-neutral-950 font-volkhorn ">
-      <div className=" px-5 py-5  flex">
+      {/* <div className=" px-5 py-5  flex">
         <FaForumbee className="text-yellow-500 mr-1 text-3xl" />
         <h1 className="text-yellow-500 text-3xl">BeeHouse</h1>
-      </div>
-      <div className="flex justify-center mb-12">
+      </div> */}
+      <SecNavbar />
+      <div className="flex justify-center mt-10">
         <h1 className=" font-volkhorn text-4xl text-yellow-500 mt-12 text-bold">
           Create Account{" "}
         </h1>
@@ -396,7 +470,15 @@ function ModelOnboardingPage() {
               htmlFor="upload1"
               className="relative rounded bg-neutral-550 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
             >
-              <span className="text-gray-400 text-3xl">+</span>
+              {imagePreviews.idCardUrl ? (
+                <img
+                  src={imagePreviews.idCardUrl}
+                  alt="Preview"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <span className="text-gray-400 text-3xl">+</span>
+              )}{" "}
             </label>
             <input
               type="file"
@@ -415,7 +497,15 @@ function ModelOnboardingPage() {
               htmlFor="upload2"
               className="relative rounded bg-neutral-950 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
             >
-              ß<span className="text-gray-400 text-3xl">+</span>
+              {imagePreviews.displayPicUrl ? (
+                <img
+                  src={imagePreviews.displayPicUrl}
+                  alt="Preview"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <span className="text-gray-400 text-3xl">+</span>
+              )}
             </label>
             <input
               type="file"
@@ -436,7 +526,15 @@ function ModelOnboardingPage() {
                 htmlFor="upload3"
                 className="relative rounded bg-neutral-950 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
               >
-                <span className="text-gray-400 text-3xl">+</span>
+                {imagePreviews.imageUrl1 ? (
+                  <img
+                    src={imagePreviews.imageUrl1}
+                    alt="Preview"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="text-gray-400 text-3xl">+</span>
+                )}{" "}
               </label>
               <input
                 type="file"
@@ -452,7 +550,15 @@ function ModelOnboardingPage() {
                 htmlFor="upload4"
                 className="relative rounded bg-neutral-950 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
               >
-                <span className="text-gray-400 text-3xl">+</span>
+                {imagePreviews.imageUrl2 ? (
+                  <img
+                    src={imagePreviews.imageUrl2}
+                    alt="Preview"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="text-gray-400 text-3xl">+</span>
+                )}
               </label>
               <input
                 type="file"
@@ -468,7 +574,15 @@ function ModelOnboardingPage() {
                 htmlFor="upload5"
                 className="relative rounded bg-neutral-950 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
               >
-                <span className="text-gray-400 text-3xl">+</span>
+                {imagePreviews.imageUrl3 ? (
+                  <img
+                    src={imagePreviews.imageUrl3}
+                    alt="Preview"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="text-gray-400 text-3xl">+</span>
+                )}{" "}
               </label>
               <input
                 type="file"
