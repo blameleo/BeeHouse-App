@@ -79,7 +79,8 @@ router.put(
   "/user",
   upload.fields([
     { name: "displayPicUrl", maxCount: 1 }, // One file for displayPicUrl field
-    { name: "idCardUrl", maxCount: 1 }, // One file for idCardUrl field
+    { name: "idCardUrl", maxCount: 1 },
+    { name: "businessCerUrl", maxCount: 1 }, // One file for idCardUrl field
     { name: "imageUrl1", maxCount: 1 },
     { name: "imageUrl2", maxCount: 1 },
     { name: "imageUrl3", maxCount: 1 }, // One file for imageUrl1 field
@@ -106,12 +107,12 @@ router.put(
           complexion: formData.complexion,
           telephone: formData.telephone,
           stature: formData.stature,
-          businessCerUrl: formData.businessCertUrl,
-          idCardUrl: "",
-          displayPicUrl: "",
-          imageUrl1: "",
-          imageUrl2: "",
-          imageUrl3: "",
+          // businessCerturl: "",
+          // idCardUrl: "",
+          // displayPicUrl: "",
+          // imageUrl1: formData.imageUrl1,
+          // imageUrl2: "",
+          // imageUrl3: "",
           location: formData.location,
         },
       };
@@ -138,6 +139,11 @@ router.put(
       if (req.files["imageUrl3"]) {
         const imageUrl3 = req.files["imageUrl3"][0].path;
         updatedDocument.$set.imageUrl3 = imageUrl3;
+      }
+
+      if (req.files["businessCerUrl"]) {
+        const businessCerUrl = req.files["businessCerUrl"][0].path;
+        updatedDocument.$set.businessCerturl = businessCerUrl;
       }
 
       const insertedUser = await UserModel.updateOne(query, updatedDocument);
