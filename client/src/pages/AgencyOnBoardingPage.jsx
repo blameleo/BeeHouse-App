@@ -1,10 +1,18 @@
 import React from 'react'
-import {FaForumbee} from 'react-icons/fa'
+import { FaForumbee } from 'react-icons/fa'
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
+import SecNavbar from '../components/SecNavbar';
 
-function AgencyOnBoardingPage() {
 
-  const [formData, setFormData] = React.useState({
-    user_id: cookies.UserId,
+
+export default function AgencyOnBoardingPage() {
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [businessCer,setBusinessCer]= React.useState(null)
+  const [displayPic, setDisplayPic] = React.useState(null);
+  const [info, setInfo] = React.useState(null);
+  const [formInfo, setFormInfo] = React.useState({
+    user_id: "",
     agencyName:"",
     about:"",
     location:"",
@@ -16,130 +24,148 @@ function AgencyOnBoardingPage() {
 
   });
 
+
+
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prevData) => ({
+    setFormInfo((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(formData);
+  const handleDisplayPicChange = (event) => {
+    const selectedFile2 = event.target.files[0];
+    setDisplayPic(selectedFile2);
+    
   };
 
-  return (
-   
-        
-        <div className="bg-neutral-950 font-volkhorn  ">
-      <div className=" px-5 py-5  flex">
-        <FaForumbee className="text-yellow-500 mr-1 text-3xl" />
-        <h1 className="text-yellow-500 text-3xl">BeeHouse</h1>
-      </div>
-      <div className="flex justify-center mb-12">
-        <h1 className=" font-volkhorn text-4xl text-yellow-500 mt-12 text-bold">
-          Create Account
-        </h1>
-      </div>
-      <form
-        action=""
-        className="px-20 text-white  justify-between "
-      >
-        <div className="">
-          <label htmlFor="" className="mb">
-            Agency Name :
-          </label>
-          <br></br>
+  const handleBusinessCerChange = (event) => {
+    const selectedFile1 = event.target.files[0];
+    setBusinessCer(selectedFile1);
+    
+  };
 
-          <input
-            className=" border px-3 border-yellow-500 outline-none bg-black  mt-1 w-[400px]  md:w-[500px] h-14 rounded rounded-lg "
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("displayPicUrl", displayPic);
+    formData.append("businessCerUrl", businessCer)
+    console.log(formInfo);
+    try{
+
+      
+       const response = await axios.put("http://localhost:4000/user", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data", // Important: Set the correct Content-Type header
+          },
+        });
+
+    console.log(response.data.message);
+      setInfo(response.data.message);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
+
+    
+
+  return (
+    <div className='bg-black font-volkhorn h-screen'>
+     <SecNavbar/>
+      <div className='flex justify-center mb-12'>
+        <h1 className='text-4xl text-yellow-500 mt-40 text-bold'>Create Account</h1>
+
+      </div>
+        <form action="" className="px-20 text-white flex flex-col md:flex-row  justify-between ">
+          <div>
+            <label htmlFor="">
+              Agency Name :
+            </label>
+            <br />
+            <input
+            className=" border px-3 mb-3 border-yellow-500 outline-none bg-black  mt-1 w-[400px]  md:w-[500px] h-14 rounded rounded-lg "
             type="text"
+            //value={formInfo.agencyName}
             onChange={handleInputChange}
-            value={formData.agencyName}
             placeholder="Agency Name"
             name="agencyName"
             id=""
-          />
-          <br></br>
-          <br />
-          <label htmlFor="">About :</label>
-          <br />
-          <input
+            />
+            <br />
+            <label htmlFor="">About :</label>
+           <br />
+           <input
             className=" border px-3 border-yellow-500 outline-none bg-black  mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg "
-            placeholder="last name"
+            placeholder="About"
             type="textarea"
             onChange={handleInputChange}
+            //value={formInfo.about}
             name="about"
-            value={formData.about}
+            
             id=""
-          />
-          <br></br>
-          <br />
-
-          <label className="" htmlFor="">
+            />
+            <br />
+            <br />
+           <label className="" htmlFor="">
             Location :
-          </label>
-          <br></br>
-          <input
-            className=" border px-3 border-yellow-500 outline-none bg-black  mt-1 w-[400px]  md:w-[500px] h-14 rounded rounded-lg "
+            </label>
+            <br />
+            <input
+            className=" border px-3 border-yellow-500 mb-3 outline-none bg-black  mt-1 w-[400px]  md:w-[500px] h-14 rounded rounded-lg "
             type="text"
             onChange={handleInputChange}
-            value={formData.location}
+            //value={formInfo.location}
             placeholder="location"
             name="location"
             id=""
-          />
-
-         
-          <br></br>
-
-          <label htmlFor="" className="font-volkhorn">
-            Telephone Number:
-          </label>
-          <br></br>
-          <input
-          className="border mb-5 outline-none px-3 border-yellow-500 bg-black  mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg"
-          type="tel" 
-          placeholder='+233 Phone Number'
-          name="telephone"
-          value={formData.telephone}
-          onChange={handleInputChange}
-          id="phoneNumber"
-          pattern="[0-9]*" 
-          minLength="10" 
-          maxLength="15" 
-          
-/>
-
-          
-
-        
-          <br></br>
-          </div>
-          <br></br>
-        <div>
-          <label htmlFor="">Profile picture ? :</label>
-          <br></br>
-          <div className="flex items-center">
-            <label
-              htmlFor="upload"
-              className="relative rounded bg-neutral-550 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
-            >
-              <span className="text-gray-400 text-3xl">+</span>
-            </label>
-            <input
-              type="file"
-              id="upload"
-              name="displayPicUrl"
-              className="hidden"
-              onChange={handleInputChange}
-              value="displayPicUrl"
             />
-          </div>
-          <br></br>
 
-          <label htmlFor="">Business Certificate:</label>
+            <br />
+            <label htmlFor="" className="font-volkhorn">
+            Telephone Number:
+            </label>
+            <br></br>
+            <input
+            className="border mb-5 outline-none px-3 border-yellow-500 bg-black  mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg"
+            type="tel" 
+            placeholder='+233 Phone Number'
+            name="telephone"
+            onChange={handleInputChange}
+            //value={formInfo.telephone}
+            id="phoneNumber"
+           pattern="[0-9]*" 
+           minLength="10" 
+            maxLength="15" 
+          
+            />
+
+
+          </div>
+
+          <div>
+            <label htmlFor="">Profile Picture :</label>
+            <br />
+            <div className=''>
+              <label 
+               htmlFor='upload'
+               className="relative rounded bg-neutral-550 border-dashed border-4 border border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
+               >
+                  <span className="text-gray-400 text-3xl">+</span>
+              </label>
+              <input type="file" 
+              id='upload'
+              name='displayPicUrl'
+              className='hidden'
+              onChange={handleDisplayPicChange}
+              //value="displayPicUrl"
+
+              />
+            </div>
+            <br />
+            <label htmlFor="">Business Certificate:</label>
           <br></br>
           <div className="flex items-center">
             <label
@@ -152,28 +178,23 @@ function AgencyOnBoardingPage() {
               type="file"
               id="upload"
               className="hidden"
-              onChange={handleInputChange}
               name="businessCerUrl"
+              onChange={handleBusinessCerChange}
+              //value='businessCerUrl'
+
             />
           </div>
 
-        
-        </div>
-        
-      </form>
+          </div>
 
-      
-      <div className="flex justify-center pb-10">
+        </form>
+
+        <div className="flex justify-center pb-10">
       <button onClick={handleSubmit} className='mr-5 mt-5 bg-yellow-500 border border-2 border-black h-[50px] rounded-lg w-[150px]'>Continue</button>
       </div>
 
-      
-     
     </div>
-
-        
-    
   )
 }
 
-export default AgencyOnBoardingPage
+

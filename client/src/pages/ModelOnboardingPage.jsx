@@ -16,7 +16,7 @@ function ModelOnboardingPage() {
 
   const [image3, setImage3] = useState(null);
 
-  const [formInfo, setFormInfo] = React.useState({
+  const [formInfo, setFormInfo] = useState({
     user_id: cookies.UserId,
     firstName: "",
     lastName: "",
