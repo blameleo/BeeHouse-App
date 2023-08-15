@@ -3,12 +3,15 @@ import { FaForumbee } from "react-icons/fa";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import SecNavbar from "../components/SecNavbar";
+import { useNavigate } from "react-router-dom";
 
 export default function AgencyOnBoardingPage() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [businessCer, setBusinessCer] = React.useState(null);
   const [displayPic, setDisplayPic] = React.useState(null);
   const [info, setInfo] = React.useState(null);
+  const navigate = useNavigate();
+
   const [imagePreviews, setImagePreviews] = useState({
     displayPicUrl: null,
     businessCerUrl: null,
@@ -85,6 +88,7 @@ export default function AgencyOnBoardingPage() {
 
       console.log(response.data.message);
       setInfo(response.data.message);
+      navigate("/agency");
     } catch (err) {
       console.log(err);
     }

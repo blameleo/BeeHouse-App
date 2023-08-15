@@ -4,13 +4,14 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { FaForumbee } from "react-icons/fa";
 import SecNavbar from "../components/SecNavbar";
+import { useNavigate } from "react-router";
 
 function ModelOnboardingPage() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [displayPic, setDisplayPic] = useState(null);
   const [idCardPic, setIdCardPic] = useState(null);
   const [info, setInfo] = useState(null);
-
+  const navigate = useNavigate();
   const [image1, setImage1] = useState(null);
 
   const [image2, setImage2] = useState(null);
@@ -180,6 +181,7 @@ function ModelOnboardingPage() {
 
       console.log(response.data.message);
       setInfo(response.data.message);
+      navigate("/home");
     } catch (err) {
       console.log(err);
     }

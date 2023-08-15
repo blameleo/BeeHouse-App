@@ -75,6 +75,18 @@ router.get("/users", async (req, res) => {
   }
 });
 
+router.get("/user", async (req, res) => {
+  const userId = req.query.userId;
+  try {
+    // const users = await UserModel.find();
+    const query = { user_id: userId };
+    const user = await UserModel.findOne(query);
+    res.send(user);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.put(
   "/user",
   upload.fields([

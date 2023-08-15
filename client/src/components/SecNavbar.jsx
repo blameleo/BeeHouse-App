@@ -5,16 +5,19 @@ import { GiTreeBeehive } from "react-icons/gi";
 import { BsFillChatLeftDotsFill, BsFillCaretDownFill } from "react-icons/bs";
 import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SecNavbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
-
-  const [cookies, setCookies] = useCookies(["access_token"]);
+  console.log(cookies);
   const logOut = () => {
-    setCookies("access_token", "");
-    window.localStorage.removeItem("userID");
+    removeCookie("Email");
+    removeCookie("UserId");
+    removeCookie("AuthToken");
     navigate("/login");
   };
 
@@ -27,18 +30,42 @@ function SecNavbar() {
       setIsOpen(false);
     }
   };
+  const userId = cookies.UserId;
+
+  const getUser = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/user", {
+        params: { userId },
+      });
+      setUser(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // useEffect(()=>{
+  // },[])
 
   useEffect(() => {
+    getUser();
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
+  console.log(user);
+
   return (
     <div className="bg-black fixed top-0 z-30 text-yellow-500 flex items-center justify-between p-4 w-full">
       <div className=" ">
         <Logo />
+        {/* <img
+          src="/server/images/displayPicUrl-1692064256856-489055357.jpeg"
+          alt=""
+          className="h-32 border border-white"
+        /> */}
 
         {/* <div className="ml-4  w-[300px] md:flex hidden  text-md text-yellow-500">
           <a href="">Messages</a>
