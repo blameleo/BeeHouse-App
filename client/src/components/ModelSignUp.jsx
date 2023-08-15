@@ -37,7 +37,7 @@ function ModelSignUp() {
       setCookie("UserId", response.data.userId);
       setCookie("AuthToken", response.data.token);
       alert("User is registered");
-      // navigate("/modelonboarding");
+      navigate("/modelonboarding");
     } catch (error) {
       console.error(error);
     }
