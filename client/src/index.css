@@ -22,3 +22,8 @@
     padding: 0;
     box-sizing: border-box;
   }
+
+  .select-dropdown{
+    max-height: 10rem; /* Adjust this value to your preferred maximum height */
+    overflow-y: auto;
+  }

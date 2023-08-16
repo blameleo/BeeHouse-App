@@ -1,60 +1,67 @@
 import React, { useState } from "react";
-import RegistrationButton from "./RegistrationButton";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useCookies } from "react-cookie";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Loader from "./Loader";
+import RegistrationButton from "./RegistrationButton";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object({
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string().required("Password is required"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
+    .required("Confirm Password is required"),
+});
 
 function ModelSignUp() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState(null);
-  const [modelSignUpData, setModelSignUpData] = useState({
-    type: "model",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
 
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setModelSignUpData((prev) => {
-      return {
-        ...prev,
-        [e.target.name]: e.target.value,
-      };
-    });
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      type: "model",
+      confirmPassword: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      console.log(values);
+      setLoading(true);
+      try {
+        const response = await axios.post(
+          "http://localhost:4000/register",
+          values
+        );
 
-  const handleSubmit = async (e) => {
-    setLoading(true);
-    e.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://localhost:4000/register",
-        modelSignUpData
-      );
+        console.log(response);
+        setCookie("Email", response.data.email);
+        setCookie("UserId", response.data.userId);
+        setCookie("AuthToken", response.data.token);
 
-      console.log(response);
-      setCookie("Email", response.data.email);
-      setCookie("UserId", response.data.userId);
-      setCookie("AuthToken", response.data.token);
-      // alert("User is registered");
-      // navigate("/modelonboarding");
-      if (response.status === 200) {
+        if (response.status === 200) {
+          setLoading(false);
+          // navigate("/modelonboarding");
+        }
+      } catch (error) {
         setLoading(false);
-        // navigate("/modelonboarding");
+        setInfo(error.response.data.message);
       }
-    } catch (error) {
-      setLoading(false);
+    },
+  });
 
-      setInfo(error.response.data.message);
-    }
-  };
+  const handleBlur =(e)=>{
+    formik.handleBlur(e);
+  }
+
   return (
     <div>
-      <form className=" " onSubmit={handleSubmit}>
+      <form className=" " onSubmit={formik.handleSubmit}>
         {loading ? (
           <Loader loaderStyle="w-[400px] h-[400px] flex justify-center items-center" />
         ) : (
@@ -64,13 +71,17 @@ function ModelSignUp() {
             </label>
             <br></br>
             <input
-              value={modelSignUpData.email}
+              value={formik.values.email}
               name="email"
-              onChange={handleChange}
+              onBlur={handleBlur}
+              onChange={formik.handleChange}
               type="email"
               placeholder="Email"
               className="mb-5  border p-2 w-96  border-1 border-black rounded-md  "
             />
+            {formik.touched.email && formik.errors.email && (
+              <p className="text-red-500">{formik.errors.email}</p>
+            )}
             <br></br>
 
             <label className="font-volkhorn" htmlFor="">
@@ -78,9 +89,10 @@ function ModelSignUp() {
             </label>
             <br></br>
             <input
-              value={modelSignUpData.password}
+              value={formik.values.password}
               name="password"
-              onChange={handleChange}
+              onChange={formik.handleChange}
+              onBlur={handleBlur}
               type="password"
               placeholder="Password"
               className="mb-5  border p-2 w-96  border-1 border-black rounded-md  "
@@ -92,19 +104,22 @@ function ModelSignUp() {
             </label>
             <br></br>
             <input
-              value={modelSignUpData.confirmPassword}
+              value={formik.values.confirmPassword}
               name="confirmPassword"
-              onChange={handleChange}
+              onBlur={handleBlur}
+              onChange={formik.handleChange}
               type="password"
               id=""
               placeholder="Confirm Password"
               className=" mb-5  border p-2 w-96  border-1 border-black rounded-md  "
             />
+            {formik.touched.confirmPassword&&formik.errors.confirmPassword && (
+              <p className="text-red-500">{formik.errors.confirmPassword}</p>
+            )}
             <br></br>
-            {/* <p className="text-center text-xs text-green-500">{info}</p> */}
-            <p className="text-red-500">{info}</p>
+
             <div className="flex justify-center mt-7">
-              <RegistrationButton label="Sign up" />
+              <RegistrationButton label="Sign up"  />
             </div>
           </div>
         )}

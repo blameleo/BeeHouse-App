@@ -4,58 +4,60 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import Loader from "./Loader";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+
+const validationSchema = Yup.object({
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string().required("Password is required"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
+    .required("Confirm Password is required"),
+});
 
 function AgencySignUp() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [info, setInfo] = useState(null);
-  const [loading, setLoading] = useState(null);
-
-  const [agencySignUpData, setAgencySignUpData] = React.useState({
-    email: "",
-    type: "agency",
-
-    password: "",
-    confirmPassword: "",
-  });
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setAgencySignUpData((prev) => {
-      return {
-        ...prev,
-        [e.target.name]: e.target.value,
-      };
-    });
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      setLoading(true);
+      try {
+        const response = await axios.post(
+          "http://localhost:4000/register",
+          {
+            ...values,
+            type: "agency", // Set the agency type here
+          }
+        );
 
-    try {
-      const response = await axios.post(
-        "http://localhost:4000/register",
-        agencySignUpData
-      );
+        setCookie("Email", response.data.email);
+        setCookie("UserId", response.data.userId);
+        setCookie("AuthToken", response.data.token);
 
-      setCookie("Email", response.data.email);
-      setCookie("UserId", response.data.userId);
-      setCookie("AuthToken", response.data.token);
-
-      if (response.status === 200) {
+        if (response.status === 200) {
+          setLoading(false);
+          navigate("/agencyonboarding");
+        }
+      } catch (error) {
         setLoading(false);
-        navigate("/agencyonboarding");
+        setInfo(error.response.data.message);
       }
-    } catch (error) {
-      setLoading(false);
-
-      setInfo(error.response.data.message);
-    }
-  };
+    },
+  });
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         {loading ? (
           <Loader loaderStyle="w-[400px] h-[400px] flex justify-center items-center" />
         ) : (
@@ -68,11 +70,14 @@ function AgencySignUp() {
               type="email"
               name="email"
               className="mb-5  border p-2 w-96  border-1 border-black rounded-md   "
-              onChange={handleChange}
-              value={agencySignUpData.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
               placeholder="Email"
             />
-
+            {formik.touched.email && formik.errors.email && (
+              <p className="text-red-500">{formik.errors.email}</p>
+            )}
             <br></br>
 
             <label className="font-volkhorn" htmlFor="">
@@ -82,13 +87,17 @@ function AgencySignUp() {
             <input
               name="password"
               type="password"
-              onChange={handleChange}
-              value={agencySignUpData.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
               placeholder="Password"
               className="mb-5  border p-2 w-96  border-1 border-black rounded-md  "
             />
-
+            {formik.touched.password && formik.errors.password && (
+              <p className="text-red-500">{formik.errors.password}</p>
+            )}
             <br></br>
+
             <label className="font-volkhorn" htmlFor="">
               Confirm Password:
             </label>
@@ -97,16 +106,21 @@ function AgencySignUp() {
               name="confirmPassword"
               type="password"
               id=""
-              onChange={handleChange}
-              value={agencySignUpData.confirmPassword}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.confirmPassword}
               placeholder="Confirm Password"
               className=" mb-5  border p-2 w-96  border-1 border-black rounded-md  "
             />
+            {formik.touched.confirmPassword && formik.errors.confirmPassword && (
+              <p className="text-red-500">{formik.errors.confirmPassword}</p>
+            )}
             <br></br>
+
             <p className="text-red-500">{info}</p>
 
             <div className="flex justify-center mt-7">
-              <RegistrationButton label="Sign up" />
+              <RegistrationButton label="Sign up" type="submit" />
             </div>
           </div>
         )}
