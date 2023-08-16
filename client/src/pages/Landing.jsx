@@ -71,7 +71,7 @@ export default function Landing() {
           <IoLogoSass />
           <GoLogoGithub />
         </div>
-        <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}></Popup>
+        {/* <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}></Popup> */}
       </div>
     </div>
   );
