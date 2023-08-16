@@ -16,16 +16,20 @@ export default function Login() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [openPopup, setOpenPopup] = useState(false);
 
-  useEffect(() => {
-    setInterval(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     setLoading(false);
+  //   }, 1000);
+  // }, []);
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
+
+  const handleClosePopup = () => {
+    setOpenPopup(false);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -57,7 +61,7 @@ export default function Login() {
 
   return (
     <div className="">
-      {loading ? (
+      {/* {loading ? (
         <div className="flex bg-yellow-500 justify-center h-screen items-center">
           <Audio
             height="80"
@@ -69,59 +73,59 @@ export default function Login() {
             wrapperClass
           />{" "}
         </div>
-      ) : (
-        <div className="grid sm:grid-cols-3 h-screen  ">
-          <div className="  h-screen col-span-2 p-2 ">
-            <Link to="/">
-              <Logo />
-            </Link>
+      ) : ( */}
+      <div className="grid sm:grid-cols-3 h-screen  ">
+        <div className="  h-screen col-span-2 p-2 ">
+          <Link to="/">
+            <Logo />
+          </Link>
 
-            <div className="flex justify-center items-center h-5/6 ">
-              <form
-                onSubmit={formik.handleSubmit}
-                className="flex flex-col justify-around h-4/6 w-10/12 sm:w-4/12"
-              >
-                <div>
-                  <h1 className="text-left font-bold text-lg mb-2">Login</h1>
-                  <p className="text-left text-gray-400">
-                    Please enter your details
-                  </p>
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="" className="text-sm">
-                    Email
-                  </label>
-                  <input
-                    placeholder="Enter your email"
-                    type="email"
-                    name="email"
-                    className="border rounded placeholder:text-sm placeholder:pl-3"
-                    {...formik.getFieldProps("email")}
-                  />
-                  {formik.touched.email && formik.errors.email && (
-                    <p className="text-red-500">{formik.errors.email}</p>
-                  )}
-                </div>
+          <div className="flex justify-center items-center h-5/6 ">
+            <form
+              onSubmit={formik.handleSubmit}
+              className="flex flex-col justify-around h-4/6 w-10/12 sm:w-4/12"
+            >
+              <div>
+                <h1 className="text-left font-bold text-lg mb-2">Login</h1>
+                <p className="text-left text-gray-400">
+                  Please enter your details
+                </p>
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="" className="text-sm">
+                  Email
+                </label>
+                <input
+                  placeholder="Enter your email"
+                  type="email"
+                  name="email"
+                  className="border rounded placeholder:text-sm placeholder:pl-3"
+                  {...formik.getFieldProps("email")}
+                />
+                {formik.touched.email && formik.errors.email && (
+                  <p className="text-red-500">{formik.errors.email}</p>
+                )}
+              </div>
 
-                <div className="flex flex-col">
-                  <label htmlFor="" className="text-sm">
-                    Password
-                  </label>
-                  <input
-                    placeholder="********"
-                    type="password"
-                    name="password"
-                    className="border rounded h-8 placeholder:text-sm placeholder:pl-3"
-                    {...formik.getFieldProps("password")}
-                  />
-                  {formik.touched.password && formik.errors.password && (
-                    <p className="text-red-500">{formik.errors.password}</p>
-                  )}
-                </div>
+              <div className="flex flex-col">
+                <label htmlFor="" className="text-sm">
+                  Password
+                </label>
+                <input
+                  placeholder="********"
+                  type="password"
+                  name="password"
+                  className="border rounded h-8 placeholder:text-sm placeholder:pl-3"
+                  {...formik.getFieldProps("password")}
+                />
+                {formik.touched.password && formik.errors.password && (
+                  <p className="text-red-500">{formik.errors.password}</p>
+                )}
+              </div>
 
-                <a href="" className="text-xs text-right text-yellow-500">
-                  forgot password?
-                </a>
+              <a href="" className="text-xs text-right text-yellow-500">
+                forgot password?
+              </a>
 
               <Button
                 name="login"
@@ -154,13 +158,12 @@ export default function Login() {
             className="w-full h-full sm:object-contain lg:object-fill "
           />
         </div>
+        <Popup
+          openPopup={openPopup}
+          setOpenPopup={setOpenPopup}
+          onClose={handleClosePopup}
+        ></Popup>
       </div>
-      <Popup
-        openPopup={openPopup}
-        setOpenPopup={setOpenPopup}
-        onClose={handleClosePopup}
-      ></Popup>
-      {/* )} */}
     </div>
   );
 }

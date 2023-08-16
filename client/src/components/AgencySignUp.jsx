@@ -6,6 +6,8 @@ import { useCookies } from "react-cookie";
 import Loader from "./Loader";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -47,7 +49,16 @@ function AgencySignUp() {
         }
       } catch (error) {
         setLoading(false);
-        setInfo(error.response.data.message);
+        toast.error(error.response.data.message, {
+          position: "top-right",
+          autoClose: false,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       }
     },
   });
