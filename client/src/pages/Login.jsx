@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Audio } from "react-loader-spinner";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import Popup from "../components/Popup";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -14,6 +15,7 @@ export default function Login() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [openPopup, setOpenPopup] = useState(false);
 
   useEffect(() => {
     setInterval(() => {
@@ -22,6 +24,10 @@ export default function Login() {
   });
 
   // const { logIn } = UserAuth();
+
+  const handleClosePopup = () => {
+    setOpenPopup(false);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,7 +90,7 @@ export default function Login() {
                   placeholder="Enter your email"
                   type="email"
                   name=""
-                  className="border rounded placeholder:text-sm placeholder:pl-3"
+                  className="border rounded pl-3 h-12 placeholder:text-sm "
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
@@ -97,7 +103,7 @@ export default function Login() {
                   placeholder="********"
                   type="password"
                   name=""
-                  className="border rounded h-8 placeholder:text-sm placeholder:pl-3"
+                  className="border rounded pl-3 h-12 placeholder:text-sm "
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
@@ -108,17 +114,20 @@ export default function Login() {
 
               <Button
                 name="login"
-                loginStyle="bg-yellow-500 w-full rounded text-white font-bold py-1"
+                loginStyle="bg-yellow-500 w-full rounded text-white font-bold py-2  hover:bg-purple-600"
               />
 
-              <Button
+              {/* <Button
                 name="Sign in with google"
                 googleLoginStyle=" w-full border rounded py-1 flex justify-center items-center"
-              />
+              /> */}
 
               <p className="text-xs text-center">
                 Don't have an account?{" "}
-                <a href="" className="text-yellow-500">
+                <a
+                  onClick={() => setOpenPopup(true)}
+                  className="text-yellow-500 cursor-pointer hover:text-purple-600 font-bold text-sm"
+                >
                   {" "}
                   Sign up
                 </a>
@@ -135,6 +144,11 @@ export default function Login() {
           />
         </div>
       </div>
+      <Popup
+        openPopup={openPopup}
+        setOpenPopup={setOpenPopup}
+        onClose={handleClosePopup}
+      ></Popup>
       {/* )} */}
     </div>
   );

@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import Loader from "./Loader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ModelSignUp() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [loading, setLoading] = useState(null);
-  const [info, setInfo] = useState(null);
   const [modelSignUpData, setModelSignUpData] = useState({
     type: "model",
     email: "",
@@ -44,12 +45,20 @@ function ModelSignUp() {
       // navigate("/modelonboarding");
       if (response.status === 200) {
         setLoading(false);
-        // navigate("/modelonboarding");
+        navigate("/modelonboarding");
       }
     } catch (error) {
       setLoading(false);
-
-      setInfo(error.response.data.message);
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: false,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   };
   return (
@@ -102,7 +111,7 @@ function ModelSignUp() {
             />
             <br></br>
             {/* <p className="text-center text-xs text-green-500">{info}</p> */}
-            <p className="text-red-500">{info}</p>
+            <ToastContainer />
             <div className="flex justify-center mt-7">
               <RegistrationButton label="Sign up" />
             </div>

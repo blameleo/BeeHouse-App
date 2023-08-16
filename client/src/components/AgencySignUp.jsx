@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import Loader from "./Loader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AgencySignUp() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-  const [info, setInfo] = useState(null);
   const [loading, setLoading] = useState(null);
 
   const [agencySignUpData, setAgencySignUpData] = React.useState({
@@ -49,7 +50,16 @@ function AgencySignUp() {
     } catch (error) {
       setLoading(false);
 
-      setInfo(error.response.data.message);
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: false,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   };
 
@@ -103,7 +113,7 @@ function AgencySignUp() {
               className=" mb-5  border p-2 w-96  border-1 border-black rounded-md  "
             />
             <br></br>
-            <p className="text-red-500">{info}</p>
+            <ToastContainer />
 
             <div className="flex justify-center mt-7">
               <RegistrationButton label="Sign up" />
