@@ -1,16 +1,15 @@
-import React from "react";
-import { Formik, Field, ErrorMessage, Form } from "formik";
-import * as Yup from "yup";
-import RegistrationButton from "./RegistrationButton";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from "react";
 import { useCookies } from "react-cookie";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Loader from "./Loader";
+import RegistrationButton from "./RegistrationButton";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
-const validationSchema = Yup.object().shape({
+const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string()
-    .min(8, "Password must be at least 8 characters")
-    .required("Password is required"),
+  password: Yup.string().required("Password is required"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Confirm Password is required"),
@@ -18,85 +17,114 @@ const validationSchema = Yup.object().shape({
 
 function ModelSignUp() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [loading, setLoading] = useState(false);
+  const [info, setInfo] = useState(null);
+
   const navigate = useNavigate();
 
-  const handleSubmit = async (values, { setSubmitting }) => {
-    try {
-      const response = await axios.post("http://localhost:4000/register", values);
-      
-      console.log(response);
-      setCookie("Email", response.data.email);
-      setCookie("UserId", response.data.userId);
-      setCookie("AuthToken", response.data.token);
-      alert("User is registered");
-      // navigate("/modelonboarding");
-    } catch (error) {
-      console.error(error);
-    }
-    setSubmitting(false);
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      type: "model",
+      confirmPassword: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      console.log(values);
+      setLoading(true);
+      try {
+        const response = await axios.post(
+          "http://localhost:4000/register",
+          values
+        );
+
+        console.log(response);
+        setCookie("Email", response.data.email);
+        setCookie("UserId", response.data.userId);
+        setCookie("AuthToken", response.data.token);
+
+        if (response.status === 200) {
+          setLoading(false);
+          // navigate("/modelonboarding");
+        }
+      } catch (error) {
+        setLoading(false);
+        setInfo(error.response.data.message);
+      }
+    },
+  });
+
+  const handleBlur =(e)=>{
+    formik.handleBlur(e);
+  }
 
   return (
-    <Formik
-      initialValues={{
-        email: "",
-        password: "",
-        confirmPassword: "",
-      }}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      {({ isSubmitting }) => (
-        <Form className=" ">
-          <label className="font-volkhorn" htmlFor="email">
-            Email:
-          </label>
-          <br />
-          <Field
-            type="email"
-            name="email"
-            placeholder="Email"
-            className="mb-1 border p-2 w-96 border-1 border-black rounded-md"
-          />
-          <ErrorMessage name="email" component="div" className="text-red-500 " />
-          <br />
+    <div>
+      <form className=" " onSubmit={formik.handleSubmit}>
+        {loading ? (
+          <Loader loaderStyle="w-[400px] h-[400px] flex justify-center items-center" />
+        ) : (
+          <div>
+            <label className="font-volkhorn" htmlFor="">
+              Email:
+            </label>
+            <br></br>
+            <input
+              value={formik.values.email}
+              name="email"
+              onBlur={handleBlur}
+              onChange={formik.handleChange}
+              type="email"
+              placeholder="Email"
+              className="mb-5  border p-2 w-96  border-1 border-black rounded-md  "
+            />
+            {formik.touched.email && formik.errors.email && (
+              <p className="text-red-500">{formik.errors.email}</p>
+            )}
+            <br></br>
 
-          <label className="font-volkhorn" htmlFor="password">
-            Password:
-          </label>
-          <br />
-          <Field
-            type="password"
-            name="password"
-            placeholder="Password"
-            className="mb-1 border p-2 w-96 border-1 border-black rounded-md"
-          />
-          <ErrorMessage name="password" component="div" className="text-red-500" />
-         <br/>
+            <label className="font-volkhorn" htmlFor="">
+              Password:
+            </label>
+            <br></br>
+            <input
+              value={formik.values.password}
+              name="password"
+              onChange={formik.handleChange}
+              onBlur={handleBlur}
+              type="password"
+              placeholder="Password"
+              className="mb-5  border p-2 w-96  border-1 border-black rounded-md  "
+            />
 
-          <label className="font-volkhorn" htmlFor="confirmPassword">
-            Confirm Password:
-          </label>
-          <br />
-          <Field
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            className="mb-1 border p-2 w-96 border-1 border-black rounded-md"
-          />
-          <ErrorMessage
-            name="confirmPassword"
-            component="div"
-            className="text-red-500"
-          />
-          <br />
+            <br></br>
+            <label className="font-volkhorn" htmlFor="">
+              Confirm Password:
+            </label>
+            <br></br>
+            <input
+              value={formik.values.confirmPassword}
+              name="confirmPassword"
+              onBlur={handleBlur}
+              onChange={formik.handleChange}
+              type="password"
+              id=""
+              placeholder="Confirm Password"
+              className=" mb-5  border p-2 w-96  border-1 border-black rounded-md  "
+            />
+            {formik.touched.confirmPassword&&formik.errors.confirmPassword && (
+              <p className="text-red-500">{formik.errors.confirmPassword}</p>
+            )}
+            <br></br>
 
-          <div className="flex justify-center mt-7">
-            <RegistrationButton label="Sign up" disabled={isSubmitting} />
+            <div className="flex justify-center mt-7">
+              <RegistrationButton label="Sign up"  />
+            </div>
           </div>
-        </Form>
-      )}
-    </Formik>
+        )}
+      </form>
+    </div>
   );
 }
 
