@@ -1,102 +1,142 @@
-import React from "react";
+import React, { useState } from "react";
 import RegistrationButton from "../components/RegistrationButton";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import Loader from "./Loader";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const validationSchema = Yup.object({
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string().required("Password is required"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
+    .required("Confirm Password is required"),
+});
 
 function AgencySignUp() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-
-  const [agencySignUpData, setAgencySignUpData] = React.useState({
-    email: "",
-    type: "agency",
-
-    password: "",
-    confirmPassword: "",
-  });
-
-  const [error, setError] = React.useState("");
+  const [info, setInfo] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setAgencySignUpData((prev) => {
-      return {
-        ...prev,
-        [e.target.name]: e.target.value,
-      };
-    });
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      setLoading(true);
+      try {
+        const response = await axios.post(
+          "http://localhost:4000/user/register",
+          {
+            ...values,
+            type: "agency", // Set the agency type here
+          }
+        );
 
-    try {
-      const response = await axios.post(
-        "http://localhost:4000/register",
-        agencySignUpData
-      );
-      alert("User is registered");
-      setCookie("Email", response.data.email);
-      setCookie("UserId", response.data.userId);
-      setCookie("AuthToken", response.data.token);
-      navigate("/agencyonboarding");
-    } catch (e) {
-      setError(e.message);
-      console.log(error);
-    }
-  };
+        setCookie("Email", response.data.email);
+        setCookie("UserId", response.data.userId);
+        setCookie("AuthToken", response.data.token);
+
+        if (response.status === 200) {
+          setLoading(false);
+          navigate("/agencyonboarding");
+        }
+      } catch (error) {
+        setLoading(false);
+        toast.error(error.response.data.message, {
+          position: "top-right",
+          autoClose: false,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+    },
+  });
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="">
-        <label className="font-volkhorn" htmlFor="">
-          Email:
-        </label>
-        <br></br>
-        <input
-          type="email"
-          name="email"
-          className="mb-5  border p-2 w-96  border-1 border-black rounded-md   "
-          onChange={handleChange}
-          value={agencySignUpData.email}
-          placeholder="Email"
-        />
+    <div>
+      <form onSubmit={formik.handleSubmit}>
+        {loading ? (
+          <Loader loaderStyle="w-[400px] h-[400px] flex justify-center items-center" />
+        ) : (
+          <div className="">
+            <label className="font-volkhorn" htmlFor="">
+              Email:
+            </label>
+            <br></br>
+            <input
+              type="email"
+              name="email"
+              className="mb-5  border p-2 w-96  border-1 border-black rounded-md   "
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
+              placeholder="Email"
+            />
+            {formik.touched.email && formik.errors.email && (
+              <p className="text-red-500">{formik.errors.email}</p>
+            )}
+            <br></br>
 
-        <br></br>
+            <label className="font-volkhorn" htmlFor="">
+              Password:
+            </label>
+            <br></br>
+            <input
+              name="password"
+              type="password"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
+              placeholder="Password"
+              className="mb-5  border p-2 w-96  border-1 border-black rounded-md  "
+            />
+            {formik.touched.password && formik.errors.password && (
+              <p className="text-red-500">{formik.errors.password}</p>
+            )}
+            <br></br>
 
-        <label className="font-volkhorn" htmlFor="">
-          Password:
-        </label>
-        <br></br>
-        <input
-          name="password"
-          type="password"
-          onChange={handleChange}
-          value={agencySignUpData.password}
-          placeholder="Password"
-          className="mb-5  border p-2 w-96  border-1 border-black rounded-md  "
-        />
+            <label className="font-volkhorn" htmlFor="">
+              Confirm Password:
+            </label>
+            <br></br>
+            <input
+              name="confirmPassword"
+              type="password"
+              id=""
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.confirmPassword}
+              placeholder="Confirm Password"
+              className=" mb-5  border p-2 w-96  border-1 border-black rounded-md  "
+            />
+            {formik.touched.confirmPassword &&
+              formik.errors.confirmPassword && (
+                <p className="text-red-500">{formik.errors.confirmPassword}</p>
+              )}
+            <br></br>
+            <ToastContainer />
 
-        <br></br>
-        <label className="font-volkhorn" htmlFor="">
-          Confirm Password:
-        </label>
-        <br></br>
-        <input
-          name="confirmPassword"
-          type="password"
-          id=""
-          onChange={handleChange}
-          value={agencySignUpData.confirmPassword}
-          placeholder="Confirm Password"
-          className=" mb-5  border p-2 w-96  border-1 border-black rounded-md  "
-        />
-        <br></br>
-        <div className="flex justify-center mt-7">
-          <RegistrationButton label="Sign up" />
-        </div>
-      </div>
-    </form>
+            <div className="flex justify-center mt-7">
+              <RegistrationButton label="Sign up" type="submit" />
+            </div>
+          </div>
+        )}
+      </form>
+    </div>
   );
 }
 

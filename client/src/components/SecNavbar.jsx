@@ -5,16 +5,19 @@ import { GiTreeBeehive } from "react-icons/gi";
 import { BsFillChatLeftDotsFill, BsFillCaretDownFill } from "react-icons/bs";
 import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SecNavbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
-
-  const [cookies, setCookies] = useCookies(["access_token"]);
+  console.log(cookies);
   const logOut = () => {
-    setCookies("access_token", "");
-    window.localStorage.removeItem("userID");
+    removeCookie("Email");
+    removeCookie("UserId");
+    removeCookie("AuthToken");
     navigate("/login");
   };
 
@@ -27,13 +30,35 @@ function SecNavbar() {
       setIsOpen(false);
     }
   };
+  const userId = cookies.UserId;
+
+  const getUser = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/user/getuser", {
+        params: { userId },
+      });
+      setUser(response.data);
+      setCookie("userData", response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // useEffect(()=>{
+  // },[])
 
   useEffect(() => {
+    getUser();
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  console.log(cookies);
+
+  const newUrl = user?.displayPicUrl?.replace("public/", "");
 
   return (
     <div className="bg-black fixed top-0 z-30 text-yellow-500 flex items-center justify-between p-4 w-full">
@@ -48,7 +73,7 @@ function SecNavbar() {
       <div className="sm:flex  hidden w-[400px] justify-between">
         <div className="lg:flex hidden items-center  ">
           <BsGeoAlt className="text-white" />
-          <p className="ml-2">Accra,Gh</p>
+          {user && <p className="ml-2">welcome {user?.firstName}</p>}
         </div>
 
         <div className="flex  w-[190px] justify-around items-center">
@@ -57,7 +82,16 @@ function SecNavbar() {
             onClick={toggleDropdown}
             ref={dropdownRef}
           >
-            <div className="bg-[url('/img/profilepic.jpeg')] w-8 h-8  rounded-full bg-cover bg-no-repeat cursor-pointer relative">
+            <div className="relative">
+              <img
+                src={
+                  newUrl
+                    ? `http://localhost:4000/${newUrl}`
+                    : "/img/defaultpic.png"
+                }
+                alt=""
+                className="w-8 h-8 rounded-full object-cover"
+              />
               {isOpen && (
                 <div
                   id="dropdown"
@@ -88,6 +122,7 @@ function SecNavbar() {
                 </div>
               )}
             </div>
+
             <BsFillCaretDownFill className="ml-1 text-xs" />
           </div>
 
@@ -101,7 +136,7 @@ function SecNavbar() {
             <BsGear className="hover:text-purple-600 cursor-pointer" />
           </div> */}
 
-          <div className="border rounded-full  border-yellow-500 w-8 h-8 grid place-items-center">
+          <div className="border relative rounded-full  border-yellow-500 w-8 h-8 grid place-items-center">
             <BsBell className="hover:text-purple-600 cursor-pointer" />
           </div>
         </div>

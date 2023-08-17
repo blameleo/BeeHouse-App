@@ -2,48 +2,63 @@ import React, { useState, useEffect } from "react";
 import Logo from "../components/Logo";
 import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
-// import { UserAuth } from "../context/AuthContext";
 import { Audio } from "react-loader-spinner";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import Popup from "../components/Popup";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [openPopup, setOpenPopup] = useState(false);
 
-  useEffect(() => {
-    setInterval(() => {
-      setLoading(false);
-    }, 1000);
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     setLoading(false);
+  //   }, 1000);
+  // }, []);
+
+  const validationSchema = Yup.object({
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    password: Yup.string().required("Password is required"),
   });
 
-  // const { logIn } = UserAuth();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:4000/login", {
-        email,
-        password,
-      });
-      console.log(response);
-      setCookie("Email", response.data.email);
-      setCookie("UserId", response.data.userId);
-      setCookie("AuthToken", response.data.token);
-
-      if (response.data.type === "model") {
-        navigate("/home");
-      } else if (response.data.type === "agency") {
-        navigate("/agency");
-      }
-    } catch (error) {
-      console.error(error);
-    }
+  const handleClosePopup = () => {
+    setOpenPopup(false);
   };
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      try {
+        const response = await axios.post("http://localhost:4000/user/login", {
+          email: values.email,
+          password: values.password,
+        });
+
+        setCookie("Email", response.data.email);
+        setCookie("UserId", response.data.userId);
+        setCookie("AuthToken", response.data.token);
+
+        if (response.data.type === "model") {
+          navigate("/home");
+        } else if (response.data.type === "agency") {
+          navigate("/agency");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  });
+
   return (
     <div className="">
       {/* {loading ? (
@@ -67,7 +82,7 @@ export default function Login() {
 
           <div className="flex justify-center items-center h-5/6 ">
             <form
-              onSubmit={handleSubmit}
+              onSubmit={formik.handleSubmit}
               className="flex flex-col justify-around h-4/6 w-10/12 sm:w-4/12"
             >
               <div>
@@ -83,10 +98,13 @@ export default function Login() {
                 <input
                   placeholder="Enter your email"
                   type="email"
-                  name=""
+                  name="email"
                   className="border rounded placeholder:text-sm placeholder:pl-3"
-                  onChange={(e) => setEmail(e.target.value)}
+                  {...formik.getFieldProps("email")}
                 />
+                {formik.touched.email && formik.errors.email && (
+                  <p className="text-red-500">{formik.errors.email}</p>
+                )}
               </div>
 
               <div className="flex flex-col">
@@ -96,10 +114,13 @@ export default function Login() {
                 <input
                   placeholder="********"
                   type="password"
-                  name=""
+                  name="password"
                   className="border rounded h-8 placeholder:text-sm placeholder:pl-3"
-                  onChange={(e) => setPassword(e.target.value)}
+                  {...formik.getFieldProps("password")}
                 />
+                {formik.touched.password && formik.errors.password && (
+                  <p className="text-red-500">{formik.errors.password}</p>
+                )}
               </div>
 
               <a href="" className="text-xs text-right text-yellow-500">
@@ -108,17 +129,20 @@ export default function Login() {
 
               <Button
                 name="login"
-                loginStyle="bg-yellow-500 w-full rounded text-white font-bold py-1"
+                loginStyle="bg-yellow-500 w-full rounded text-white font-bold py-2  hover:bg-purple-600"
               />
 
-              <Button
+              {/* <Button
                 name="Sign in with google"
                 googleLoginStyle=" w-full border rounded py-1 flex justify-center items-center"
-              />
+              /> */}
 
               <p className="text-xs text-center">
                 Don't have an account?{" "}
-                <a href="" className="text-yellow-500">
+                <a
+                  onClick={() => setOpenPopup(true)}
+                  className="text-yellow-500 cursor-pointer hover:text-purple-600 font-bold text-sm"
+                >
                   {" "}
                   Sign up
                 </a>
@@ -134,8 +158,12 @@ export default function Login() {
             className="w-full h-full sm:object-contain lg:object-fill "
           />
         </div>
+        <Popup
+          openPopup={openPopup}
+          setOpenPopup={setOpenPopup}
+          onClose={handleClosePopup}
+        ></Popup>
       </div>
-      {/* )} */}
     </div>
   );
 }
