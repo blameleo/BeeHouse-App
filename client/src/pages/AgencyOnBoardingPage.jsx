@@ -26,6 +26,16 @@ export default function AgencyOnBoardingPage() {
     displayPicUrl: "",
     businessCerUrl: "",
   });
+  const [errors, setErrors] = useState({
+    agencyName: "",
+    about: "",
+    location: "",
+    telephone: "",
+    displayPicUrl: "",
+    businessCerUrl: "",
+  });
+
+  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -75,6 +85,23 @@ export default function AgencyOnBoardingPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const newErrors = {};
+    for (const field in formInfo) {
+      if (formInfo[field] === "") {
+        newErrors[field] = "This field is required";
+      } else {
+        newErrors[field] = "";
+      }
+    }
+    setErrors(newErrors);
+
+    // Check if there are any errors
+    const hasErrors = Object.values(newErrors).some((error) => error !== "");
+    if (hasErrors) {
+      return; // Exit if there are errors
+    }
+
     const formData = new FormData();
     formData.append("displayPicUrl", displayPic);
     formData.append("businessCerUrl", businessCer);
@@ -117,7 +144,9 @@ export default function AgencyOnBoardingPage() {
             placeholder="Agency Name"
             name="agencyName"
             id=""
+            required
           />
+          {errors.agencyName && <div className="text-red-500">{errors.agencyName}</div>}
           <br />
           <label htmlFor="">About :</label>
           <br />
@@ -129,7 +158,9 @@ export default function AgencyOnBoardingPage() {
             value={formInfo.about}
             name="about"
             id=""
+            required
           />
+            {errors.about && <div className="text-red-500">{errors.about}</div>}
           <br />
           <br />
           <label className="" htmlFor="">
@@ -144,7 +175,9 @@ export default function AgencyOnBoardingPage() {
             placeholder="location"
             name="location"
             id=""
+            required
           />
+            {errors.location && <div className="text-red-500">{errors.location}</div>}
 
           <br />
           <label htmlFor="" className="font-volkhorn">
@@ -162,7 +195,9 @@ export default function AgencyOnBoardingPage() {
             pattern="[0-9]*"
             minLength="10"
             maxLength="15"
+            required
           />
+            {errors.telephone && <div className="text-red-500">{errors.telephone}</div>}
         </div>
 
         <div>
@@ -190,8 +225,10 @@ export default function AgencyOnBoardingPage() {
               className="hidden"
               onChange={handleDisplayPicChange}
               //value="displayPicUrl"
+              required
             />
           </div>
+          {errors.displayPicUrl && <div className="text-red-500">{errors.displayPicUrl}</div>}
           <br />
           <label htmlFor="">Business Certificate:</label>
           <br></br>
@@ -217,8 +254,11 @@ export default function AgencyOnBoardingPage() {
               name="businessCerUrl"
               onChange={handleBusinessCerChange}
               //value='businessCerUrl'
+              required
             />
+             
           </div>
+          {errors.businessCerUrl && <div className="text-red-500">{errors.businessCerUrl}</div>}
         </div>
       </form>
 
