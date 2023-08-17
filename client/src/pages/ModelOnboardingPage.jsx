@@ -46,6 +46,25 @@ function ModelOnboardingPage() {
     imageUrl3: "",
   });
 
+  const [errors, setErrors] = useState({
+    firstName: "",
+    lastName: "",
+    gender: "",
+    telephone: "",
+    dob_day: "",
+    dob_month: "",
+    dob_year: "",
+    height: "",
+    location: "",
+    complexion: "",
+    stature: "",
+    idCardUrl: "",
+    displayPicUrl: "",
+    imageUrl1: "",
+    imageUrl2: "",
+    imageUrl3: "",
+  });
+
   const handleSelectChange = (name, value) => {
     setFormInfo((prevFormInfo) => ({
       ...prevFormInfo,
@@ -154,6 +173,23 @@ function ModelOnboardingPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const newErrors = {};
+    for (const field in formInfo) {
+      if (formInfo[field] === "") {
+        newErrors[field] = "This field is required";
+      } else {
+        newErrors[field] = "";
+      }
+    }
+    setErrors(newErrors);
+
+    // Check if there are any errors
+    const hasErrors = Object.values(newErrors).some((error) => error !== "");
+    if (hasErrors) {
+      return; // Exit if there are errors
+    }
+
     const formData = new FormData();
     formData.append("displayPicUrl", displayPic);
     formData.append("idCardUrl", idCardPic);
@@ -207,6 +243,7 @@ function ModelOnboardingPage() {
             name="firstName"
             id=""
           />
+           {errors.firstName && <div className="text-red-500">{errors.firstName}</div>}
           <br></br>
           <br />
           <label htmlFor="">Last Name :</label>
@@ -220,6 +257,7 @@ function ModelOnboardingPage() {
             value={formInfo.lastName}
             id=""
           />
+           {errors.lastName && <div className="text-red-500">{errors.lastName}</div>}
           <br></br>
           <br />
 
@@ -355,12 +393,13 @@ function ModelOnboardingPage() {
           <input
             className=" outline-none border px-3 border-yellow-500 bg-black   mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg "
             type="number"
-            placeholder="height"
+            placeholder="height (cm)"
             onChange={handleInputChange}
             name="height"
             value={formInfo.height}
             id=""
           />
+           {errors.height && <div className="text-red-500">{errors.height}</div>}
           <br></br>
 
           <label htmlFor="">Location:</label>
@@ -374,6 +413,7 @@ function ModelOnboardingPage() {
             name="location"
             id=""
           />
+           {errors.location && <div className="text-red-500">{errors.location}</div>}
           <br></br>
 
           <label htmlFor="">Complexion:</label>
@@ -499,6 +539,7 @@ function ModelOnboardingPage() {
               onChange={handleIdCardChange}
             />
           </div>
+          {errors.idCardUrl && <div className="text-red-500">{errors.idCardUrl}</div>}
           <br></br>
 
           <label htmlFor="">Profile pic:</label>
@@ -525,7 +566,9 @@ function ModelOnboardingPage() {
               onChange={handleDisplayPicChange}
               name="displayPicUrl"
             />
+            
           </div>
+          {errors.displayPicUrl && <div className="text-red-500">{errors.displayPicUrl}</div>}
 
           <br></br>
 
@@ -554,7 +597,9 @@ function ModelOnboardingPage() {
                 className="hidden"
                 name="imageUrl1"
               />
+               
             </div>
+            
 
             <div className="flex items-center mr-5">
               <label
@@ -578,7 +623,9 @@ function ModelOnboardingPage() {
                 onChange={handleImage2Change}
                 name="imageUrl1"
               />
+
             </div>
+           
 
             <div className="flex items-center">
               <label
@@ -603,9 +650,20 @@ function ModelOnboardingPage() {
                 name="imageUrl2"
               />
             </div>
+           
           </div>
+          <div className="flex mt-2 justify-around">
+        {errors.imageUrl1 && <div className="text-red-500">required</div>}
+        {errors.imageUrl2 && <div className="text-red-500">required</div>}
+        {errors.imageUrl3 && <div className="text-red-500">required</div>}
         </div>
+         
+        </div>
+        
+        
       </form>
+     
+      
 
       <div className="flex justify-center pb-10">
         <button
