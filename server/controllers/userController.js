@@ -51,7 +51,7 @@ const loginUser = async (req, res) => {
     if (!isPasswordValid) {
       return res
         .status(401)
-        .json({ message: "Username or password is incorrect" });
+        .json({ message: "email or password is incorrect" });
     }
 
     const token = jwt.sign(user.toJSON(), "secret");
