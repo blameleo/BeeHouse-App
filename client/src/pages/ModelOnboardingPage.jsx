@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Logo from "../components/Logo";
 import axios from "axios";
+import { useNavigate } from "react-router";
 import { useCookies } from "react-cookie";
 import { FaForumbee } from "react-icons/fa";
 import SecNavbar from "../components/SecNavbar";
@@ -12,7 +13,7 @@ function ModelOnboardingPage() {
   const [displayPic, setDisplayPic] = useState(null);
   const [idCardPic, setIdCardPic] = useState(null);
   const [info, setInfo] = useState(null);
-
+  const navigate = useNavigate();
   const [image1, setImage1] = useState(null);
 
   const [image2, setImage2] = useState(null);
@@ -162,11 +163,15 @@ function ModelOnboardingPage() {
     formData.append("imageUrl3", image3);
     console.log(formInfo);
     try {
-      const response = await axios.put("http://localhost:4000/user", formInfo, {
-        headers: {
-          "Content-Type": "multipart/form-data", // Important: Set the correct Content-Type header
-        },
-      });
+      const response = await axios.put(
+        "http://localhost:4000/profile/user",
+        formInfo,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Important: Set the correct Content-Type header
+          },
+        }
+      );
 
       console.log(response.data.message);
       setInfo(response.data.message);
