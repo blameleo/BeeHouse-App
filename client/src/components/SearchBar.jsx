@@ -163,7 +163,7 @@ export default function SearchBar() {
 
         <div className="hidden lg:block mr-6">
           <label
-            for="small-range"
+            htmlFor="small-range"
             className="block mb-2 ml-4 text-sm font-medium text-gray-400 dark:text-gray-300"
           >
             Pay range
@@ -171,7 +171,6 @@ export default function SearchBar() {
           <input
             id="small-range"
             type="range"
-            value="50"
             className="w-[170px] ml-4 h-1  bg-gray-200 rounded-lg appearance-none cursor-pointer range-sm dark:bg-gray-800"
           />
         </div>

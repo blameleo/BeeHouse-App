@@ -15,7 +15,6 @@ const UserSchema = new mongoose.Schema({
   dob_day: { type: String },
   stature: { type: String },
   businessCerturl: { type: String },
-  idCardUrl: { type: String },
   displayPicUrl: { type: String },
   imageUrl1: { type: String },
   imageUrl2: { type: String },

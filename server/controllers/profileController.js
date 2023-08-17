@@ -26,7 +26,6 @@ const updateUserProfile = async (req, res) => {
     // Handle file uploads
     const fileFields = [
       "displayPicUrl",
-      "idCardUrl",
       "businessCerUrl",
       "imageUrl1",
       "imageUrl2",

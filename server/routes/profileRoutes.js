@@ -24,7 +24,6 @@ router.put(
   "/user",
   upload.fields([
     { name: "displayPicUrl", maxCount: 1 }, // One file for displayPicUrl field
-    { name: "idCardUrl", maxCount: 1 },
     { name: "businessCerUrl", maxCount: 1 }, // One file for idCardUrl field
     { name: "imageUrl1", maxCount: 1 },
     { name: "imageUrl2", maxCount: 1 },
