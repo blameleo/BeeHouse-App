@@ -34,10 +34,11 @@ function SecNavbar() {
 
   const getUser = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/user", {
+      const response = await axios.get("http://localhost:4000/user/getuser", {
         params: { userId },
       });
       setUser(response.data);
+      setCookie("userData", response.data);
     } catch (error) {
       console.log(error);
     }
@@ -55,10 +56,9 @@ function SecNavbar() {
     };
   }, []);
 
-  console.log(user);
+  console.log(cookies);
 
   const newUrl = user?.displayPicUrl?.replace("public/", "");
-  console.log(newUrl);
 
   return (
     <div className="bg-black fixed top-0 z-30 text-yellow-500 flex items-center justify-between p-4 w-full">
@@ -84,7 +84,11 @@ function SecNavbar() {
           >
             <div className="relative">
               <img
-                src={`http://localhost:4000/${newUrl}`}
+                src={
+                  newUrl
+                    ? `http://localhost:4000/${newUrl}`
+                    : "/img/defaultpic.png"
+                }
                 alt=""
                 className="w-8 h-8 rounded-full object-cover"
               />
@@ -132,7 +136,7 @@ function SecNavbar() {
             <BsGear className="hover:text-purple-600 cursor-pointer" />
           </div> */}
 
-          <div className="border rounded-full  border-yellow-500 w-8 h-8 grid place-items-center">
+          <div className="border relative rounded-full  border-yellow-500 w-8 h-8 grid place-items-center">
             <BsBell className="hover:text-purple-600 cursor-pointer" />
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Logo from "../components/Logo";
 import axios from "axios";
+import { useNavigate } from "react-router";
 import { useCookies } from "react-cookie";
 import { FaForumbee } from "react-icons/fa";
 import SecNavbar from "../components/SecNavbar";
@@ -12,7 +13,7 @@ function ModelOnboardingPage() {
   const [displayPic, setDisplayPic] = useState(null);
   const [idCardPic, setIdCardPic] = useState(null);
   const [info, setInfo] = useState(null);
-
+  const navigate = useNavigate();
   const [image1, setImage1] = useState(null);
 
   const [image2, setImage2] = useState(null);
@@ -20,7 +21,6 @@ function ModelOnboardingPage() {
   const [image3, setImage3] = useState(null);
   const [imagePreviews, setImagePreviews] = useState({
     displayPicUrl: null,
-    idCardUrl: null,
     imageUrl1: null,
     imageUrl2: null,
     imageUrl3: null,
@@ -39,7 +39,6 @@ function ModelOnboardingPage() {
     location: "",
     complexion: "",
     stature: "",
-    idCardUrl: "",
     displayPicUrl: "",
     imageUrl1: "",
     imageUrl2: "",
@@ -58,7 +57,6 @@ function ModelOnboardingPage() {
     location: "",
     complexion: "",
     stature: "",
-    idCardUrl: "",
     displayPicUrl: "",
     imageUrl1: "",
     imageUrl2: "",
@@ -83,24 +81,24 @@ function ModelOnboardingPage() {
   const months = Array.from({ length: 12 }, (_, i) => (i + 1).toString());
   const years = Array.from({ length: 65 }, (_, i) => (2023 - i).toString());
 
-  const handleIdCardChange = (event) => {
-    const selectedFile5 = event.target.files[0];
-    setIdCardPic(selectedFile5);
+  // const handleIdCardChange = (event) => {
+  //   const selectedFile5 = event.target.files[0];
+  //   setIdCardPic(selectedFile5);
 
-    setFormInfo((prevData) => ({
-      ...prevData,
-      idCardUrl: selectedFile5,
-    }));
+  //   setFormInfo((prevData) => ({
+  //     ...prevData,
+  //     idCardUrl: selectedFile5,
+  //   }));
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      setImagePreviews((prevPreviews) => ({
-        ...prevPreviews,
-        idCardUrl: e.target.result,
-      }));
-    };
-    reader.readAsDataURL(selectedFile5);
-  };
+  //   const reader = new FileReader();
+  //   reader.onload = (e) => {
+  //     setImagePreviews((prevPreviews) => ({
+  //       ...prevPreviews,
+  //       idCardUrl: e.target.result,
+  //     }));
+  //   };
+  //   reader.readAsDataURL(selectedFile5);
+  // };
 
   const handleDisplayPicChange = (event) => {
     const selectedFile4 = event.target.files[0];
@@ -192,19 +190,26 @@ function ModelOnboardingPage() {
 
     const formData = new FormData();
     formData.append("displayPicUrl", displayPic);
-    formData.append("idCardUrl", idCardPic);
+    // formData.append("idCardUrl", idCardPic);
     formData.append("imageUrl1", image1);
     formData.append("imageUrl2", image2);
     formData.append("imageUrl3", image3);
     console.log(formInfo);
     try {
-      const response = await axios.put("http://localhost:4000/user", formInfo, {
-        headers: {
-          "Content-Type": "multipart/form-data", // Important: Set the correct Content-Type header
-        },
-      });
+      const response = await axios.put(
+        "http://localhost:4000/profile/user",
+        formInfo,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Important: Set the correct Content-Type header
+          },
+        }
+      );
 
       console.log(response.data.message);
+      console.log(response.data.data);
+      setCookie("userdata", response.data.data.firstName);
+
       setInfo(response.data.message);
       navigate("/home");
     } catch (err) {
@@ -243,7 +248,9 @@ function ModelOnboardingPage() {
             name="firstName"
             id=""
           />
-           {errors.firstName && <div className="text-red-500">{errors.firstName}</div>}
+          {errors.firstName && (
+            <div className="text-red-500">{errors.firstName}</div>
+          )}
           <br></br>
           <br />
           <label htmlFor="">Last Name :</label>
@@ -257,7 +264,9 @@ function ModelOnboardingPage() {
             value={formInfo.lastName}
             id=""
           />
-           {errors.lastName && <div className="text-red-500">{errors.lastName}</div>}
+          {errors.lastName && (
+            <div className="text-red-500">{errors.lastName}</div>
+          )}
           <br></br>
           <br />
 
@@ -399,7 +408,7 @@ function ModelOnboardingPage() {
             value={formInfo.height}
             id=""
           />
-           {errors.height && <div className="text-red-500">{errors.height}</div>}
+          {errors.height && <div className="text-red-500">{errors.height}</div>}
           <br></br>
 
           <label htmlFor="">Location:</label>
@@ -413,7 +422,9 @@ function ModelOnboardingPage() {
             name="location"
             id=""
           />
-           {errors.location && <div className="text-red-500">{errors.location}</div>}
+          {errors.location && (
+            <div className="text-red-500">{errors.location}</div>
+          )}
           <br></br>
 
           <label htmlFor="">Complexion:</label>
@@ -514,9 +525,9 @@ function ModelOnboardingPage() {
 
         <br></br>
         <div>
-          <label htmlFor="">Identification Card :</label>
-          <br></br>
-          <div className="flex items-center">
+          {/* <label htmlFor="">Identification Card :</label>
+          <br></br> */}
+          {/* <div className="flex items-center">
             <label
               htmlFor="upload1"
               className="relative rounded-xl p-2 bg-neutral-550 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
@@ -538,8 +549,7 @@ function ModelOnboardingPage() {
               className="hidden"
               onChange={handleIdCardChange}
             />
-          </div>
-          {errors.idCardUrl && <div className="text-red-500">{errors.idCardUrl}</div>}
+          </div> */}
           <br></br>
 
           <label htmlFor="">Profile pic:</label>
@@ -566,9 +576,10 @@ function ModelOnboardingPage() {
               onChange={handleDisplayPicChange}
               name="displayPicUrl"
             />
-            
           </div>
-          {errors.displayPicUrl && <div className="text-red-500">{errors.displayPicUrl}</div>}
+          {errors.displayPicUrl && (
+            <div className="text-red-500">{errors.displayPicUrl}</div>
+          )}
 
           <br></br>
 
@@ -597,9 +608,7 @@ function ModelOnboardingPage() {
                 className="hidden"
                 name="imageUrl1"
               />
-               
             </div>
-            
 
             <div className="flex items-center mr-5">
               <label
@@ -623,9 +632,7 @@ function ModelOnboardingPage() {
                 onChange={handleImage2Change}
                 name="imageUrl1"
               />
-
             </div>
-           
 
             <div className="flex items-center">
               <label
@@ -650,20 +657,14 @@ function ModelOnboardingPage() {
                 name="imageUrl2"
               />
             </div>
-           
           </div>
           <div className="flex mt-2 justify-around">
-        {errors.imageUrl1 && <div className="text-red-500">required</div>}
-        {errors.imageUrl2 && <div className="text-red-500">required</div>}
-        {errors.imageUrl3 && <div className="text-red-500">required</div>}
+            {errors.imageUrl1 && <div className="text-red-500">required</div>}
+            {errors.imageUrl2 && <div className="text-red-500">required</div>}
+            {errors.imageUrl3 && <div className="text-red-500">required</div>}
+          </div>
         </div>
-         
-        </div>
-        
-        
       </form>
-     
-      
 
       <div className="flex justify-center pb-10">
         <button

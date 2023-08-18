@@ -2,9 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const { userRouter } = require("./routes/users.js");
-// import { userRouter } from "./routes/users.js";
+const { userRouter } = require("./routes/userRoutes");
 
+const { profileRouter } = require("./routes/profileRoutes");
 const app = express();
 const port = 4000;
 
@@ -12,7 +12,9 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static("public"));
 // app.use("/images", express.static("images"));
-app.use("/", userRouter);
+
+app.use("/user", userRouter);
+app.use("/profile", profileRouter);
 
 mongoose.connect(process.env.MONGODB_URL);
 

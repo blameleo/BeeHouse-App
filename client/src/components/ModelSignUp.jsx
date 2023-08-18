@@ -42,7 +42,7 @@ function ModelSignUp() {
       setLoading(true);
       try {
         const response = await axios.post(
-          "http://localhost:4000/register",
+          "http://localhost:4000/user/register",
           values
         );
 
@@ -53,7 +53,7 @@ function ModelSignUp() {
 
         if (response.status === 200) {
           setLoading(false);
-          // navigate("/modelonboarding");
+          navigate("/modelonboarding");
         }
       } catch (error) {
         setLoading(false);
