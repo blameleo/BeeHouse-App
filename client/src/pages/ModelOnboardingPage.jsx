@@ -667,108 +667,104 @@ function ModelOnboardingPage() {
           <label htmlFor="">Images Upload :</label>
           <br></br>
           <div className="flex ">
-  <div className="flex items-center mr-5">
-    <label
-      htmlFor="upload3"
-      className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 ${
-        errors.imageUrl1 ? 'border-red-500' : 'border-yellow-500'
-      } h-40 w-32 flex items-center justify-center cursor-pointer`}
-    >
-      {imagePreviews.imageUrl1 ? (
-        <img
-          src={imagePreviews.imageUrl1}
-          alt="Preview"
-          className="w-full h-full object-cover"
-        />
-      ) : (
-        <span className="text-gray-400 text-3xl">+</span>
-      )}
-    </label>
-    <input
-      type="file"
-      id="upload3"
-      onChange={handleImage1Change}
-      className="hidden"
-      name="imageUrl1"
-    />
-  </div>
- 
-
-
-        <div className="flex items-center mr-5">
-        <label
-          htmlFor="upload4"
-          className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer ${
-            errors.imageUrl1 ? 'border-red-500' : ''
-          }`}
-        >
-          {imagePreviews.imageUrl2 ? (
-            <img
-              src={imagePreviews.imageUrl2}
-              alt="Preview"
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <span className="text-gray-400 text-3xl">+</span>
-          )}
-        </label>
-        <input
-          type="file"
-          id="upload4"
-          className="hidden"
-          onChange={handleImage2Change}
-          name="imageUrl1"
-        />
-      </div>
-
-      <div className="flex items-center">
-        <label
-          htmlFor="upload5"
-          className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer ${
-            errors.imageUrl3 ? 'border-red-500' : ''
-          }`}
-        >
-          {imagePreviews.imageUrl3 ? (
-            <img
-              src={imagePreviews.imageUrl3}
-              alt="Preview"
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <span className="text-gray-400 text-3xl">+</span>
-          )}{" "}
-        </label>
-        <input
-          type="file"
-          id="upload5"
-          className="hidden"
-          onChange={handleImage3Change}
-          name="imageUrl3"
-        />
-      </div>
-      </div>
-                <div className="flex mt-2 justify-around">
-                  {errors.imageUrl1 && <div className="text-red-500 text-xs">required</div>}
-                  {errors.imageUrl2 && <div className="text-red-500 text-xs">required</div>}
-                  {errors.imageUrl3 && <div className="text-red-500 text-xs">required</div>}
-                </div>
-              </div>
-            </form>
-
-            <div className="flex justify-center pb-10">
-              <button
-                onClick={handleSubmit}
-                className="mr-5 mt-5 bg-yellow-500  border-2 border-black h-[50px] rounded-lg w-[150px]"
+            <div className="flex items-center mr-5">
+              <label
+                htmlFor="upload3"
+                className="relative rounded-xl p-2 bg-neutral-950 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
               >
-                Continue
-              </button>
+                {imagePreviews.imageUrl1 ? (
+                  <img
+                    src={imagePreviews.imageUrl1}
+                    alt="Preview"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="text-gray-400 text-3xl">+</span>
+                )}{" "}
+              </label>
+              <input
+                type="file"
+                id="upload3"
+                onChange={handleImage1Change}
+                className="hidden"
+                name="imageUrl1"
+              />
             </div>
 
-            <div className="flex text-white text-xl hover:text-blue-500 justify-center pb-5">
-              <h1>{info}</h1>
-            </div>
+            <div className="flex items-center mr-5">
+  <label
+    htmlFor="upload4"
+    className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer ${
+      errors.imageUrl1 ? 'border-red-500' : ''
+    }`}
+  >
+    {imagePreviews.imageUrl2 ? (
+      <img
+        src={imagePreviews.imageUrl2}
+        alt="Preview"
+        className="w-full h-full object-cover"
+      />
+    ) : (
+      <span className="text-gray-400 text-3xl">+</span>
+    )}
+  </label>
+  <input
+    type="file"
+    id="upload4"
+    className="hidden"
+    onChange={handleImage2Change}
+    name="imageUrl1"
+  />
+</div>
+
+<div className="flex items-center">
+  <label
+    htmlFor="upload5"
+    className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer ${
+      errors.imageUrl3 ? 'border-red-500' : ''
+    }`}
+  >
+    {imagePreviews.imageUrl3 ? (
+      <img
+        src={imagePreviews.imageUrl3}
+        alt="Preview"
+        className="w-full h-full object-cover"
+      />
+    ) : (
+      <span className="text-gray-400 text-3xl">+</span>
+    )}{" "}
+  </label>
+  <input
+    type="file"
+    id="upload5"
+    className="hidden"
+    onChange={handleImage3Change}
+    name="imageUrl3"
+  />
+</div>
+</div>
+          <div className="flex mt-2 justify-around">
+            {errors.imageUrl1 && <div className="text-red-500 text-xs">required</div>}
+            {errors.imageUrl2 && <div className="text-red-500 text-xs">required</div>}
+            {errors.imageUrl3 && <div className="text-red-500 text-xs">required</div>}
           </div>
-        );
-      }
+        </div>
+      </form>
 
-      export default ModelOnboardingPage;
+      <div className="flex justify-center pb-10">
+        <button
+          onClick={handleSubmit}
+          className="mr-5 mt-5 bg-yellow-500  border-2 border-black h-[50px] rounded-lg w-[150px]"
+        >
+          Continue
+        </button>
+      </div>
+
+      <div className="flex text-white text-xl hover:text-blue-500 justify-center pb-5">
+        <h1>{info}</h1>
+      </div>
+    </div>
+  );
+}
+
+export default ModelOnboardingPage;
