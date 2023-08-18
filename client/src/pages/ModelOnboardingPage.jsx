@@ -721,7 +721,7 @@ function ModelOnboardingPage() {
   <label
     htmlFor="upload5"
     className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer ${
-      errors.imageUrl2 ? 'border-red-500' : ''
+      errors.imageUrl3 ? 'border-red-500' : ''
     }`}
   >
     {imagePreviews.imageUrl3 ? (
@@ -739,7 +739,7 @@ function ModelOnboardingPage() {
     id="upload5"
     className="hidden"
     onChange={handleImage3Change}
-    name="imageUrl2"
+    name="imageUrl3"
   />
 </div>
 </div>
