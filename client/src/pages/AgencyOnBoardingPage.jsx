@@ -35,8 +35,6 @@ export default function AgencyOnBoardingPage() {
     businessCerUrl: "",
   });
 
-  
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormInfo((prevData) => ({
@@ -141,7 +139,7 @@ export default function AgencyOnBoardingPage() {
           <label htmlFor="">Agency Name :</label>
           <br />
           <input
-            className=" border px-3 mb-3 border-yellow-500 outline-none bg-black  mt-1 w-[400px]  md:w-[500px] h-14 rounded rounded-lg "
+            className=" border px-3 mb-3 border-yellow-500 outline-none bg-black  mt-1 w-[400px]  md:w-[500px] h-14  rounded-lg "
             type="text"
             value={formInfo.agencyName}
             onChange={handleInputChange}
@@ -150,12 +148,14 @@ export default function AgencyOnBoardingPage() {
             id=""
             required
           />
-          {errors.agencyName && <div className="text-red-500">{errors.agencyName}</div>}
+          {errors.agencyName && (
+            <div className="text-red-500">{errors.agencyName}</div>
+          )}
           <br />
           <label htmlFor="">About :</label>
           <br />
           <input
-            className=" border px-3 border-yellow-500 outline-none bg-black  mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg "
+            className=" border px-3 border-yellow-500 outline-none bg-black  mt-1 w-[400px] md:w-[500px] h-14  rounded-lg "
             placeholder="About"
             type="textarea"
             onChange={handleInputChange}
@@ -164,7 +164,7 @@ export default function AgencyOnBoardingPage() {
             id=""
             required
           />
-            {errors.about && <div className="text-red-500">{errors.about}</div>}
+          {errors.about && <div className="text-red-500">{errors.about}</div>}
           <br />
           <br />
           <label className="" htmlFor="">
@@ -172,7 +172,7 @@ export default function AgencyOnBoardingPage() {
           </label>
           <br />
           <input
-            className=" border px-3 border-yellow-500 mb-3 outline-none bg-black  mt-1 w-[400px]  md:w-[500px] h-14 rounded rounded-lg "
+            className=" border px-3 border-yellow-500 mb-3 outline-none bg-black  mt-1 w-[400px]  md:w-[500px] h-14  rounded-lg "
             type="text"
             onChange={handleInputChange}
             value={formInfo.location}
@@ -181,7 +181,9 @@ export default function AgencyOnBoardingPage() {
             id=""
             required
           />
-            {errors.location && <div className="text-red-500">{errors.location}</div>}
+          {errors.location && (
+            <div className="text-red-500">{errors.location}</div>
+          )}
 
           <br />
           <label htmlFor="" className="font-volkhorn">
@@ -189,7 +191,7 @@ export default function AgencyOnBoardingPage() {
           </label>
           <br></br>
           <input
-            className="border mb-5 outline-none px-3 border-yellow-500 bg-black  mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg"
+            className="border mb-5 outline-none px-3 border-yellow-500 bg-black  mt-1 w-[400px] md:w-[500px] h-14  rounded-lg"
             type="tel"
             placeholder="+233 Phone Number"
             name="telephone"
@@ -201,7 +203,9 @@ export default function AgencyOnBoardingPage() {
             maxLength="15"
             required
           />
-            {errors.telephone && <div className="text-red-500">{errors.telephone}</div>}
+          {errors.telephone && (
+            <div className="text-red-500">{errors.telephone}</div>
+          )}
         </div>
 
         <div>
@@ -232,7 +236,9 @@ export default function AgencyOnBoardingPage() {
               required
             />
           </div>
-          {errors.displayPicUrl && <div className="text-red-500">{errors.displayPicUrl}</div>}
+          {errors.displayPicUrl && (
+            <div className="text-red-500">{errors.displayPicUrl}</div>
+          )}
           <br />
           <label htmlFor="">Business Certificate:</label>
           <br></br>
@@ -260,9 +266,10 @@ export default function AgencyOnBoardingPage() {
               //value='businessCerUrl'
               required
             />
-             
           </div>
-          {errors.businessCerUrl && <div className="text-red-500">{errors.businessCerUrl}</div>}
+          {errors.businessCerUrl && (
+            <div className="text-red-500">{errors.businessCerUrl}</div>
+          )}
         </div>
       </form>
 

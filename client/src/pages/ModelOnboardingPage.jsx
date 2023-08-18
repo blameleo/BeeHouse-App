@@ -240,7 +240,7 @@ function ModelOnboardingPage() {
           <br></br>
 
           <input
-            className=" border px-3 border-yellow-500 outline-none bg-black  mt-1 w-[400px]  md:w-[500px] h-14 rounded rounded-lg "
+            className=" border px-3 border-yellow-500 outline-none bg-black  mt-1 w-[400px]  md:w-[500px] h-14  rounded-lg "
             type="text"
             onChange={handleInputChange}
             value={formInfo.firstName}
@@ -256,7 +256,7 @@ function ModelOnboardingPage() {
           <label htmlFor="">Last Name :</label>
           <br />
           <input
-            className=" border px-3 border-yellow-500 outline-none bg-black  mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg "
+            className=" border px-3 border-yellow-500 outline-none bg-black  mt-1 w-[400px] md:w-[500px] h-14  rounded-lg "
             placeholder="last name"
             type="text"
             onChange={handleInputChange}
@@ -317,7 +317,7 @@ function ModelOnboardingPage() {
           </label>
           <br></br>
           <input
-            className="border mb-5 outline-none px-3 border-yellow-500 bg-black  mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg"
+            className="border mb-5 outline-none px-3 border-yellow-500 bg-black  mt-1 w-[400px] md:w-[500px] h-14  rounded-lg"
             type="tel"
             placeholder="+233 Phone Number"
             name="telephone"
@@ -338,7 +338,7 @@ function ModelOnboardingPage() {
           <div className="flex">
             <div className="mr-2">
               <select
-                className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14 rounded rounded-lg"
+                className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14  rounded-lg"
                 type="date"
                 placeholder="DD"
                 name="dob_day"
@@ -356,7 +356,7 @@ function ModelOnboardingPage() {
             </div>
             <div className="mr-2">
               <select
-                className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14 rounded rounded-lg"
+                className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14  rounded-lg"
                 type="date"
                 placeholder="MM"
                 name="dob_month"
@@ -375,7 +375,7 @@ function ModelOnboardingPage() {
             </div>
             <div>
               <select
-                className="border px-2 py-1 outline-none border-yellow-500 bg-black select-dropdown  mt-1 w-24 h-14 rounded rounded-lg"
+                className="border px-2 py-1 outline-none border-yellow-500 bg-black select-dropdown  mt-1 w-24 h-14  rounded-lg"
                 type="date"
                 placeholder="YYYY"
                 name="dob_year"
@@ -400,7 +400,7 @@ function ModelOnboardingPage() {
           </label>
           <br></br>
           <input
-            className=" outline-none border px-3 border-yellow-500 bg-black   mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg "
+            className=" outline-none border px-3 border-yellow-500 bg-black   mt-1 w-[400px] md:w-[500px] h-14  rounded-lg "
             type="number"
             placeholder="height (cm)"
             onChange={handleInputChange}
@@ -414,7 +414,7 @@ function ModelOnboardingPage() {
           <label htmlFor="">Location:</label>
           <br></br>
           <input
-            className=" outline-none border px-3 border-yellow-500 mb-3 bg-black   mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg "
+            className=" outline-none border px-3 border-yellow-500 mb-3 bg-black   mt-1 w-[400px] md:w-[500px] h-14  rounded-lg "
             type="text"
             placeholder="Location"
             onChange={handleInputChange}
