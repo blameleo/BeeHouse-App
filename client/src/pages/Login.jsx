@@ -99,48 +99,51 @@ export default function Login() {
               <Logo />
             </Link>
 
-            <div className="flex justify-center items-center h-5/6 ">
-              <form
-                onSubmit={formik.handleSubmit}
-                className="flex flex-col justify-around h-4/6 w-10/12 sm:w-4/12"
-              >
-                <div>
-                  <h1 className="text-left font-bold text-lg mb-2">Login</h1>
-                  <p className="text-left text-gray-400">
-                    Please enter your details
-                  </p>
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="" className="text-sm">
-                    Email
-                  </label>
-                  <input
-                    placeholder="Enter your email"
-                    type="email"
-                    name="email"
-                    className="border rounded placeholder:text-sm placeholder:pl-3"
-                    {...formik.getFieldProps("email")}
-                  />
-                  {formik.touched.email && formik.errors.email && (
-                    <p className="text-red-500">{formik.errors.email}</p>
-                  )}
-                </div>
 
-                <div className="flex flex-col">
-                  <label htmlFor="" className="text-sm">
-                    Password
-                  </label>
-                  <input
-                    placeholder="********"
-                    type="password"
-                    name="password"
-                    className="border rounded h-8 placeholder:text-sm placeholder:pl-3"
-                    {...formik.getFieldProps("password")}
-                  />
-                  {formik.touched.password && formik.errors.password && (
-                    <p className="text-red-500">{formik.errors.password}</p>
-                  )}
-                </div>
+          <div className="flex justify-center items-center h-5/6 ">
+            <form
+              onSubmit={formik.handleSubmit}
+              className="flex flex-col justify-around h-3/6 w-10/12 sm:w-4/12"
+            >
+              <div>
+                <h1 className="text-left font-bold text-lg mb-1">Login</h1>
+                <p className="text-left text-gray-400">
+                  Please enter your details
+                </p>
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="" className="text-sm">
+                  Email
+                </label>
+                <input
+                  placeholder="Enter your email"
+                  type="email"
+                  name="email"
+                  className="border border-black rounded placeholder:text-sm h-10 placeholder:pl-3"
+                  {...formik.getFieldProps("email")}
+                />
+                {formik.touched.email && formik.errors.email && (
+                  <p className="text-red-500">{formik.errors.email}</p>
+                )}
+              </div>
+
+              <div className="flex flex-col">
+                <label htmlFor="" className="text-sm">
+                  Password
+                </label>
+                <input
+                  placeholder="********"
+                  type="password"
+                  name="password"
+                  className="border border-black rounded h-10 placeholder:text-sm placeholder:pl-3"
+                  {...formik.getFieldProps("password")}
+                />
+                {formik.touched.password && formik.errors.password && (
+                  <p className="text-red-500">{formik.errors.password}</p>
+                )}
+              </div>
+
+
 
                 <a href="" className="text-xs text-right text-yellow-500">
                   forgot password?
