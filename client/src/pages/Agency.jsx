@@ -6,7 +6,6 @@ function Agency() {
   return (
     <div className="flex w-screen  ">
       <AgencySidebar />
-
       <AgencyNavbar />
     </div>
   );

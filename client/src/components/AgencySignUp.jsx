@@ -34,10 +34,13 @@ function AgencySignUp() {
     onSubmit: async (values) => {
       setLoading(true);
       try {
-        const response = await axios.post("http://localhost:4000/register", {
-          ...values,
-          type: "agency", // Set the agency type here
-        });
+        const response = await axios.post(
+          "http://localhost:4000/user/register",
+          {
+            ...values,
+            type: "agency", // Set the agency type here
+          }
+        );
 
         setCookie("Email", response.data.email);
         setCookie("UserId", response.data.userId);

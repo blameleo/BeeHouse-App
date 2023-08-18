@@ -107,11 +107,15 @@ export default function AgencyOnBoardingPage() {
     formData.append("businessCerUrl", businessCer);
     console.log(formInfo);
     try {
-      const response = await axios.put("http://localhost:4000/user", formInfo, {
-        headers: {
-          "Content-Type": "multipart/form-data", // Important: Set the correct Content-Type header
-        },
-      });
+      const response = await axios.put(
+        "http://localhost:4000/profile/user",
+        formInfo,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Important: Set the correct Content-Type header
+          },
+        }
+      );
 
       console.log(response.data.message);
       setInfo(response.data.message);
