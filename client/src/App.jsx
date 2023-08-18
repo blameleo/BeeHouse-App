@@ -9,6 +9,7 @@ import ModelOnboardingPage from "./pages/ModelOnboardingPage";
 import AgencyOnboardingPage from "./pages/AgencyOnBoardingPage";
 import ModelEditPage from "./pages/ModelEditPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
+import PrivateRoutes from "./utils/PrivateRoutes";
 
 // import { AuthContextProvider } from "./context/AuthContext";
 
@@ -20,18 +21,23 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/agency" element={<Agency />} />
-          <Route path="/settings" element={<ModelSettings />}>
-            <Route index element={<ModelEditPage />} />
-            <Route path="/settings/modeledit" element={<ModelEditPage />} />
+          <Route element={<PrivateRoutes />}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/agency" element={<Agency />} />
+            <Route path="/settings" element={<ModelSettings />}>
+              <Route index element={<ModelEditPage />} />
+              <Route path="/settings/modeledit" element={<ModelEditPage />} />
+              <Route
+                path="/settings/changepassword"
+                element={<ChangePasswordPage />}
+              />
+            </Route>
             <Route
-              path="/settings/changepassword"
-              element={<ChangePasswordPage />}
+              path="/agencyonboarding"
+              element={<AgencyOnboardingPage />}
             />
+            <Route path="/modelonboarding" element={<ModelOnboardingPage />} />
           </Route>
-          <Route path="/agencyonboarding" element={<AgencyOnboardingPage />} />
-          <Route path="/modelonboarding" element={<ModelOnboardingPage />} />
         </Routes>
       </BrowserRouter>
       {/* </AuthContextProvider> */}
