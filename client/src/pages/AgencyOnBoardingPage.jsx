@@ -150,7 +150,7 @@ export default function AgencyOnBoardingPage() {
             id=""
             required
           />
-          {errors.agencyName && <div className="text-red-500">{errors.agencyName}</div>}
+          {errors.agencyName && <div className="text-red-500 text-xs">{errors.agencyName}</div>}
           <br />
           <label htmlFor="">About :</label>
           <br />
@@ -164,7 +164,7 @@ export default function AgencyOnBoardingPage() {
             id=""
             required
           />
-            {errors.about && <div className="text-red-500">{errors.about}</div>}
+            {errors.about && <div className="text-red-500 text-xs">{errors.about}</div>}
           <br />
           <br />
           <label className="" htmlFor="">
@@ -181,7 +181,7 @@ export default function AgencyOnBoardingPage() {
             id=""
             required
           />
-            {errors.location && <div className="text-red-500">{errors.location}</div>}
+            {errors.location && <div className="text-red-500 text-xs">{errors.location}</div>}
 
           <br />
           <label htmlFor="" className="font-volkhorn">
@@ -201,7 +201,7 @@ export default function AgencyOnBoardingPage() {
             maxLength="15"
             required
           />
-            {errors.telephone && <div className="text-red-500">{errors.telephone}</div>}
+            {errors.telephone && <div className="text-red-500 text-xs">{errors.telephone}</div>}
         </div>
 
         <div>
@@ -232,7 +232,7 @@ export default function AgencyOnBoardingPage() {
               required
             />
           </div>
-          {errors.displayPicUrl && <div className="text-red-500">{errors.displayPicUrl}</div>}
+          {errors.displayPicUrl && <div className="text-red-500 text-xs">{errors.displayPicUrl}</div>}
           <br />
           <label htmlFor="">Business Certificate:</label>
           <br></br>
@@ -262,7 +262,7 @@ export default function AgencyOnBoardingPage() {
             />
              
           </div>
-          {errors.businessCerUrl && <div className="text-red-500">{errors.businessCerUrl}</div>}
+          {errors.businessCerUrl && <div className="text-red-500 text-xs">{errors.businessCerUrl}</div>}
         </div>
       </form>
 
