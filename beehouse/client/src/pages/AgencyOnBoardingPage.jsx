@@ -133,7 +133,7 @@ export default function AgencyOnBoardingPage() {
   };
 
   return (
-    <div className="bg-black font-volkhorn h-screen ">
+    <div className="bg-black font-volkhorn  ">
       <SecNavbar />
       <div className="flex justify-center mb-12">
         <h1 className="text-4xl text-yellow-500 mt-40 text-bold">
