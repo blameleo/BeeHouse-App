@@ -31,6 +31,7 @@ function ModelOnboardingPage() {
     firstName: "",
     lastName: "",
     gender: "",
+    countryCode:"",
     telephone: "",
     dob_day: "",
     dob_month: "",
@@ -63,6 +64,13 @@ function ModelOnboardingPage() {
     imageUrl3: "",
   });
 
+  const handleCountryCodeChange = (event) => {
+    const selectedCountryCode = event.target.value;
+    setFormInfo((prevFormInfo) => ({
+      ...prevFormInfo,
+      countryCode: selectedCountryCode,
+    }));
+  };
   const handleSelectChange = (name, value) => {
     setFormInfo((prevFormInfo) => ({
       ...prevFormInfo,
@@ -240,7 +248,8 @@ function ModelOnboardingPage() {
           <br></br>
 
           <input
-            className=" border px-3 border-yellow-500 outline-none bg-black  mt-1 w-[400px]  md:w-[500px] h-14 rounded rounded-lg "
+            className={`border px-3 border-yellow-500 outline-none bg-black mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
+              errors.firstName ? 'border-red-500' : '' }`}
             type="text"
             onChange={handleInputChange}
             value={formInfo.firstName}
@@ -249,24 +258,29 @@ function ModelOnboardingPage() {
             id=""
           />
           {errors.firstName && (
-            <div className="text-red-500">{errors.firstName}</div>
+            <div className="text-red-500 text-xs">{errors.firstName}</div>
           )}
+
           <br></br>
           <br />
           <label htmlFor="">Last Name :</label>
           <br />
           <input
-            className=" border px-3 border-yellow-500 outline-none bg-black  mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg "
-            placeholder="last name"
-            type="text"
-            onChange={handleInputChange}
-            name="lastName"
-            value={formInfo.lastName}
-            id=""
-          />
-          {errors.lastName && (
-            <div className="text-red-500">{errors.lastName}</div>
-          )}
+              className={`border px-3 border-yellow-500 outline-none bg-black mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
+                errors.lastName ? 'border-red-500' : ''
+              }`}
+              placeholder="Last Name"
+              type="text"
+              onChange={handleInputChange}
+              name="lastName"
+              value={formInfo.lastName}
+              id=""
+            />
+            {errors.lastName && (
+              <div className="text-red-500 text-xs">{errors.lastName}</div>
+            )}
+
+         
           <br></br>
           <br />
 
@@ -286,7 +300,7 @@ function ModelOnboardingPage() {
                 id="male"
               />
               <label
-                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-2 peer-checked:border-transparent"
+                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="male"
               >
                 Male
@@ -303,31 +317,73 @@ function ModelOnboardingPage() {
                 id="female"
               />
               <label
-                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-2 peer-checked:border-transparent"
+                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="female"
               >
                 Female
               </label>
             </li>
           </ul>
-          <br></br>
+         
+          {errors.gender && (
+            <div className="text-red-500 text-xs">{errors.gender}</div>
+          )}
+           <br></br>
+          
 
-          <label htmlFor="" className="font-volkhorn">
-            Telephone Number:
-          </label>
-          <br></br>
-          <input
-            className="border mb-5 outline-none px-3 border-yellow-500 bg-black  mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg"
-            type="tel"
-            placeholder="+233 Phone Number"
-            name="telephone"
-            value={formInfo.telephone}
-            onChange={handleInputChange}
-            id="telephone"
-            pattern="[0-9]*"
-            minLength="10"
-            maxLength="15"
+         <div className="mb-5">
+  <label htmlFor="telephone" className="font-volkhorn">
+    Telephone Number:
+  </label>
+  <br />
+  <div className="flex">
+    <div className="relative ">
+      <select
+        className="border border-yellow-500 mr-3 outline-none pr-8 bg-black mt-1 h-14 rounded-l rounded-lg appearance-none"
+        id="countryCode"
+        name="countryCode"
+        value="+233"
+        onChange={handleCountryCodeChange}
+      >
+        <option value="+233">+233 (Ghana)</option>
+        {/* You can add more country options here */}
+      </select>
+      <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+        <svg
+          className="w-5 h-5 text-gray-400"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            fillRule="evenodd"
+            d="M6.293 6.293a1 1 0 011.414 0L10 8.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+            clipRule="evenodd"
           />
+        </svg>
+      </div>
+    </div>
+    <input
+      className={`border outline-none px-3 border-yellow-500 bg-black mt-1 w-full h-14 rounded-r rounded-lg ${
+        errors.telephone ? 'border-red-500' : ''
+      }`}
+      type="tel"
+      placeholder="Phone Number"
+      name="telephone"
+      value={formInfo.telephone}
+      onChange={handleInputChange}
+      id="telephone"
+      pattern="[0-9]*"
+      minLength="10"
+      maxLength="15"
+    />
+  </div>
+  {errors.telephone && (
+    <div className="text-red-500 text-xs">{errors.telephone}</div>
+  )}
+</div>
+
 
           <br></br>
 
@@ -336,6 +392,9 @@ function ModelOnboardingPage() {
           </label>
           <br></br>
           <div className="flex">
+          {errors.dob_day && (
+            <div className="text-red-500 text-xs">*</div>
+          )}
             <div className="mr-2">
               <select
                 className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14 rounded rounded-lg"
@@ -354,6 +413,9 @@ function ModelOnboardingPage() {
                 ))}
               </select>
             </div>
+            {errors.dob_month && (
+            <div className="text-red-500 text-xs">*</div>
+          )}
             <div className="mr-2">
               <select
                 className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14 rounded rounded-lg"
@@ -373,6 +435,9 @@ function ModelOnboardingPage() {
                 ))}
               </select>
             </div>
+            {errors.dob_year && (
+            <div className="text-red-500 text-xs">*</div>
+          )}
             <div>
               <select
                 className="border px-2 py-1 outline-none border-yellow-500 bg-black select-dropdown  mt-1 w-24 h-14 rounded rounded-lg"
@@ -400,21 +465,25 @@ function ModelOnboardingPage() {
           </label>
           <br></br>
           <input
-            className=" outline-none border px-3 border-yellow-500 bg-black   mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg "
+            className={`outline-none border px-3 border-yellow-500 bg-black mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
+              errors.height ? 'border-red-500' : ''
+            }`}
             type="number"
-            placeholder="height (cm)"
+            placeholder="Height (cm)"
             onChange={handleInputChange}
             name="height"
             value={formInfo.height}
             id=""
           />
-          {errors.height && <div className="text-red-500">{errors.height}</div>}
+          {errors.height && <div className="text-red-500 text-xs">{errors.height}</div>}
           <br></br>
 
           <label htmlFor="">Location:</label>
           <br></br>
           <input
-            className=" outline-none border px-3 border-yellow-500 mb-3 bg-black   mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg "
+            className={`outline-none border px-3 border-yellow-500 mb-3 bg-black mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
+              errors.location ? 'border-red-500' : ''
+            }`}
             type="text"
             placeholder="Location"
             onChange={handleInputChange}
@@ -423,14 +492,14 @@ function ModelOnboardingPage() {
             id=""
           />
           {errors.location && (
-            <div className="text-red-500">{errors.location}</div>
+            <div className="text-red-500 text-xs">{errors.location}</div>
           )}
           <br></br>
 
           <label htmlFor="">Complexion:</label>
 
           <br></br>
-          <ul className="grid grid-cols-3 gap-x-5 pb-5  max-w-md ">
+          <ul className="grid grid-cols-3 gap-x-5 pb-3   max-w-md ">
             <li className="relative">
               <input
                 className="sr-only peer"
@@ -441,7 +510,7 @@ function ModelOnboardingPage() {
                 id="dark"
               />
               <label
-                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-2 peer-checked:border-transparent"
+                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="dark"
               >
                 Dark
@@ -458,13 +527,18 @@ function ModelOnboardingPage() {
                 id="fair"
               />
               <label
-                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-2 peer-checked:border-transparent"
+                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="fair"
               >
                 Fair
               </label>
-            </li>
+            </li> 
           </ul>
+          {errors.complexion && (
+            <div className="text-red-500 text-xs pb-5">{errors.complexion}</div>
+          )}
+         
+         
 
           <label htmlFor="stature" className="font-volkhorn">
             Stature :
@@ -480,7 +554,7 @@ function ModelOnboardingPage() {
                 id="slim"
               />
               <label
-                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-2 peer-checked:border-transparent"
+                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="slim"
               >
                 Slim
@@ -497,7 +571,7 @@ function ModelOnboardingPage() {
                 id="Average"
               />
               <label
-                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-2 peer-checked:border-transparent"
+                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="Average"
               >
                 Average
@@ -514,15 +588,19 @@ function ModelOnboardingPage() {
                 id="chubby"
               />
               <label
-                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-2 peer-checked:border-transparent"
+                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="chubby"
               >
                 Chubby
               </label>
             </li>
+            {errors.stature && (
+            <div className="text-red-500 text-xs">{errors.stature}</div>
+          )}
           </ul>
+         
         </div>
-
+       
         <br></br>
         <div>
           {/* <label htmlFor="">Identification Card :</label>
@@ -555,131 +633,142 @@ function ModelOnboardingPage() {
           <label htmlFor="">Profile pic:</label>
           <br></br>
           <div className="flex items-center">
-            <label
-              htmlFor="upload2"
-              className="relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 order border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
-            >
-              {imagePreviews.displayPicUrl ? (
-                <img
-                  src={imagePreviews.displayPicUrl}
-                  alt="Preview"
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <span className="text-gray-400 text-3xl">+</span>
-              )}
-            </label>
-            <input
-              type="file"
-              id="upload2"
-              className="hidden"
-              onChange={handleDisplayPicChange}
-              name="displayPicUrl"
-            />
-          </div>
-          {errors.displayPicUrl && (
-            <div className="text-red-500">{errors.displayPicUrl}</div>
-          )}
+          <label
+            htmlFor="upload2"
+            className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 order border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer ${
+              errors.displayPicUrl ? 'border-red-500' : ''
+            }`}
+          >
+            {imagePreviews.displayPicUrl ? (
+              <img
+                src={imagePreviews.displayPicUrl}
+                alt="Preview"
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <span className="text-gray-400 text-3xl">+</span>
+            )}
+          </label>
+          <input
+            type="file"
+            id="upload2"
+            className="hidden"
+            onChange={handleDisplayPicChange}
+            name="displayPicUrl"
+          />
+        </div>
+        {errors.displayPicUrl && (
+          <div className="text-red-500 text-xs">{errors.displayPicUrl}</div>
+        )}
 
+          
           <br></br>
 
           <label htmlFor="">Images Upload :</label>
           <br></br>
           <div className="flex ">
-            <div className="flex items-center mr-5">
-              <label
-                htmlFor="upload3"
-                className="relative rounded-xl p-2 bg-neutral-950 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
-              >
-                {imagePreviews.imageUrl1 ? (
-                  <img
-                    src={imagePreviews.imageUrl1}
-                    alt="Preview"
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <span className="text-gray-400 text-3xl">+</span>
-                )}{" "}
-              </label>
-              <input
-                type="file"
-                id="upload3"
-                onChange={handleImage1Change}
-                className="hidden"
-                name="imageUrl1"
-              />
-            </div>
+  <div className="flex items-center mr-5">
+    <label
+      htmlFor="upload3"
+      className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 ${
+        errors.imageUrl1 ? 'border-red-500' : 'border-yellow-500'
+      } h-40 w-32 flex items-center justify-center cursor-pointer`}
+    >
+      {imagePreviews.imageUrl1 ? (
+        <img
+          src={imagePreviews.imageUrl1}
+          alt="Preview"
+          className="w-full h-full object-cover"
+        />
+      ) : (
+        <span className="text-gray-400 text-3xl">+</span>
+      )}
+    </label>
+    <input
+      type="file"
+      id="upload3"
+      onChange={handleImage1Change}
+      className="hidden"
+      name="imageUrl1"
+    />
+  </div>
+ 
 
-            <div className="flex items-center mr-5">
-              <label
-                htmlFor="upload4"
-                className="relative rounded-xl p-2  bg-neutral-950 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
-              >
-                {imagePreviews.imageUrl2 ? (
-                  <img
-                    src={imagePreviews.imageUrl2}
-                    alt="Preview"
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <span className="text-gray-400 text-3xl">+</span>
-                )}
-              </label>
-              <input
-                type="file"
-                id="upload4"
-                className="hidden"
-                onChange={handleImage2Change}
-                name="imageUrl1"
-              />
-            </div>
 
-            <div className="flex items-center">
-              <label
-                htmlFor="upload5"
-                className="relative rounded-xl p-2 bg-neutral-950 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
-              >
-                {imagePreviews.imageUrl3 ? (
-                  <img
-                    src={imagePreviews.imageUrl3}
-                    alt="Preview"
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <span className="text-gray-400 text-3xl">+</span>
-                )}{" "}
-              </label>
-              <input
-                type="file"
-                id="upload5"
-                className="hidden"
-                onChange={handleImage3Change}
-                name="imageUrl2"
-              />
-            </div>
-          </div>
-          <div className="flex mt-2 justify-around">
-            {errors.imageUrl1 && <div className="text-red-500">required</div>}
-            {errors.imageUrl2 && <div className="text-red-500">required</div>}
-            {errors.imageUrl3 && <div className="text-red-500">required</div>}
-          </div>
-        </div>
-      </form>
-
-      <div className="flex justify-center pb-10">
-        <button
-          onClick={handleSubmit}
-          className="mr-5 mt-5 bg-yellow-500  border-2 border-black h-[50px] rounded-lg w-[150px]"
+        <div className="flex items-center mr-5">
+        <label
+          htmlFor="upload4"
+          className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer ${
+            errors.imageUrl1 ? 'border-red-500' : ''
+          }`}
         >
-          Continue
-        </button>
+          {imagePreviews.imageUrl2 ? (
+            <img
+              src={imagePreviews.imageUrl2}
+              alt="Preview"
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <span className="text-gray-400 text-3xl">+</span>
+          )}
+        </label>
+        <input
+          type="file"
+          id="upload4"
+          className="hidden"
+          onChange={handleImage2Change}
+          name="imageUrl1"
+        />
       </div>
 
-      <div className="flex text-white text-xl hover:text-blue-500 justify-center pb-5">
-        <h1>{info}</h1>
+      <div className="flex items-center">
+        <label
+          htmlFor="upload5"
+          className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer ${
+            errors.imageUrl3 ? 'border-red-500' : ''
+          }`}
+        >
+          {imagePreviews.imageUrl3 ? (
+            <img
+              src={imagePreviews.imageUrl3}
+              alt="Preview"
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <span className="text-gray-400 text-3xl">+</span>
+          )}{" "}
+        </label>
+        <input
+          type="file"
+          id="upload5"
+          className="hidden"
+          onChange={handleImage3Change}
+          name="imageUrl3"
+        />
       </div>
-    </div>
-  );
-}
+      </div>
+                <div className="flex mt-2 justify-around">
+                  {errors.imageUrl1 && <div className="text-red-500 text-xs">required</div>}
+                  {errors.imageUrl2 && <div className="text-red-500 text-xs">required</div>}
+                  {errors.imageUrl3 && <div className="text-red-500 text-xs">required</div>}
+                </div>
+              </div>
+            </form>
 
-export default ModelOnboardingPage;
+            <div className="flex justify-center pb-10">
+              <button
+                onClick={handleSubmit}
+                className="mr-5 mt-5 bg-yellow-500  border-2 border-black h-[50px] rounded-lg w-[150px]"
+              >
+                Continue
+              </button>
+            </div>
+
+            <div className="flex text-white text-xl hover:text-blue-500 justify-center pb-5">
+              <h1>{info}</h1>
+            </div>
+          </div>
+        );
+      }
+
+      export default ModelOnboardingPage;
