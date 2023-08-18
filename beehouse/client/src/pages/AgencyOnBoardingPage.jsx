@@ -249,8 +249,11 @@ export default function AgencyOnBoardingPage() {
       maxLength="15"
     />
   </div>
+  {errors.telephone && (
+            <div className="text-red-500 text-xs mt-2">{errors.telephone}</div>
+          )}
         </div>
-
+       
         <div>
   <label htmlFor="">Profile Picture :</label>
   <br />
@@ -281,7 +284,7 @@ export default function AgencyOnBoardingPage() {
     />
   </div>
   {errors.displayPicUrl && (
-    <div className="text-red-500 text-xs">{errors.displayPicUrl}</div>
+    <div className="text-red-500 text-xs mt-2">{errors.displayPicUrl}</div>
   )}
   <br />
   <label htmlFor="">Business Certificate:</label>
@@ -314,7 +317,7 @@ export default function AgencyOnBoardingPage() {
   </div>
 
           {errors.businessCerUrl && (
-            <div className="text-red-500 text-xs">{errors.businessCerUrl}</div>
+            <div className="text-red-500 text-xs mt-2">{errors.businessCerUrl}</div>
           )}
         </div>
       </form>
