@@ -206,9 +206,9 @@ function ModelOnboardingPage() {
         }
       );
 
-      console.log(response.data.message);
-      console.log(response.data.data);
-      setCookie("userdata", response.data.data.firstName);
+      // console.log(response.data.message);
+      // console.log(response.data.data);
+      // setCookie("userdata", response.data.data.firstName);
 
       setInfo(response.data.message);
       navigate("/home");

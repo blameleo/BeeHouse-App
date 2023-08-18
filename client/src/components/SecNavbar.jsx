@@ -13,10 +13,13 @@ function SecNavbar() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
-  console.log(cookies);
+
   const logOut = () => {
     removeCookie("Email");
+    removeCookie("userData");
+    removeCookie("userdata");
     removeCookie("UserId");
+    setUser(null);
     removeCookie("AuthToken");
     navigate("/login");
   };

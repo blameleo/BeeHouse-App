@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken");
 const { v4: uuidv4 } = require("uuid");
 const UserModel = require("../models/User.js");
 
+const tokenExpiration = 3600;
+const expirationTime = Math.floor(Date.now() / 1000) + tokenExpiration;
 const registerUser = async (req, res) => {
   try {
     const { email, password, type } = req.body;
@@ -25,7 +27,10 @@ const registerUser = async (req, res) => {
 
     await newUser.save();
 
-    const token = jwt.sign(newUser.toJSON(), "secret");
+    const token = jwt.sign(
+      { ...newUser.toJSON(), exp: expirationTime },
+      process.env.JWT_SECRETKEY
+    );
     res.status(200).json({
       token,
       userId: generatedUserId,
@@ -51,10 +56,13 @@ const loginUser = async (req, res) => {
     if (!isPasswordValid) {
       return res
         .status(401)
-        .json({ message: "Username or password is incorrect" });
+        .json({ message: "email or password is incorrect" });
     }
 
-    const token = jwt.sign(user.toJSON(), "secret");
+    const token = jwt.sign(
+      { ...newUser.toJSON(), exp: expirationTime },
+      process.env.JWT_SECRETKEY
+    );
     res
       .status(200)
       .json({ token, userId: user.user_id, email, type: user.type });
