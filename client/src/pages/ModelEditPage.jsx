@@ -23,22 +23,22 @@ export default function ModelEditPage() {
   });
 
   const [formInfo, setFormInfo] = useState({
-    user_id: cookies.UserId,
-    firstName: cookies.userData.firstName,
-    lastName: cookies.userData.lastName,
-    gender: cookies.userData.gender,
-    telephone: cookies.userData.telephone,
-    dob_day: cookies.userData.dob_day,
-    dob_month: cookies.userData.dob_month,
-    dob_year: cookies.userData.dob_year,
-    height: cookies.userData.height,
-    location: cookies.userData.location,
-    complexion: cookies.userData.complexion,
-    stature: cookies.userData.stature,
-    displayPicUrl: cookies.userData.displayPicUrl,
-    imageUrl1: cookies.userData.imageUrl1,
-    imageUrl2: cookies.userData.imageUrl2,
-    imageUrl3: cookies.userData.imageUrl3,
+    user_id: cookies?.UserId,
+    firstName: cookies?.userData?.firstName,
+    lastName: cookies?.userData?.lastName,
+    gender: cookies?.userData?.gender,
+    telephone: cookies?.userData?.telephone,
+    dob_day: cookies?.userData?.dob_day,
+    dob_month: cookies?.userData?.dob_month,
+    dob_year: cookies?.userData?.dob_year,
+    height: cookies?.userData?.height,
+    location: cookies?.userData?.location,
+    complexion: cookies?.userData?.complexion,
+    stature: cookies?.userData?.stature,
+    displayPicUrl: cookies?.userData?.displayPicUrl,
+    imageUrl1: cookies?.userData?.imageUrl1,
+    imageUrl2: cookies?.userData?.imageUrl2,
+    imageUrl3: cookies?.userData?.imageUrl3,
   });
 
   const handleSelectChange = (name, value) => {
@@ -55,9 +55,9 @@ export default function ModelEditPage() {
       [name]: value,
     }));
   };
-  const days = Array.from({ length: 31 }, (_, i) => (i + 1).toString());
-  const months = Array.from({ length: 12 }, (_, i) => (i + 1).toString());
-  const years = Array.from({ length: 65 }, (_, i) => (2023 - i).toString());
+  // const days = Array.from({ length: 31 }, (_, i) => (i + 1).toString());
+  // const months = Array.from({ length: 12 }, (_, i) => (i + 1).toString());
+  // const years = Array.from({ length: 65 }, (_, i) => (2023 - i).toString());
 
   //   const handleIdCardChange = (event) => {
   //     const selectedFile5 = event.target.files[0];
@@ -174,7 +174,7 @@ export default function ModelEditPage() {
     }
   };
 
-  const newUrl = cookies.userData.displayPicUrl.replace("public/", "");
+  // const newUrl = cookies.userData.displayPicUrl.replace("public/", "");
 
   return (
     <div className=" font-volkhorn  px-4 pt-">
@@ -195,7 +195,7 @@ export default function ModelEditPage() {
               />
             ) : (
               <img
-                src={`http://localhost:4000/${cookies.userData.displayPicUrl.replace(
+                src={`http://localhost:4000/${cookies.userData?.displayPicUrl?.replace(
                   "public/",
                   ""
                 )}`}
@@ -382,7 +382,7 @@ export default function ModelEditPage() {
                   />
                 ) : (
                   <img
-                    src={`http://localhost:4000/${cookies.userData.imageUrl1.replace(
+                    src={`http://localhost:4000/${cookies.userData?.imageUrl1?.replace(
                       "public/",
                       ""
                     )}`}
@@ -413,7 +413,7 @@ export default function ModelEditPage() {
                   />
                 ) : (
                   <img
-                    src={`http://localhost:4000/${cookies.userData.imageUrl2.replace(
+                    src={`http://localhost:4000/${cookies.userData?.imageUrl2?.replace(
                       "public/",
                       ""
                     )}`}
@@ -444,7 +444,7 @@ export default function ModelEditPage() {
                   />
                 ) : (
                   <img
-                    src={`http://localhost:4000/${cookies.userData.imageUrl3.replace(
+                    src={`http://localhost:4000/${cookies.userData?.imageUrl3?.replace(
                       "public/",
                       ""
                     )}`}
