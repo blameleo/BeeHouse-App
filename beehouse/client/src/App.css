@@ -1,0 +1,11 @@
+.expanded-input {
+  width: 800px; /* Change this value to your desired width */
+}
+
+.octagon {
+  width: 100px;
+  height: 100px;
+  margin: 50px auto;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background-color: #4fd1c5;
+}
