@@ -27,3 +27,4 @@ dist-ssr
 *.sw?
 beehouse/client/.env
 beehouse/server/.env
+beehouse/server/.env
