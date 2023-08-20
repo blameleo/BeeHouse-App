@@ -3,6 +3,8 @@ const UserModel = require("../models/User.js");
 const updateUserProfile = async (req, res) => {
   try {
     const formData = req.body;
+
+    console.log(formData);
     const query = { user_id: formData.user_id };
 
     const updatedDocument = {
@@ -38,11 +40,18 @@ const updateUserProfile = async (req, res) => {
         updatedDocument.$set[fieldName] = fileUrl;
       }
     });
+    console.log(updatedDocument);
+    const insertedUser = await UserModel.findOneAndUpdate(
+      query,
+      updatedDocument,
+      { new: true }
+    );
 
-    const insertedUser = await UserModel.updateOne(query, updatedDocument);
-    res
-      .status(201)
-      .json({ message: "User profile updated", data: insertedUser });
+    console.log(insertedUser);
+    res.status(201).json({
+      message: "User profile updated successfully",
+      data: insertedUser,
+    });
   } catch (error) {
     console.error(error);
     res

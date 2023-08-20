@@ -6,13 +6,17 @@ import { BsFillChatLeftDotsFill, BsFillCaretDownFill } from "react-icons/bs";
 import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../Redux/slice/userSlice";
 
 function SecNavbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const logOut = () => {
     removeCookie("Email");
@@ -40,7 +44,8 @@ function SecNavbar() {
       const response = await axios.get("http://localhost:4000/user/getuser", {
         params: { userId },
       });
-      setUser(response.data);
+      // setUser(response.data);
+      dispatch(setUser(response.data));
       setCookie("userData", response.data);
     } catch (error) {
       console.log(error);
@@ -59,7 +64,9 @@ function SecNavbar() {
     };
   }, []);
 
-  console.log(cookies);
+  // console.log(user);
+
+  // console.log(cookies);
 
   const newUrl = user?.displayPicUrl?.replace("public/", "");
 
