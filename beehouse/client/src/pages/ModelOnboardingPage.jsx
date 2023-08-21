@@ -180,6 +180,22 @@ function ModelOnboardingPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const newErrors = {};
+    for (const field in formInfo) {
+      if (formInfo[field] === "") {
+        newErrors[field] = "This field is required";
+      } else {
+        newErrors[field] = "";
+      }
+    }
+    setErrors(newErrors);
+
+    // Check if there are any errors
+    const hasErrors = Object.values(newErrors).some((error) => error !== "");
+    if (hasErrors) {
+      return; // Exit if there are errors
+    }
+
     const formData = new FormData();
     formData.append("displayPicUrl", displayPic);
     // formData.append("idCardUrl", idCardPic);
@@ -198,8 +214,8 @@ function ModelOnboardingPage() {
         }
       );
 
-      console.log(response.data.message);
-      console.log(response.data.data);
+      // console.log(response.data.message);
+      // console.log(response.data.data);
       // setCookie("userdata", response.data.data.firstName);
 
       setInfo(response.data.message);
@@ -325,10 +341,11 @@ function ModelOnboardingPage() {
                   className="border border-yellow-500 mr-3 outline-none pr-8 bg-black mt-1 h-14 rounded-l rounded-lg appearance-none"
                   id="countryCode"
                   name="countryCode"
-                  value="+233"
+                  value={formInfo.countryCode}
                   onChange={handleCountryCodeChange}
                 >
-                  <option value="+233">+233 (Ghana)</option>
+                  <option value="">Select Country Code</option>
+                  <option value="+233">+233 (Ghana)</option>{" "}
                   {/* You can add more country options here */}
                 </select>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">

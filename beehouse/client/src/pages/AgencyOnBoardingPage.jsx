@@ -22,7 +22,7 @@ export default function AgencyOnBoardingPage() {
     agencyName: "",
     about: "",
     location: "",
-    countryCode:"",
+    countryCode: "+",
     telephone: "",
     displayPicUrl: "",
     businessCerUrl: "",
@@ -32,6 +32,8 @@ export default function AgencyOnBoardingPage() {
     about: "",
     location: "",
     telephone: "",
+    countryCode: "",
+
     displayPicUrl: "",
     businessCerUrl: "",
   });
@@ -46,6 +48,7 @@ export default function AgencyOnBoardingPage() {
 
   const handleCountryCodeChange = (event) => {
     const selectedCountryCode = event.target.value;
+    console.log(selectedCountryCode);
     setFormInfo((prevFormInfo) => ({
       ...prevFormInfo,
       countryCode: selectedCountryCode,
@@ -93,6 +96,8 @@ export default function AgencyOnBoardingPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log(formInfo);
+
     const newErrors = {};
     for (const field in formInfo) {
       if (formInfo[field] === "") {
@@ -113,6 +118,8 @@ export default function AgencyOnBoardingPage() {
     formData.append("displayPicUrl", displayPic);
     formData.append("businessCerUrl", businessCer);
     console.log(formInfo);
+
+    console.log("Submitting form data...");
     try {
       const response = await axios.put(
         "http://localhost:4000/profile/user",
@@ -148,17 +155,17 @@ export default function AgencyOnBoardingPage() {
           <label htmlFor="">Agency Name :</label>
           <br />
           <input
-          className={`border px-3 mb-3 outline-none mt-1 w-[400px] md:w-[500px] h-14 rounded-lg ${
-            errors.agencyName ? 'border-red-500' : 'border-yellow-500'
-          } bg-black`}
-          type="text"
-          value={formInfo.agencyName}
-          onChange={handleInputChange}
-          placeholder="Agency Name"
-          name="agencyName"
-          id=""
-          required
-        />
+            className={`border px-3 mb-3 outline-none mt-1 w-[400px] md:w-[500px] h-14 rounded-lg ${
+              errors.agencyName ? "border-red-500" : "border-yellow-500"
+            } bg-black`}
+            type="text"
+            value={formInfo.agencyName}
+            onChange={handleInputChange}
+            placeholder="Agency Name"
+            name="agencyName"
+            id=""
+            required
+          />
           {errors.agencyName && (
             <div className="text-red-500 text-xs">{errors.agencyName}</div>
           )}
@@ -166,18 +173,20 @@ export default function AgencyOnBoardingPage() {
           <label htmlFor="">About :</label>
           <br />
           <textarea
-          className={`border px-3 outline-none mt-1 w-[400px] md:w-[500px] h-14 rounded-lg ${
-            errors.about ? 'border-red-500' : 'border-yellow-500'
-          } bg-black`}
-          placeholder="About"
-          onChange={handleInputChange}
-          value={formInfo.about}
-          name="about"
-          id=""
-          required
-        />
+            className={`border px-3 outline-none mt-1 w-[400px] md:w-[500px] h-14 rounded-lg ${
+              errors.about ? "border-red-500" : "border-yellow-500"
+            } bg-black`}
+            placeholder="About"
+            onChange={handleInputChange}
+            value={formInfo.about}
+            name="about"
+            id=""
+            required
+          />
 
-          {errors.about && <div className="text-red-500 text-xs">{errors.about}</div>}
+          {errors.about && (
+            <div className="text-red-500 text-xs">{errors.about}</div>
+          )}
           <br />
           <br />
           <label className="" htmlFor="">
@@ -185,17 +194,17 @@ export default function AgencyOnBoardingPage() {
           </label>
           <br />
           <input
-          className={`border px-3 mb-3 outline-none mt-1 w-[400px] md:w-[500px] h-14 rounded-lg ${
-            errors.location ? 'border-red-500' : 'border-yellow-500'
-          } bg-black`}
-          type="text"
-          onChange={handleInputChange}
-          value={formInfo.location}
-          placeholder="Location"
-          name="location"
-          id=""
-          required
-        />
+            className={`border px-3 mb-3 outline-none mt-1 w-[400px] md:w-[500px] h-14 rounded-lg ${
+              errors.location ? "border-red-500" : "border-yellow-500"
+            } bg-black`}
+            type="text"
+            onChange={handleInputChange}
+            value={formInfo.location}
+            placeholder="Location"
+            name="location"
+            id=""
+            required
+          />
 
           {errors.location && (
             <div className="text-red-500 text-xs">{errors.location}</div>
@@ -207,117 +216,122 @@ export default function AgencyOnBoardingPage() {
           </label>
           <br></br>
           <div className="flex">
-    <div className="relative ">
-      <select
-        className="border border-yellow-500 mr-3 outline-none pr-8 bg-black mt-1 h-14 rounded-l rounded-lg appearance-none"
-        id="countryCode"
-        name="countryCode"
-        value="+233"
-        onChange={handleCountryCodeChange}
-      >
-        <option value="+233">+233 (Ghana)</option>
-        {/* You can add more country options here */}
-      </select>
-      <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-        <svg
-          className="w-5 h-5 text-gray-400"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            fillRule="evenodd"
-            d="M6.293 6.293a1 1 0 011.414 0L10 8.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </div>
-    </div>
-    <input
-      className={`border outline-none px-3 border-yellow-500 bg-black mt-1 w-full h-14 rounded-r rounded-lg ${
-        errors.telephone ? 'border-red-500' : ''
-      }`}
-      type="tel"
-      placeholder="Phone Number"
-      name="telephone"
-      value={formInfo.telephone}
-      onChange={handleInputChange}
-      id="telephone"
-      pattern="[0-9]*"
-      minLength="10"
-      maxLength="15"
-    />
-  </div>
-  {errors.telephone && (
+            <div className="relative ">
+              <select
+                className="border border-yellow-500 mr-3 outline-none pr-8 bg-black mt-1 h-14 rounded-l rounded-lg appearance-none"
+                id="countryCode"
+                name="countryCode"
+                value={formInfo.countryCode}
+                onChange={handleCountryCodeChange}
+              >
+                <option value="">Select Country Code</option>
+                <option value="+233">+233 (Ghana)</option>{" "}
+                {/* You can add more country options here */}
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                <svg
+                  className="w-5 h-5 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M6.293 6.293a1 1 0 011.414 0L10 8.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
+            <input
+              className={`border outline-none px-3 border-yellow-500 bg-black mt-1 w-full h-14 rounded-r rounded-lg ${
+                errors.telephone ? "border-red-500" : ""
+              }`}
+              type="tel"
+              placeholder="Phone Number"
+              name="telephone"
+              value={formInfo.telephone}
+              onChange={handleInputChange}
+              id="telephone"
+              pattern="[0-9]*"
+              minLength="10"
+              maxLength="15"
+            />
+          </div>
+          {errors.telephone && (
             <div className="text-red-500 text-xs mt-2">{errors.telephone}</div>
           )}
         </div>
-       
+
         <div>
-  <label htmlFor="">Profile Picture :</label>
-  <br />
-  <div className="">
-    <label
-      htmlFor="upload1"
-      className={`relative rounded-xl p-2 bg-neutral-550 border-dashed border-4 ${
-        errors.displayPicUrl ? 'border-red-500' : 'border-yellow-500'
-      } h-40 w-32 flex items-center justify-center cursor-pointer`}
-    >
-      {imagePreviews.displayPicUrl ? (
-        <img
-          src={imagePreviews.displayPicUrl}
-          alt="Preview"
-          className="w-full h-full object-cover"
-        />
-      ) : (
-        <span className="text-gray-400 text-3xl">+</span>
-      )}{" "}
-    </label>
-    <input
-      type="file"
-      id="upload1"
-      name="displayPicUrl"
-      className="hidden"
-      onChange={handleDisplayPicChange}
-      required
-    />
-  </div>
-  {errors.displayPicUrl && (
-    <div className="text-red-500 text-xs mt-2">{errors.displayPicUrl}</div>
-  )}
-  <br />
-  <label htmlFor="">Business Certificate:</label>
-  <br></br>
-  <div className="flex items-center">
-    <label
-      htmlFor="upload2"
-      className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 ${
-        errors.businessCerUrl ? 'border-red-500' : 'border-yellow-500'
-      } h-40 w-32 flex items-center justify-center cursor-pointer`}
-    >
-      {imagePreviews.businessCerUrl ? (
-        <img
-          src={imagePreviews.businessCerUrl}
-          alt="Preview"
-          className="w-full h-full object-cover"
-        />
-      ) : (
-        <span className="text-gray-400 text-3xl">+</span>
-      )}{" "}
-    </label>
-    <input
-      type="file"
-      id="upload2"
-      className="hidden"
-      name="businessCerUrl"
-      onChange={handleBusinessCerChange}
-      required
-    />
-  </div>
+          <label htmlFor="">Profile Picture :</label>
+          <br />
+          <div className="">
+            <label
+              htmlFor="upload1"
+              className={`relative rounded-xl p-2 bg-neutral-550 border-dashed border-4 ${
+                errors.displayPicUrl ? "border-red-500" : "border-yellow-500"
+              } h-40 w-32 flex items-center justify-center cursor-pointer`}
+            >
+              {imagePreviews.displayPicUrl ? (
+                <img
+                  src={imagePreviews.displayPicUrl}
+                  alt="Preview"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <span className="text-gray-400 text-3xl">+</span>
+              )}{" "}
+            </label>
+            <input
+              type="file"
+              id="upload1"
+              name="displayPicUrl"
+              className="hidden"
+              onChange={handleDisplayPicChange}
+              required
+            />
+          </div>
+          {errors.displayPicUrl && (
+            <div className="text-red-500 text-xs mt-2">
+              {errors.displayPicUrl}
+            </div>
+          )}
+          <br />
+          <label htmlFor="">Business Certificate:</label>
+          <br></br>
+          <div className="flex items-center">
+            <label
+              htmlFor="upload2"
+              className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 ${
+                errors.businessCerUrl ? "border-red-500" : "border-yellow-500"
+              } h-40 w-32 flex items-center justify-center cursor-pointer`}
+            >
+              {imagePreviews.businessCerUrl ? (
+                <img
+                  src={imagePreviews.businessCerUrl}
+                  alt="Preview"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <span className="text-gray-400 text-3xl">+</span>
+              )}{" "}
+            </label>
+            <input
+              type="file"
+              id="upload2"
+              className="hidden"
+              name="businessCerUrl"
+              onChange={handleBusinessCerChange}
+              required
+            />
+          </div>
 
           {errors.businessCerUrl && (
-            <div className="text-red-500 text-xs mt-2">{errors.businessCerUrl}</div>
+            <div className="text-red-500 text-xs mt-2">
+              {errors.businessCerUrl}
+            </div>
           )}
         </div>
       </form>
