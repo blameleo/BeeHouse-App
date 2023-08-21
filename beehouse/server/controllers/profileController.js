@@ -1,8 +1,12 @@
 const UserModel = require("../models/User.js");
+const bcrypt = require("bcrypt");
+const mongoose = require("mongoose");
 
 const updateUserProfile = async (req, res) => {
   try {
     const formData = req.body;
+
+    console.log(formData);
     const query = { user_id: formData.user_id };
 
     const updatedDocument = {
@@ -38,11 +42,18 @@ const updateUserProfile = async (req, res) => {
         updatedDocument.$set[fieldName] = fileUrl;
       }
     });
+    console.log(updatedDocument);
+    const insertedUser = await UserModel.findOneAndUpdate(
+      query,
+      updatedDocument,
+      { new: true }
+    );
 
-    const insertedUser = await UserModel.updateOne(query, updatedDocument);
-    res
-      .status(201)
-      .json({ message: "User profile updated", data: insertedUser });
+    console.log(insertedUser);
+    res.status(201).json({
+      message: "User profile updated successfully",
+      data: insertedUser,
+    });
   } catch (error) {
     console.error(error);
     res
@@ -51,4 +62,39 @@ const updateUserProfile = async (req, res) => {
   }
 };
 
-module.exports = { updateUserProfile };
+const changePassword = async (req, res) => {
+  try {
+    const { oldPassword, newPassword, user_id } = req.body;
+    // const query = { user_id: user_id };
+
+    // console.log(query);
+
+    if (!oldPassword || !newPassword || !user_id) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+    // const userIdObject = mongoose.Types.ObjectId(user_id);
+
+    const user = await UserModel.findOne({ user_id: user_id });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const passwordMatch = await bcrypt.compare(oldPassword, user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ message: "Old password is incorrect" });
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    user.password = hashedPassword;
+    await user.save();
+
+    return res.status(200).json({ message: "Password updated successfully" });
+  } catch (error) {
+    console.error("Error changing password:", error);
+    return res.status(500).json({ message: "An error occurred" });
+  }
+};
+module.exports = { updateUserProfile, changePassword };

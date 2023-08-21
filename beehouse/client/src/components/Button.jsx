@@ -1,38 +1,37 @@
-import React from 'react'
+import React from "react";
 import { FcGoogle } from "react-icons/fc";
- 
 
- function Button({
+function Button({
   children,
+  style,
   signUpLoginStyle,
   name,
   joinStyle,
   loginStyle,
   googleLoginStyle,
-  onClick
-  
+  onClick,
 }) {
-  
-
   return (
     <div>
-      <button 
+      <button
         onClick={onClick}
         className={
-          name === "sign up with google" ? googleLoginStyle :
-          name === "Join" ? joinStyle :
-          name === "login" ? loginStyle :
-          name === "Sign in with google" ? googleLoginStyle :
-          null
+          name === "sign up with google"
+            ? googleLoginStyle
+            : name === "Join"
+            ? joinStyle
+            : name === "login"
+            ? loginStyle
+            : name === "Sign in with google"
+            ? googleLoginStyle
+            : style
         }
       >
-        {name === "Sign in with google" && <FcGoogle className='mr-3'/> }
+        {name === "Sign in with google" && <FcGoogle className="mr-3" />}
         {name}
       </button>
     </div>
   );
 }
 
-export default Button
-
-
+export default Button;
