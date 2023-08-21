@@ -1,6 +1,9 @@
 const express = require("express");
 const multer = require("multer");
-const { updateUserProfile } = require("../controllers/profileController");
+const {
+  updateUserProfile,
+  changePassword,
+} = require("../controllers/profileController");
 const path = require("path");
 
 const router = express.Router();
@@ -23,13 +26,15 @@ const upload = multer({ storage: storage });
 router.put(
   "/user",
   upload.fields([
-    { name: "displayPicUrl", maxCount: 1 }, // One file for displayPicUrl field
-    { name: "businessCerUrl", maxCount: 1 }, // One file for idCardUrl field
+    { name: "displayPicUrl", maxCount: 1 },
+    { name: "businessCerUrl", maxCount: 1 },
     { name: "imageUrl1", maxCount: 1 },
     { name: "imageUrl2", maxCount: 1 },
-    { name: "imageUrl3", maxCount: 1 }, // One file for imageUrl1 field
+    { name: "imageUrl3", maxCount: 1 },
   ]),
   updateUserProfile
 );
+
+router.post("/changepassword", changePassword);
 
 module.exports = { profileRouter: router };
