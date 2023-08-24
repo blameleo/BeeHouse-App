@@ -1,14 +1,28 @@
 import React from "react";
 import AgencySidebar from "../components/AgencySidebar";
-import AgencyNavbar from "../components/AgencyNavbar";
+
+import SecNavbar from "../components/SecNavbar";
+import { Outlet } from "react-router";
 
 function Agency() {
   return (
-    <div className="flex w-screen  ">
-      <AgencySidebar />
-      <AgencyNavbar />
+    <div className=" ">
+      <SecNavbar/>
+  
+        <AgencySidebar/>
+       
+        <Outlet/>
+      
+       
+        
+        
+
+
+     
+   
     </div>
   );
 }
 
 export default Agency;
+
