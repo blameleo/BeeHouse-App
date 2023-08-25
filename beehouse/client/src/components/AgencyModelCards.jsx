@@ -3,7 +3,7 @@ import ModelCardCarousel from './ModelCardCarousel'
 
 function AgencyModelCards() {
   return (
-    <div className=' hover:scale-105 transition duration-500 rounded border mt-10 rounded-2xl bg-white shadow-2xl  w-[360px] h-[450px] '>
+    <div className=' hover:scale-105 transition duration-500 rounded border mt-10 rounded-2xl bg-white shadow-2xl  w-[300px] h-[450px] '>
          <ModelCardCarousel/>
          <p className='mt-5 ml-5'>Ronima Dean</p>
          <p className='text-gray-400 ml-5'>Tall dark Male model </p>
