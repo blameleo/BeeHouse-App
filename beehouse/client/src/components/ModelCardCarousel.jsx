@@ -10,7 +10,7 @@ export default function ModelCardCarousel() {
       showStatus={false}
       showIndicators={false}
       showThumbs={false}
-      width={359}
+      width={300}
       className=" "
     >
       <img className="rounded-xl shadow-xl border " src="/img/test2.webp" />
