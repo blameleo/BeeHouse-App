@@ -217,17 +217,7 @@ export default function AgencyOnBoardingPage() {
           <br></br>
           <div className="flex">
             <div className="relative ">
-              <select
-                className="border border-yellow-500 mr-3 outline-none pr-8 bg-black mt-1 h-14 rounded-l rounded-lg appearance-none"
-                id="countryCode"
-                name="countryCode"
-                value={formInfo.countryCode}
-                onChange={handleCountryCodeChange}
-              >
-                <option value="">Select Country Code</option>
-                <option value="+233">+233 (Ghana)</option>{" "}
-                {/* You can add more country options here */}
-              </select>
+             
               <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                 <svg
                   className="w-5 h-5 text-gray-400"
