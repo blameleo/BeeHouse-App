@@ -25,7 +25,7 @@ function AgencySidebar() {
         <div
           className={`flex justify-center  cursor-pointer ${
             location.pathname === "/agency" ||
-            location.pathname === "/settings"
+            location.pathname === "/agency"
               ? "bg-purple-600 text-white"
               : " "
           }   font-bold  rounded-xl mx-2 sm:py-6 py-4  items-center`}
