@@ -1,15 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {RiAdvertisementFill} from "react-icons/ri"
 
 function AgencyJobs() {
+  const [tags,setTags] =  useState([]);
+  const [tagInput,setTagInput]= useState('');
 
-  const [formInfo, setFormInfo]= React.useState({
+  const [formInfo, setFormInfo]= useState({
     gender:"",
     complexion:"",
     stature:"",
-    jobDescription:""
+    jobDescription:"",
+    
+   
 
   })
+
+ 
+
+  const handleTagInputChange = (event)=>{
+    setTagInput(event.target.value);
+  }
+
+  const handleTagInputKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ',') {
+      event.preventDefault();
+      const newTag = tagInput.trim();
+      if (newTag !== '' && !tags.includes(newTag)) {
+        setTags([...tags, newTag]);
+        setTagInput('');
+      }
+     
+    }
+    
+  };
+
+  const removeTag = (tagToRemove) => {
+   
+    setTags(tags.filter(tag => tag !== tagToRemove));
+  };
 
 
 
@@ -23,14 +51,25 @@ function AgencyJobs() {
       [name]: value,
     }));
   };
+ 
 
-    const handleSubmit =(e)=>{
-      e.preventDefault();
-      console.log(formInfo);
-    }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  
+    // Include the current tags in the formInfo object
+
+
+    const formWithTags = {
+      ...formInfo,
+      tags: tags,
+    };
+  
+    console.log(formWithTags);
+  };
 
   return (
-    <div className="flex flex-col   items-center ml-20  font-volkhorn bg-[url('/img/beehive-bg1.jpeg')] ">
+    <div className="flex flex-col ml-20 lg:ml-60  items-center   font-volkhorn bg-[url('/img/beehive-bg1.jpeg')] ">
         <div className='flex'> 
           <h1 className='mt-20 text-xl '>Post an</h1>
           <RiAdvertisementFill className='mt-12 ml-2 text-6xl text-yellow-500'/>
@@ -43,7 +82,7 @@ function AgencyJobs() {
           </label>
           <br></br>
 
-          <ul className="grid grid-cols-3  text-black gap-x-5 mt-3 max-w-md ">
+          <ul className="grid grid-cols-3 mb-5  text-black gap-x-5 mt-3 max-w-md ">
             <li className="relative">
               <input
                 className="sr-only peer "
@@ -54,7 +93,7 @@ function AgencyJobs() {
                 id="male"
               />
               <label
-                className="flex p-5 bg-white hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-4 w-[100px]  hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="male"
               >
                 Male
@@ -71,7 +110,7 @@ function AgencyJobs() {
                 id="female"
               />
               <label
-                className="flex p-5 bg-white hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-4  w-[100px] hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="female"
               >
                 Female
@@ -87,10 +126,10 @@ function AgencyJobs() {
                 id="both genders"
               />
               <label
-                className="flex p-5 bg-white hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-4 w-[100px]  hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="both genders"
               >
-                Both Genders
+                Unisex
               </label>
             </li>
             
@@ -99,7 +138,7 @@ function AgencyJobs() {
           <label htmlFor="">Complexion:</label>
 
 <br></br>
-<ul className="grid grid-cols-3 gap-x-5 pb-3 text-white   max-w-md ">
+<ul className="grid grid-cols-3 gap-x-5 pb-3 text-white    max-w-md ">
   <li className="relative">
     <input
       className="sr-only peer"
@@ -110,7 +149,7 @@ function AgencyJobs() {
       id="dark"
     />
     <label
-      className="flex p-5 bg-white hover:bg-purple-500 hover:text-white border text-black border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+      className="flex p-4 w-[100px]  hover:bg-purple-500 hover:text-white border text-black border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
       htmlFor="dark"
     >
       Dark
@@ -127,7 +166,7 @@ function AgencyJobs() {
       id="fair"
     />
     <label
-      className="flex p-5 bg-white hover:bg-purple-500 hover:text-white border text-black border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+      className="flex p-4 w-[100px]  hover:bg-purple-500 hover:text-white border text-black border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
       htmlFor="fair"
     >
       Fair
@@ -135,7 +174,7 @@ function AgencyJobs() {
   </li>
 </ul>
         <h1>Stature</h1>
-          <ul className="grid grid-cols-3 gap-x-5 pb-20  max-w-md ">
+          <ul className="grid grid-cols-3 gap-x-5 pb-10  max-w-md ">
             <li className="relative">
               <input
                 className="sr-only peer"
@@ -146,7 +185,7 @@ function AgencyJobs() {
                 id="slim"
               />
               <label
-                className="flex p-5 bg-white hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-4 w-[100px]  hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="slim"
               >
                 Slim
@@ -163,7 +202,7 @@ function AgencyJobs() {
                 id="Average"
               />
               <label
-                className="flex p-5 bg-white hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-4 w-[100px]  hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="Average"
               >
                 Average
@@ -180,7 +219,7 @@ function AgencyJobs() {
                 id="chubby"
               />
               <label
-                className="flex p-5 bg-white hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-4 w-[100px]  hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="chubby"
               >
                 Chubby
@@ -188,7 +227,27 @@ function AgencyJobs() {
             </li>
           </ul>
 
-          <div className='flex flex-col'>
+          <div className="tag-input">
+    
+      <input
+        className='border border-black border-outline-none h-[40px] p-3 mb-3'
+        type="text"
+        placeholder="Enter tags..."
+        value={tagInput}
+        onChange={handleTagInputChange}
+        onKeyDown={handleTagInputKeyDown}
+      />
+        <div className=" flex">
+        {tags.map((tag, index) => (
+          <div key={index} className="border flex justify-around  w-[80px] rounded rounded-full mr-3">
+            {tag}
+            <button className='text-red-500' onClick={() => removeTag(tag)}>x</button>
+          </div>
+        ))}
+      </div>
+    </div>
+
+          <div className='flex flex-col mt-10'>
             <label htmlFor="">Job description</label>
             <textarea 
             className='border border-black rounded rounded-lg'
