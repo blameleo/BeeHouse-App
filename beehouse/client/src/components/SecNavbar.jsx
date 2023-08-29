@@ -7,7 +7,7 @@ import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { setUser } from "../Redux/slice/userSlice";
+import { setUser, clearUser } from "../Redux/slice/userSlice";
 
 function SecNavbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +23,8 @@ function SecNavbar() {
     removeCookie("userData");
     removeCookie("userdata");
     removeCookie("UserId");
-    setUser(null);
+    dispatch(setUser(null));
+    dispatch(clearUser());
     removeCookie("AuthToken");
     navigate("/login");
   };
@@ -70,8 +71,10 @@ function SecNavbar() {
 
   const newUrl = user?.displayPicUrl?.replace("public/", "");
 
+  console.log(user);
+
   return (
-    <div className="bg-black fixed top-0 z-30 text-yellow-500 flex items-center justify-between p-4 w-full">
+    <div className="bg-black fixed top-0 z-30 text-yellow-500 flex items-center justify-between text-sm p-4  w-full">
       <div className=" ">
         <Logo />
 
@@ -83,7 +86,11 @@ function SecNavbar() {
       <div className="sm:flex  hidden w-[400px] justify-between">
         <div className="lg:flex hidden items-center  ">
           <BsGeoAlt className="text-white" />
-          {user && <p className="ml-2">welcome {user?.firstName}</p>}
+          {user && (
+            <p className="ml-2">
+              welcome {user.type === "model" ? user.firstName : user.agencyName}
+            </p>
+          )}
         </div>
 
         <div className="flex  w-[190px] justify-around items-center">
@@ -112,7 +119,7 @@ function SecNavbar() {
                     aria-labelledby="dropdownDefaultButton"
                   >
                     <li>
-                      <Link to="/settings">
+                      <Link to={user.type === "model" ? "/settings" : null}>
                         <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-purple-600 dark:hover:text-white">
                           Settings
                         </a>

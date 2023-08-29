@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const { userRouter } = require("./routes/userRoutes");
+const { jobRouter } = require("./routes/jobRoutes");
 
 const { profileRouter } = require("./routes/profileRoutes");
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.static("public"));
 
 app.use("/user", userRouter);
 app.use("/profile", profileRouter);
+app.use("/jobs", jobRouter);
 
 mongoose.connect(process.env.MONGODB_URL);
 
