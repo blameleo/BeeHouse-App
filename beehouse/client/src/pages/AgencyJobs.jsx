@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState }, { useState } from "react";
 import { RiAdvertisementFill } from "react-icons/ri";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -8,18 +8,49 @@ import Loader from "../components/Loader";
 import { useEffect } from "react";
 
 function AgencyJobs() {
+  const [tags,setTags] =  useState([]);
+  const [tagInput,setTagInput]= useState('');
   const user = useSelector((state) => state.user);
   const [loading, setLoading] = useState(null);
 
-  console.log(user);
-  const [formInfo, setFormInfo] = React.useState({
-    agencyUserId: "",
-    agencyName: "",
-    gender: "",
-    complexion: "",
-    stature: "",
-    description: "",
-  });
+  const [formInfo, setFormInfo]= useState({
+    gender:"",
+    complexion:"",
+    stature:"",
+    jobDescription:"",
+    
+   
+
+  })
+
+ 
+
+  const handleTagInputChange = (event)=>{
+    setTagInput(event.target.value);
+  }
+
+  const handleTagInputKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ',') {
+      event.preventDefault();
+      const newTag = tagInput.trim();
+      if (newTag !== '' && !tags.includes(newTag)) {
+        setTags([...tags, newTag]);
+        setTagInput('');
+      }
+     
+    }
+    
+  };
+
+  const removeTag = (tagToRemove) => {
+   
+    setTags(tags.filter(tag => tag !== tagToRemove));
+  };
+
+
+
+
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -28,74 +59,38 @@ function AgencyJobs() {
       [name]: value,
     }));
   };
+ 
 
-  const handleSubmit = async (e) => {
-    setLoading(true);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formInfo);
+  
+    // Include the current tags in the formInfo object
 
-    try {
-      const response = await axios.post(
-        "http://localhost:4000/jobs/create",
-        formInfo
-      );
 
-      if (response.status === 201) {
-        setLoading(false);
-        toast.success(response.data.message, {
-          position: "top-right",
-          autoClose: false,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-      }
-      console.log(response.data.message);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-      toast.error(error.response.data.error, {
-        position: "top-right",
-        autoClose: false,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-    }
+    const formWithTags = {
+      ...formInfo,
+      tags: tags,
+    };
+  
+    console.log(formWithTags);
   };
 
-  useEffect(() => {
-    if (user) {
-      setFormInfo({
-        agencyUserId: user.user_id,
-        agencyName: user.agencyName,
-      });
-    }
-  }, [user]);
-
   return (
-    <div className="flex flex-col   items-center ml-20  font-volkhorn bg-[url('/img/beehive-bg1.jpeg')] ">
-      <div className="flex">
-        <h1 className="mt-20 text-xl ">Post an</h1>
-        <RiAdvertisementFill className="mt-12 ml-2 text-6xl text-yellow-500" />
-      </div>
+    <div className="flex flex-col ml-20 lg:ml-60  items-center   font-volkhorn bg-[url('/img/beehive-bg1.jpeg')] ">
+        <div className='flex'> 
+          <h1 className='mt-20 text-xl '>Post an</h1>
+          <RiAdvertisementFill className='mt-12 ml-2 text-6xl text-yellow-500'/>
+          </div>
+        
+         <form action="">
 
-      {loading ? (
-        <Loader loaderStyle="h-screen flex justify-center mt-64" />
-      ) : (
-        <form action="">
-          <label className="" htmlFor="">
+         <label className="" htmlFor="">
             Gender:
           </label>
           <br></br>
 
-          <ul className="grid grid-cols-3  text-black gap-x-5 mt-3 max-w-md ">
+          <ul className="grid grid-cols-3 mb-5  text-black gap-x-5 mt-3 max-w-md ">
             <li className="relative">
               <input
                 className="sr-only peer "
@@ -107,7 +102,7 @@ function AgencyJobs() {
                 required
               />
               <label
-                className="flex p-5 bg-white hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-4 w-[100px]  hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="male"
               >
                 Male
@@ -124,7 +119,7 @@ function AgencyJobs() {
                 id="female"
               />
               <label
-                className="flex p-5 bg-white hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-4  w-[100px] hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="female"
               >
                 Female
@@ -140,54 +135,54 @@ function AgencyJobs() {
                 id="both genders"
               />
               <label
-                className="flex p-5 bg-white hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-4 w-[100px]  hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="both genders"
               >
-                Both Genders
+                Unisex
               </label>
             </li>
           </ul>
 
           <label htmlFor="">Complexion:</label>
 
-          <br></br>
-          <ul className="grid grid-cols-3 gap-x-5 pb-3 text-white   max-w-md ">
-            <li className="relative">
-              <input
-                className="sr-only peer"
-                onChange={handleInputChange}
-                type="radio"
-                value="dark"
-                name="complexion"
-                id="dark"
-              />
-              <label
-                className="flex p-5 bg-white hover:bg-purple-500 hover:text-white border text-black border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
-                htmlFor="dark"
-              >
-                Dark
-              </label>
-            </li>
+<br></br>
+<ul className="grid grid-cols-3 gap-x-5 pb-3 text-white    max-w-md ">
+  <li className="relative">
+    <input
+      className="sr-only peer"
+      onChange={handleInputChange}
+      type="radio"
+      value="dark"
+      name="complexion"
+      id="dark"
+    />
+    <label
+      className="flex p-4 w-[100px]  hover:bg-purple-500 hover:text-white border text-black border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+      htmlFor="dark"
+    >
+      Dark
+    </label>
+  </li>
 
-            <li className="relative">
-              <input
-                className="sr-only peer"
-                type="radio"
-                value="fair"
-                onChange={handleInputChange}
-                name="complexion"
-                id="fair"
-              />
-              <label
-                className="flex p-5 bg-white hover:bg-purple-500 hover:text-white border text-black border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
-                htmlFor="fair"
-              >
-                Fair
-              </label>
-            </li>
-          </ul>
-          <h1>Stature</h1>
-          <ul className="grid grid-cols-3 gap-x-5 pb-20  max-w-md ">
+  <li className="relative">
+    <input
+      className="sr-only peer"
+      type="radio"
+      value="fair"
+      onChange={handleInputChange}
+      name="complexion"
+      id="fair"
+    />
+    <label
+      className="flex p-4 w-[100px]  hover:bg-purple-500 hover:text-white border text-black border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+      htmlFor="fair"
+    >
+      Fair
+    </label>
+  </li>
+</ul>
+        <h1>Stature</h1>
+          <ul className="grid grid-cols-3 gap-x-5 pb-10  max-w-md ">
             <li className="relative">
               <input
                 className="sr-only peer"
@@ -198,7 +193,7 @@ function AgencyJobs() {
                 id="slim"
               />
               <label
-                className="flex p-5 bg-white hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-4 w-[100px]  hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="slim"
               >
                 Slim
@@ -215,7 +210,7 @@ function AgencyJobs() {
                 id="Average"
               />
               <label
-                className="flex p-5 bg-white hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-4 w-[100px]  hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="Average"
               >
                 Average
@@ -232,7 +227,7 @@ function AgencyJobs() {
                 id="chubby"
               />
               <label
-                className="flex p-5 bg-white hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-4 w-[100px]  hover:bg-purple-500 hover:text-white border border-black rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="chubby"
               >
                 Chubby
@@ -240,7 +235,27 @@ function AgencyJobs() {
             </li>
           </ul>
 
-          <div className="flex flex-col">
+          <div className="tag-input">
+    
+      <input
+        className='border border-black border-outline-none h-[40px] p-3 mb-3'
+        type="text"
+        placeholder="Enter tags..."
+        value={tagInput}
+        onChange={handleTagInputChange}
+        onKeyDown={handleTagInputKeyDown}
+      />
+        <div className=" flex">
+        {tags.map((tag, index) => (
+          <div key={index} className="border flex justify-around  w-[80px] rounded rounded-full mr-3">
+            {tag}
+            <button className='text-red-500' onClick={() => removeTag(tag)}>x</button>
+          </div>
+        ))}
+      </div>
+    </div>
+
+          <div className='flex flex-col mt-10'>
             <label htmlFor="">Job description</label>
             <textarea
               className="border border-black rounded rounded-lg"
