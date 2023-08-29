@@ -23,7 +23,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div className=" bg-black fixed z-20 w-full top-12 text-yellow-500 py-10 grid place-items-center  px-6">
+    <div className=" bg-black fixed z-20 w-full top-12 text-yellow-500 py-5 grid place-items-center  px-6">
       <form
         action=""
         className={`flex  items-center  ${
@@ -161,7 +161,7 @@ export default function SearchBar() {
           />
         </div> */}
 
-        <div className="hidden lg:block mr-6">
+        {/* <div className="hidden lg:block mr-6">
           <label
             htmlFor="small-range"
             className="block mb-2 ml-4 text-sm font-medium text-gray-400 dark:text-gray-300"
@@ -173,7 +173,7 @@ export default function SearchBar() {
             type="range"
             className="w-[170px] ml-4 h-1  bg-gray-200 rounded-lg appearance-none cursor-pointer range-sm dark:bg-gray-800"
           />
-        </div>
+        </div> */}
         <BsFillFunnelFill className="md:hidden block mr-2 text-[20px] text-gray-500" />
         <GiBee className="text-[35px] cursor-pointer hover:text-purple-600" />
       </form>

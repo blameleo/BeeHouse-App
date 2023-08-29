@@ -8,6 +8,13 @@ const JobSchema = new mongoose.Schema({
   gender: { type: String },
   stature: { type: String },
   complexion: { type: String },
+  tags: [String],
+  price: Number,
+  location: String,
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const JobModel = mongoose.model("jobs", JobSchema);

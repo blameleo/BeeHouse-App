@@ -9,7 +9,12 @@ const createJob = async (req, res) => {
       complexion,
       gender,
       agencyName,
+      tags,
+      price,
+      location,
     } = req.body;
+
+    console.log(tags);
     const newJob = new JobModel({
       agencyUserId,
       description,
@@ -17,6 +22,9 @@ const createJob = async (req, res) => {
       agencyName,
       complexion,
       gender,
+      tags,
+      price,
+      location,
     });
     await newJob.save();
     res.status(201).json({ message: "Job created successfully", data: newJob });
@@ -39,6 +47,8 @@ const getJobsForModels = async (req, res) => {
 const updateJob = async (req, res) => {
   try {
     const formData = req.body;
+
+    console.log(formData);
     const query = { agencyId: formData._id };
     const updatedDocument = {
       $set: {
@@ -46,6 +56,7 @@ const updateJob = async (req, res) => {
         gender: formData.gender,
         stature: formData.stature,
         complexion: formData.complexion,
+        tags: formData.tags,
       },
     };
     const insertedJob = await JobModel.findOneAndUpdate(

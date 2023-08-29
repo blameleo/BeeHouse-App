@@ -1,920 +1,149 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MdVerified } from "react-icons/md";
 import { GiBee } from "react-icons/gi";
 import Filter from "./Filter";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchJobsFailure,
+  fetchJobsStart,
+  fetchJobsSuccess,
+} from "../Redux/slice/jobSlice";
+import Loader from "./Loader";
 
 function Jobs() {
+  const dispatch = useDispatch();
+
+  const getJobs = async () => {
+    dispatch(fetchJobsStart());
+    try {
+      const response = await axios.get("http://localhost:4000/jobs/getjobs");
+      dispatch(fetchJobsSuccess(response.data));
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+      dispatch(fetchJobsFailure(error.message));
+    }
+  };
+  const jobs = useSelector((state) => state.job.jobs);
+  const loading = useSelector((state) => state.job.loading);
+  const error = useSelector((state) => state.job.error);
+  console.log(jobs);
+
+  useEffect(() => {
+    getJobs();
+  }, []);
+
+  function getRandomColor() {
+    const base = 200; //
+    const variance = 55;
+    const red = base + Math.floor(Math.random() * variance);
+    const green = base + Math.floor(Math.random() * variance);
+    const blue = base + Math.floor(Math.random() * variance);
+    const yellow = base + Math.floor(Math.random() * variance);
+    const purple = base + Math.floor(Math.random() * variance);
+    const violet = base + Math.floor(Math.random() * variance);
+    const pink = base + Math.floor(Math.random() * variance);
+
+    return `rgb(${red}, ${green}, ${blue})`;
+  }
+
   return (
     <div className="mt-44   bg-[url('/img/beehive-bg1.jpeg')] bg-contain bg-no   flex flex-col md:flex-row">
-      <div className="  min-w-[350px] hidden md:block h-screen p-5 bg-white fixed left-0 top-[200px]">
+      <div className="  min-w-[350px] hidden md:block h-screen p-5 bg-white fixed left-0 ">
         <div className=" h-[200px] rounded-xl mb-4 bg-[url('/img/adpic.jpg')] bg-cover bg-no-repeat"></div>
 
-        <div className="   rounded-xl">
+        <div className="rounded-xl">
           <Filter />
         </div>
       </div>
-      <div className="  mt-20 md:ml-[440px] md:w-[75%]  ">
-        <div className="p-5  fixed top-32 z-10 bg-white w-full pt-20 sm:left-[400px]">
-          <h1 className="text-xl font-black">Popular Jobs</h1>
+      <div className="   md:ml-[400px] md:w-[75%]  ">
+        <div className="py-1   fixed top-32 z-10 bg-white w-full  sm:left-[400px]">
+          <h1 className="text-md font-black">Popular Jobs</h1>
         </div>
 
-        <div className="flex flex-wrap sm:justify-between px-8 justify-center">
-          <div className="h-[330px] sm:w-[300px] border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer mb-10">
-            <div className="h-[240px] bg-blue-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
+        {loading ? (
+          <Loader loaderStyle="  h-[100vh] grid place-items-center yellow-500" />
+        ) : error ? (
+          <p>{error}</p>
+        ) : (
+          <div className="flex flex-wrap sm:px-8 ">
+            {jobs.map((job) => {
+              const randomColor = getRandomColor();
 
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
+              const date = new Date(job.createdAt);
 
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl  rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer">
-            <div className="h-[240px] bg-pink-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
+              const day = date.getDate();
 
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
+              const monthNames = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+              ];
+              const month = monthNames[date.getMonth()];
 
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer">
-            <div className="h-[240px] bg-green-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
+              const year = date.getFullYear();
 
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
+              console.log(`Day: ${day}, Month: ${month}, Year: ${year}`);
+              return (
+                <div className=" h-[20%] w-[250px] mr-5 border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500  mb-10">
+                  <div
+                    className=" bg-blue-100 rounded-[20px] m-2 p-2"
+                    style={{ backgroundColor: randomColor }}
+                  >
+                    <p className="bg-white rounded-lg flex justify-center w-24 py-1 px-8 text-[10px]">
+                      {`${day},${month},${year}`}
+                    </p>
 
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer">
-            <div className="h-[240px] bg-red-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
+                    <div className="pt-6 flex items-center">
+                      <h1 className=" text-gray-700 text-[70%]">
+                        {job.agencyName}
+                      </h1>
+                      <MdVerified className="ml-1 text-yellow-500 text-[90%]" />
+                    </div>
 
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
+                    <div className="py-2">
+                      <h1 className="font-black text-md">{job.description}</h1>
+                    </div>
+                    <div className="flex flex-wrap">
+                      {Object.values(job.tags).map((tag, i) => (
+                        <p
+                          key={i}
+                          className="border border-gray-400 mr-2 text-gray-600 text-[14px] rounded-xl px-[5px] my-1"
+                        >
+                          {tag}
+                        </p>
+                      ))}
+                      {/* // .join(",")} */}
+                    </div>
+                  </div>
+                  <div className="px-4 pt-2 flex  pb-1 justify-between items-center">
+                    <div>
+                      <p className="font-black text-md">₵{job.price}</p>
+                      <p className="text-gray-500 text-sm">{job.location}</p>
+                    </div>
+                    <GiBee className="text-black text-[32px]  rounded-full cursor-pointer  h-10 w-10" />
+                  </div>
+                </div>
+              );
+            })}
 
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer">
-            <div className="h-[240px] bg-orange-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
-
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
-
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer">
-            <div className="h-[240px] bg-blue-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
-
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
-
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer mb-10">
-            <div className="h-[240px] bg-blue-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
-
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
-
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl  rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer">
-            <div className="h-[240px] bg-pink-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
-
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
-
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer mb-10">
-            <div className="h-[240px] bg-blue-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
-
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
-
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl  rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer">
-            <div className="h-[240px] bg-pink-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
-
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
-
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer mb-10">
-            <div className="h-[240px] bg-blue-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
-
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
-
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl  rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer">
-            <div className="h-[240px] bg-pink-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
-
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
-
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer mb-10">
-            <div className="h-[240px] bg-blue-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
-
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
-
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl  rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer">
-            <div className="h-[240px] bg-pink-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
-
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
-
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer mb-10">
-            <div className="h-[240px] bg-blue-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
-
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
-
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl  rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer">
-            <div className="h-[240px] bg-pink-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
-
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
-
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer mb-10">
-            <div className="h-[240px] bg-blue-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
-
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
-
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl  rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer">
-            <div className="h-[240px] bg-pink-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
-
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
-
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer mb-10">
-            <div className="h-[240px] bg-blue-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
-
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
-
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl  rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer">
-            <div className="h-[240px] bg-pink-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
-
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
-
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-          <div className="h-[330px] w-[300px] border border-gray-700 shadow-xl  rounded-[20px] bg-white hover:scale-105 transition duration-500 cursor-pointer">
-            <div className="h-[240px] bg-pink-100 rounded-[20px] m-2 p-4">
-              <p className="bg-white rounded-lg flex justify-center w-24 py-1 text-sm">
-                19 Feb,2023
-              </p>
-
-              <div className="pt-6 flex items-center">
-                <h1 className=" text-gray-700">Innova DDB</h1>
-                <MdVerified className="ml-1 text-yellow-500 text-[20px]" />
-              </div>
-
-              <div className="py-2">
-                <h1 className="font-black text-xl">
-                  20 years old man needed for a food advert
-                </h1>
-              </div>
-              <div className="flex flex-wrap">
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  chubby
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Brown Hair
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  6ft
-                </p>
-                <p className="border border-gray-400 mr-2 text-gray-600 rounded-xl px-[5px] my-1">
-                  Muscular
-                </p>
-              </div>
-            </div>
-            <div className="px-4 pt-2 flex justify-between items-center">
-              <div>
-                <p className="font-black text-xl">₵1200</p>
-                <p className="text-gray-500">East Legon, Accra</p>
-              </div>
-              <GiBee className="text-black text-[32px]  rounded-full  h-10 w-10" />
-            </div>
-          </div>
-          {/* <div className="h-[300px] w-[300px] border border-gray-400 rounded-[20px] bg-white"></div>
+            {/* <div className="h-[300px] w-[300px] border border-gray-400 rounded-[20px] bg-white"></div>
           <div className="h-[300px] w-[300px] border border-gray-400 rounded-[20px] bg-white"></div>
           <div className="h-[300px] w-[300px] border border-gray-400 rounded-[20px] bg-white"></div>
           <div className="h-[300px] w-[300px] border border-gray-400 rounded-[20px] bg-white"></div>
           <div className="h-[300px] w-[300px] border border-gray-400 rounded-[20px] bg-white"></div> */}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
