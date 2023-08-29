@@ -5,15 +5,16 @@ import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../components/Loader";
+import { useEffect } from "react";
 
 function AgencyJobs() {
   const user = useSelector((state) => state.user);
   const [loading, setLoading] = useState(null);
 
-  // console.log(user);
+  console.log(user);
   const [formInfo, setFormInfo] = React.useState({
-    agencyUserId: user?.user_id,
-    agencyName: user?.agencyName,
+    agencyUserId: "",
+    agencyName: "",
     gender: "",
     complexion: "",
     stature: "",
@@ -68,6 +69,15 @@ function AgencyJobs() {
       });
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      setFormInfo({
+        agencyUserId: user.user_id,
+        agencyName: user.agencyName,
+      });
+    }
+  }, [user]);
 
   return (
     <div className="flex flex-col   items-center ml-20  font-volkhorn bg-[url('/img/beehive-bg1.jpeg')] ">
