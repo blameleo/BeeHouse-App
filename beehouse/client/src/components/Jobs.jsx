@@ -13,7 +13,8 @@ import Loader from "./Loader";
 
 function Jobs() {
   const dispatch = useDispatch();
-
+  const user = useSelector((state) => state.user);
+  console.log(user);
   const getJobs = async () => {
     dispatch(fetchJobsStart());
     try {
@@ -33,6 +34,21 @@ function Jobs() {
   useEffect(() => {
     getJobs();
   }, []);
+
+  const applyToJob = async (modelUserId, jobId) => {
+    const params = {
+      modelUserId,
+      jobId,
+    };
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/jobs/apply",
+        params
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="mt-44   bg-[url('/img/beehive-bg1.jpeg')] bg-contain bg-no   flex flex-col md:flex-row">
@@ -120,7 +136,10 @@ function Jobs() {
                       <p className="font-black text-md">₵{job.price}</p>
                       <p className="text-gray-500 text-sm">{job.location}</p>
                     </div>
-                    <GiBee className="text-black text-[32px]  rounded-full cursor-pointer  h-10 w-10" />
+                    <GiBee
+                      onClick={() => applyToJob(user?._id, job._id)}
+                      className="text-black text-[32px]  rounded-full cursor-pointer  h-10 w-10"
+                    />
                   </div>
                 </div>
               );
