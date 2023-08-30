@@ -50,8 +50,8 @@ function Jobs() {
 
         {loading ? (
           <Loader loaderStyle="  h-[100vh] grid place-items-center yellow-500" />
-        ) : error ? (
-          <p>{error}</p>
+        ) : jobs == false ? (
+          <p className="text-black ">There are no jobs available</p>
         ) : (
           <div className="flex flex-wrap sm:px-8 ">
             {jobs.map((job) => {
