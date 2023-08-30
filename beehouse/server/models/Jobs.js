@@ -11,6 +11,7 @@ const JobSchema = new mongoose.Schema({
   tags: [String],
   price: Number,
   location: String,
+  color: String,
   createdAt: {
     type: Date,
     default: Date.now,

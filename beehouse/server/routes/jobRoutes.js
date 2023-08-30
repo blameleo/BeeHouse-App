@@ -3,7 +3,9 @@ const express = require("express");
 const {
   createJob,
   getJobsForModels,
+  getjobsForAgency,
   updateJob,
+  deleteJob,
 } = require("../controllers/jobController");
 const router = express.Router();
 
@@ -32,6 +34,8 @@ const isJobOwner = async (req, res, next) => {
 
 router.post("/create", createJob);
 router.get("/getjobs", getJobsForModels);
+router.get("/getjobs/:id", getjobsForAgency);
 router.put("/updatejob", updateJob);
+router.delete("/deletejob/:id", deleteJob);
 
 module.exports = { jobRouter: router };

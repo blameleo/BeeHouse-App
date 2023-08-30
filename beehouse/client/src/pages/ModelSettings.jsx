@@ -11,7 +11,7 @@ export default function ModelSettings() {
     <div>
       <SecNavbar />
       <div className=" mt-16 w-full ">
-        <div className="min-w-[17%]  pt-10 sm:pt-0  h-[100vh] bg-yellow-500 fixed left-0">
+        <div className="min-w-[17%]  pt-10 sm:pt-0  h-[100vh] bg-yellow-500 fixed left-0 ">
           {/* <BsGearFill /> */}
           <h1 className="text-center pt-10 font-black mb-10 hidden sm:block">
             Account Settings

@@ -71,7 +71,7 @@ function SecNavbar() {
 
   const newUrl = user?.displayPicUrl?.replace("public/", "");
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <div className="bg-black fixed top-0 z-30 text-yellow-500 flex items-center justify-between text-sm p-4  w-full">

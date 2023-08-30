@@ -11,6 +11,7 @@ const createJob = async (req, res) => {
       agencyName,
       tags,
       price,
+      color,
       location,
     } = req.body;
 
@@ -24,6 +25,7 @@ const createJob = async (req, res) => {
       gender,
       tags,
       price,
+      color,
       location,
     });
     await newJob.save();
@@ -40,6 +42,31 @@ const getJobsForModels = async (req, res) => {
     res.json(jobs);
   } catch (error) {
     console.error(error);
+    res.status(500).json({ error: "An error occurred while fetching jobs" });
+  }
+};
+
+const deleteJob = async (req, res) => {
+  try {
+    const jobId = req.params.id;
+
+    await JobModel.findByIdAndDelete(jobId); // Remove the job from the database
+
+    res.status(200).json({ message: "Job deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting job:", error);
+    res.status(500).json({ error: "An error occurred while deleting the job" });
+  }
+};
+
+const getjobsForAgency = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    console.log(req.params.id);
+    const jobs = await JobModel.find({ agencyUserId: userId });
+    res.json(jobs);
+  } catch (error) {
+    console.error("Error fetching jobs:", error);
     res.status(500).json({ error: "An error occurred while fetching jobs" });
   }
 };
@@ -73,4 +100,10 @@ const updateJob = async (req, res) => {
   }
 };
 
-module.exports = { createJob, getJobsForModels, updateJob };
+module.exports = {
+  createJob,
+  getJobsForModels,
+  updateJob,
+  getjobsForAgency,
+  deleteJob,
+};
