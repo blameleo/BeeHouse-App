@@ -34,20 +34,6 @@ function Jobs() {
     getJobs();
   }, []);
 
-  function getRandomColor() {
-    const base = 200; //
-    const variance = 55;
-    const red = base + Math.floor(Math.random() * variance);
-    const green = base + Math.floor(Math.random() * variance);
-    const blue = base + Math.floor(Math.random() * variance);
-    const yellow = base + Math.floor(Math.random() * variance);
-    const purple = base + Math.floor(Math.random() * variance);
-    const violet = base + Math.floor(Math.random() * variance);
-    const pink = base + Math.floor(Math.random() * variance);
-
-    return `rgb(${red}, ${green}, ${blue})`;
-  }
-
   return (
     <div className="mt-44   bg-[url('/img/beehive-bg1.jpeg')] bg-contain bg-no   flex flex-col md:flex-row">
       <div className="  min-w-[350px] hidden md:block h-screen p-5 bg-white fixed left-0 ">
@@ -69,7 +55,7 @@ function Jobs() {
         ) : (
           <div className="flex flex-wrap sm:px-8 ">
             {jobs.map((job) => {
-              const randomColor = getRandomColor();
+              // const randomColor = getRandomColor();
 
               const date = new Date(job.createdAt);
 
@@ -95,10 +81,13 @@ function Jobs() {
 
               console.log(`Day: ${day}, Month: ${month}, Year: ${year}`);
               return (
-                <div className=" h-[20%] w-[250px] mr-5 border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500  mb-10">
+                <div
+                  key={job._id}
+                  className=" h-[20%] w-[250px] mr-5 border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500  mb-10"
+                >
                   <div
                     className=" bg-blue-100 rounded-[20px] m-2 p-2"
-                    style={{ backgroundColor: randomColor }}
+                    style={{ backgroundColor: job.color }}
                   >
                     <p className="bg-white rounded-lg flex justify-center w-24 py-1 px-8 text-[10px]">
                       {`${day},${month},${year}`}
@@ -136,12 +125,6 @@ function Jobs() {
                 </div>
               );
             })}
-
-            {/* <div className="h-[300px] w-[300px] border border-gray-400 rounded-[20px] bg-white"></div>
-          <div className="h-[300px] w-[300px] border border-gray-400 rounded-[20px] bg-white"></div>
-          <div className="h-[300px] w-[300px] border border-gray-400 rounded-[20px] bg-white"></div>
-          <div className="h-[300px] w-[300px] border border-gray-400 rounded-[20px] bg-white"></div>
-          <div className="h-[300px] w-[300px] border border-gray-400 rounded-[20px] bg-white"></div> */}
           </div>
         )}
       </div>
