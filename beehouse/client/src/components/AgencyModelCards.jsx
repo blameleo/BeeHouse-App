@@ -9,6 +9,7 @@ import { BiPhoneCall } from "react-icons/bi";
 import { MdEmail, MdWork } from "react-icons/md";
 // import { FaUserAlt } from "react-icons/fa6";
 import { BsPersonCircle } from "react-icons/bs";
+import Loader from "./Loader";
 
 function AgencyModelCards() {
   // const [applications, setApplications] = useState(null);
@@ -33,7 +34,6 @@ function AgencyModelCards() {
       console.log(error);
     }
   };
-  
 
   useEffect(() => {
     if (user) {
@@ -74,20 +74,16 @@ function AgencyModelCards() {
 
                       <div className="flex items-center">
                         <BiPhoneCall className="text-sm" />
-                        <a href={`tel:${application.modelUserId.telephone}`}>
                         <p className=" ml-1 text-xs  text-gray-500">
                           {application.modelUserId.telephone}
                         </p>
-                        </a>
                       </div>
 
                       <div className="flex items-center">
                         <MdEmail className="text-sm" />
-                        <a href={`mailto:${application.modelUserId.email}`}>
                         <p className=" ml-1 text-xs  text-gray-500">
                           {application.modelUserId.email}
                         </p>
-                        </a>
                       </div>
                     </div>
                   </div>
