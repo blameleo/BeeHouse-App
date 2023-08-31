@@ -236,7 +236,7 @@ function AgencyJobs() {
   };
 
   return (
-    <div className="flex flex-col  -500 ml-20 lg:ml-60  items-center    bg-[url('/img/beehive-bg1.jpeg')] ">
+    <div className="flex flex-col  -500 ml-20 lg:ml-60  items-center     ">
       {/* <div className="flex">
         <h1 className="mt-20 text-xl ">Post an</h1>
         <RiAdvertisementFill className="mt-12 ml-2 text-6xl text-yellow-500" />

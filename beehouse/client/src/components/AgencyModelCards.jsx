@@ -10,6 +10,7 @@ import { MdEmail, MdWork } from "react-icons/md";
 // import { FaUserAlt } from "react-icons/fa6";
 import { BsPersonCircle } from "react-icons/bs";
 import Loader from "./Loader";
+import ProgressBar from "./ProgressBar";
 
 function AgencyModelCards() {
   // const [applications, setApplications] = useState(null);
@@ -42,7 +43,7 @@ function AgencyModelCards() {
   }, [user]);
 
   return (
-    <div>
+    <div className="border gap-10 grid grid-cols-1 ml-[5%] sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 ">
       {applications.map((application) => {
         const newUrl = application.modelUserId.displayPicUrl.replace(
           "public/",
@@ -53,8 +54,8 @@ function AgencyModelCards() {
         const url3 = application.modelUserId.imageUrl3.replace("public/", "");
 
         return (
-          <div>
-            <div className=" hover:scale-105 transition duration-500  border mt-10 rounded-2xl bg-white shadow-2xl  w-[370px]  p-2 ">
+          <div className="">
+            <div className=" hover:scale-105 transition duration-500  border mt-5 rounded-2xl bg-white shadow-2xl  w-[100%]  p-2 ">
               <div className="flex justify-between">
                 <div className="   ">
                   <div className="flex ">
@@ -72,18 +73,22 @@ function AgencyModelCards() {
                         </p>
                       </div>
 
-                      <div className="flex items-center">
+                      <div className="flex items-center hover:text-blue-500">
                         <BiPhoneCall className="text-sm" />
-                        <p className=" ml-1 text-xs  text-gray-500">
-                          {application.modelUserId.telephone}
-                        </p>
+                        <a href={`tel:${application.modelUserId.telephone}`}>
+                          <p className=" ml-1 text-xs  text-gray-500 hover:text-blue-500">
+                            {application.modelUserId.telephone}
+                          </p>
+                        </a>
                       </div>
 
-                      <div className="flex items-center">
+                      <div className="flex items-center hover:text-blue-500">
                         <MdEmail className="text-sm" />
-                        <p className=" ml-1 text-xs  text-gray-500">
-                          {application.modelUserId.email}
-                        </p>
+                        <a href={`mailto:${application.modelUserId.email}`}>
+                          <p className=" ml-1 text-xs  text-gray-500 hover:text-blue-500">
+                            {application.modelUserId.email}
+                          </p>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -93,6 +98,21 @@ function AgencyModelCards() {
                     <p className="text-[12px] ml-2">
                       {application.jobId.description}
                     </p>
+                  </div>
+
+                  <div className="flex justify-center   pt-4">
+                    <button
+                      className="mr-5 bg-red-500 font-bold text-white rounded border-black px-2
+                "
+                    >
+                      Reject
+                    </button>
+                    <button
+                      disabled
+                      className=" border rounded bg-gray-200 text-gray-400 hover:cursor-not-allowed p-2 text-sm"
+                    >
+                      Pay via momo
+                    </button>
                   </div>
                 </div>
 
@@ -142,19 +162,8 @@ function AgencyModelCards() {
         </div>
       </div> */}
 
-              <div className="flex justify-center   ">
-                <button
-                  className="mr-5 bg-yellow-500  border-2 border-black px-2
-                "
-                >
-                  Actions
-                </button>
-                <button
-                  disabled
-                  className=" border bg-gray-200 text-gray-400 hover:cursor-not-allowed p-2 text-sm"
-                >
-                  Pay via momo
-                </button>
+              <div className="">
+                <ProgressBar />
               </div>
             </div>
           </div>

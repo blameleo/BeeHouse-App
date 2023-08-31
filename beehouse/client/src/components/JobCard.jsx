@@ -134,7 +134,7 @@ export default function JobCard({ job }) {
         </div>
       </div>
 
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </div>
   );
 }

@@ -9,6 +9,7 @@ import {
 } from "../Redux/slice/jobSlice";
 import Loader from "./Loader";
 import JobCard from "./JobCard";
+import { ToastContainer } from "react-toastify";
 
 function Jobs() {
   const dispatch = useDispatch();
@@ -63,6 +64,8 @@ function Jobs() {
           </div>
         )}
       </div>
+
+      <ToastContainer />
     </div>
   );
 }
