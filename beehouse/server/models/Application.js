@@ -6,6 +6,23 @@ const ApplicationSchema = new mongoose.Schema({
   status: { type: String, default: "Pending" }, // Status of the application (Pending, Approved, Rejected)
 });
 
+ApplicationSchema.post(
+  "remove",
+  { document: true, query: false },
+  async function () {
+    try {
+      console.log("deleting");
+      const ApplicationModel = mongoose.model(
+        "applications",
+        ApplicationSchema
+      );
+      await ApplicationModel.deleteMany({ jobId: this.jobId });
+    } catch (error) {
+      console.error("Error in pre-delete hook:", error);
+    }
+  }
+);
+
 const ApplicationModel = mongoose.model("applications", ApplicationSchema);
 
 module.exports = ApplicationModel;

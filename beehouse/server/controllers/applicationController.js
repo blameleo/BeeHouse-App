@@ -3,7 +3,7 @@ const ApplicationModel = require("../models/Application.js");
 const applyForJob = async (req, res) => {
   try {
     const { modelUserId, jobId } = req.body;
-    console.log(modelUserId + " " + jobId);
+    // console.log(modelUserId + " " + jobId);
     const newApplication = new ApplicationModel({
       modelUserId,
       jobId,
@@ -26,7 +26,7 @@ const getApplicationsForAgency = async (req, res) => {
     // Assuming you have agency user authentication middleware
     const agencyUserId = req.params.id;
 
-    console.log(agencyUserId);
+    // console.log(agencyUserId);
     const applications = await ApplicationModel.find({})
       .populate({
         path: "jobId",

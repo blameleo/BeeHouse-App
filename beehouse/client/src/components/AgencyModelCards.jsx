@@ -142,11 +142,17 @@ function AgencyModelCards() {
       </div> */}
 
               <div className="flex justify-center   ">
-                <button className="mr-5 bg-yellow-500  border-2 border-black h-[40px] w-[100px]">
+                <button
+                  className="mr-5 bg-yellow-500  border-2 border-black px-2
+                "
+                >
                   Actions
                 </button>
-                <button className=" border border-yellow-500 h-[40px] w-[100px]">
-                  Save
+                <button
+                  disabled
+                  className=" border bg-gray-200 text-gray-400 hover:cursor-not-allowed p-2 text-sm"
+                >
+                  Pay via momo
                 </button>
               </div>
             </div>
