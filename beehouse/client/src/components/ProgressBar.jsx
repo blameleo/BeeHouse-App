@@ -1,11 +1,45 @@
+import axios from "axios";
 import React, { useState } from "react";
 
-const ProgressBar = () => {
+const ProgressBar = ({ id, status, setUpdatedStep, setButtonAvailability }) => {
   const steps = ["Pending", "Audition", "Approved", "Paid"];
-  const [selectedStep, setSelectedStep] = useState("Pending");
+  const [selectedStep, setSelectedStep] = useState(status);
 
-  const handleStepChange = (event) => {
-    setSelectedStep(event.target.value);
+  console.log(id);
+
+  const handleStepChange = async (e) => {
+    const newSelectedStep = e.target.value;
+    // setSelectedStep(newSelectedStep);
+    setSelectedStep(async (prevSelectedStep) => {
+      if (prevSelectedStep !== newSelectedStep) {
+        const data = {
+          status: newSelectedStep,
+        };
+
+        try {
+          const response = await axios.put(
+            `http://localhost:4000/jobs/${id}/status`,
+            data
+          );
+
+          if (response.status === 200) {
+            setSelectedStep(response.data.data.status);
+
+            if (response.data.data.status === "Approved") {
+              setUpdatedStep(response.data.data.status);
+              setButtonAvailability(id, true);
+            } else {
+              setButtonAvailability(id, false);
+            }
+          }
+
+          console.log(response);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      return newSelectedStep; // Update the state with the new value
+    });
   };
 
   //   const canProgress = steps.indexOf(selectedStep) > 0;
@@ -45,7 +79,7 @@ const ProgressBar = () => {
         <select
           value={selectedStep}
           onChange={handleStepChange}
-          className="py-1 mt-1 bg-yellow-500 border-2 border-black rounded focus:outline-none focus:border-blue-500"
+          className="py-1 mt-1 bg-gray-200 text-gray-700 border border-black rounded focus:outline-none focus:border-blue-500"
         >
           {steps.map((step, index) => (
             <option

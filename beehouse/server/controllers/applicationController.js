@@ -50,4 +50,33 @@ const getApplicationsForAgency = async (req, res) => {
   }
 };
 
-module.exports = { applyForJob, getApplicationsForAgency };
+const updateApplicationStatus = async (req, res) => {
+  console.log("test");
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    console.log(status);
+
+    const updatedApplication = await ApplicationModel.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true } // Return the updated document
+    );
+
+    res.json({
+      message: "Application status updated",
+      data: updatedApplication,
+    });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while updating the status" });
+  }
+};
+
+module.exports = {
+  applyForJob,
+  getApplicationsForAgency,
+  updateApplicationStatus,
+};

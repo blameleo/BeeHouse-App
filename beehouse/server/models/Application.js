@@ -23,6 +23,16 @@ ApplicationSchema.post(
   }
 );
 
+ApplicationSchema.methods.updateStatus = async function (newStatus) {
+  try {
+    this.status = newStatus;
+    await this.save();
+    return this;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const ApplicationModel = mongoose.model("applications", ApplicationSchema);
 
 module.exports = ApplicationModel;

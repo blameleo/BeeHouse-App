@@ -7,16 +7,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchApplicationSuccess } from "../Redux/slice/applicationsSlice";
 import { BiPhoneCall } from "react-icons/bi";
 import { MdEmail, MdWork } from "react-icons/md";
-// import { FaUserAlt } from "react-icons/fa6";
 import { BsPersonCircle } from "react-icons/bs";
 import Loader from "./Loader";
 import ProgressBar from "./ProgressBar";
+import PayButton from "./PayButton";
 
 function AgencyModelCards() {
   // const [applications, setApplications] = useState(null);
   const user = useSelector((state) => state.user);
   const applications = useSelector((state) => state.application.applications);
-
+  const [updatedStep, setUpdatedStep] = useState("Pending");
+  const [buttonAvailabilities, setButtonAvailabilities] = useState({});
+  console.log(updatedStep);
   const dispatch = useDispatch();
   console.log(applications);
   console.log(user);
@@ -49,13 +51,22 @@ function AgencyModelCards() {
           "public/",
           ""
         );
-        const url1 = application.modelUserId.imageUrl1.replace("public/", "");
-        const url2 = application.modelUserId.imageUrl3.replace("public/", "");
-        const url3 = application.modelUserId.imageUrl3.replace("public/", "");
+        const url1 = application?.modelUserId?.imageUrl1?.replace(
+          "public/",
+          ""
+        );
+        const url2 = application?.modelUserId?.imageUrl2?.replace(
+          "public/",
+          ""
+        );
+        const url3 = application?.modelUserId?.imageUrl3?.replace(
+          "public/",
+          ""
+        );
 
         return (
           <div className="">
-            <div className=" hover:scale-105 transition duration-500  border mt-5 rounded-2xl bg-white shadow-2xl  w-[100%]  p-2 ">
+            <div className="   border mt-5 rounded-2xl bg-white shadow-2xl  w-[100%]  p-2 ">
               <div className="flex justify-between">
                 <div className="   ">
                   <div className="flex ">
@@ -107,12 +118,14 @@ function AgencyModelCards() {
                     >
                       Reject
                     </button>
-                    <button
-                      disabled
-                      className=" border rounded bg-gray-200 text-gray-400 hover:cursor-not-allowed p-2 text-sm"
-                    >
-                      Pay via momo
-                    </button>
+
+                    <PayButton
+                      status={application.status}
+                      updatedStep={updatedStep}
+                      buttonAvailability={
+                        buttonAvailabilities[application._id] || false
+                      }
+                    />
                   </div>
                 </div>
 
@@ -163,7 +176,17 @@ function AgencyModelCards() {
       </div> */}
 
               <div className="">
-                <ProgressBar />
+                <ProgressBar
+                  id={application._id}
+                  status={application.status}
+                  setUpdatedStep={setUpdatedStep}
+                  setButtonAvailability={(id, value) =>
+                    setButtonAvailabilities((prevAvailabilities) => ({
+                      ...prevAvailabilities,
+                      [id]: value,
+                    }))
+                  }
+                />
               </div>
             </div>
           </div>
