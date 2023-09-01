@@ -23,7 +23,7 @@ function AgencyJobs() {
   const user = useSelector((state) => state.user);
   const jobs = useSelector((state) => state.job.jobs);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -159,11 +159,13 @@ function AgencyJobs() {
   };
 
   const fetchAgencyJobs = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(
         `http://localhost:4000/jobs/getjobs/${user.user_id}`
       );
       dispatch(fetchJobsSuccess(response.data));
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching jobs:", error);
       dispatch(fetchJobsFailure(error.message));
@@ -201,14 +203,15 @@ function AgencyJobs() {
   };
 
   const deleteJob = async (id) => {
+    setLoading(true);
     try {
       const response = await axios.delete(
         `http://localhost:4000/jobs/deletejob/${id}`
       );
-      setLoading(true);
+
       if (response.status === 200) {
         fetchAgencyJobs();
-        setLoading(false);
+
         toast.success(response.data.message, {
           position: "top-right",
           autoClose: true,
@@ -220,6 +223,8 @@ function AgencyJobs() {
           theme: "colored",
         });
       }
+
+      setLoading(false);
     } catch (error) {
       setLoading(false);
       toast.error(error.response.data.error, {
