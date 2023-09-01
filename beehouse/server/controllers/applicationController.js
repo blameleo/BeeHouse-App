@@ -3,7 +3,7 @@ const ApplicationModel = require("../models/Application.js");
 const applyForJob = async (req, res) => {
   try {
     const { modelUserId, jobId } = req.body;
-    console.log(modelUserId + " " + jobId);
+    // console.log(modelUserId + " " + jobId);
     const newApplication = new ApplicationModel({
       modelUserId,
       jobId,
@@ -26,7 +26,7 @@ const getApplicationsForAgency = async (req, res) => {
     // Assuming you have agency user authentication middleware
     const agencyUserId = req.params.id;
 
-    console.log(agencyUserId);
+    // console.log(agencyUserId);
     const applications = await ApplicationModel.find({})
       .populate({
         path: "jobId",
@@ -50,4 +50,33 @@ const getApplicationsForAgency = async (req, res) => {
   }
 };
 
-module.exports = { applyForJob, getApplicationsForAgency };
+const updateApplicationStatus = async (req, res) => {
+  console.log("test");
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    console.log(status);
+
+    const updatedApplication = await ApplicationModel.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true } // Return the updated document
+    );
+
+    res.json({
+      message: "Application status updated",
+      data: updatedApplication,
+    });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while updating the status" });
+  }
+};
+
+module.exports = {
+  applyForJob,
+  getApplicationsForAgency,
+  updateApplicationStatus,
+};

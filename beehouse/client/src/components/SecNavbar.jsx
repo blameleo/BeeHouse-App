@@ -21,7 +21,6 @@ function SecNavbar() {
   const logOut = () => {
     removeCookie("Email");
     removeCookie("userData");
-    removeCookie("userdata");
     removeCookie("UserId");
     dispatch(setUser(null));
     dispatch(clearUser());

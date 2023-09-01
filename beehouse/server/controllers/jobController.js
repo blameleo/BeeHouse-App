@@ -1,3 +1,4 @@
+const ApplicationModel = require("../models/Application");
 const JobModel = require("../models/Jobs");
 
 const createJob = async (req, res) => {
@@ -15,7 +16,6 @@ const createJob = async (req, res) => {
       location,
     } = req.body;
 
-    console.log(tags);
     const newJob = new JobModel({
       agencyUserId,
       description,
@@ -50,8 +50,12 @@ const deleteJob = async (req, res) => {
   try {
     const jobId = req.params.id;
 
-    await JobModel.findByIdAndDelete(jobId); // Remove the job from the database
-
+    const deletedJob = await JobModel.findByIdAndDelete(jobId); // Remove the job from the database
+    if (!deletedJob) {
+      return res.status(404).json({ error: "Job not found" });
+    }
+    console.log(jobId);
+    await ApplicationModel.deleteMany({ jobId });
     res.status(200).json({ message: "Job deleted successfully" });
   } catch (error) {
     console.error("Error deleting job:", error);
@@ -62,7 +66,7 @@ const deleteJob = async (req, res) => {
 const getjobsForAgency = async (req, res) => {
   try {
     const userId = req.params.id;
-    console.log(req.params.id);
+    // console.log(req.params.id);
     const jobs = await JobModel.find({ agencyUserId: userId });
     res.json(jobs);
   } catch (error) {
