@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import Agency from './pages/Agency'
+import Agency from "./pages/Agency";
 import "./App.css";
 import ModelSettings from "./pages/ModelSettings";
 import ModelOnboardingPage from "./pages/ModelOnboardingPage";
@@ -33,23 +33,24 @@ function App() {
                 <Route index element={<AgencyDash />} />
                 <Route path="jobs" element={<AgencyJobs />} />
 
-               
-                <Route path="profile" element={<AgencyProfile />}/>
-                  <Route path="security" element={<AgencySecurity />} />
-                
+                <Route path="profile" element={<AgencyProfile />} />
+                <Route path="security" element={<AgencySecurity />} />
               </Route>
 
               <Route path="/settings" element={<ModelSettings />}>
                 <Route index element={<ModelEditPage />} />
                 <Route path="modeledit" element={<ModelEditPage />} />
-                <Route
-                  path="changepassword"
-                  element={<ChangePasswordPage />}
-                />
+                <Route path="changepassword" element={<ChangePasswordPage />} />
               </Route>
 
-              <Route path="/agencyonboarding" element={<AgencyOnboardingPage />} />
-              <Route path="/modelonboarding" element={<ModelOnboardingPage />} />
+              <Route
+                path="/agencyonboarding"
+                element={<AgencyOnboardingPage />}
+              />
+              <Route
+                path="/modelonboarding"
+                element={<ModelOnboardingPage />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>
