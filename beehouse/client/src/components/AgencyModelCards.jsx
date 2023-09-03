@@ -129,6 +129,7 @@ function AgencyModelCards() {
 
                         <PayButton
                           status={application.status}
+                          application={application}
                           updatedStep={updatedStep}
                           buttonAvailability={
                             buttonAvailabilities[application._id] || false
