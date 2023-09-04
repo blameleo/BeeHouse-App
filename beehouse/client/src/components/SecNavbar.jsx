@@ -18,6 +18,8 @@ function SecNavbar() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  console.log(user);
+
   const logOut = () => {
     removeCookie("Email");
     removeCookie("userData");
@@ -46,7 +48,7 @@ function SecNavbar() {
       });
       // setUser(response.data);
       dispatch(setUser(response.data));
-      setCookie("userData", response.data);
+      // setCookie("userData", response.data);
     } catch (error) {
       console.log(error);
     }

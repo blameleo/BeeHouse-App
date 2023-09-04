@@ -19,7 +19,9 @@ function Jobs() {
   const getJobs = async () => {
     dispatch(fetchJobsStart());
     try {
-      const response = await axios.get("http://localhost:4000/jobs/getjobs");
+      const response = await axios.get(
+        `http://localhost:4000/jobs/models/getjobs`
+      );
       dispatch(fetchJobsSuccess(response.data));
       console.log(response.data);
     } catch (error) {

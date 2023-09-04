@@ -51,7 +51,7 @@ function AgencyModelCards() {
       {loading ? (
         <Loader loaderStyle="h-full  flex justify-center pt-20" />
       ) : (
-        <div className=" gap-10 grid grid-cols-1 ml-[5%] sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 ">
+        <div className=" gap-10 grid grid-cols-1 ml-[5%] sm:grid-cols-2 border   md:grid-cols-2 lg:grid-cols-3 ">
           {applications.map((application) => {
             const newUrl = application.modelUserId.displayPicUrl.replace(
               "public/",

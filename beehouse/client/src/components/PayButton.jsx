@@ -20,7 +20,7 @@ export default function PayButton({
       name,
     },
     publicKey,
-    text: "Pay via momo",
+    // text: " Pay via momo",
     onSuccess: () =>
       alert("Thanks for doing business with us! Come back soon!!"),
     onClose: () => alert("Wait! You need this oil, don't go!!!!"),
@@ -34,10 +34,8 @@ export default function PayButton({
       }`}
       disabled={updatedStep !== "Approved" || buttonAvailability}
     >
-      <PaystackButton {...componentProps}>
-        {" "}
-        <GiTakeMyMoney className="mr-1 text-xl" />
-      </PaystackButton>
+      <GiTakeMyMoney className="mr-1 text-xl" />
+      {<PaystackButton {...componentProps}>Pay via momo</PaystackButton>}{" "}
     </div>
   );
 }

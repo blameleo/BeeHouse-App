@@ -50,13 +50,13 @@ export default function Login() {
 
         if (response.data.type === "model" && response.status === 200) {
           setLoading(false);
-          setCookie("Email", response.data.email);
+          // setCookie("Email", response.data.email);
           setCookie("UserId", response.data.userId);
           setCookie("AuthToken", response.data.token);
 
           navigate("/home");
         } else if (response.data.type === "agency" && response.status === 200) {
-          setCookie("Email", response.data.email);
+          // setCookie("Email", response.data.email);
           setCookie("UserId", response.data.userId);
           setCookie("AuthToken", response.data.token);
           setLoading(false);

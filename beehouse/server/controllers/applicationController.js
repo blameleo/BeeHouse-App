@@ -3,7 +3,19 @@ const ApplicationModel = require("../models/Application.js");
 const applyForJob = async (req, res) => {
   try {
     const { modelUserId, jobId } = req.body;
-    // console.log(modelUserId + " " + jobId);
+
+    const existingApplication = await ApplicationModel.findOne({
+      modelUserId,
+      jobId,
+    });
+
+    if (existingApplication) {
+      // User has already applied for this job
+      return res
+        .status(400)
+        .json({ message: "You have already applied for this job." });
+    }
+
     const newApplication = new ApplicationModel({
       modelUserId,
       jobId,
@@ -32,7 +44,8 @@ const getApplicationsForAgency = async (req, res) => {
         path: "jobId",
         populate: { path: "agencyUserId" }, // Assuming the field name is "agencyUserId"
       })
-      .populate("modelUserId");
+      .populate("modelUserId")
+      .sort({ createdAt: -1 });
 
     const agencyApplications = applications.filter((application) => {
       const jobId = application.jobId;

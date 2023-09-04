@@ -46,6 +46,8 @@ export default function JobCard({ job }) {
         "http://localhost:4000/jobs/apply",
         params
       );
+
+      console.log(response);
       if (response.status === 201) {
         // setIsLoading(false);
 
@@ -64,7 +66,7 @@ export default function JobCard({ job }) {
     } catch (error) {
       console.log(error);
       setIsLoading(false);
-      toast.error(error.response.data.error, {
+      toast.error(error.response.data.message, {
         position: "top-right",
         autoClose: true,
         hideProgressBar: false,
@@ -128,13 +130,15 @@ export default function JobCard({ job }) {
             ) : isApplied ? (
               <GiCheckMark className="text-green-500 text-[32px] rounded-full  cursor-not-allowed h-10 w-10" />
             ) : (
-              <GiBee className="text-black text-[32px] rounded-full cursor-pointer h-10 w-10" />
+              <button className="border px-5 bg-yellow-500 text-white font-bold">
+                apply
+              </button>
             )}
           </div>
         </div>
       </div>
 
-      {/* <ToastContainer /> */}
+      <ToastContainer />
     </div>
   );
 }
