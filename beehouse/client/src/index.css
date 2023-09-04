@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Vollkorn:wght@900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.font-nunito {
+  font-family: nunito, sans-serif;
+}
+
+.font-volkhorn {
+  font-family: "Vollkorn", serif;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.select-dropdown {
+  max-height: 10rem; /* Adjust this value to your preferred maximum height */
+  overflow-y: auto;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+  z-index: 1000; /* Adjust the z-index to ensure it covers the page content */
+  position: relative;
+  border: solid red;
+  height: 700px;
+  margin-top: -23%;
+}
