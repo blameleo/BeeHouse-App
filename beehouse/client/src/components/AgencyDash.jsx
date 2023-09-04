@@ -12,12 +12,12 @@ function AgencyDash() {
 
   return (
     <div className="  mt-[50px] ml-[17%]  ">
-      <div className="flex sm:flex-row justify-around flex-wrap">
+      {/*<div className="flex sm:flex-row justify-around flex-wrap">
         <MiniDetailsCard />
         <MiniDetailsCard />
         <MiniDetailsCard />
         <MiniDetailsCard />
-      </div>
+  </div>*/}
 
       <div className="    ">
         <AgencyModelCards />

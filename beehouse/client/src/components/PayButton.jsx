@@ -20,7 +20,7 @@ export default function PayButton({
       name,
     },
     publicKey,
-    text: "Pay via momo",
+    text: "Momo pay",
     onSuccess: () =>
       alert("Thanks for doing business with us! Come back soon!!"),
     onClose: () => alert("Wait! You need this oil, don't go!!!!"),

@@ -37,7 +37,7 @@ function Jobs() {
   }, []);
 
   return (
-    <div className="mt-44    bg-contain bg-no   flex flex-col md:flex-row">
+    <div className="mt-44    bg-contain bg-no   flex  flex-col md:flex-row">
       <div className="  min-w-[350px] hidden md:block h-screen p-5 bg-white fixed left-0 ">
         <div className=" h-[200px] rounded-xl mb-4 bg-[url('/img/adpic.jpg')] bg-cover bg-no-repeat"></div>
 
@@ -45,7 +45,7 @@ function Jobs() {
           <Filter />
         </div>
       </div>
-      <div className="   md:ml-[400px] md:w-[75%]  ">
+      <div className="   md:ml-[400px] md:w-[75%]   ">
         <div className="py-1   fixed top-32 z-10 bg-white w-full  sm:left-[400px]">
           <h1 className="text-md font-black">Popular Jobs</h1>
         </div>
@@ -55,7 +55,7 @@ function Jobs() {
         ) : jobs == false ? (
           <p className="text-black ">There are no jobs available</p>
         ) : (
-          <div className="flex flex-wrap sm:px-8 ">
+          <div className="flex flex-wrap justify-center sm:justify-start sm:px-8 ">
             {jobs.map((job) => {
               // const randomColor = getRandomColor();
 

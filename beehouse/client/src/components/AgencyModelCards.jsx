@@ -51,7 +51,7 @@ function AgencyModelCards() {
       {loading ? (
         <Loader loaderStyle="h-full  flex justify-center pt-20" />
       ) : (
-        <div className=" gap-10 grid grid-cols-1 ml-[5%] sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 ">
+        <div className=" gap-10 grid grid-cols-1  sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 ">
           {applications.map((application) => {
             const newUrl = application.modelUserId.displayPicUrl.replace(
               "public/",
@@ -72,10 +72,10 @@ function AgencyModelCards() {
 
             return (
               <div className="">
-                <div className="   border mt-5 rounded-2xl bg-white shadow-2xl  w-[100%]  p-2 ">
+                <div className="   border mt-5 rounded-2xl bg-white shadow-2xl w-[90%] sm:w-[100%]  p-2 ">
                   <div className="flex justify-between">
                     <div className="   ">
-                      <div className="flex ">
+                      <div className="flex   flex-col place-items-center md:flex-row  ">
                         <img
                           src={`http://localhost:4000/${newUrl}`}
                           className="w-10 h-10  mt-2  rounded-full object-cover"

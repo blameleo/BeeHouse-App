@@ -80,7 +80,7 @@ function AgencySignUp() {
             <input
               type="email"
               name="email"
-              className="mb-5  border p-2 w-96  border-1 border-black rounded-md   "
+              className="mb-5  border p-2 w-[220px] sm:w-96  border-1 border-black rounded-md   "
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
@@ -102,7 +102,7 @@ function AgencySignUp() {
               onBlur={formik.handleBlur}
               value={formik.values.password}
               placeholder="Password"
-              className="mb-5  border p-2 w-96  border-1 border-black rounded-md  "
+              className="mb-5  border p-2 w-[220px] sm:w-96  border-1 border-black rounded-md  "
             />
             {formik.touched.password && formik.errors.password && (
               <p className="text-red-500">{formik.errors.password}</p>
@@ -121,7 +121,7 @@ function AgencySignUp() {
               onBlur={formik.handleBlur}
               value={formik.values.confirmPassword}
               placeholder="Confirm Password"
-              className=" mb-5  border p-2 w-96  border-1 border-black rounded-md  "
+              className=" mb-5  border p-2 w-[220px] sm:w-96  border-1 border-black rounded-md  "
             />
             {formik.touched.confirmPassword &&
               formik.errors.confirmPassword && (

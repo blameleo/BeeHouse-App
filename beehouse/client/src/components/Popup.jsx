@@ -57,12 +57,12 @@ function Popup(props) {
       PaperProps={{ sx: { padding: "40px" } }}
     >
       <DialogTitle>
-        <div className="flex justify-center mb-10">
+        <div className="flex justify-center mb-5">
           <Logo />
         </div>
 
         <div>
-          <h1 className="font-volkhorn uppercase">{dialogTitle}</h1>
+          <h1 className="font-volkhorn text-sm md:text-lg uppercase">{dialogTitle}</h1>
         </div>
       </DialogTitle>
 
@@ -70,7 +70,7 @@ function Popup(props) {
         {!showSignUpForm ? (
           <div className="flex">
             <button
-              className="w-48 bg-white rounded-lg shadow p-6 hover:cursor-pointer mb-8 hover:bg-yellow-500 mr-5"
+              className="w-48 bg-white rounded-lg shadow p-1 sm:p-6 hover:cursor-pointer mb-8 hover:bg-yellow-500 mr-5"
               onClick={() => {
                 setSelectedOption("model");
                 setIsModelSelected(true);
@@ -95,7 +95,7 @@ function Popup(props) {
               </div>
             </button>
             <button
-              className="w-48 bg-white rounded-lg shadow p-6 hover:cursor-pointer mb-8 hover:bg-yellow-500"
+              className="w-48 bg-white rounded-lg shadow p-1 md:p-6 hover:cursor-pointer mb-8 hover:bg-yellow-500"
               onClick={() => {
                 setSelectedOption("creativeAgency");
                 setIsModelSelected(true);

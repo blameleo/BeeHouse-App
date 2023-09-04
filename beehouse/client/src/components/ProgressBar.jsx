@@ -50,7 +50,7 @@ const ProgressBar = ({ id, status, setUpdatedStep, setButtonAvailability }) => {
         {steps.map((step, index) => (
           <div
             key={step}
-            className={`flex  items-center text-sm mx-1 space-x-2 ${
+            className={`flex  place-items-center text-xs   ${
               index <= steps.indexOf(selectedStep)
                 ? "text-green-500"
                 : "text-gray-300"
