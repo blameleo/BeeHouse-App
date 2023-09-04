@@ -126,11 +126,11 @@ export default function JobCard({ job }) {
 
           <div onClick={() => applyToJob(user?._id, job._id)}>
             {isLoading ? (
-              <GiHourglass className="text-[32px] rounded-full cursor-pointer h-10 w-10" />
+              <GiHourglass className="text-[12px] rounded-full cursor-pointer h-10 w-10" />
             ) : isApplied ? (
-              <GiCheckMark className="text-green-500 text-[32px] rounded-full  cursor-not-allowed h-10 w-10" />
+              <GiCheckMark className="text-green-500 text-[12px] rounded-full  cursor-not-allowed h-10 w-10" />
             ) : (
-              <button className="border px-5 bg-yellow-500 text-white font-bold">
+              <button className="border rounded px-5 hover:bg-purple-600 bg-yellow-500 text-white font-bold">
                 apply
               </button>
             )}

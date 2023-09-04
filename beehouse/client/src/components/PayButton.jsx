@@ -9,7 +9,7 @@ export default function PayButton({
   application,
 }) {
   const publicKey = "pk_test_e3fd9414aa9c96ebb8ed9e2993d3e78b79a5a35e";
-  console.log(application);
+  // console.log(application);
   const [price, setPrice] = useState(application.jobId.price);
   const amount = price * 100; // Remember, set in kobo!
   const componentProps = {

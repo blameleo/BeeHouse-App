@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser, clearUser } from "../Redux/slice/userSlice";
+import Notification from "./Notification";
 
 function SecNavbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +18,13 @@ function SecNavbar() {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleNotification = () => {
+    // alert("hi");
+    setIsVisible(!isVisible);
+  };
 
   console.log(user);
 
@@ -75,7 +83,7 @@ function SecNavbar() {
   // console.log(user);
 
   return (
-    <div className="bg-black fixed top-0 z-30 text-yellow-500 flex items-center justify-between text-sm p-4  w-full">
+    <div className="bg-black  fixed top-0 z-30 text-yellow-500 flex items-center justify-between text-sm p-4  w-full">
       <div className=" ">
         <Logo />
 
@@ -144,22 +152,32 @@ function SecNavbar() {
             <BsFillCaretDownFill className="ml-1 text-xs" />
           </div>
 
-          <div className="border relative rounded-full   border-yellow-500 w-8 h-8 grid place-items-center ">
-            <span className="text-white font-black text-[13px] bg-red-500 rounded-full px-[6px] text-center absolute left-5 bottom-4">
+          <div className="border relative rounded-full cursor-pointer  border-yellow-500 w-8 h-8 grid place-items-center ">
+            {/* <span className="text-white font-black text-[13px] bg-red-500 rounded-full px-[6px] text-center absolute left-5 bottom-4">
               1
-            </span>
+            </span> */}
             <BsFillChatLeftDotsFill className="hover:text-purple-600 cursor-pointer" />
           </div>
           {/* <div className="border rounded-full  border-yellow-500 w-8 h-8 grid place-items-center">
             <BsGear className="hover:text-purple-600 cursor-pointer" />
           </div> */}
 
-          <div className="border relative rounded-full  border-yellow-500 w-8 h-8 grid place-items-center">
+          <div
+            className="border relative rounded-full cursor-pointer border-yellow-500 w-8 h-8 grid place-items-center"
+            onClick={toggleNotification}
+          >
             <BsBell className="hover:text-purple-600 cursor-pointer" />
           </div>
         </div>
       </div>
       <GiTreeBeehive className="sm:hidden text-[30px] cursor-pointer" />
+
+      {isVisible && (
+        <Notification
+          isVisible={isVisible}
+          toggleNotification={toggleNotification}
+        />
+      )}
     </div>
   );
 }

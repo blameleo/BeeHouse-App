@@ -1,4 +1,5 @@
 const ApplicationModel = require("../models/Application.js");
+const NotificationModel = require("../models/Notifications.js");
 
 const applyForJob = async (req, res) => {
   try {
@@ -63,8 +64,16 @@ const getApplicationsForAgency = async (req, res) => {
   }
 };
 
+const saveNotification = async (userId, message) => {
+  const newNotification = new NotificationModel({
+    userId,
+    message,
+    timestamp: Date.now(),
+  });
+  await newNotification.save();
+};
+
 const updateApplicationStatus = async (req, res) => {
-  console.log("test");
   try {
     const { id } = req.params;
     const { status } = req.body;
@@ -73,8 +82,13 @@ const updateApplicationStatus = async (req, res) => {
     const updatedApplication = await ApplicationModel.findByIdAndUpdate(
       id,
       { status },
-      { new: true } // Return the updated document
+      { new: true }
     );
+
+    const userId = updatedApplication.modelUserId;
+
+    const notificationMessage = `Your application status has been updated to: ${status}`;
+    saveNotification(userId, notificationMessage);
 
     res.json({
       message: "Application status updated",
