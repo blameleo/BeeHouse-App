@@ -15,11 +15,13 @@ function Jobs() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
-  console.log(user);
+  // console.log(user);
   const getJobs = async () => {
     dispatch(fetchJobsStart());
     try {
-      const response = await axios.get("http://localhost:4000/jobs/getjobs");
+      const response = await axios.get(
+        `http://localhost:4000/jobs/models/getjobs`
+      );
       dispatch(fetchJobsSuccess(response.data));
       console.log(response.data);
     } catch (error) {
@@ -30,7 +32,7 @@ function Jobs() {
   const jobs = useSelector((state) => state.job.jobs);
   const loading = useSelector((state) => state.job.loading);
   const error = useSelector((state) => state.job.error);
-  console.log(jobs);
+  // console.log(jobs);
 
   useEffect(() => {
     getJobs();
@@ -56,10 +58,10 @@ function Jobs() {
           <p className="text-black ">There are no jobs available</p>
         ) : (
           <div className="flex flex-wrap sm:px-8 ">
-            {jobs.map((job) => {
+            {jobs.map((job, i) => {
               // const randomColor = getRandomColor();
 
-              return <JobCard job={job} />;
+              return <JobCard key={i} job={job} />;
             })}
           </div>
         )}

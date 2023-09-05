@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const UserModel = require("../models/User.js");
 
 const tokenExpiration = 3600;
-const expirationTime = Math.floor(Date.now() / 1000) + tokenExpiration;
+
 const registerUser = async (req, res) => {
   try {
     const { email, password, type } = req.body;
@@ -26,6 +26,7 @@ const registerUser = async (req, res) => {
     });
 
     await newUser.save();
+    const expirationTime = Math.floor(Date.now() / 1000) + tokenExpiration;
 
     const token = jwt.sign(
       { ...newUser.toJSON(), exp: expirationTime },
@@ -58,6 +59,7 @@ const loginUser = async (req, res) => {
         .status(401)
         .json({ message: "email or password is incorrect" });
     }
+    const expirationTime = Math.floor(Date.now() / 1000) + tokenExpiration;
 
     const token = jwt.sign(
       { ...user.toJSON(), exp: expirationTime },

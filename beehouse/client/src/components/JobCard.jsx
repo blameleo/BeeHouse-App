@@ -32,7 +32,7 @@ export default function JobCard({ job }) {
 
   const year = date.getFullYear();
 
-  console.log(`Day: ${day}, Month: ${month}, Year: ${year}`);
+  // console.log(`Day: ${day}, Month: ${month}, Year: ${year}`);
 
   const applyToJob = async (modelUserId, jobId) => {
     if (isLoading || isApplied) return;
@@ -46,6 +46,8 @@ export default function JobCard({ job }) {
         "http://localhost:4000/jobs/apply",
         params
       );
+
+      console.log(response);
       if (response.status === 201) {
         // setIsLoading(false);
 
@@ -64,7 +66,7 @@ export default function JobCard({ job }) {
     } catch (error) {
       console.log(error);
       setIsLoading(false);
-      toast.error(error.response.data.error, {
+      toast.error(error.response.data.message, {
         position: "top-right",
         autoClose: true,
         hideProgressBar: false,
@@ -124,11 +126,13 @@ export default function JobCard({ job }) {
 
           <div onClick={() => applyToJob(user?._id, job._id)}>
             {isLoading ? (
-              <GiHourglass className="text-[32px] rounded-full cursor-pointer h-10 w-10" />
+              <GiHourglass className="text-[12px] rounded-full cursor-pointer h-10 w-10" />
             ) : isApplied ? (
-              <GiCheckMark className="text-green-500 text-[32px] rounded-full  cursor-not-allowed h-10 w-10" />
+              <GiCheckMark className="text-green-500 text-[12px] rounded-full  cursor-not-allowed h-10 w-10" />
             ) : (
-              <GiBee className="text-black text-[32px] rounded-full cursor-pointer h-10 w-10" />
+              <button className="border rounded px-5 hover:bg-purple-600 bg-yellow-500 text-white font-bold">
+                apply
+              </button>
             )}
           </div>
         </div>

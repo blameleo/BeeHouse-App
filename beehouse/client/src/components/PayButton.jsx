@@ -9,7 +9,7 @@ export default function PayButton({
   application,
 }) {
   const publicKey = "pk_test_e3fd9414aa9c96ebb8ed9e2993d3e78b79a5a35e";
-  console.log(application);
+  // console.log(application);
   const [price, setPrice] = useState(application.jobId.price);
   const amount = price * 100; // Remember, set in kobo!
   const componentProps = {
@@ -20,7 +20,7 @@ export default function PayButton({
       name,
     },
     publicKey,
-    text: "Pay via momo",
+    // text: " Pay via momo",
     onSuccess: () =>
       alert("Thanks for doing business with us! Come back soon!!"),
     onClose: () => alert("Wait! You need this oil, don't go!!!!"),
@@ -34,10 +34,8 @@ export default function PayButton({
       }`}
       disabled={updatedStep !== "Approved" || buttonAvailability}
     >
-      <PaystackButton {...componentProps}>
-        {" "}
-        <GiTakeMyMoney className="mr-1 text-xl" />
-      </PaystackButton>
+      <GiTakeMyMoney className="mr-1 text-xl" />
+      {<PaystackButton {...componentProps}>Pay via momo</PaystackButton>}{" "}
     </div>
   );
 }
