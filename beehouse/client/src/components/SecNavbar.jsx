@@ -9,6 +9,10 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser, clearUser } from "../Redux/slice/userSlice";
 import Notification from "./Notification";
+import {
+  fetchNotificationSuccess,
+  unreadNotificationsCount,
+} from "../Redux/slice/notificationsSlice";
 
 function SecNavbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +21,16 @@ function SecNavbar() {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+  const newNotificationsCount = useSelector(
+    (state) => state.notification.newNotificationsCount
+  );
   const dispatch = useDispatch();
+
+  // const notifications = useSelector(
+  //   (state) => state.notification.notifications
+  // );
+
+  // console.log(newNotificationsCount);
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -49,6 +62,9 @@ function SecNavbar() {
   };
   const userId = cookies.UserId;
 
+  // useEffect(() => {
+  // }, []);
+
   const getUser = async () => {
     try {
       const response = await axios.get("http://localhost:4000/user/getuser", {
@@ -62,11 +78,25 @@ function SecNavbar() {
     }
   };
 
+  const getNotifications = async () => {
+    console.log(user?._id);
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/jobs/notifications/${user._id}`
+      );
+      console.log(response.data.unreadCount);
+      dispatch(fetchNotificationSuccess(response.data.notifications));
+      dispatch(unreadNotificationsCount(response.data.unreadCount));
+    } catch (error) {}
+  };
+
   // useEffect(()=>{
   // },[])
 
   useEffect(() => {
     getUser();
+
+    // getNotifications();
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -167,6 +197,11 @@ function SecNavbar() {
             onClick={toggleNotification}
           >
             <BsBell className="hover:text-purple-600 cursor-pointer" />
+            {newNotificationsCount > 0 && (
+              <span className="text-white font-black text-[13px] bg-red-500 rounded-full px-[6px] text-center absolute left-[20px] bottom-4">
+                {newNotificationsCount}
+              </span>
+            )}
           </div>
         </div>
       </div>

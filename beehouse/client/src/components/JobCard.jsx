@@ -32,7 +32,7 @@ export default function JobCard({ job }) {
 
   const year = date.getFullYear();
 
-  console.log(`Day: ${day}, Month: ${month}, Year: ${year}`);
+  // console.log(`Day: ${day}, Month: ${month}, Year: ${year}`);
 
   const applyToJob = async (modelUserId, jobId) => {
     if (isLoading || isApplied) return;
@@ -138,7 +138,7 @@ export default function JobCard({ job }) {
         </div>
       </div>
 
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </div>
   );
 }
