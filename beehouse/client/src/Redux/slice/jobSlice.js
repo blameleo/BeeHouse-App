@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  jobs: [], // This will hold the job data
+  jobs: [],
+  filteredJobs: [],
   loading: false,
   error: null,
 };
@@ -22,7 +23,12 @@ const jobSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    // Add more reducers as needed
+    searchJobs: (state, action) => {
+      const searchTerm = action.payload.toLowerCase();
+      state.filteredJobs = state.jobs.filter((job) =>
+        job.title.toLowerCase().includes(searchTerm)
+      );
+    },
   },
 });
 
@@ -30,7 +36,7 @@ export const {
   fetchJobsStart,
   fetchJobsSuccess,
   fetchJobsFailure,
-  // Add more action creators here
+  searchJobs,
 } = jobSlice.actions;
 
 export default jobSlice.reducer;

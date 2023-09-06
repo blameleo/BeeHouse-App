@@ -1,8 +1,24 @@
 import React, { useState } from "react";
 import { BsSearch, BsGeoAlt, BsFillFunnelFill } from "react-icons/bs";
 import { GiBee } from "react-icons/gi";
+import { useDispatch, useSelector } from "react-redux";
+import { searchJobs } from "../Redux/slice/jobSlice";
 
 export default function SearchBar() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const dispatch = useDispatch();
+
+  const handleSearch = () => {
+    setSearchTerm("");
+    dispatch(searchJobs(searchTerm));
+
+    // alert(searchTerm);
+  };
+
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   const [expandedInputs, setExpandedInputs] = useState({});
   const handleInputClick = (inputKey) => {
     setExpandedInputs((prevExpandedInputs) => ({
@@ -57,6 +73,9 @@ export default function SearchBar() {
                 : ""
             }`}
             type="text"
+            name="title"
+            value={searchTerm}
+            onChange={handleChange}
             placeholder="Search gig by title"
             onClick={() => handleInputClick("designer")}
             onBlur={() => handleInputBlur("designer")}
@@ -175,7 +194,10 @@ export default function SearchBar() {
           />
         </div> */}
         <BsFillFunnelFill className="md:hidden block mr-2 text-[20px] text-gray-500" />
-        <GiBee className="text-[35px] cursor-pointer hover:text-purple-600" />
+        <GiBee
+          onClick={handleSearch}
+          className="text-[35px] cursor-pointer hover:text-purple-600"
+        />
       </form>
     </div>
   );
