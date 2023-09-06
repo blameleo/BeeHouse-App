@@ -23,7 +23,7 @@ function Jobs() {
         `http://localhost:4000/jobs/models/getjobs`
       );
       dispatch(fetchJobsSuccess(response.data));
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.log(error);
       dispatch(fetchJobsFailure(error.message));
@@ -54,15 +54,19 @@ function Jobs() {
 
         {loading ? (
           <Loader loaderStyle="  h-[100vh] grid place-items-center yellow-500" />
-        ) : jobs == false ? (
-          <p className="text-black ">There are no jobs available</p>
         ) : (
           <div className="flex flex-wrap sm:px-8 ">
-            {jobs.map((job, i) => {
-              // const randomColor = getRandomColor();
+            {jobs.length === 0 ? (
+              <p className="text-black text-[320px]">
+                You have no jobs ata the moment
+              </p>
+            ) : (
+              jobs.map((job, i) => {
+                // const randomColor = getRandomColor();
 
-              return <JobCard key={i} job={job} />;
-            })}
+                return <JobCard key={i} job={job} />;
+              })
+            )}
           </div>
         )}
       </div>

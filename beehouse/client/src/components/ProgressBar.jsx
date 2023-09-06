@@ -1,7 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-const ProgressBar = ({ id, status, setUpdatedStep, setButtonAvailability }) => {
+const ProgressBar = ({
+  id,
+  application,
+  status,
+  setUpdatedStep,
+  setButtonAvailability,
+}) => {
   const steps = ["Pending", "Audition", "Approved", "Paid"];
   const [selectedStep, setSelectedStep] = useState(status);
 
@@ -9,6 +15,7 @@ const ProgressBar = ({ id, status, setUpdatedStep, setButtonAvailability }) => {
   console.log("mounted");
 
   const handleStepChange = async (e) => {
+    console.log(id);
     const newSelectedStep = e.target.value;
 
     console.log(newSelectedStep);
@@ -16,6 +23,8 @@ const ProgressBar = ({ id, status, setUpdatedStep, setButtonAvailability }) => {
 
     const data = {
       status: newSelectedStep,
+      title: application?.jobId.description,
+      agencyName: application?.jobId.agencyName,
     };
 
     console.log(data);
