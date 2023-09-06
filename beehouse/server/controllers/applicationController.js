@@ -1,9 +1,22 @@
 const ApplicationModel = require("../models/Application.js");
+const NotificationModel = require("../models/Notifications.js");
 
 const applyForJob = async (req, res) => {
   try {
     const { modelUserId, jobId } = req.body;
-    // console.log(modelUserId + " " + jobId);
+
+    const existingApplication = await ApplicationModel.findOne({
+      modelUserId,
+      jobId,
+    });
+
+    if (existingApplication) {
+      // User has already applied for this job
+      return res
+        .status(400)
+        .json({ message: "You have already applied for this job." });
+    }
+
     const newApplication = new ApplicationModel({
       modelUserId,
       jobId,
@@ -32,7 +45,8 @@ const getApplicationsForAgency = async (req, res) => {
         path: "jobId",
         populate: { path: "agencyUserId" }, // Assuming the field name is "agencyUserId"
       })
-      .populate("modelUserId");
+      .populate("modelUserId")
+      .sort({ createdAt: -1 });
 
     const agencyApplications = applications.filter((application) => {
       const jobId = application.jobId;
@@ -50,8 +64,16 @@ const getApplicationsForAgency = async (req, res) => {
   }
 };
 
+const saveNotification = async (userId, message) => {
+  const newNotification = new NotificationModel({
+    userId,
+    message,
+    timestamp: Date.now(),
+  });
+  await newNotification.save();
+};
+
 const updateApplicationStatus = async (req, res) => {
-  console.log("test");
   try {
     const { id } = req.params;
     const { status } = req.body;
@@ -60,8 +82,13 @@ const updateApplicationStatus = async (req, res) => {
     const updatedApplication = await ApplicationModel.findByIdAndUpdate(
       id,
       { status },
-      { new: true } // Return the updated document
+      { new: true }
     );
+
+    const userId = updatedApplication.modelUserId;
+
+    const notificationMessage = `Your application status has been updated to: ${status}`;
+    saveNotification(userId, notificationMessage);
 
     res.json({
       message: "Application status updated",

@@ -38,7 +38,9 @@ const createJob = async (req, res) => {
 
 const getJobsForModels = async (req, res) => {
   try {
-    const jobs = await JobModel.find().populate("agencyUserId", "agencyName");
+    const jobs = await JobModel.find()
+      .populate("agencyUserId", "agencyName")
+      .sort({ createdAt: -1 });
     res.json(jobs);
   } catch (error) {
     console.error(error);

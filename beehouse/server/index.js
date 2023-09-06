@@ -7,6 +7,7 @@ const { jobRouter } = require("./routes/jobRoutes");
 const { applicationRouter } = require("./routes/applicationRoutes");
 
 const { profileRouter } = require("./routes/profileRoutes");
+const { notificationRouter } = require("./routes/notificationRoutes");
 const app = express();
 const port = 4000;
 
@@ -19,6 +20,7 @@ app.use("/user", userRouter);
 app.use("/profile", profileRouter);
 app.use("/jobs", jobRouter);
 app.use("/jobs", applicationRouter);
+app.use("/jobs", notificationRouter);
 
 mongoose.connect(process.env.MONGODB_URL);
 
