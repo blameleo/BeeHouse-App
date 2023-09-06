@@ -20,6 +20,25 @@ const getNotifications = async (req, res) => {
   }
 };
 
+const getNotificationsCount = async (req, res) => {
+  const userId = req.params.id;
+
+  console.log(userId);
+
+  try {
+    const notifications = await NotificationModel.find({ userId }).sort({
+      timestamp: -1,
+    });
+
+    const unreadCount = notifications.filter(
+      (notification) => !notification.isRead
+    ).length;
+    res.json(unreadCount);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const updateReadStatus = async (req, res) => {
   const notificationId = req.params.id;
   const { read } = req.body;
@@ -51,4 +70,4 @@ const updateReadStatus = async (req, res) => {
   }
 };
 
-module.exports = { getNotifications, updateReadStatus };
+module.exports = { getNotifications, updateReadStatus, getNotificationsCount };

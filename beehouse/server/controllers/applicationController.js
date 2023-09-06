@@ -43,7 +43,7 @@ const getApplicationsForAgency = async (req, res) => {
     const applications = await ApplicationModel.find({})
       .populate({
         path: "jobId",
-        populate: { path: "agencyUserId" }, // Assuming the field name is "agencyUserId"
+        populate: { path: "agencyName" }, // Assuming the field name is "agencyUserId"
       })
       .populate("modelUserId")
       .sort({ createdAt: -1 });

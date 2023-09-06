@@ -134,9 +134,9 @@ function AgencyJobs() {
   };
 
   useEffect(() => {
-    if (user && user.user_id && user.agencyName) {
+    if (user && user._id && user.agencyName) {
       setFormInfo({
-        agencyUserId: user.user_id,
+        _id: user._id,
         agencyName: user.agencyName,
         gender: "",
         complexion: "",
@@ -162,7 +162,7 @@ function AgencyJobs() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:4000/jobs/getjobs/${user.user_id}`
+        `http://localhost:4000/jobs/getjobs/${user._id}`
       );
       dispatch(fetchJobsSuccess(response.data));
       setLoading(false);
@@ -174,7 +174,7 @@ function AgencyJobs() {
 
   useEffect(() => {
     fetchAgencyJobs();
-  }, [user?.user_id]);
+  }, [user?._id]);
 
   function getRandomColor() {
     const base = 200; //

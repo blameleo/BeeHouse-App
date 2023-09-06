@@ -22,21 +22,18 @@ export default function AgencyProfile() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  
   const [imagePreviews, setImagePreviews] = useState({
     displayPicUrl: null,
   });
 
   const [formInfo, setFormInfo] = useState({
-    user_id: "",
-    agencyName: "", 
-    telephone: "", 
+    _id: "",
+    agencyName: "",
+    telephone: "",
     location: "",
     displayPicUrl: "",
-    about:"",
+    about: "",
   });
-
-  
 
   const handleSelectChange = (name, value) => {
     setFormInfo((prevFormInfo) => ({
@@ -70,22 +67,14 @@ export default function AgencyProfile() {
     reader.readAsDataURL(selectedFile4);
   };
 
- 
-
-   
-
-  
-
-  
-
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
     const formData = new FormData();
     formData.append("displayPicUrl", displayPic);
     // formData.append("idCardUrl", idCardPic);
-   console.log(formInfo)
-    
+    console.log(formInfo);
+
     try {
       const response = await axios.put(
         "http://localhost:4000/profile/user",
@@ -127,14 +116,12 @@ export default function AgencyProfile() {
   useEffect(() => {
     if (user) {
       setFormInfo({
-        user_id: cookies.UserId,
+        _id: cookies.UserId,
         agencyName: user.agencyName,
         telephone: user.telephone,
         location: user.location,
         displayPicUrl: user.displayPicUrl,
-        about:user.about,
-
-       
+        about: user.about,
       });
     }
   }, [user]);
@@ -219,8 +206,6 @@ export default function AgencyProfile() {
               />
             </div>
 
-           
-
             <div className="flex flex-col items-center">
               <label htmlFor="" className="text-black">
                 Location:
@@ -238,18 +223,14 @@ export default function AgencyProfile() {
 
             <div className="flex flex-col items-center text-black">
               <label htmlFor="">About</label>
-              <textarea 
-              className="outline-none border px-3 border-gray-400 mb-3 text-black w-[350px] lg:w-[500px] mt-1 h-48 rounded-lg" 
-              placeholder="About"
-              onChange={handleInputChange}
-              value={formInfo.about}
-              name="about"
+              <textarea
+                className="outline-none border px-3 border-gray-400 mb-3 text-black w-[350px] lg:w-[500px] mt-1 h-48 rounded-lg"
+                placeholder="About"
+                onChange={handleInputChange}
+                value={formInfo.about}
+                name="about"
               />
             </div>
-
-           
-
-            
 
             <div className="flex  justify-center">
               <button

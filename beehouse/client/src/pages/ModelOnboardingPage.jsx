@@ -27,7 +27,7 @@ function ModelOnboardingPage() {
   });
 
   const [formInfo, setFormInfo] = useState({
-    user_id: cookies.UserId,
+    _id: cookies.UserId,
     firstName: "",
     lastName: "",
     gender: "",
