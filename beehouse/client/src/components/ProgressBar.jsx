@@ -5,41 +5,43 @@ const ProgressBar = ({ id, status, setUpdatedStep, setButtonAvailability }) => {
   const steps = ["Pending", "Audition", "Approved", "Paid"];
   const [selectedStep, setSelectedStep] = useState(status);
 
-  console.log(id);
+  // console.log(id);l
+  console.log("mounted");
 
   const handleStepChange = async (e) => {
     const newSelectedStep = e.target.value;
-    // setSelectedStep(newSelectedStep);
-    setSelectedStep(async (prevSelectedStep) => {
-      if (prevSelectedStep !== newSelectedStep) {
-        const data = {
-          status: newSelectedStep,
-        };
 
-        try {
-          const response = await axios.put(
-            `http://localhost:4000/jobs/${id}/status`,
-            data
-          );
+    console.log(newSelectedStep);
+    setSelectedStep(newSelectedStep);
 
-          if (response.status === 200) {
-            setSelectedStep(response.data.data.status);
+    const data = {
+      status: newSelectedStep,
+    };
 
-            if (response.data.data.status === "Approved") {
-              setUpdatedStep(response.data.data.status);
-              setButtonAvailability(id, true);
-            } else {
-              setButtonAvailability(id, false);
-            }
-          }
+    console.log(data);
 
-          console.log(response);
-        } catch (error) {
-          console.log(error);
+    try {
+      const response = await axios.put(
+        `http://localhost:4000/jobs/${id}/status`,
+        data
+      );
+
+      if (response.status === 200) {
+        setSelectedStep(response.data.data.status);
+
+        if (response.data.data.status === "Approved") {
+          setButtonAvailability(id, true);
+
+          setUpdatedStep(response.data.data.status);
+        } else {
+          setButtonAvailability(id, false);
         }
       }
-      return newSelectedStep; // Update the state with the new value
-    });
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   //   const canProgress = steps.indexOf(selectedStep) > 0;

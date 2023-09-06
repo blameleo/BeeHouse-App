@@ -23,7 +23,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div className=" bg-black fixed z-20 w-full top-12 text-yellow-500 py-5 grid place-items-center   px-6">
+    <div className=" bg-black  fixed z-20 w-full top-12 text-yellow-500 py-5 grid place-items-center   px-6">
       <form
         action=""
         className={`flex  items-center  ${

@@ -4,7 +4,7 @@ const JobModel = require("../models/Jobs");
 const createJob = async (req, res) => {
   try {
     const {
-      agencyUserId,
+      _id,
       description,
       stature,
       complexion,
@@ -17,7 +17,7 @@ const createJob = async (req, res) => {
     } = req.body;
 
     const newJob = new JobModel({
-      agencyUserId,
+      agencyUserId: _id,
       description,
       stature,
       agencyName,
@@ -28,6 +28,8 @@ const createJob = async (req, res) => {
       color,
       location,
     });
+
+    console.log(newJob);
     await newJob.save();
     res.status(201).json({ message: "Job created successfully", data: newJob });
   } catch (error) {
@@ -38,7 +40,9 @@ const createJob = async (req, res) => {
 
 const getJobsForModels = async (req, res) => {
   try {
-    const jobs = await JobModel.find().populate("agencyUserId", "agencyName");
+    const jobs = await JobModel.find()
+      .populate("agencyName")
+      .sort({ createdAt: -1 });
     res.json(jobs);
   } catch (error) {
     console.error(error);
@@ -66,7 +70,7 @@ const deleteJob = async (req, res) => {
 const getjobsForAgency = async (req, res) => {
   try {
     const userId = req.params.id;
-    // console.log(req.params.id);
+    console.log(req.params.id);
     const jobs = await JobModel.find({ agencyUserId: userId });
     res.json(jobs);
   } catch (error) {
@@ -80,7 +84,7 @@ const updateJob = async (req, res) => {
     const formData = req.body;
 
     console.log(formData);
-    const query = { agencyId: formData._id };
+    const query = { _id: formData._id };
     const updatedDocument = {
       $set: {
         description: formData.description,

@@ -35,7 +35,7 @@ export default function ModelEditPage() {
   });
 
   const [formInfo, setFormInfo] = useState({
-    user_id: "",
+    _id: "",
     firstName: "",
     lastName: "",
     gender: "",
@@ -190,7 +190,7 @@ export default function ModelEditPage() {
   useEffect(() => {
     if (user) {
       setFormInfo({
-        user_id: cookies.UserId,
+        _id: cookies.UserId,
         firstName: user.firstName,
         lastName: user.lastName,
         gender: user.gender,

@@ -2,7 +2,7 @@ import React from "react";
 import { Audio } from "react-loader-spinner";
 
 export default function Loader({ loaderStyle }) {
-  console.log(loaderStyle);
+  // console.log(loaderStyle);
   return (
     <div className={`${loaderStyle}`}>
       <Audio

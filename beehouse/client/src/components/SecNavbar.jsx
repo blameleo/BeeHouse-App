@@ -8,6 +8,11 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser, clearUser } from "../Redux/slice/userSlice";
+import Notification from "./Notification";
+import {
+  fetchNotificationSuccess,
+  unreadNotificationsCount,
+} from "../Redux/slice/notificationsSlice";
 
 function SecNavbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +21,25 @@ function SecNavbar() {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+  const newNotificationsCount = useSelector(
+    (state) => state.notification.newNotificationsCount
+  );
   const dispatch = useDispatch();
+
+  const notifications = useSelector(
+    (state) => state.notification.notifications
+  );
+
+  // console.log(newNotificationsCount);
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleNotification = () => {
+    // alert("hi");
+    setIsVisible(!isVisible);
+  };
+
+  console.log(user);
 
   const logOut = () => {
     removeCookie("Email");
@@ -39,6 +62,9 @@ function SecNavbar() {
   };
   const userId = cookies.UserId;
 
+  // useEffect(() => {
+  // }, []);
+
   const getUser = async () => {
     try {
       const response = await axios.get("http://localhost:4000/user/getuser", {
@@ -46,14 +72,29 @@ function SecNavbar() {
       });
       // setUser(response.data);
       dispatch(setUser(response.data));
-      setCookie("userData", response.data);
+      // setCookie("userData", response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // useEffect(()=>{
-  // },[])
+  const getNotificationsCount = async () => {
+    console.log(userId);
+    try {
+      const response = await axios.put(
+        `http://localhost:4000/jobs//notifications/count/${userId}`
+      );
+
+      console.log(response);
+      dispatch(unreadNotificationsCount(response.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getNotificationsCount();
+  }, []);
 
   useEffect(() => {
     getUser();
@@ -73,7 +114,7 @@ function SecNavbar() {
   // console.log(user);
 
   return (
-    <div className="bg-black fixed top-0 z-30 text-yellow-500 flex items-center justify-between text-sm p-4  w-full">
+    <div className="bg-black  fixed top-0 z-30 text-yellow-500 flex items-center justify-between text-sm p-4  w-full">
       <div className=" ">
         <Logo />
 
@@ -142,22 +183,37 @@ function SecNavbar() {
             <BsFillCaretDownFill className="ml-1 text-xs" />
           </div>
 
-          <div className="border relative rounded-full   border-yellow-500 w-8 h-8 grid place-items-center ">
-            <span className="text-white font-black text-[13px] bg-red-500 rounded-full px-[6px] text-center absolute left-5 bottom-4">
+          <div className="border relative rounded-full cursor-pointer  border-yellow-500 w-8 h-8 grid place-items-center ">
+            {/* <span className="text-white font-black text-[13px] bg-red-500 rounded-full px-[6px] text-center absolute left-5 bottom-4">
               1
-            </span>
+            </span> */}
             <BsFillChatLeftDotsFill className="hover:text-purple-600 cursor-pointer" />
           </div>
           {/* <div className="border rounded-full  border-yellow-500 w-8 h-8 grid place-items-center">
             <BsGear className="hover:text-purple-600 cursor-pointer" />
           </div> */}
 
-          <div className="border relative rounded-full  border-yellow-500 w-8 h-8 grid place-items-center">
+          <div
+            className="border relative rounded-full cursor-pointer border-yellow-500 w-8 h-8 grid place-items-center"
+            onClick={toggleNotification}
+          >
             <BsBell className="hover:text-purple-600 cursor-pointer" />
+            {/* {newNotificationsCount > 0 && ( */}
+            <span className="text-white font-black text-[13px] bg-red-500 rounded-full px-[6px] text-center absolute left-[20px] bottom-4">
+              {newNotificationsCount > 0 ? newNotificationsCount : null}
+            </span>
+            {/* )} */}
           </div>
         </div>
       </div>
       <GiTreeBeehive className="sm:hidden text-[30px] cursor-pointer" />
+
+      {isVisible && (
+        <Notification
+          isVisible={isVisible}
+          toggleNotification={toggleNotification}
+        />
+      )}
     </div>
   );
 }
