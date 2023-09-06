@@ -57,7 +57,7 @@ function Jobs() {
         ) : jobs == false ? (
           <p className="text-black ">There are no jobs available</p>
         ) : (
-          <div className="flex flex-wrap sm:px-8 ">
+          <div className="flex flex-wrap justify-center sm:px-8 ">
             {jobs.map((job, i) => {
               // const randomColor = getRandomColor();
 

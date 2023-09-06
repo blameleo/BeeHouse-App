@@ -254,7 +254,7 @@ export default function AgencyProfile() {
             <div className="flex  justify-center">
               <button
                 onClick={handleSubmit}
-                className="mr-5 mt-5 bg-yellow-500 hover:bg-purple-600 border-2 text-black hover:text-white  h-[50px] rounded-lg ml-[30px] sm:ml-[0px] w-[280px] sm:w-[350px]   w-full lg:w-[500px] "
+                className="mr-5 mt-5 bg-yellow-500 hover:bg-purple-600 border-2 text-black hover:text-white  h-[50px] rounded-lg ml-[30px] sm:ml-[0px] w-[280px] sm:w-[350px]    lg:w-[500px] "
               >
                 update
               </button>

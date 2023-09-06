@@ -72,7 +72,7 @@ function AgencyModelCards() {
 
             return (
               <div className="">
-                <div className="   border mt-5 rounded-2xl bg-white shadow-2xl w-[90%] sm:w-[100%]  p-2 ">
+                <div className="   border mt-5 rounded-2xl bg-white shadow-2xl w-[95%] sm:w-[100%]  p-2 ">
                   <div className="flex justify-between">
                     <div className="   ">
                       <div className="flex   flex-col place-items-center md:flex-row  ">

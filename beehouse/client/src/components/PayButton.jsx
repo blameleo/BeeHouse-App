@@ -20,14 +20,14 @@ export default function PayButton({
       name,
     },
     publicKey,
-    // text: " Pay via momo",
+    // text: "Pay via momo",
     onSuccess: () =>
       alert("Thanks for doing business with us! Come back soon!!"),
     onClose: () => alert("Wait! You need this oil, don't go!!!!"),
   };
   return (
     <div
-      className={`rounded p-2 text-sm ${
+      className={`rounded p-2 text-xs ${
         buttonAvailability || status === "Approved"
           ? "bg-yellow-500 text-white font-bold flex items-center cursor-pointer hover:bg-purple-600"
           : "bg-gray-200 text-gray-400 hover:cursor-not-allowed flex items-center"
@@ -35,7 +35,7 @@ export default function PayButton({
       disabled={updatedStep !== "Approved" || buttonAvailability}
     >
       <GiTakeMyMoney className="mr-1 text-xl" />
-      {<PaystackButton {...componentProps}>Pay via momo</PaystackButton>}{" "}
+      {<PaystackButton {...componentProps}>Momo pay</PaystackButton>}{" "}
     </div>
   );
 }
