@@ -12,6 +12,8 @@ export default function JobCard({ job }) {
 
   const date = new Date(job.createdAt);
 
+  console.log(user);
+
   const day = date.getDate();
 
   const monthNames = [

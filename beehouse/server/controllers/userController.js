@@ -17,9 +17,9 @@ const registerUser = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const generatedUserId = uuidv4();
+    // const generatedUserId = uuidv4();
     const newUser = new UserModel({
-      user_id: generatedUserId,
+      // user_id: generatedUserId,
       email,
       password: hashedPassword,
       type,
@@ -34,7 +34,7 @@ const registerUser = async (req, res) => {
     );
     res.status(200).json({
       token,
-      userId: generatedUserId,
+      userId: newUser._id,
       email,
       message: "User registered successfully",
     });
@@ -65,9 +65,7 @@ const loginUser = async (req, res) => {
       { ...user.toJSON(), exp: expirationTime },
       process.env.JWT_SECRETKEY
     );
-    res
-      .status(200)
-      .json({ token, userId: user.user_id, email, type: user.type });
+    res.status(200).json({ token, userId: user._id, email, type: user.type });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "An error occurred during login" });
@@ -87,7 +85,7 @@ const getUser = async (req, res) => {
   const userId = req.query.userId;
   try {
     // const users = await UserModel.find();
-    const query = { user_id: userId };
+    const query = { _id: userId };
     const user = await UserModel.findOne(query);
     res.send(user);
   } catch (error) {

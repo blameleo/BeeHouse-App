@@ -18,7 +18,7 @@ function AgencySecurity() {
     setLoading(true);
 
     const values = {
-      user_id: cookies.UserId,
+      _id: cookies.UserId,
       oldPassword,
       newPassword,
     };
@@ -147,4 +147,3 @@ function AgencySecurity() {
 }
 
 export default AgencySecurity;
-

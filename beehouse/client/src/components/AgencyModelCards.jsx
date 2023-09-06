@@ -25,7 +25,7 @@ function AgencyModelCards() {
   const getApplications = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/jobs/model/applications/${user?.user_id}`
+        `http://localhost:4000/jobs/model/applications/${user?._id}`
       );
 
       if (response.status === 200) {

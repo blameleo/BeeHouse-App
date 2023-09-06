@@ -7,7 +7,7 @@ const updateUserProfile = async (req, res) => {
     const formData = req.body;
 
     console.log(formData);
-    const query = { user_id: formData.user_id };
+    const query = { _id: formData._id };
 
     const updatedDocument = {
       $set: {
@@ -64,17 +64,17 @@ const updateUserProfile = async (req, res) => {
 
 const changePassword = async (req, res) => {
   try {
-    const { oldPassword, newPassword, user_id } = req.body;
+    const { oldPassword, newPassword, _id } = req.body;
     // const query = { user_id: user_id };
 
     // console.log(query);
 
-    if (!oldPassword || !newPassword || !user_id) {
+    if (!oldPassword || !newPassword || !_id) {
       return res.status(400).json({ message: "Missing required fields" });
     }
     // const userIdObject = mongoose.Types.ObjectId(user_id);
 
-    const user = await UserModel.findOne({ user_id: user_id });
+    const user = await UserModel.findOne({ _id: _id });
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });

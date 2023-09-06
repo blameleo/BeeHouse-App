@@ -26,9 +26,9 @@ function SecNavbar() {
   );
   const dispatch = useDispatch();
 
-  // const notifications = useSelector(
-  //   (state) => state.notification.notifications
-  // );
+  const notifications = useSelector(
+    (state) => state.notification.notifications
+  );
 
   // console.log(newNotificationsCount);
 
@@ -78,25 +78,26 @@ function SecNavbar() {
     }
   };
 
-  const getNotifications = async () => {
-    console.log(user?._id);
+  const getNotificationsCount = async () => {
+    console.log(userId);
     try {
-      const response = await axios.get(
-        `http://localhost:4000/jobs/notifications/${user._id}`
+      const response = await axios.put(
+        `http://localhost:4000/jobs//notifications/count/${userId}`
       );
-      console.log(response.data.unreadCount);
-      dispatch(fetchNotificationSuccess(response.data.notifications));
-      dispatch(unreadNotificationsCount(response.data.unreadCount));
-    } catch (error) {}
+
+      console.log(response);
+      dispatch(unreadNotificationsCount(response.data));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  // useEffect(()=>{
-  // },[])
+  useEffect(() => {
+    getNotificationsCount();
+  }, []);
 
   useEffect(() => {
     getUser();
-
-    // getNotifications();
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -197,11 +198,11 @@ function SecNavbar() {
             onClick={toggleNotification}
           >
             <BsBell className="hover:text-purple-600 cursor-pointer" />
-            {newNotificationsCount > 0 && (
-              <span className="text-white font-black text-[13px] bg-red-500 rounded-full px-[6px] text-center absolute left-[20px] bottom-4">
-                {newNotificationsCount}
-              </span>
-            )}
+            {/* {newNotificationsCount > 0 && ( */}
+            <span className="text-white font-black text-[13px] bg-red-500 rounded-full px-[6px] text-center absolute left-[20px] bottom-4">
+              {newNotificationsCount > 0 ? newNotificationsCount : null}
+            </span>
+            {/* )} */}
           </div>
         </div>
       </div>
