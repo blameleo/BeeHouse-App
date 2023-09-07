@@ -19,7 +19,7 @@ function AgencyDash() {
         <MiniDetailsCard />
       </div> */}
 
-      <div className="    ">
+      <div className="mr-[2%]    ">
         <AgencyModelCards />
       </div>
 
