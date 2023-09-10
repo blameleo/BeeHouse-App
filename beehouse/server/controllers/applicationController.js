@@ -76,18 +76,18 @@ const saveNotification = async (userId, message) => {
 const updateApplicationStatus = async (req, res) => {
   try {
     const { id } = req.params;
-    const { status } = req.body;
+    const { status, title, agencyName } = req.body;
     console.log(status);
 
     const updatedApplication = await ApplicationModel.findByIdAndUpdate(
       id,
-      { status },
+      { status, title, agencyName },
       { new: true }
     );
 
     const userId = updatedApplication.modelUserId;
 
-    const notificationMessage = `Your application status has been updated to: ${status}`;
+    const notificationMessage = `Your application status for the job: ${title} by ${agencyName} has been updated to: ${status}`;
     saveNotification(userId, notificationMessage);
 
     res.json({

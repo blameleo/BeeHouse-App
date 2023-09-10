@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { BsFillCircleFill, BsFillXCircleFill } from "react-icons/bs";
+
 import {
   fetchNotificationSuccess,
   unreadNotificationsCount,
@@ -72,28 +74,35 @@ function Notification({ isVisible, toggleNotification }) {
             <p className="text-lg font-bold text-white text-center">
               Notifications
             </p>
-
-            <p
+            <BsFillXCircleFill
               className=" text-red-600 cursor-pointer text-lg "
               onClick={toggleNotification}
-            >
-              x
-            </p>
+            />
           </div>
           <ul className="">
             {notifications?.map((notification) => {
               return (
-                <li
-                  key={notification._id}
-                  className={`border-b border-gray-300 flex items-center cursor-pointer h-24 ${
-                    notification.isRead || notification.read
-                      ? "text-gray-500"
-                      : "text-white"
-                  }`}
-                  onClick={() => handleNotificationClick(notification._id)}
-                >
-                  {notification.message}
-                </li>
+                <div className="flex items-center">
+                  <li
+                    key={notification._id}
+                    className={`border-b border-gray-300 flex items-center cursor-pointer h-24 ${
+                      notification.isRead || notification.read
+                        ? "text-gray-500"
+                        : "text-white"
+                    }`}
+                    onClick={() => handleNotificationClick(notification._id)}
+                  >
+                    {notification.message}
+                  </li>
+
+                  <BsFillCircleFill
+                    className={`text-2xl text-yellow-300 ${
+                      notification.isRead || notification.read
+                        ? "hidden"
+                        : "block"
+                    }`}
+                  />
+                </div>
               );
             })}
           </ul>
