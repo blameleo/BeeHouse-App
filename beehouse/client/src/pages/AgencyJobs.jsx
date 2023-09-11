@@ -241,7 +241,7 @@ function AgencyJobs() {
   };
 
   return (
-    <div className="flex flex-col  -500 ml-20 lg:ml-60  items-center     ">
+    <div className="flex flex-col   ml-20 lg:ml-60  items-center     ">
       {/* <div className="flex">
         <h1 className="mt-20 text-xl ">Post an</h1>
         <RiAdvertisementFill className="mt-12 ml-2 text-6xl text-yellow-500" />
@@ -282,7 +282,7 @@ function AgencyJobs() {
 
             console.log(`Day: ${day}, Month: ${month}, Year: ${year}`);
             return (
-              <div className=" h-[20%] w-[250px] mr-5 border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500  mb-10">
+              <div className=" h-[20%] w-[250px] sm:ml-[20px] mr-5 border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500  mb-10">
                 <div
                   className=" bg-blue-100 rounded-[20px] m-2 p-2"
                   style={{ backgroundColor: job.color }}

@@ -55,10 +55,10 @@ function Jobs() {
         {loading ? (
           <Loader loaderStyle="  h-[100vh] grid place-items-center yellow-500" />
         ) : (
-          <div className="flex flex-wrap sm:px-8 ">
+          <div className="flex flex-wrap justify-center sm:px-8 ">
             {jobs.length === 0 ? (
               <p className="text-black text-[320px]">
-                You have no jobs ata the moment
+                You have no jobs  available
               </p>
             ) : (
               jobs.map((job, i) => {

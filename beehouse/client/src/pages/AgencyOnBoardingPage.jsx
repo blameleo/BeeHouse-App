@@ -140,7 +140,7 @@ export default function AgencyOnBoardingPage() {
   };
 
   return (
-    <div className="bg-black font-volkhorn  ">
+    <div className="bg-black font-volkhorn     ">
       <SecNavbar />
       <div className="flex justify-center mb-12">
         <h1 className="text-4xl text-yellow-500 mt-40 text-bold">
@@ -155,7 +155,7 @@ export default function AgencyOnBoardingPage() {
           <label htmlFor="">Agency Name :</label>
           <br />
           <input
-            className={`border px-3 mb-3 outline-none mt-1 w-[400px] md:w-[500px] h-14 rounded-lg ${
+            className={`border px-3 mb-3  outline-none mt-1 w-[300px] sm:w-[400px] md:w-[500px] h-14 rounded-lg ${
               errors.agencyName ? "border-red-500" : "border-yellow-500"
             } bg-black`}
             type="text"
@@ -173,7 +173,7 @@ export default function AgencyOnBoardingPage() {
           <label htmlFor="">About :</label>
           <br />
           <textarea
-            className={`border px-3 outline-none mt-1 w-[400px] md:w-[500px] h-14 rounded-lg ${
+            className={`border px-3 outline-none mt-1 w-[300px] sm:w-[400px] md:w-[500px h-14 rounded-lg ${
               errors.about ? "border-red-500" : "border-yellow-500"
             } bg-black`}
             placeholder="About"
@@ -194,7 +194,7 @@ export default function AgencyOnBoardingPage() {
           </label>
           <br />
           <input
-            className={`border px-3 mb-3 outline-none mt-1 w-[400px] md:w-[500px] h-14 rounded-lg ${
+            className={`border px-3 mb-3 outline-none mt-1 w-[300px] sm:w-[400px] md:w-[500px h-14 rounded-lg ${
               errors.location ? "border-red-500" : "border-yellow-500"
             } bg-black`}
             type="text"
@@ -249,7 +249,7 @@ export default function AgencyOnBoardingPage() {
             />
           </div>
           {errors.telephone && (
-            <div className="text-red-500 text-xs mt-2">{errors.telephone}</div>
+            <div className="text-red-500 text-xs mb-2 mt-2">{errors.telephone}</div>
           )}
         </div>
 

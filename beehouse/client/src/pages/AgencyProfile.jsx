@@ -178,7 +178,7 @@ export default function AgencyProfile() {
               </label>
 
               <input
-                className=" border px-3 border-gray-400 outline-none text-black  mt-1  h-14 w-[350px] lg:w-[500px]  rounded-lg "
+                className=" border px-3 border-gray-400 outline-none text-black  mt-1  h-14 ml-[20px] sm:ml-[0px] w-[280px] sm:w-[350px]   lg:w-[500px]  rounded-lg "
                 type="text"
                 onChange={handleInputChange}
                 value={formInfo.agencyName}
@@ -193,7 +193,7 @@ export default function AgencyProfile() {
                 Telephone:
               </label>
               <input
-                className="border  outline-none px-3 border-gray-400 text-black w-[350px] lg:w-[500px] mt-1  h-14  rounded-lg"
+                className="border  outline-none px-3 border-gray-400 text-black ml-[20px] sm:ml-[0px] w-[280px] sm:w-[350px]  lg:w-[500px] mt-1  h-14  rounded-lg"
                 type="tel"
                 placeholder="+233 Phone Number"
                 name="telephone"
@@ -211,7 +211,7 @@ export default function AgencyProfile() {
                 Location:
               </label>
               <input
-                className=" outline-none border px-3 border-gray-400 mb-3 text-black w-[350px] lg:w-[500px]  mt-1  h-14  rounded-lg "
+                className=" outline-none border px-3 border-gray-400 mb-3 text-black ml-[20px] sm:ml-[0px] w-[280px] sm:w-[350px] lg:w-[500px]  mt-1  h-14  rounded-lg "
                 type="text"
                 placeholder="Location"
                 onChange={handleInputChange}
@@ -224,7 +224,7 @@ export default function AgencyProfile() {
             <div className="flex flex-col items-center text-black">
               <label htmlFor="">About</label>
               <textarea
-                className="outline-none border px-3 border-gray-400 mb-3 text-black w-[350px] lg:w-[500px] mt-1 h-48 rounded-lg"
+                className="outline-none border px-3 border-gray-400 mb-3 text-black ml-[20px] sm:ml-[0px] w-[280px]  sm:w-[350px] lg:w-[500px] mt-1 h-48 rounded-lg"
                 placeholder="About"
                 onChange={handleInputChange}
                 value={formInfo.about}
@@ -235,7 +235,7 @@ export default function AgencyProfile() {
             <div className="flex  justify-center">
               <button
                 onClick={handleSubmit}
-                className="mr-5 mt-5 bg-yellow-500 hover:bg-purple-600 border-2 text-black hover:text-white  h-[50px] rounded-lg w-[340px]  w-full lg:w-[500px] "
+                className="mr-5 mt-5 bg-yellow-500 hover:bg-purple-600 border-2 text-black hover:text-white  h-[50px] rounded-lg ml-[30px] sm:ml-[0px] w-[280px] sm:w-[350px]   lg:w-[500px] "
               >
                 update
               </button>

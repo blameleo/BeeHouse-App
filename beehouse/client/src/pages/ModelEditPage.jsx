@@ -217,8 +217,8 @@ export default function ModelEditPage() {
       {loading ? (
         <Loader loaderStyle=" grid place-items-center h-[100vh]" />
       ) : (
-        <div className=" font-volkhorn  px-4 pt-">
-          <div className="flex justify-center mt-10">
+        <div className=" font-volkhorn   lg:mr-[200px] px-4 pt-">
+          <div className="flex justify-center  mt-10">
             <h1 className="  text-xl py-4 text-bold">Update user profile</h1>
           </div>
           <form action="" className=" text-white   " onSubmit={handleSubmit}>
@@ -256,13 +256,13 @@ export default function ModelEditPage() {
               />
             </div>
 
-            <div className="flex flex-col lg:items-center ">
-              <label htmlFor="" className="text-black">
+            <div className="flex flex-col lg:items-center sm:ml-[70px] sm:w-[500px] ">
+              <label htmlFor="" className="text-black ">
                 First Name:
               </label>
 
               <input
-                className=" border px-3 border-gray-400 outline-none text-black  mt-1  h-14 lg:w-[500px]  rounded-lg "
+                className=" border px-3 border-gray-400 outline-none text-black  mt-1   h-14 lg:w-[500px]  rounded-lg "
                 type="text"
                 onChange={handleInputChange}
                 value={formInfo.firstName}
@@ -272,7 +272,7 @@ export default function ModelEditPage() {
               />
             </div>
 
-            <div className="flex flex-col lg:items-center">
+            <div className="flex flex-col sm:ml-[70px] sm:w-[500px] lg:items-center">
               <label htmlFor="" className="text-black ">
                 Last Name:
               </label>
@@ -287,7 +287,7 @@ export default function ModelEditPage() {
               />
             </div>
 
-            <div className="flex flex-col lg:items-center">
+            <div className="flex flex-col sm:ml-[70px] sm:w-[500px] lg:items-center">
               <label htmlFor="" className="font-volkhorn text-black">
                 Telephone:
               </label>
@@ -305,7 +305,7 @@ export default function ModelEditPage() {
               />
             </div>
 
-            <div className="flex flex-col lg:items-center">
+            <div className="flex flex-col sm:ml-[70px] sm:w-[500px] lg:items-center">
               <label htmlFor="" className="font-volkhorn text-black">
                 Height:
               </label>
@@ -320,7 +320,7 @@ export default function ModelEditPage() {
               />
             </div>
 
-            <div className="flex flex-col lg:items-center">
+            <div className="flex sm:ml-[70px] sm:w-[500px] flex-col lg:items-center">
               <label htmlFor="" className="text-black">
                 Location:
               </label>
@@ -335,7 +335,7 @@ export default function ModelEditPage() {
               />
             </div>
 
-            <div className="flex flex-col lg:items-center mb-4">
+            <div className="flex flex-col sm:ml-[70px] sm:w-[500px] lg:items-center mb-4">
               <label htmlFor="stature" className="font-volkhorn text-black">
                 Stature :
               </label>
@@ -405,7 +405,7 @@ export default function ModelEditPage() {
               </ul>
             </div>
 
-            <div className=" flex flex-col lg:items-center">
+            <div className=" flex flex-col sm:ml-[70px] sm:w-[500px] lg:items-center">
               <label htmlFor="" className="text-black">
                 Images Upload :
               </label>
@@ -506,10 +506,10 @@ export default function ModelEditPage() {
               </div>
             </div>
 
-            <div className="flex  lg:justify-center">
+            <div className="flex  lg:justify-center sm:ml-[130px] sm:w-[400px]">
               <button
                 onClick={handleSubmit}
-                className="mr-5 mt-5 bg-yellow-500 hover:bg-purple-600 border-2 text-black hover:text-white  h-[50px] rounded-lg  w-full lg:w-[500px] "
+                className="mr-5 mt-5 bg-yellow-500 hover:bg-purple-600  border-2 text-black hover:text-white  h-[50px] rounded-lg  w-full lg:w-[500px] "
               >
                 update
               </button>
