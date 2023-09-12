@@ -1,19 +1,21 @@
-// // Import the functions you need from the SDKs you need
-// import { initializeApp } from "firebase/app";
-// import { getAuth } from "firebase/auth";
-// import {getFirestore} from "firebase/firestore"
-// const firebaseConfig = {
-//   apiKey: "AIzaSyAEGigwfyqjZ5SACPOcMp026wV8hK5VaRw",
-//   authDomain: "beehouse-344de.firebaseapp.com",
-//   projectId: "beehouse-344de",
-//   storageBucket: "beehouse-344de.appspot.com",
-//   messagingSenderId: "780702604232",
-//   appId: "1:780702604232:web:96f635eccba4a3156c7efd",
-//   measurementId: "G-WNE2NSZPW7"
-// };
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-// const app = initializeApp(firebaseConfig);
-// export  const db = getFirestore(app)
-// export const auth = getAuth(app);
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDPRd-NDGTvkugW7n_ahioXQqHrCJFjjLM",
+  authDomain: "beehouse-storage.firebaseapp.com",
+  projectId: "beehouse-storage",
+  storageBucket: "beehouse-storage.appspot.com",
+  messagingSenderId: "951687171518",
+  appId: "1:951687171518:web:4d35ee161af09ca3fafdef",
+  measurementId: "G-10163GRZXS",
+};
 
-// export default app
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+export default app;

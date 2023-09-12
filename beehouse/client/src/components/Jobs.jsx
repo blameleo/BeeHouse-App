@@ -20,7 +20,7 @@ function Jobs() {
     dispatch(fetchJobsStart());
     try {
       const response = await axios.get(
-        `http://localhost:4000/jobs/models/getjobs`
+        `https://beehouse-app-api.vercel.app/jobs/models/getjobs`
       );
       dispatch(fetchJobsSuccess(response.data));
       // console.log(response.data);
@@ -55,10 +55,10 @@ function Jobs() {
         {loading ? (
           <Loader loaderStyle="  h-[100vh] grid place-items-center yellow-500" />
         ) : (
-          <div className="flex flex-wrap sm:px-8 ">
+          <div className="flex flex-wrap justify-center sm:px-8 ">
             {jobs.length === 0 ? (
-              <p className="text-black text-[320px]">
-                You have no jobs ata the moment
+              <p className="text-black text-[20px]">
+                You have no jobs available
               </p>
             ) : (
               jobs.map((job, i) => {

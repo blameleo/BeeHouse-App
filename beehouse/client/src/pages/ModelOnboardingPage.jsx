@@ -66,6 +66,7 @@ function ModelOnboardingPage() {
 
   const handleCountryCodeChange = (event) => {
     const selectedCountryCode = event.target.value;
+    console.log(selectedCountryCode);
     setFormInfo((prevFormInfo) => ({
       ...prevFormInfo,
       countryCode: selectedCountryCode,
@@ -178,6 +179,7 @@ function ModelOnboardingPage() {
   };
 
   const handleSubmit = async (e) => {
+    console.log(formInfo);
     e.preventDefault();
 
     const newErrors = {};
@@ -198,11 +200,10 @@ function ModelOnboardingPage() {
 
     const formData = new FormData();
     formData.append("displayPicUrl", displayPic);
-    // formData.append("idCardUrl", idCardPic);
     formData.append("imageUrl1", image1);
     formData.append("imageUrl2", image2);
     formData.append("imageUrl3", image3);
-    console.log(formInfo);
+
     try {
       const response = await axios.put(
         "http://localhost:4000/profile/user",
@@ -214,12 +215,15 @@ function ModelOnboardingPage() {
         }
       );
 
+      console.log(response);
+      console.log(formInfo);
+
       // console.log(response.data.message);
       // console.log(response.data.data);
       // setCookie("userdata", response.data.data.firstName);
 
       setInfo(response.data.message);
-      navigate("/home");
+      // navigate("/home");
     } catch (err) {
       console.log(err);
     }
@@ -240,6 +244,7 @@ function ModelOnboardingPage() {
         action=""
         className="px-20 text-white flex flex-col md:flex-row justify-between "
         onSubmit={handleSubmit}
+        enctype="multipart/form-data"
       >
         <div className="">
           <label htmlFor="" className="mb">
@@ -248,7 +253,7 @@ function ModelOnboardingPage() {
           <br></br>
 
           <input
-            className={`border px-3 border-yellow-500 outline-none bg-black mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
+            className={`border px-3 border-yellow-500 outline-none bg-black mt-1 w-[280px] sm:w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
               errors.firstName ? "border-red-500" : ""
             }`}
             type="text"
@@ -267,7 +272,7 @@ function ModelOnboardingPage() {
           <label htmlFor="">Last Name :</label>
           <br />
           <input
-            className={`border px-3 border-yellow-500 outline-none bg-black mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
+            className={`border px-3 border-yellow-500 outline-none bg-black mt-1 w-[280px] sm:w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
               errors.lastName ? "border-red-500" : ""
             }`}
             placeholder="Last Name"
@@ -300,14 +305,14 @@ function ModelOnboardingPage() {
                 id="male"
               />
               <label
-                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-5 text-center w-[100px] bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="male"
               >
                 Male
               </label>
             </li>
 
-            <li className="relative">
+            <li className="relative ml-10">
               <input
                 className="sr-only peer"
                 type="radio"
@@ -317,7 +322,7 @@ function ModelOnboardingPage() {
                 id="female"
               />
               <label
-                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-5 w-[100px] bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="female"
               >
                 Female
@@ -338,15 +343,14 @@ function ModelOnboardingPage() {
             <div className="flex">
               <div className="relative ">
                 <select
-                  className="border border-yellow-500 mr-3 outline-none pr-8 bg-black mt-1 h-14 rounded-l rounded-lg appearance-none"
+                  className="border border-yellow-500 mr-3 outline-none w-[90px]  bg-black mt-1 h-14 rounded-l rounded-lg appearance-none"
                   id="countryCode"
                   name="countryCode"
                   value={formInfo.countryCode}
                   onChange={handleCountryCodeChange}
                 >
-                  <option value="">Select Country Code</option>
-                  <option value="+233">+233 (Ghana)</option>{" "}
-                  {/* You can add more country options here */}
+                  <option value="001">+001(us)</option>{" "}
+                  <option value="+233">+233(Gh)</option>{" "}
                 </select>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                   <svg
@@ -365,7 +369,7 @@ function ModelOnboardingPage() {
                 </div>
               </div>
               <input
-                className={`border outline-none px-3 border-yellow-500 bg-black mt-1 w-full h-14 rounded-r rounded-lg ${
+                className={`border outline-none px-3 border-yellow-500 bg-black mt-1 w-[200px] h-14 rounded-r rounded-lg ${
                   errors.telephone ? "border-red-500" : ""
                 }`}
                 type="tel"
@@ -458,7 +462,7 @@ function ModelOnboardingPage() {
           </label>
           <br></br>
           <input
-            className={`outline-none border px-3 border-yellow-500 bg-black mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
+            className={`outline-none border px-3 border-yellow-500 bg-black mt-1  w-[280px] sm:w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
               errors.height ? "border-red-500" : ""
             }`}
             type="number"
@@ -476,7 +480,7 @@ function ModelOnboardingPage() {
           <label htmlFor="">Location:</label>
           <br></br>
           <input
-            className={`outline-none border px-3 border-yellow-500 mb-3 bg-black mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
+            className={`outline-none border px-3 border-yellow-500 mb-3 bg-black  mt-1 w-[280px] sm:w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
               errors.location ? "border-red-500" : ""
             }`}
             type="text"
@@ -505,14 +509,14 @@ function ModelOnboardingPage() {
                 id="dark"
               />
               <label
-                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-5 w-[100px] bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="dark"
               >
                 Dark
               </label>
             </li>
 
-            <li className="relative">
+            <li className="relative ml-10">
               <input
                 className="sr-only peer"
                 type="radio"
@@ -522,7 +526,7 @@ function ModelOnboardingPage() {
                 id="fair"
               />
               <label
-                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-5 w-[100px] bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="fair"
               >
                 Fair
@@ -547,14 +551,14 @@ function ModelOnboardingPage() {
                 id="slim"
               />
               <label
-                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-5 bg-neutral-950 w-[90px] border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="slim"
               >
                 Slim
               </label>
             </li>
 
-            <li className="relative">
+            <li className="relative ml-5">
               <input
                 className="sr-only peer"
                 type="radio"
@@ -564,14 +568,14 @@ function ModelOnboardingPage() {
                 id="Average"
               />
               <label
-                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-5 bg-neutral-950 w-[90px] border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="Average"
               >
                 Average
               </label>
             </li>
 
-            <li className="relative">
+            <li className="relative ml-10">
               <input
                 className="sr-only peer"
                 type="radio"
@@ -581,7 +585,7 @@ function ModelOnboardingPage() {
                 id="chubby"
               />
               <label
-                className="flex p-5 bg-neutral-950 border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
+                className="flex p-5 bg-neutral-950 w-[90px] border border-gray-300 rounded-lg cursor-pointer focus:outline-none  peer-checked:ring-yellow-500 peer-checked:ring-4 peer-checked:border-transparent"
                 htmlFor="chubby"
               >
                 Chubby
@@ -657,12 +661,13 @@ function ModelOnboardingPage() {
 
           <label htmlFor="">Images Upload :</label>
           <br></br>
-          <div className="flex ">
-            <div className="flex items-center mr-5">
+          <div className="flex flex-wrap ">
+            {errors.imageUrl1 && <div className="text-red-500 text-xs">*</div>}
+            <div className="flex items-center mb-3 mr-5">
               <label
                 htmlFor="upload3"
                 className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 ${
-                  errors.imageUrl1 ? "border-red-500" : "border-yellow-500"
+                  errors.imageUrl1 ? "border-yellow-500" : "border-yellow-500"
                 } h-40 w-32 flex items-center justify-center cursor-pointer`}
               >
                 {imagePreviews.imageUrl1 ? (
@@ -684,11 +689,14 @@ function ModelOnboardingPage() {
               />
             </div>
 
-            <div className="flex items-center mr-5">
+            <div className="flex  mb-3  mr-5">
+              {errors.imageUrl2 && (
+                <div className="text-red-500 text-xs">*</div>
+              )}
               <label
                 htmlFor="upload4"
                 className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer ${
-                  errors.imageUrl1 ? "border-red-500" : ""
+                  errors.imageUrl2 ? "border-red-500" : ""
                 }`}
               >
                 {imagePreviews.imageUrl2 ? (
@@ -710,7 +718,10 @@ function ModelOnboardingPage() {
               />
             </div>
 
-            <div className="flex items-center">
+            <div className="flex ">
+              {errors.imageUrl1 && (
+                <div className="text-red-500 text-xs">*</div>
+              )}
               <label
                 htmlFor="upload5"
                 className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer ${
@@ -736,7 +747,7 @@ function ModelOnboardingPage() {
               />
             </div>
           </div>
-          <div className="flex mt-2 justify-around">
+          {/*<div className="flex mt-2 justify-around">
             {errors.imageUrl1 && (
               <div className="text-red-500 text-xs">required</div>
             )}
@@ -746,7 +757,7 @@ function ModelOnboardingPage() {
             {errors.imageUrl3 && (
               <div className="text-red-500 text-xs">required</div>
             )}
-          </div>
+            </div>*/}
         </div>
       </form>
 

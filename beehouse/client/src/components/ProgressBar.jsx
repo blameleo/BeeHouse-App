@@ -31,7 +31,7 @@ const ProgressBar = ({
 
     try {
       const response = await axios.put(
-        `http://localhost:4000/jobs/${id}/status`,
+        `https://beehouse-app-api.vercel.app/jobs/${id}/status`,
         data
       );
 
@@ -61,7 +61,7 @@ const ProgressBar = ({
         {steps.map((step, index) => (
           <div
             key={step}
-            className={`flex  items-center text-sm mx-1 space-x-2 ${
+            className={`flex  place-items-center text-xs  ${
               index <= steps.indexOf(selectedStep)
                 ? "text-green-500"
                 : "text-gray-300"

@@ -25,7 +25,7 @@ function AgencyModelCards() {
   const getApplications = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/jobs/model/applications/${user?._id}`
+        `https://beehouse-app-api.vercel.app/jobs/model/applications/${user?._id}`
       );
 
       if (response.status === 200) {
@@ -74,18 +74,18 @@ function AgencyModelCards() {
               );
 
               return (
-                <div className="">
-                  <div className="   border mt-5 rounded-2xl bg-white shadow-2xl  w-[100%]  p-2 ">
+                <div className="lg:">
+                  <div className="   border mt-5 rounded-2xl bg-white shadow-2xl  w-[95%] sm:w[100%]  p-2  ">
                     <div className="flex justify-between">
                       <div className="   ">
-                        <div className="flex ">
+                        <div className="flex flex-col place-items-center  ">
                           <img
-                            src={`http://localhost:4000/${newUrl}`}
+                            src={application?.modelUserId?.displayPicUrl}
                             className="w-10 h-10  mt-2  rounded-full object-cover"
                             alt=""
                           />
 
-                          <div className=" ml-3 ">
+                          <div className=" ml-1 ">
                             <div className="flex items-center">
                               <BsPersonCircle className="text-sm" />
                               <p className="ml-1  text-sm font-bold">
@@ -156,17 +156,17 @@ function AgencyModelCards() {
                         >
                           <img
                             className="rounded-xl shadow-xl border "
-                            src={`http://localhost:4000/${url1}`}
+                            src={application?.modelUserId?.imageUrl1}
                           />
 
                           <img
                             className="rounded-xl shadow-xl border"
-                            src={`http://localhost:4000/${url2}`}
+                            src={application?.modelUserId?.imageUrl2}
                           />
 
                           <img
                             className="rounded-xl shadow-xl border"
-                            src={`http://localhost:4000/${url3}`}
+                            src={application?.modelUserId?.imageUrl3}
                           />
                         </Carousel>
                       </div>

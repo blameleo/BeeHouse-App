@@ -45,7 +45,7 @@ export default function JobCard({ job }) {
     };
     try {
       const response = await axios.post(
-        "http://localhost:4000/jobs/apply",
+        "https://beehouse-app-api.vercel.app/jobs/apply",
         params
       );
 
@@ -86,7 +86,7 @@ export default function JobCard({ job }) {
     <div>
       <div
         key={job._id}
-        className="  w-[250px] mr-5 border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500  mb-10"
+        className="  w-[250px] mr-5  border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500  mb-10"
       >
         <div
           className=" bg-blue-100 rounded-[20px] m-2 p-2"
