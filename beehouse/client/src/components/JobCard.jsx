@@ -12,7 +12,7 @@ export default function JobCard({ job }) {
 
   const date = new Date(job.createdAt);
 
-  console.log(user);
+  // console.log(user);
 
   const day = date.getDate();
 
@@ -49,7 +49,7 @@ export default function JobCard({ job }) {
         params
       );
 
-      console.log(response);
+      // console.log(response);
       if (response.status === 201) {
         // setIsLoading(false);
 

@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import Logo from "../components/Logo";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { useCookies } from "react-cookie";
-import { FaForumbee } from "react-icons/fa";
 import SecNavbar from "../components/SecNavbar";
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
@@ -11,7 +9,6 @@ import SecNavbar from "../components/SecNavbar";
 function ModelOnboardingPage() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [displayPic, setDisplayPic] = useState(null);
-  const [idCardPic, setIdCardPic] = useState(null);
   const [info, setInfo] = useState(null);
   const navigate = useNavigate();
   const [image1, setImage1] = useState(null);

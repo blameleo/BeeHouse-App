@@ -19,7 +19,6 @@ const validationSchema = Yup.object({
 
 function AgencySignUp() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-  const [info, setInfo] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();

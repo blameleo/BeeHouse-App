@@ -1,12 +1,11 @@
 const UserModel = require("../models/User.js");
 const bcrypt = require("bcrypt");
-const mongoose = require("mongoose");
 
 const updateUserProfile = async (req, res) => {
   try {
     const formData = req.body;
 
-    console.log(formData);
+    // console.log(formData);
     const query = { _id: formData._id };
 
     const updatedDocument = {
