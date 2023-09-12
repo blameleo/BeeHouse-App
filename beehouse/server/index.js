@@ -14,7 +14,7 @@ const app = express();
 const port = 4000;
 
 const corsOptions = {
-  origin: "https://beehouse-fynf74cdy-blameleo.vercel.app", // Replace with your frontend's URL
+  origin: "https://beehouse-app.vercel.app", // Replace with your frontend's URL
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true, // Enable cookies and HTTP authentication headers
   optionsSuccessStatus: 204, // No content response to preflight requests
