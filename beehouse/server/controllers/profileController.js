@@ -28,10 +28,9 @@ async function createTempUploadDir() {
   }
 }
 
-createTempUploadDir();
-
 const updateUserProfile = async (req, res) => {
   // console.log(req.files);
+  createTempUploadDir();
   try {
     const formData = req.body;
     const userId = formData._id;
