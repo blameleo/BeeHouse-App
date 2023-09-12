@@ -13,14 +13,16 @@ const { notificationRouter } = require("./routes/notificationRoutes");
 const app = express();
 const port = 4000;
 
+const corsOptions = {
+  origin: "https://beehouse-fynf74cdy-blameleo.vercel.app", // Replace with your frontend's URL
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Enable cookies and HTTP authentication headers
+  optionsSuccessStatus: 204, // No content response to preflight requests
+};
+
 app.use(express.json());
-app.use(cors());
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://127.0.0.1:5173");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
+app.use(cors(corsOptions));
+
 app.use(bodyParser.json());
 app.use(express.static("public"));
 // app.use("/images", express.static("images"));
