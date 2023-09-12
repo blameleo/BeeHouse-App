@@ -1,11 +1,7 @@
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import React, { useState } from "react";
-import { AiFillCheckCircle } from "react-icons/ai";
 import { MdAccessibilityNew } from "react-icons/md";
 import { BsBuildingFillCheck } from "react-icons/bs";
-import ControlButton from "../components/ControlButton";
-import CustomModal from "../components/CustomModal";
-import Button from "../components/Button";
 import RegistrationButton from "../components/RegistrationButton";
 import ModelSignUp from "../components/ModelSignUp";
 import AgencySignUp from "../components/AgencySignUp";

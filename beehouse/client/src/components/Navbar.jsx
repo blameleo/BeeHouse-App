@@ -4,8 +4,6 @@ import Button from "../components/Button";
 import Logo from "./Logo";
 import { useEffect, useState } from "react";
 import Popup from "../components/Popup";
-import Landing from "../pages/Landing";
-import CustomModal from "../components/CustomModal";
 
 export default function Navbar() {
   const [openPopup, setOpenPopup] = useState(false);

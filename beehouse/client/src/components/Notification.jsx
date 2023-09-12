@@ -16,15 +16,15 @@ function Notification({ isVisible, toggleNotification }) {
     (state) => state.notification.notifications
   );
 
-  console.log(notifications);
+  // console.log(notifications);
 
   const getNotifications = async () => {
-    console.log("test");
+    // console.log("test");
     try {
       const response = await axios.get(
         `http://localhost:4000/jobs/notifications/${user?._id}`
       );
-      console.log(response.data.unreadCount);
+      // console.log(response.data.unreadCount);
       dispatch(fetchNotificationSuccess(response.data.notifications));
       dispatch(unreadNotificationsCount(response.data.unreadCount));
     } catch (error) {}

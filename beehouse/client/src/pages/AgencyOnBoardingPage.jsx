@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FaForumbee } from "react-icons/fa";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import SecNavbar from "../components/SecNavbar";

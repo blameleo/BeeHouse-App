@@ -4,8 +4,6 @@ import axios from "axios";
 import { MdVerified } from "react-icons/md";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
@@ -35,7 +33,7 @@ function AgencyJobs() {
     price: "",
     location: "",
   });
-  console.log(user);
+  // console.log(user);
   const handleTagInputChange = (event) => {
     setTagInput(event.target.value);
   };
@@ -82,7 +80,7 @@ function AgencyJobs() {
       color: getRandomColor(),
     };
 
-    console.log(formWithTags);
+    // console.log(formWithTags);
 
     try {
       const response = await axios.post(
@@ -116,7 +114,7 @@ function AgencyJobs() {
         setTags([]);
         handleClose();
       }
-      console.log(response.data.message);
+      // console.log(response.data.message);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -147,16 +145,6 @@ function AgencyJobs() {
       });
     }
   }, [user]);
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-    },
-  };
 
   const fetchAgencyJobs = async () => {
     setLoading(true);

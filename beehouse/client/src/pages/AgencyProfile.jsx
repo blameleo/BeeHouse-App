@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Logo from "../components/Logo";
 import axios from "axios";
-import { useNavigate } from "react-router";
 import { useCookies } from "react-cookie";
 import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
@@ -14,11 +12,9 @@ import { clearUser, setUser } from "../Redux/slice/userSlice";
 export default function AgencyProfile() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [displayPic, setDisplayPic] = useState(null);
-  const [idCardPic, setIdCardPic] = useState(null);
   const [loading, setLoading] = useState(null);
 
   const [info, setInfo] = useState(null);
-  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -86,9 +82,9 @@ export default function AgencyProfile() {
         }
       );
 
-      console.log(formInfo);
+      // console.log(formInfo);
 
-      console.log(response.data.data);
+      // console.log(response.data.data);
       // dispatch(clearUser());
       if (response.data.data) {
         dispatch(setUser(response.data.data));

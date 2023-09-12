@@ -12,10 +12,10 @@ const ProgressBar = ({
   const [selectedStep, setSelectedStep] = useState(status);
 
   // console.log(id);l
-  console.log("mounted");
+  // console.log("mounted");
 
   const handleStepChange = async (e) => {
-    console.log(id);
+    // console.log(id);
     const newSelectedStep = e.target.value;
 
     console.log(newSelectedStep);
@@ -27,7 +27,7 @@ const ProgressBar = ({
       agencyName: application?.jobId.agencyName,
     };
 
-    console.log(data);
+    // console.log(data);
 
     try {
       const response = await axios.put(
@@ -47,7 +47,7 @@ const ProgressBar = ({
         }
       }
 
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       console.log(error);
     }

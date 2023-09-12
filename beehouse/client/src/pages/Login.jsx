@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Logo from "../components/Logo";
 import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
-import { Audio } from "react-loader-spinner";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useFormik } from "formik";
@@ -13,7 +12,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Loader from "../components/Loader";
 
 export default function Login() {
-  const [error, setError] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);

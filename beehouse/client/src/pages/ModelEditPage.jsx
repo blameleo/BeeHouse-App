@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Logo from "../components/Logo";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { useCookies } from "react-cookie";
@@ -18,7 +17,6 @@ export default function ModelEditPage() {
   const [loading, setLoading] = useState(null);
 
   const [info, setInfo] = useState(null);
-  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -162,7 +160,7 @@ export default function ModelEditPage() {
 
       console.log(formInfo);
 
-      console.log(response.data.data);
+      // console.log(response.data.data);
       // dispatch(clearUser());
       if (response.data.data) {
         dispatch(setUser(response.data.data));

@@ -20,12 +20,6 @@ import "react-toastify/dist/ReactToastify.css";
 function ModelSignUp() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [loading, setLoading] = useState(null);
-  const [modelSignUpData, setModelSignUpData] = useState({
-    type: "model",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
 
   const navigate = useNavigate();
 
@@ -38,7 +32,7 @@ function ModelSignUp() {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      console.log(values);
+      // console.log(values);
       setLoading(true);
       try {
         const response = await axios.post(
@@ -46,7 +40,7 @@ function ModelSignUp() {
           values
         );
 
-        console.log(response);
+        // console.log(response);
         setCookie("Email", response.data.email);
         setCookie("UserId", response.data.userId);
         setCookie("AuthToken", response.data.token);

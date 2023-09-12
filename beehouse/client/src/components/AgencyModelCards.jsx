@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import ModelCardCarousel from "./ModelCardCarousel";
 import axios from "axios";
 import { Carousel } from "react-responsive-carousel";
-
 import { useSelector, useDispatch } from "react-redux";
 import { fetchApplicationSuccess } from "../Redux/slice/applicationsSlice";
 import { BiPhoneCall } from "react-icons/bi";
@@ -18,10 +17,10 @@ function AgencyModelCards() {
   const applications = useSelector((state) => state.application.applications);
   const [updatedStep, setUpdatedStep] = useState("Pending");
   const [buttonAvailabilities, setButtonAvailabilities] = useState({});
-  console.log(updatedStep);
+  // console.log(updatedStep);
   const dispatch = useDispatch();
-  console.log(applications);
-  console.log(user);
+  // console.log(applications);
+  // console.log(user);
   const getApplications = async () => {
     try {
       const response = await axios.get(
@@ -33,7 +32,7 @@ function AgencyModelCards() {
         dispatch(fetchApplicationSuccess(response.data));
         // setApplications();
       }
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.log(error);
     }

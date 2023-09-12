@@ -23,7 +23,7 @@ function ChangePasswordPage() {
       newPassword,
     };
 
-    console.log(values);
+    // console.log(values);
     try {
       const response = await axios.post(
         "http://localhost:4000/profile/changepassword",
@@ -47,7 +47,7 @@ function ChangePasswordPage() {
           theme: "colored",
         });
       }
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       // console.log(error.response.data.message);
       setLoading(false);

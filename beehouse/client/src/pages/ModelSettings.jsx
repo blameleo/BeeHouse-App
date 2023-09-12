@@ -3,7 +3,6 @@ import SecNavbar from "../components/SecNavbar";
 import { BsFillPersonBadgeFill, BsGearFill } from "react-icons/bs";
 import { GiPadlock } from "react-icons/gi";
 import { Link, Routes, Route, Outlet, useLocation } from "react-router-dom";
-import ModelEditPage from "./ModelEditPage";
 
 export default function ModelSettings() {
   const location = useLocation();

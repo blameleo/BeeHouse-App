@@ -26,9 +26,9 @@ function SecNavbar() {
   );
   const dispatch = useDispatch();
 
-  const notifications = useSelector(
-    (state) => state.notification.notifications
-  );
+  // const notifications = useSelector(
+  //   (state) => state.notification.notifications
+  // );
 
   // console.log(newNotificationsCount);
 
@@ -39,7 +39,7 @@ function SecNavbar() {
     setIsVisible(!isVisible);
   };
 
-  console.log(user);
+  // console.log(user);
 
   const logOut = () => {
     removeCookie("Email");
@@ -85,7 +85,7 @@ function SecNavbar() {
         `http://localhost:4000/jobs//notifications/count/${userId}`
       );
 
-      console.log(response);
+      // console.log(response);
       dispatch(unreadNotificationsCount(response.data));
     } catch (error) {
       console.log(error);

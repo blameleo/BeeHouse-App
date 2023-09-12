@@ -1,18 +1,13 @@
 import React from "react";
-import { Link, Outlet,useLocation } from "react-router-dom";
-import Logo from "./Logo";
-import { FaForumbee } from "react-icons/fa";
-import { SlBadge } from "react-icons/sl";
-import { GrGroup } from "react-icons/gr";
-import { FiSettings } from "react-icons/fi";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { BsFillPersonBadgeFill } from "react-icons/bs";
 import { GiPadlock } from "react-icons/gi";
 import { ImManWoman } from "react-icons/im";
 import { MdBadge } from "react-icons/md";
 
 function AgencySidebar() {
-    const location = useLocation()
-  
+  const location = useLocation();
+
   return (
     <div className=" mt-16 w-full ">
       <div className="min-w-[14%]  pt-10 sm:pt-0  h-[100vh] bg-yellow-500 fixed  left-0">
