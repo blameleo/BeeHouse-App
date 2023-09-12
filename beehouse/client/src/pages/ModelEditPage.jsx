@@ -151,7 +151,7 @@ export default function ModelEditPage() {
     // console.log(formInfo);
     try {
       const response = await axios.put(
-        "http://localhost:4000/profile/user",
+        "https://beehouse-app-api.vercel.app/profile/user",
         formInfo,
         {
           headers: {

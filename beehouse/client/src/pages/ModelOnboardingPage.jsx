@@ -206,7 +206,7 @@ function ModelOnboardingPage() {
 
     try {
       const response = await axios.put(
-        "http://localhost:4000/profile/user",
+        "https://beehouse-app-api.vercel.app/profile/user",
         formInfo,
         {
           headers: {
