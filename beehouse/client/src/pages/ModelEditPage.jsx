@@ -235,10 +235,7 @@ export default function ModelEditPage() {
                   />
                 ) : (
                   <img
-                    src={`http://localhost:4000/${user?.displayPicUrl?.replace(
-                      "public/",
-                      ""
-                    )}`}
+                    src={user?.displayPicUrl}
                     alt="preview"
                     className="w-full h-full object-cover rounded-full"
                   />
@@ -424,10 +421,7 @@ export default function ModelEditPage() {
                       />
                     ) : (
                       <img
-                        src={`http://localhost:4000/${user?.imageUrl1?.replace(
-                          "public/",
-                          ""
-                        )}`}
+                        src={user?.imageUrl1}
                         alt="preview"
                         className="w-full h-full object-cover"
                       />
@@ -455,10 +449,7 @@ export default function ModelEditPage() {
                       />
                     ) : (
                       <img
-                        src={`http://localhost:4000/${user?.imageUrl2?.replace(
-                          "public/",
-                          ""
-                        )}`}
+                        src={user?.imageUrl2}
                         alt="preview"
                         className="w-full h-full object-cover"
                       />
@@ -486,10 +477,7 @@ export default function ModelEditPage() {
                       />
                     ) : (
                       <img
-                        src={`http://localhost:4000/${user?.imageUrl3?.replace(
-                          "public/",
-                          ""
-                        )}`}
+                        src={user?.imageUrl3}
                         alt="preview"
                         className="w-full h-full object-cover"
                       />

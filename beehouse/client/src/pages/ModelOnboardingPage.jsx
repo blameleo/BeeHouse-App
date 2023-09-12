@@ -66,6 +66,7 @@ function ModelOnboardingPage() {
 
   const handleCountryCodeChange = (event) => {
     const selectedCountryCode = event.target.value;
+    console.log(selectedCountryCode);
     setFormInfo((prevFormInfo) => ({
       ...prevFormInfo,
       countryCode: selectedCountryCode,
@@ -178,6 +179,7 @@ function ModelOnboardingPage() {
   };
 
   const handleSubmit = async (e) => {
+    console.log(formInfo);
     e.preventDefault();
 
     const newErrors = {};
@@ -198,11 +200,10 @@ function ModelOnboardingPage() {
 
     const formData = new FormData();
     formData.append("displayPicUrl", displayPic);
-    // formData.append("idCardUrl", idCardPic);
     formData.append("imageUrl1", image1);
     formData.append("imageUrl2", image2);
     formData.append("imageUrl3", image3);
-    console.log(formInfo);
+
     try {
       const response = await axios.put(
         "http://localhost:4000/profile/user",
@@ -214,12 +215,15 @@ function ModelOnboardingPage() {
         }
       );
 
+      console.log(response);
+      console.log(formInfo);
+
       // console.log(response.data.message);
       // console.log(response.data.data);
       // setCookie("userdata", response.data.data.firstName);
 
       setInfo(response.data.message);
-      navigate("/home");
+      // navigate("/home");
     } catch (err) {
       console.log(err);
     }
@@ -240,6 +244,7 @@ function ModelOnboardingPage() {
         action=""
         className="px-20 text-white flex flex-col md:flex-row justify-between "
         onSubmit={handleSubmit}
+        enctype="multipart/form-data"
       >
         <div className="">
           <label htmlFor="" className="mb">
@@ -344,9 +349,8 @@ function ModelOnboardingPage() {
                   value={formInfo.countryCode}
                   onChange={handleCountryCodeChange}
                 >
-                 {/*<option value="">Select Country Code</option>*/}
+                  <option value="001">+001(us)</option>{" "}
                   <option value="+233">+233(Gh)</option>{" "}
-                  {/* You can add more country options here */}
                 </select>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                   <svg
@@ -658,9 +662,7 @@ function ModelOnboardingPage() {
           <label htmlFor="">Images Upload :</label>
           <br></br>
           <div className="flex flex-wrap ">
-          {errors.imageUrl1 && (
-              <div className="text-red-500 text-xs">*</div>
-            )}
+            {errors.imageUrl1 && <div className="text-red-500 text-xs">*</div>}
             <div className="flex items-center mb-3 mr-5">
               <label
                 htmlFor="upload3"
@@ -688,9 +690,9 @@ function ModelOnboardingPage() {
             </div>
 
             <div className="flex  mb-3  mr-5">
-            {errors.imageUrl2 && (
-              <div className="text-red-500 text-xs">*</div>
-            )}
+              {errors.imageUrl2 && (
+                <div className="text-red-500 text-xs">*</div>
+              )}
               <label
                 htmlFor="upload4"
                 className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer ${
@@ -717,9 +719,9 @@ function ModelOnboardingPage() {
             </div>
 
             <div className="flex ">
-            {errors.imageUrl1 && (
-              <div className="text-red-500 text-xs">*</div>
-            )}
+              {errors.imageUrl1 && (
+                <div className="text-red-500 text-xs">*</div>
+              )}
               <label
                 htmlFor="upload5"
                 className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer ${

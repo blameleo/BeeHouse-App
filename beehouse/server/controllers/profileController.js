@@ -1,14 +1,85 @@
 const UserModel = require("../models/User.js");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  cloud_name: "dmywtk0vi",
+  api_key: "673388561162641",
+  api_secret: "lvwzfMj9RVuMgTG7bWPoGHMBBM4",
+});
+const fs = require("fs").promises;
+const util = require("util");
+
+const tempUploadDir = "./temp"; // Adjust the path as needed
+
+// Ensure the temporary directory exists or create it
+const mkdir = util.promisify(fs.mkdir);
+
+async function createTempUploadDir() {
+  try {
+    await mkdir(tempUploadDir);
+    console.log("Temporary upload directory created");
+  } catch (error) {
+    if (error.code === "EEXIST") {
+      console.log("Temporary upload directory already exists");
+    } else {
+      throw error;
+    }
+  }
+}
+
+createTempUploadDir();
 
 const updateUserProfile = async (req, res) => {
+  // console.log(req.files);
   try {
     const formData = req.body;
+    const userId = formData._id;
+    // console.log(formData);
 
-    console.log(formData);
-    const query = { _id: formData._id };
+    const fileFields = [
+      "displayPicUrl",
+      "businessCerUrl",
+      "imageUrl1",
+      "imageUrl2",
+      "imageUrl3",
+    ];
 
+    const fileUrls = {};
+    const fileUploadPromises = [];
+    for (const fieldName of fileFields) {
+      if (req.files[fieldName]) {
+        // console.log(req.files[fieldName]);
+        const uploadedFile = req.files[fieldName][0].buffer;
+        const tempFilePath = `${tempUploadDir}/${fieldName}-${Date.now()}.jpg`;
+
+        try {
+          // Save the uploaded file to a temporary location on your server's filesystem
+          await fs.writeFile(tempFilePath, uploadedFile);
+
+          // Upload the temporary file to Cloudinary
+          const uploadResponse = await cloudinary.uploader.upload(
+            tempFilePath,
+            {
+              resource_type: "auto",
+            }
+          );
+
+          fileUploadPromises.push(uploadResponse);
+
+          // Store the Cloudinary URL in the database
+          fileUrls[fieldName] = uploadResponse.secure_url;
+
+          // Remove the temporary file
+          fs.unlink(tempFilePath);
+        } catch (error) {
+          console.error(`Error uploading file for field ${fieldName}:`, error);
+        }
+      }
+    }
+
+    // Update the user's profile with the image URLs in your database
+    const query = { _id: userId };
     const updatedDocument = {
       $set: {
         firstName: formData.firstName,
@@ -24,32 +95,18 @@ const updateUserProfile = async (req, res) => {
         telephone: formData.telephone,
         stature: formData.stature,
         location: formData.location,
+        ...fileUrls, // Add image URLs to the user's profile
       },
     };
 
-    // Handle file uploads
-    const fileFields = [
-      "displayPicUrl",
-      "businessCerUrl",
-      "imageUrl1",
-      "imageUrl2",
-      "imageUrl3",
-    ];
+    console.log(fileUrls);
 
-    fileFields.forEach((fieldName) => {
-      if (req.files[fieldName]) {
-        const fileUrl = req.files[fieldName][0].path;
-        updatedDocument.$set[fieldName] = fileUrl;
-      }
-    });
-    console.log(updatedDocument);
     const insertedUser = await UserModel.findOneAndUpdate(
       query,
       updatedDocument,
       { new: true }
     );
 
-    console.log(insertedUser);
     res.status(201).json({
       message: "User profile updated successfully",
       data: insertedUser,

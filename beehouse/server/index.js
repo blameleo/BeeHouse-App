@@ -2,9 +2,11 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 const { userRouter } = require("./routes/userRoutes");
 const { jobRouter } = require("./routes/jobRoutes");
 const { applicationRouter } = require("./routes/applicationRoutes");
+const cloudinary = require("cloudinary").v2;
 
 const { profileRouter } = require("./routes/profileRoutes");
 const { notificationRouter } = require("./routes/notificationRoutes");
@@ -13,6 +15,7 @@ const port = 4000;
 
 app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json());
 app.use(express.static("public"));
 // app.use("/images", express.static("images"));
 

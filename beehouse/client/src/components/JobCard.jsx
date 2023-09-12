@@ -45,7 +45,7 @@ export default function JobCard({ job }) {
     };
     try {
       const response = await axios.post(
-        "http://localhost:4000/jobs/apply",
+        "https://beehouse-app-api.vercel.app/jobs/apply",
         params
       );
 

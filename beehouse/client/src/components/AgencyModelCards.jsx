@@ -25,7 +25,7 @@ function AgencyModelCards() {
   const getApplications = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/jobs/model/applications/${user?._id}`
+        `https://beehouse-app-api.vercel.app/jobs/model/applications/${user?._id}`
       );
 
       if (response.status === 200) {
@@ -80,7 +80,7 @@ function AgencyModelCards() {
                       <div className="   ">
                         <div className="flex flex-col place-items-center  ">
                           <img
-                            src={`http://localhost:4000/${newUrl}`}
+                            src={application?.modelUserId?.displayPicUrl}
                             className="w-10 h-10  mt-2  rounded-full object-cover"
                             alt=""
                           />
@@ -156,17 +156,17 @@ function AgencyModelCards() {
                         >
                           <img
                             className="rounded-xl shadow-xl border "
-                            src={`http://localhost:4000/${url1}`}
+                            src={application?.modelUserId?.imageUrl1}
                           />
 
                           <img
                             className="rounded-xl shadow-xl border"
-                            src={`http://localhost:4000/${url2}`}
+                            src={application?.modelUserId?.imageUrl2}
                           />
 
                           <img
                             className="rounded-xl shadow-xl border"
-                            src={`http://localhost:4000/${url3}`}
+                            src={application?.modelUserId?.imageUrl3}
                           />
                         </Carousel>
                       </div>

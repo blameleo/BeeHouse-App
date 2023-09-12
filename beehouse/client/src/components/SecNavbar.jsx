@@ -67,9 +67,12 @@ function SecNavbar() {
 
   const getUser = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/user/getuser", {
-        params: { userId },
-      });
+      const response = await axios.get(
+        "https://beehouse-app-api.vercel.app/user/getuser",
+        {
+          params: { userId },
+        }
+      );
       // setUser(response.data);
       dispatch(setUser(response.data));
       // setCookie("userData", response.data);
@@ -82,7 +85,7 @@ function SecNavbar() {
     console.log(userId);
     try {
       const response = await axios.put(
-        `http://localhost:4000/jobs//notifications/count/${userId}`
+        `https://beehouse-app-api.vercel.app/notifications/count/${userId}`
       );
 
       console.log(response);
@@ -141,11 +144,7 @@ function SecNavbar() {
           >
             <div className="relative">
               <img
-                src={
-                  newUrl
-                    ? `http://localhost:4000/${newUrl}`
-                    : "/img/defaultpic.png"
-                }
+                src={user?.displayPicUrl}
                 alt=""
                 className="w-8 h-8 rounded-full object-cover"
               />

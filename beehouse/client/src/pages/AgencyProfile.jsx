@@ -151,10 +151,7 @@ export default function AgencyProfile() {
                   />
                 ) : (
                   <img
-                    src={`http://localhost:4000/${user?.displayPicUrl?.replace(
-                      "public/",
-                      ""
-                    )}`}
+                    src={user?.displayPicUrl}
                     alt="preview"
                     className="w-full h-full object-cover rounded-full"
                   />

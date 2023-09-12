@@ -249,7 +249,9 @@ export default function AgencyOnBoardingPage() {
             />
           </div>
           {errors.telephone && (
-            <div className="text-red-500 text-xs mb-2 mt-2">{errors.telephone}</div>
+            <div className="text-red-500 text-xs mb-2 mt-2">
+              {errors.telephone}
+            </div>
           )}
         </div>
 

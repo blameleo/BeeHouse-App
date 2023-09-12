@@ -4,24 +4,11 @@ const {
   updateUserProfile,
   changePassword,
 } = require("../controllers/profileController");
-const path = require("path");
 
 const router = express.Router();
-// app.use(express.static("public"));
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/images");
-  },
-  filename: function (req, file, cb) {
-    console.log(file);
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    const extname = path.extname(file.originalname);
-    cb(null, file.fieldname + "-" + uniqueSuffix + extname);
-  },
-});
-
+const storage = multer.memoryStorage(); // Use memory storage for storing files in memory
 const upload = multer({ storage: storage });
+// console.log(upload.storage);
 
 router.put(
   "/user",

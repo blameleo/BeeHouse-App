@@ -26,7 +26,7 @@ function AgencySecurity() {
     console.log(values);
     try {
       const response = await axios.post(
-        "http://localhost:4000/profile/changepassword",
+        "https://beehouse-app-api.vercel.app/profile/changepassword",
         values
       );
 

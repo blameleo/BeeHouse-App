@@ -86,7 +86,7 @@ function AgencyJobs() {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/jobs/create",
+        "https://beehouse-app-api.vercel.app/jobs/create",
         formWithTags
       );
 
@@ -162,7 +162,7 @@ function AgencyJobs() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:4000/jobs/getjobs/${user._id}`
+        `https://beehouse-app-api.vercel.app/jobs/getjobs/${user._id}`
       );
       dispatch(fetchJobsSuccess(response.data));
       setLoading(false);
@@ -206,7 +206,7 @@ function AgencyJobs() {
     setLoading(true);
     try {
       const response = await axios.delete(
-        `http://localhost:4000/jobs/deletejob/${id}`
+        `https://beehouse-app-api.vercel.app/deletejob/${id}`
       );
 
       if (response.status === 200) {

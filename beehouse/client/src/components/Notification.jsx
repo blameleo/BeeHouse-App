@@ -22,7 +22,7 @@ function Notification({ isVisible, toggleNotification }) {
     console.log("test");
     try {
       const response = await axios.get(
-        `http://localhost:4000/jobs/notifications/${user?._id}`
+        `https://beehouse-app-api.vercel.app/jobs/notifications/${user?._id}`
       );
       console.log(response.data.unreadCount);
       dispatch(fetchNotificationSuccess(response.data.notifications));

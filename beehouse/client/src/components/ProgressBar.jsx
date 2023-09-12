@@ -31,7 +31,7 @@ const ProgressBar = ({
 
     try {
       const response = await axios.put(
-        `http://localhost:4000/jobs/${id}/status`,
+        `https://beehouse-app-api.vercel.app/jobs/${id}/status`,
         data
       );
 
