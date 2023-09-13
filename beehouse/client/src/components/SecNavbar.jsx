@@ -123,7 +123,7 @@ function SecNavbar() {
         </div> */}
       </div>
 
-      <div className="sm:flex  hidden w-[400px] justify-between">
+      <div className="sm:flex  hidden w-[400px]  justify-end ">
         <div className="lg:flex hidden items-center  ">
           <BsGeoAlt className="text-white" />
           {user && (

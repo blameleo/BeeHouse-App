@@ -47,7 +47,7 @@ function Jobs() {
           <Filter />
         </div>
       </div>
-      <div className="   md:ml-[400px] md:w-[75%]  ">
+      <div className="   md:ml-[150px] md:w-[75%]  ">
         <div className="py-1   fixed top-32 z-10 bg-white w-full  sm:left-[400px]">
           <h1 className="text-md font-black">Popular Jobs</h1>
         </div>
@@ -55,10 +55,10 @@ function Jobs() {
         {loading ? (
           <Loader loaderStyle="  h-[100vh] grid place-items-center yellow-500" />
         ) : (
-          <div className="flex flex-wrap sm:px-8 ">
+          <div className="flex flex-wrap justify-center sm:px-8 ">
             {jobs.length === 0 ? (
-              <p className="text-black text-[320px]">
-                You have no jobs ata the moment
+              <p className="text-black text-[20px]">
+                You have no jobs available
               </p>
             ) : (
               jobs.map((job, i) => {

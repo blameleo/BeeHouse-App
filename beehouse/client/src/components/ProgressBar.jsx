@@ -12,10 +12,10 @@ const ProgressBar = ({
   const [selectedStep, setSelectedStep] = useState(status);
 
   // console.log(id);l
-  // console.log("mounted");
+  console.log("mounted");
 
   const handleStepChange = async (e) => {
-    // console.log(id);
+    console.log(id);
     const newSelectedStep = e.target.value;
 
     console.log(newSelectedStep);
@@ -27,11 +27,11 @@ const ProgressBar = ({
       agencyName: application?.jobId.agencyName,
     };
 
-    // console.log(data);
+    console.log(data);
 
     try {
       const response = await axios.put(
-        `http://localhost:4000/jobs/${id}/status`,
+        `https://beehouse-app-api.vercel.app/jobs/${id}/status`,
         data
       );
 
@@ -47,7 +47,7 @@ const ProgressBar = ({
         }
       }
 
-      // console.log(response);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -61,7 +61,7 @@ const ProgressBar = ({
         {steps.map((step, index) => (
           <div
             key={step}
-            className={`flex  items-center text-sm mx-1 space-x-2 ${
+            className={`flex  place-items-center text-xs  ${
               index <= steps.indexOf(selectedStep)
                 ? "text-green-500"
                 : "text-gray-300"

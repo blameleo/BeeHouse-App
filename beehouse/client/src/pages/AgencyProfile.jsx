@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import Logo from "../components/Logo";
 import axios from "axios";
+import { useNavigate } from "react-router";
 import { useCookies } from "react-cookie";
 import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,9 +14,11 @@ import { clearUser, setUser } from "../Redux/slice/userSlice";
 export default function AgencyProfile() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [displayPic, setDisplayPic] = useState(null);
+  const [idCardPic, setIdCardPic] = useState(null);
   const [loading, setLoading] = useState(null);
 
   const [info, setInfo] = useState(null);
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -82,9 +86,9 @@ export default function AgencyProfile() {
         }
       );
 
-      // console.log(formInfo);
+      console.log(formInfo);
 
-      // console.log(response.data.data);
+      console.log(response.data.data);
       // dispatch(clearUser());
       if (response.data.data) {
         dispatch(setUser(response.data.data));
@@ -122,7 +126,7 @@ export default function AgencyProfile() {
     }
   }, [user]);
 
-  // const newUrl = cookies.userData.displayPicUrl.replace("public/", "");
+  const newUrl = formInfo.displayPicUrl.replace("public/", "");
 
   return (
     <div>
@@ -147,10 +151,7 @@ export default function AgencyProfile() {
                   />
                 ) : (
                   <img
-                    src={`http://localhost:4000/${user?.displayPicUrl?.replace(
-                      "public/",
-                      ""
-                    )}`}
+                    src={`http://localhost:4000/${newUrl}`}
                     alt="preview"
                     className="w-full h-full object-cover rounded-full"
                   />
@@ -174,7 +175,7 @@ export default function AgencyProfile() {
               </label>
 
               <input
-                className=" border px-3 border-gray-400 outline-none text-black  mt-1  h-14 w-[350px] lg:w-[500px]  rounded-lg "
+                className=" border px-3 border-gray-400 outline-none text-black  mt-1  h-14 ml-[20px] sm:ml-[0px] w-[280px] sm:w-[350px]   lg:w-[500px]  rounded-lg "
                 type="text"
                 onChange={handleInputChange}
                 value={formInfo.agencyName}
@@ -189,7 +190,7 @@ export default function AgencyProfile() {
                 Telephone:
               </label>
               <input
-                className="border  outline-none px-3 border-gray-400 text-black w-[350px] lg:w-[500px] mt-1  h-14  rounded-lg"
+                className="border  outline-none px-3 border-gray-400 text-black ml-[20px] sm:ml-[0px] w-[280px] sm:w-[350px]  lg:w-[500px] mt-1  h-14  rounded-lg"
                 type="tel"
                 placeholder="+233 Phone Number"
                 name="telephone"
@@ -207,7 +208,7 @@ export default function AgencyProfile() {
                 Location:
               </label>
               <input
-                className=" outline-none border px-3 border-gray-400 mb-3 text-black w-[350px] lg:w-[500px]  mt-1  h-14  rounded-lg "
+                className=" outline-none border px-3 border-gray-400 mb-3 text-black ml-[20px] sm:ml-[0px] w-[280px] sm:w-[350px] lg:w-[500px]  mt-1  h-14  rounded-lg "
                 type="text"
                 placeholder="Location"
                 onChange={handleInputChange}
@@ -220,7 +221,7 @@ export default function AgencyProfile() {
             <div className="flex flex-col items-center text-black">
               <label htmlFor="">About</label>
               <textarea
-                className="outline-none border px-3 border-gray-400 mb-3 text-black w-[350px] lg:w-[500px] mt-1 h-48 rounded-lg"
+                className="outline-none border px-3 border-gray-400 mb-3 text-black ml-[20px] sm:ml-[0px] w-[280px]  sm:w-[350px] lg:w-[500px] mt-1 h-48 rounded-lg"
                 placeholder="About"
                 onChange={handleInputChange}
                 value={formInfo.about}
@@ -231,7 +232,7 @@ export default function AgencyProfile() {
             <div className="flex  justify-center">
               <button
                 onClick={handleSubmit}
-                className="mr-5 mt-5 bg-yellow-500 hover:bg-purple-600 border-2 text-black hover:text-white  h-[50px] rounded-lg w-[340px]  w-full lg:w-[500px] "
+                className="mr-5 mt-5 bg-yellow-500 hover:bg-purple-600 border-2 text-black hover:text-white  h-[50px] rounded-lg ml-[30px] sm:ml-[0px] w-[280px] sm:w-[350px]   lg:w-[500px] "
               >
                 update
               </button>
