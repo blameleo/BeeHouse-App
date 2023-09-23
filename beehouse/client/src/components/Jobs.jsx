@@ -47,7 +47,7 @@ function Jobs() {
           <Filter />
         </div>
       </div>
-      <div className="   md:ml-[150px] md:w-[75%]  ">
+      <div className="   md:ml-[250px] md:w-[75%]  ">
         <div className="py-1   fixed top-32 z-10 bg-white w-full  sm:left-[400px]">
           <h1 className="text-md font-black">Popular Jobs</h1>
         </div>

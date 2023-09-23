@@ -42,12 +42,10 @@ function SecNavbar() {
   // console.log(user);
 
   const logOut = () => {
-    removeCookie("Email");
-    removeCookie("userData");
+    removeCookie("AuthToken");
     removeCookie("UserId");
     dispatch(setUser(null));
     dispatch(clearUser());
-    removeCookie("AuthToken");
     navigate("/login");
   };
 
