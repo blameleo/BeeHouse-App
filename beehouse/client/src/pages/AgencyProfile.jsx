@@ -77,7 +77,7 @@ export default function AgencyProfile() {
 
     try {
       const response = await axios.put(
-        "http://localhost:4000/profile/user",
+        "https://beehouse-backend-api.onrender.com/profile/user",
         formInfo,
         {
           headers: {
@@ -120,14 +120,19 @@ export default function AgencyProfile() {
         agencyName: user.agencyName,
         telephone: user.telephone,
         location: user.location,
-        displayPicUrl: user.displayPicUrl,
+        displayPicUrl: user?.displayPicUrl,
         about: user.about,
       });
     }
   }, [user]);
 
-  const newUrl = formInfo.displayPicUrl.replace("public/", "");
+  console.log("formInfo.displayPicUrl:", formInfo.displayPicUrl);
 
+  let newUrl = "";
+  if (typeof formInfo.displayPicUrl === "string") {
+    newUrl = formInfo.displayPicUrl.replace("public/", "");
+    console.log(newUrl);
+  }
   return (
     <div>
       {loading ? (
@@ -151,7 +156,7 @@ export default function AgencyProfile() {
                   />
                 ) : (
                   <img
-                    src={`http://localhost:4000/${newUrl}`}
+                    src={`https://beehouse-backend-api.onrender.com/${newUrl}`}
                     alt="preview"
                     className="w-full h-full object-cover rounded-full"
                   />

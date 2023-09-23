@@ -84,7 +84,7 @@ function AgencyJobs() {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/jobs/create",
+        "https://beehouse-backend-api.onrender.com/jobs/create",
         formWithTags
       );
 
@@ -150,7 +150,7 @@ function AgencyJobs() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:4000/jobs/getjobs/${user._id}`
+        `https://beehouse-backend-api.onrender.com/jobs/getjobs/${user._id}`
       );
       dispatch(fetchJobsSuccess(response.data));
       setLoading(false);

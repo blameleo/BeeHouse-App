@@ -21,11 +21,11 @@ function AgencyModelCards() {
   console.log(updatedStep);
   const dispatch = useDispatch();
   console.log(applications);
-  console.log(user);
+  // console.log(user._id);
   const getApplications = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/jobs/model/applications/${user?._id}`
+        `https://beehouse-backend-api.onrender.com/jobs/model/applications/${user?._id}`
       );
 
       if (response.status === 200) {
@@ -80,7 +80,7 @@ function AgencyModelCards() {
                       <div className="   ">
                         <div className="flex flex-col place-items-center  ">
                           <img
-                            src={`http://localhost:4000/${newUrl}`}
+                            src={`https://beehouse-backend-api.onrender.com/${newUrl}`}
                             className="w-10 h-10  mt-2  rounded-full object-cover"
                             alt=""
                           />
@@ -156,17 +156,17 @@ function AgencyModelCards() {
                         >
                           <img
                             className="rounded-xl shadow-xl border "
-                            src={`http://localhost:4000/${url1}`}
+                            src={`https://beehouse-backend-api.onrender.com/${url1}`}
                           />
 
                           <img
                             className="rounded-xl shadow-xl border"
-                            src={`http://localhost:4000/${url2}`}
+                            src={`https://beehouse-backend-api.onrender.com/${url2}`}
                           />
 
                           <img
                             className="rounded-xl shadow-xl border"
-                            src={`http://localhost:4000/${url3}`}
+                            src={`https://beehouse-backend-api.onrender.com/${url3}`}
                           />
                         </Carousel>
                       </div>
