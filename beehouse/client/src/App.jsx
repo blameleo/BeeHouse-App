@@ -23,10 +23,7 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-            <Route
-              path="https://beehouse-app-frontend.vercel.app/"
-              element={<Landing />}
-            />
+            <Route path="/" element={<Landing />} />
             <Route
               path="https://beehouse-app-frontend.vercel.app/login"
               element={<Login />}
