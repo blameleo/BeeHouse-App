@@ -23,13 +23,25 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/login" element={<Login />} />
+            <Route
+              path="https://beehouse-app-frontend.vercel.app/"
+              element={<Landing />}
+            />
+            <Route
+              path="https://beehouse-app-frontend.vercel.app/login"
+              element={<Login />}
+            />
 
             <Route element={<PrivateRoutes />}>
-              <Route path="/home" element={<Home />} />
+              <Route
+                path="https://beehouse-app-frontend.vercel.app/home"
+                element={<Home />}
+              />
 
-              <Route path="/agency" element={<Agency />}>
+              <Route
+                path="https://beehouse-app-frontend.vercel.app/agency"
+                element={<Agency />}
+              >
                 <Route index element={<AgencyDash />} />
                 <Route path="jobs" element={<AgencyJobs />} />
 
@@ -37,18 +49,21 @@ function App() {
                 <Route path="security" element={<AgencySecurity />} />
               </Route>
 
-              <Route path="/settings" element={<ModelSettings />}>
+              <Route
+                path="https://beehouse-app-frontend.vercel.app/settings"
+                element={<ModelSettings />}
+              >
                 <Route index element={<ModelEditPage />} />
                 <Route path="modeledit" element={<ModelEditPage />} />
                 <Route path="changepassword" element={<ChangePasswordPage />} />
               </Route>
 
               <Route
-                path="/agencyonboarding"
+                path="https://beehouse-app-frontend.vercel.app/agencyonboarding"
                 element={<AgencyOnboardingPage />}
               />
               <Route
-                path="/modelonboarding"
+                path="https://beehouse-app-frontend.vercel.app/modelonboarding"
                 element={<ModelOnboardingPage />}
               />
             </Route>
