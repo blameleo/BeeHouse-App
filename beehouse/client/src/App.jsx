@@ -24,21 +24,12 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Landing />} />
-            <Route
-              path="https://beehouse-app-frontend.vercel.app/login"
-              element={<Login />}
-            />
+            <Route path="/login" element={<Login />} />
 
             <Route element={<PrivateRoutes />}>
-              <Route
-                path="https://beehouse-app-frontend.vercel.app/home"
-                element={<Home />}
-              />
+              <Route path="/home" element={<Home />} />
 
-              <Route
-                path="https://beehouse-app-frontend.vercel.app/agency"
-                element={<Agency />}
-              >
+              <Route path="/agency" element={<Agency />}>
                 <Route index element={<AgencyDash />} />
                 <Route path="jobs" element={<AgencyJobs />} />
 
@@ -46,21 +37,18 @@ function App() {
                 <Route path="security" element={<AgencySecurity />} />
               </Route>
 
-              <Route
-                path="https://beehouse-app-frontend.vercel.app/settings"
-                element={<ModelSettings />}
-              >
+              <Route path="/settings" element={<ModelSettings />}>
                 <Route index element={<ModelEditPage />} />
                 <Route path="modeledit" element={<ModelEditPage />} />
                 <Route path="changepassword" element={<ChangePasswordPage />} />
               </Route>
 
               <Route
-                path="https://beehouse-app-frontend.vercel.app/agencyonboarding"
+                path="/agencyonboarding"
                 element={<AgencyOnboardingPage />}
               />
               <Route
-                path="https://beehouse-app-frontend.vercel.app/modelonboarding"
+                path="/modelonboarding"
                 element={<ModelOnboardingPage />}
               />
             </Route>
