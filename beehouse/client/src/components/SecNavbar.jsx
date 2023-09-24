@@ -83,7 +83,7 @@ function SecNavbar() {
     console.log(userId);
     try {
       const response = await axios.get(
-        `https://beehouse-backend-api.onrender.com/notifications/count/${userId}`
+        `https://beehouse-backend-api.onrender.com/jobs/notifications/count/${userId}`
       );
 
       // console.log(response);
