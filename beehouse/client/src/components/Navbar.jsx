@@ -14,10 +14,12 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="py-3 flex justify-between">
+      <nav className="py-3 flex justify-between w-full ">
+        
         <Logo />
+        
 
-        <div className="flex items-center  w-40 justify-between">
+        <div className="flex items-center ml-37  justify-between w-40 ">
           <Link to="/login">
             <Button name="Sign in" />
           </Link>

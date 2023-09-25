@@ -235,17 +235,18 @@ function ModelOnboardingPage() {
       </div>
       <form
         action=""
-        className="px-20 text-white flex flex-col md:flex-row justify-between "
+        className=" text-white flex flex-col md:flex-row place-items-center md:place-items-start  justify-between "
         onSubmit={handleSubmit}
       >
         <div className="">
-          <label htmlFor="" className="mb">
+          
+          <label htmlFor="" >
             First Name :
           </label>
           <br></br>
 
           <input
-            className={`border px-3 border-yellow-500 outline-none bg-black mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
+            className={`border px-3 border-yellow-500 outline-none bg-black mt-1 w-[300px] md:w-[300px] h-14 rounded rounded-lg ${
               errors.firstName ? "border-red-500" : ""
             }`}
             type="text"
@@ -256,15 +257,16 @@ function ModelOnboardingPage() {
             id=""
           />
           {errors.firstName && (
-            <div className="text-red-500 text-xs">{errors.firstName}</div>
+            <div className="text-red-500 mt-2 text-xs">{errors.firstName}</div>
           )}
+          
 
           <br></br>
           <br />
           <label htmlFor="">Last Name :</label>
           <br />
           <input
-            className={`border px-3 border-yellow-500 outline-none bg-black mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
+            className={`border px-3 border-yellow-500 outline-none bg-black  w-[300px] md:w-[300px] h-14 rounded rounded-lg ${
               errors.lastName ? "border-red-500" : ""
             }`}
             placeholder="Last Name"
@@ -275,7 +277,7 @@ function ModelOnboardingPage() {
             id=""
           />
           {errors.lastName && (
-            <div className="text-red-500 text-xs">{errors.lastName}</div>
+            <div className="text-red-500 text-xs mt-2">{errors.lastName}</div>
           )}
 
           <br></br>
@@ -286,7 +288,7 @@ function ModelOnboardingPage() {
           </label>
           <br></br>
 
-          <ul className="grid grid-cols-3 gap-x-5 mt-3 max-w-md ">
+          <ul className="grid grid-cols-3 gap-x-5  mb-3 max-w-md ">
             <li className="relative">
               <input
                 className="sr-only peer"
@@ -323,11 +325,11 @@ function ModelOnboardingPage() {
           </ul>
 
           {errors.gender && (
-            <div className="text-red-500 text-xs">{errors.gender}</div>
+            <div className="text-red-500 text-xs mt-2">{errors.gender}</div>
           )}
           <br></br>
 
-          <div className="mb-5">
+          <div className="mb-3">
             <label htmlFor="telephone" className="font-volkhorn">
               Telephone Number:
             </label>
@@ -341,8 +343,8 @@ function ModelOnboardingPage() {
                   value={formInfo.countryCode}
                   onChange={handleCountryCodeChange}
                 >
-                  <option value="">Select Country Code</option>
-                  <option value="+233">+233 (Ghana)</option>{" "}
+                  
+                  <option value="+233">+233(Gh)</option>{" "}
                   {/* You can add more country options here */}
                 </select>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -362,7 +364,7 @@ function ModelOnboardingPage() {
                 </div>
               </div>
               <input
-                className={`border outline-none px-3 border-yellow-500 bg-black mt-1 w-full h-14 rounded-r rounded-lg ${
+                className={`border outline-none px-3 border-yellow-500 bg-black mt-1 w-[220px] md:w-[200px] h-14 rounded-r rounded-lg ${
                   errors.telephone ? "border-red-500" : ""
                 }`}
                 type="tel"
@@ -377,17 +379,17 @@ function ModelOnboardingPage() {
               />
             </div>
             {errors.telephone && (
-              <div className="text-red-500 text-xs">{errors.telephone}</div>
+              <div className="text-red-500 text-xs mt-2">{errors.telephone}</div>
             )}
           </div>
 
           <br></br>
 
-          <label className="mt-5" htmlFor="">
+          <label className="" htmlFor="">
             Date of Birth:
           </label>
           <br></br>
-          <div className="flex">
+          <div className="flex mb-3">
             {errors.dob_day && <div className="text-red-500 text-xs">*</div>}
             <div className="mr-2">
               <select
@@ -449,13 +451,14 @@ function ModelOnboardingPage() {
             </div>
           </div>
           <br></br>
-
+          
+          <div className="mb-2">
           <label htmlFor="" className="font-volkhorn">
             Height:
           </label>
           <br></br>
           <input
-            className={`outline-none border px-3 border-yellow-500 bg-black mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
+            className={`outline-none border px-3  border-yellow-500 bg-black mt-1 w-[300px] md:w-[300px] h-14 rounded rounded-lg ${
               errors.height ? "border-red-500" : ""
             }`}
             type="number"
@@ -466,14 +469,15 @@ function ModelOnboardingPage() {
             id=""
           />
           {errors.height && (
-            <div className="text-red-500 text-xs">{errors.height}</div>
+            <div className="text-red-500 text-xs mt-2">{errors.height}</div>
           )}
+          </div>
           <br></br>
-
+            <div className="mb-2">
           <label htmlFor="">Location:</label>
           <br></br>
           <input
-            className={`outline-none border px-3 border-yellow-500 mb-3 bg-black mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
+            className={`outline-none border px-3 border-yellow-500 mb-3  bg-black mt-1 w-[300px] md:w-[300px] h-14 rounded rounded-lg ${
               errors.location ? "border-red-500" : ""
             }`}
             type="text"
@@ -486,11 +490,13 @@ function ModelOnboardingPage() {
           {errors.location && (
             <div className="text-red-500 text-xs">{errors.location}</div>
           )}
+          </div>
           <br></br>
 
           <label htmlFor="">Complexion:</label>
 
           <br></br>
+          <div className="mb-3">
           <ul className="grid grid-cols-3 gap-x-5 pb-3   max-w-md ">
             <li className="relative">
               <input
@@ -529,11 +535,12 @@ function ModelOnboardingPage() {
           {errors.complexion && (
             <div className="text-red-500 text-xs pb-5">{errors.complexion}</div>
           )}
+          </div>
 
           <label htmlFor="stature" className="font-volkhorn">
             Stature :
           </label>
-          <ul className="grid grid-cols-3 gap-x-5 pb-20  max-w-md ">
+          <ul className="grid grid-cols-3 gap-x-5   max-w-md ">
             <li className="relative">
               <input
                 className="sr-only peer"
@@ -584,14 +591,15 @@ function ModelOnboardingPage() {
                 Chubby
               </label>
             </li>
-            {errors.stature && (
-              <div className="text-red-500 text-xs">{errors.stature}</div>
-            )}
+            
           </ul>
+          {errors.stature && (
+              <div className="text-red-500 mt-2 text-xs">{errors.stature}</div>
+            )}
         </div>
 
         <br></br>
-        <div>
+        <div className="flex flex-col ">
           {/* <label htmlFor="">Identification Card :</label>
           <br></br> */}
           {/* <div className="flex items-center">
@@ -620,7 +628,7 @@ function ModelOnboardingPage() {
           <br></br>
 
           <label htmlFor="">Profile pic:</label>
-          <br></br>
+          
           <div className="flex items-center">
             <label
               htmlFor="upload2"
@@ -647,13 +655,14 @@ function ModelOnboardingPage() {
             />
           </div>
           {errors.displayPicUrl && (
-            <div className="text-red-500 text-xs">{errors.displayPicUrl}</div>
+            <div className="text-red-500 mt-1 text-xs">{errors.displayPicUrl}</div>
           )}
 
-          <br></br>
+          <br />
 
+          
           <label htmlFor="">Images Upload :</label>
-          <br></br>
+          
           <div className="flex ">
             <div className="flex items-center mr-5">
               <label

@@ -139,7 +139,7 @@ export default function AgencyOnBoardingPage() {
   };
 
   return (
-    <div className="bg-black font-volkhorn  ">
+    <div className="bg-black font-volkhorn sm:h-full md:h-screen lg:h-full  ">
       <SecNavbar />
       <div className="flex justify-center mb-12">
         <h1 className="text-4xl text-yellow-500 mt-40 text-bold">
@@ -148,13 +148,15 @@ export default function AgencyOnBoardingPage() {
       </div>
       <form
         action=""
-        className="px-20 text-white flex flex-col md:flex-row  justify-between "
+        className=" text-white flex flex-col md:flex-row  place-items-center justify-between "
       >
         <div>
+
+          <div className="mb-5">
           <label htmlFor="">Agency Name :</label>
           <br />
           <input
-            className={`border px-3 mb-3 outline-none mt-1 w-[400px] md:w-[500px] h-14 rounded-lg ${
+            className={`border px-3  outline-none  w-[300px] md:w-[500px]  h-14 rounded-lg ${
               errors.agencyName ? "border-red-500" : "border-yellow-500"
             } bg-black`}
             type="text"
@@ -166,13 +168,15 @@ export default function AgencyOnBoardingPage() {
             required
           />
           {errors.agencyName && (
-            <div className="text-red-500 text-xs">{errors.agencyName}</div>
+            <div className="text-red-500 mb-5 mt-1 text-xs">{errors.agencyName}</div>
           )}
+          </div>
           <br />
-          <label htmlFor="">About :</label>
+          <div>
+          <label htmlFor="" className="">About :</label>
           <br />
           <textarea
-            className={`border px-3 outline-none mt-1 w-[400px] md:w-[500px] h-14 rounded-lg ${
+            className={`border px-3 outline-none   w-[300px] md:w-[500px] h-14 rounded-lg ${
               errors.about ? "border-red-500" : "border-yellow-500"
             } bg-black`}
             placeholder="About"
@@ -186,14 +190,15 @@ export default function AgencyOnBoardingPage() {
           {errors.about && (
             <div className="text-red-500 text-xs">{errors.about}</div>
           )}
+          </div>
           <br />
-          <br />
+          <div className="mb-5">
           <label className="" htmlFor="">
             Location :
           </label>
           <br />
           <input
-            className={`border px-3 mb-3 outline-none mt-1 w-[400px] md:w-[500px] h-14 rounded-lg ${
+            className={`border px-3  outline-none  w-[300px] md:w-[500px] h-14 rounded-lg ${
               errors.location ? "border-red-500" : "border-yellow-500"
             } bg-black`}
             type="text"
@@ -206,16 +211,28 @@ export default function AgencyOnBoardingPage() {
           />
 
           {errors.location && (
-            <div className="text-red-500 text-xs">{errors.location}</div>
+            <div className="text-red-500 text-xs mt-1">{errors.location}</div>
           )}
+          </div>
 
           <br />
           <label htmlFor="" className="font-volkhorn">
             Telephone Number:
           </label>
           <br></br>
-          <div className="flex">
-            <div className="relative ">
+          <div className="mb-5">
+          <div className="flex justify-center sm:justify-start  ">
+            <div className="relative   ">
+            <select
+                  className="border border-yellow-500 mr-2  w-[100px] mr-2 h-14 rounded outline-none pr-8 bg-black  h-14 rounded-l rounded-lg appearance-none"
+                  id="countryCode"
+                  name="countryCode"
+                  value={formInfo.countryCode}
+                  onChange={handleCountryCodeChange}
+                >
+                  <option value="+233">+233(Gh)</option>{" "}
+                  {/* You can add more country options here */}
+                </select>
               <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                 <svg
                   className="w-5 h-5 text-gray-400"
@@ -233,7 +250,7 @@ export default function AgencyOnBoardingPage() {
               </div>
             </div>
             <input
-              className={`border outline-none px-3 border-yellow-500 bg-black mt-1 w-full h-14 rounded-r rounded-lg ${
+              className={`border outline-none px-3 border-yellow-500 bg-black  w-[200px] h-14 rounded-r rounded-lg ${
                 errors.telephone ? "border-red-500" : ""
               }`}
               type="tel"
@@ -248,8 +265,9 @@ export default function AgencyOnBoardingPage() {
             />
           </div>
           {errors.telephone && (
-            <div className="text-red-500 text-xs mt-2">{errors.telephone}</div>
+            <div className="text-red-500 text-xs mt-1 mb-5">{errors.telephone}</div>
           )}
+        </div>
         </div>
 
         <div>
@@ -324,7 +342,7 @@ export default function AgencyOnBoardingPage() {
         </div>
       </form>
 
-      <div className="flex justify-center pb-10">
+      <div className="flex justify-center mt-5 pb-10">
         <button
           onClick={handleSubmit}
           className="mr-5 mt-5 bg-yellow-500  border-2 border-black h-[50px] rounded-lg w-[150px]"

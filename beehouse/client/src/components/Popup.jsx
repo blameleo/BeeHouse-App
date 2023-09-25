@@ -58,15 +58,15 @@ function Popup(props) {
         </div>
 
         <div>
-          <h1 className="font-volkhorn uppercase">{dialogTitle}</h1>
+          <h1 className="font-volkhorn text-sm uppercase">{dialogTitle}</h1>
         </div>
       </DialogTitle>
 
       <DialogContent className="">
         {!showSignUpForm ? (
-          <div className="flex">
+          <div className="flex ">
             <button
-              className="w-48 bg-white rounded-lg shadow p-6 hover:cursor-pointer mb-8 hover:bg-yellow-500 mr-5"
+              className="w-[110px] sm:w-[200px]  bg-white rounded-lg shadow p-4  md:p-6  hover:cursor-pointer mb-8 hover:bg-yellow-500 mr-5"
               onClick={() => {
                 setSelectedOption("model");
                 setIsModelSelected(true);
@@ -86,12 +86,12 @@ function Popup(props) {
                   />
                 </div>
               </div>
-              <div>
+              <div className="hidden sm:block">
                 <MdAccessibilityNew size={70} />
               </div>
             </button>
             <button
-              className="w-48 bg-white rounded-lg shadow p-6 hover:cursor-pointer mb-8 hover:bg-yellow-500"
+              className="w-[110px] sm:w-[200px]  bg-white rounded-lg shadow p-4 md:p-6 hover:cursor-pointer mb-8 hover:bg-yellow-500"
               onClick={() => {
                 setSelectedOption("creativeAgency");
                 setIsModelSelected(true);
@@ -111,7 +111,7 @@ function Popup(props) {
                   />
                 </div>
               </div>
-              <div>
+              <div className="hidden sm:block">
                 <BsBuildingFillCheck size={70} />
               </div>
             </button>
