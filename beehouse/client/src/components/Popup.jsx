@@ -66,7 +66,7 @@ function Popup(props) {
         {!showSignUpForm ? (
           <div className="flex ">
             <button
-              className="w-[110px] sm:w-[200px]  bg-white rounded-lg shadow p-4  md:p-6  hover:cursor-pointer mb-8 hover:bg-yellow-500 mr-5"
+              className="w-[110px] sm:w-[200px]  bg-white rounded-lg shadow p-4  md:p-6  hover:cursor-pointer mb-8 hover:bg-yellow-500 mr-3"
               onClick={() => {
                 setSelectedOption("model");
                 setIsModelSelected(true);

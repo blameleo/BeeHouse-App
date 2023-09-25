@@ -111,7 +111,7 @@ function ModelSignUp() {
               onChange={formik.handleChange}
               type="email"
               placeholder="Email"
-              className="mb-5  border p-2 w-[250px] sm:w-96  border-1 border-black rounded-md  "
+              className="mb-5  border p-2 w-[200px] sm:w-96  border-1 border-black rounded-md  "
             />
             {formik.touched.email && formik.errors.email && (
               <p className="text-red-500">{formik.errors.email}</p>
@@ -129,7 +129,7 @@ function ModelSignUp() {
               onBlur={handleBlur}
               type="password"
               placeholder="Password"
-              className="mb-5  border p-2 w-[250px] sm:w-96  border-1 border-black rounded-md  "
+              className="mb-5  border p-2 w-[200px] sm:w-96  border-1 border-black rounded-md  "
             />
 
             <br></br>
@@ -145,7 +145,7 @@ function ModelSignUp() {
               type="password"
               id=""
               placeholder="Confirm Password"
-              className=" mb-5  border p-2 w-[250px] sm:w-96  border-1 border-black rounded-md  "
+              className=" mb-5  border p-2 w-[200px] sm:w-96  border-1 border-black rounded-md  "
             />
             {formik.touched.confirmPassword &&
               formik.errors.confirmPassword && (
