@@ -10,6 +10,7 @@ function Button({
   loginStyle,
   googleLoginStyle,
   onClick,
+  signinStyle
 }) {
   return (
     <div>
@@ -24,7 +25,10 @@ function Button({
             ? loginStyle
             : name === "Sign in with google"
             ? googleLoginStyle
+            : name === "Sign in"
+            ? signinStyle
             : style
+          
         }
       >
         {name === "Sign in with google" && <FcGoogle className="mr-3" />}

@@ -69,7 +69,7 @@ function AgencySignUp() {
     <div>
       <form onSubmit={formik.handleSubmit}>
         {loading ? (
-          <Loader loaderStyle="w-[400px] h-[400px] flex justify-center items-center" />
+          <Loader loaderStyle="  w-[400px] h-[400px] flex justify-center items-center" />
         ) : (
           <div className="">
             <label className="font-volkhorn" htmlFor="">

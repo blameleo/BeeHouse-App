@@ -235,7 +235,7 @@ function ModelOnboardingPage() {
       </div>
       <form
         action=""
-        className=" text-white flex flex-col md:flex-row place-items-center md:place-items-start  justify-between "
+        className=" px-5 text-white flex flex-col md:flex-row place-items-center md:place-items-start  justify-between "
         onSubmit={handleSubmit}
       >
         <div className="">
@@ -626,13 +626,13 @@ function ModelOnboardingPage() {
             />
           </div> */}
           <br></br>
-
+          <div className="">
           <label htmlFor="">Profile pic:</label>
           
           <div className="flex items-center">
             <label
               htmlFor="upload2"
-              className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 order border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer ${
+              className={`relative rounded-xl  p-2 bg-neutral-950 border-dashed border-4 order border-yellow-500  h-32  sm:h-40 w-[100px] sm:w-32 flex items-center justify-center cursor-pointer ${
                 errors.displayPicUrl ? "border-red-500" : ""
               }`}
             >
@@ -657,6 +657,7 @@ function ModelOnboardingPage() {
           {errors.displayPicUrl && (
             <div className="text-red-500 mt-1 text-xs">{errors.displayPicUrl}</div>
           )}
+          </div>
 
           <br />
 
@@ -667,9 +668,9 @@ function ModelOnboardingPage() {
             <div className="flex items-center mr-5">
               <label
                 htmlFor="upload3"
-                className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 ${
+                className={`relative rounded-xl p-2 h-32  sm:h-40 w-[100px] sm:w-32 bg-neutral-950 border-dashed border-4 ${
                   errors.imageUrl1 ? "border-red-500" : "border-yellow-500"
-                } h-40 w-32 flex items-center justify-center cursor-pointer`}
+                }  w-32 flex items-center justify-center cursor-pointer`}
               >
                 {imagePreviews.imageUrl1 ? (
                   <img
@@ -693,7 +694,7 @@ function ModelOnboardingPage() {
             <div className="flex items-center mr-5">
               <label
                 htmlFor="upload4"
-                className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer ${
+                className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 border-yellow-500  h-32  sm:h-40 w-[100px] sm:w-32  flex items-center justify-center cursor-pointer ${
                   errors.imageUrl1 ? "border-red-500" : ""
                 }`}
               >
@@ -719,7 +720,7 @@ function ModelOnboardingPage() {
             <div className="flex items-center">
               <label
                 htmlFor="upload5"
-                className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer ${
+                className={`relative rounded-xl p-2 bg-neutral-950 border-dashed border-4 border-yellow-500 h-32  sm:h-40 w-[100px] sm:w-32 flex items-center justify-center cursor-pointer ${
                   errors.imageUrl3 ? "border-red-500" : ""
                 }`}
               >
