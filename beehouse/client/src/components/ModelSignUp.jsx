@@ -97,7 +97,7 @@ function ModelSignUp() {
     <div>
       <form className=" " onSubmit={formik.handleSubmit}>
         {loading ? (
-          <Loader loaderStyle="w-[400px] h-[400px] flex justify-center items-center" />
+          <Loader loaderStyle="  pr-[200px] sm:pr-[0px] w-[400px] h-[400px] flex justify-center items-center" />
         ) : (
           <div>
             <label className="font-volkhorn" htmlFor="">
