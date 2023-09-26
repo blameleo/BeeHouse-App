@@ -21,7 +21,7 @@ export default function Navbar() {
 
         <div className="flex items-center ml-37  justify-between w-40 ">
           <Link to="/login">
-            <Button name="Sign in" signinStyle="ml-12" />
+            <Button name="Sign in" signinStyle="ml-12 " />
 
           </Link>
           <Button
