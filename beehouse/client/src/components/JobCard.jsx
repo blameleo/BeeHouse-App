@@ -45,7 +45,7 @@ export default function JobCard({ job }) {
     };
     try {
       const response = await axios.post(
-        "https://beehouse-backend-api.onrender.com/jobs/apply",
+        "http://localhost:4000/jobs/apply",
         params
       );
 
@@ -83,64 +83,60 @@ export default function JobCard({ job }) {
     }
   };
   return (
-    <div>
+    <div
+      key={job._id}
+      className="  w-[300px] sm:w-[280px]   border border-gray-400 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500  mb-10"
+    >
       <div
-        key={job._id}
-        className="  w-[250px] mr-5  border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500  mb-10"
+        className=" bg-blue-100 rounded-[20px] m-2 p-2"
+        style={{ backgroundColor: job.color }}
       >
-        <div
-          className=" bg-blue-100 rounded-[20px] m-2 p-2"
-          style={{ backgroundColor: job.color }}
-        >
-          <p className="bg-white rounded-lg flex justify-center w-24 py-1 px-8 text-[10px]">
-            {`${day},${month},${year}`}
-          </p>
+        <p className="bg-white rounded-lg flex justify-center w-24 py-1 px-8 text-[10px]">
+          {`${day},${month},${year}`}
+        </p>
 
-          <div className="pt-6 flex items-center">
-            <h1 className=" text-gray-700 text-[70%]">{job.agencyName}</h1>
-            <MdVerified className="ml-1 text-yellow-500 text-[90%]" />
-          </div>
-
-          <div className="py-2">
-            <h1 className="font-black text-md">{job.description}</h1>
-          </div>
-          <div className="flex flex-wrap">
-            {Object.values(job.tags).map((tag, i) => (
-              <p
-                key={i}
-                className="border border-gray-400 mr-2 text-gray-600 text-[14px] rounded-xl px-[5px] my-1"
-              >
-                {tag}
-              </p>
-            ))}
-            {/* // .join(",")} */}
-          </div>
+        <div className="pt-6 flex items-center">
+          <h1 className=" text-gray-700 text-[70%]">{job.agencyName}</h1>
+          <MdVerified className="ml-1 text-yellow-500 text-[90%]" />
         </div>
-        <div className="px-4 pt-2 flex  pb-1 justify-between items-center">
-          <div>
-            <p className="font-black text-md">₵{job.price}</p>
-            <p className="text-gray-500 text-sm">{job.location}</p>
-          </div>
-          {/* <GiBee
+
+        <div className="py-2">
+          <h1 className="font-black text-md">{job.description}</h1>
+        </div>
+        <div className="flex flex-wrap">
+          {Object.values(job.tags).map((tag, i) => (
+            <p
+              key={i}
+              className="border border-gray-400 mr-2 text-gray-600 text-[14px] rounded-xl px-[5px] my-1"
+            >
+              {tag}
+            </p>
+          ))}
+          {/* // .join(",")} */}
+        </div>
+      </div>
+      <div className="px-4 pt-2 flex  pb-1 justify-between items-center">
+        <div>
+          <p className="font-black text-md">₵{job.price}</p>
+          <p className="text-gray-500 text-sm">{job.location}</p>
+        </div>
+        {/* <GiBee
         onClick={}
         className="text-black text-[32px]  rounded-full cursor-pointer  h-10 w-10"
       /> */}
 
-          <div onClick={() => applyToJob(user?._id, job._id)}>
-            {isLoading ? (
-              <GiHourglass className="text-[12px] rounded-full cursor-pointer h-10 w-10" />
-            ) : isApplied ? (
-              <GiCheckMark className="text-green-500 text-[12px] rounded-full  cursor-not-allowed h-10 w-10" />
-            ) : (
-              <button className="border rounded px-5 hover:bg-purple-600 bg-yellow-500 text-white font-bold">
-                apply
-              </button>
-            )}
-          </div>
+        <div onClick={() => applyToJob(user?._id, job._id)}>
+          {isLoading ? (
+            <GiHourglass className="text-[12px] rounded-full cursor-pointer h-10 w-10" />
+          ) : isApplied ? (
+            <GiCheckMark className="text-green-500 text-[12px] rounded-full  cursor-not-allowed h-10 w-10" />
+          ) : (
+            <button className="border rounded px-5 hover:bg-purple-600 bg-yellow-500 text-white font-bold">
+              apply
+            </button>
+          )}
         </div>
       </div>
-
-      {/* <ToastContainer /> */}
     </div>
   );
 }

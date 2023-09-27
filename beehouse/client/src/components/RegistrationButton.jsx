@@ -10,7 +10,7 @@ export default function RegistrationButton({ label, onClick }) {
   return (
     <div className="">
       <button
-        className="w-96   rounded  bg-yellow-500 p-3 hover:bg-purple-600 hover:text-white"
+        className="sm:w-96   rounded  bg-yellow-500 p-3 hover:bg-purple-600 hover:text-white"
         onClick={handleOnClick}
       >
         {label}

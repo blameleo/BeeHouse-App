@@ -9,10 +9,10 @@ function AgencySidebar() {
   const location = useLocation();
 
   return (
-    <div className=" mt-16 w-full ">
-      <div className="min-w-[14%]  pt-10 sm:pt-0  h-[100vh] bg-yellow-500 fixed  left-0">
+    <div className="  ">
+      <div className="min-w-[14%]  border border-green-600 pt-10 sm:pt-0  h-[100vh] bg-yellow-500 fixed sm:block hidden left-0 ">
         {/* <BsGearFill /> */}
-        <h1 className="text-center pt-10 font-black mb-10 hidden sm:block"></h1>
+        <h1 className="text-center  font-black mb-10 hidden sm:block"></h1>
         <Link to="/agency">
           <div
             className={`flex justify-center  cursor-pointer ${

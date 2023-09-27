@@ -36,7 +36,7 @@ function ModelSignUp() {
       setLoading(true);
       try {
         const response = await axios.post(
-          "https://beehouse-backend-api.onrender.com/user/register",
+          "http://localhost:4000/user/register",
           values
         );
 
@@ -95,7 +95,7 @@ function ModelSignUp() {
   // };
   return (
     <div>
-      <form className=" " onSubmit={formik.handleSubmit}>
+      <form className=" border-black " onSubmit={formik.handleSubmit}>
         {loading ? (
           <Loader loaderStyle="w-[400px] h-[400px] flex justify-center items-center" />
         ) : (
@@ -111,7 +111,7 @@ function ModelSignUp() {
               onChange={formik.handleChange}
               type="email"
               placeholder="Email"
-              className="mb-5  border p-2 w-96  border-1 border-black rounded-md  "
+              className="mb-5  border p-2 w-64 sm:w-96  border-1 border-black rounded-md  "
             />
             {formik.touched.email && formik.errors.email && (
               <p className="text-red-500">{formik.errors.email}</p>
@@ -129,7 +129,7 @@ function ModelSignUp() {
               onBlur={handleBlur}
               type="password"
               placeholder="Password"
-              className="mb-5  border p-2 w-96  border-1 border-black rounded-md  "
+              className="mb-5  border p-2 w-full sm:w-96  border-1 border-black rounded-md  "
             />
 
             <br></br>
@@ -145,7 +145,7 @@ function ModelSignUp() {
               type="password"
               id=""
               placeholder="Confirm Password"
-              className=" mb-5  border p-2 w-96  border-1 border-black rounded-md  "
+              className=" mb-5  border p-2 w-full sm:w-96  border-1 border-black rounded-md  "
             />
             {formik.touched.confirmPassword &&
               formik.errors.confirmPassword && (

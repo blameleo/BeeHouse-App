@@ -84,7 +84,7 @@ function AgencyJobs() {
 
     try {
       const response = await axios.post(
-        "https://beehouse-backend-api.onrender.com/jobs/create",
+        "http://localhost:4000/jobs/create",
         formWithTags
       );
 
@@ -150,7 +150,7 @@ function AgencyJobs() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://beehouse-backend-api.onrender.com/jobs/getjobs/${user._id}`
+        `http://localhost:4000/jobs/getjobs/${user._id}`
       );
       dispatch(fetchJobsSuccess(response.data));
       setLoading(false);
@@ -229,22 +229,24 @@ function AgencyJobs() {
   };
 
   return (
-    <div className="flex flex-col  -500 ml-20 lg:ml-60  items-center     ">
+    <div className="border mt-16 border-black  sm:ml-[15%]">
       {/* <div className="flex">
         <h1 className="mt-20 text-xl ">Post an</h1>
         <RiAdvertisementFill className="mt-12 ml-2 text-6xl text-yellow-500" />
       </div> */}
-      <button
-        className="mt-5 px-2 py-1 bg-yellow-500 absolute cursor-pointer hover:bg-purple-600 hover:text-white"
-        onClick={handleOpen}
-      >
-        Post a job
-      </button>
+      <div className="flex justify-center">
+        <button
+          className="mt-5 px-2 py-1 bg-yellow-500  cursor-pointer hover:bg-purple-600 hover:text-white "
+          onClick={handleOpen}
+        >
+          Post a job
+        </button>
+      </div>
 
       {loading ? (
-        <Loader loaderStyle="mt-44" />
+        <Loader loaderStyle="h-[100vh] grid place-items-center" />
       ) : (
-        <div className="flex flex-wrap sm:px-8 mt-20 ">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 place-items-center mt-10 pb-28">
           {jobs.map((job) => {
             const date = new Date(job.createdAt);
 
@@ -270,7 +272,7 @@ function AgencyJobs() {
 
             console.log(`Day: ${day}, Month: ${month}, Year: ${year}`);
             return (
-              <div className=" h-[20%] w-[250px] mr-5 border border-gray-700 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500  mb-10">
+              <div className="  w-[300px]  border border-gray-300 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500  mb-10">
                 <div
                   className=" bg-blue-100 rounded-[20px] m-2 p-2"
                   style={{ backgroundColor: job.color }}

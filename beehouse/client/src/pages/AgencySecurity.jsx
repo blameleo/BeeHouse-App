@@ -26,7 +26,7 @@ function AgencySecurity() {
     // console.log(values);
     try {
       const response = await axios.post(
-        "https://beehouse-backend-api.onrender.com/profile/changepassword",
+        "http://localhost:4000/profile/changepassword",
         values
       );
 
@@ -66,30 +66,27 @@ function AgencySecurity() {
   };
 
   return (
-    <section className="">
+    <section className="sm:mt-10 mt-28 pb-28">
       {loading ? (
         <Loader loaderStyle="grid place-items-center h-[100vh]" />
       ) : (
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div className="grid place-items-center ">
           <div className=" p-6 bg-white  md:mt-0 sm:max-w-md  sm:p-8">
-            <h2 className="mb-1 ml-5 sm:ml-[0px] text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
+            <h2 className="mb-1 text-center sm:ml-[0px] text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
               Change Password
             </h2>
-            <form
-              onSubmit={handleSubmit}
-              className="mt-4 space-y-4 lg:mt-5 md:space-y-5"
-            >
+            <form onSubmit={handleSubmit} className="grid  gap-y-5">
               <div>
                 <label
                   htmlFor="oldPassword"
-                  className="block mb-2 text-sm ml-5 font-medium text-gray-900 "
+                  className="block mb-2 text-sm  font-medium text-gray-900 "
                 >
                   Old Password
                 </label>
                 <input
                   type="password"
                   id="oldPassword"
-                  className="bg-gray-50 border border-gray-700 ml-[20px] sm:ml-[0px]  w-[280px] sm:w-[350px] text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-gray-700  sm:ml-[0px]  w-[280px] sm:w-[350px] text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   value={oldPassword}
                   placeholder="••••••••"
                   onChange={(e) => setOldPassword(e.target.value)}
@@ -99,14 +96,14 @@ function AgencySecurity() {
               <div>
                 <label
                   htmlFor="password"
-                  className="block mb-2 ml-5 text-sm font-medium text-gray-900 "
+                  className="block mb-2  text-sm font-medium text-gray-900 "
                 >
                   New Password
                 </label>
                 <input
                   type="password"
                   id="password"
-                  className="bg-gray-50 border border-gray-300 text-gray-900  ml-[20px] sm:ml-[0px] w-[280px] sm:w-[350px] sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 0 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-gray-700  sm:ml-[0px]  w-[280px] sm:w-[350px] text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="••••••••"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
@@ -116,14 +113,14 @@ function AgencySecurity() {
               <div>
                 <label
                   htmlFor="confirm-password"
-                  className="block mb-2 ml-5 text-sm font-medium text-gray-900 "
+                  className="block mb-2  text-sm font-medium text-gray-900 "
                 >
                   Confirm new password
                 </label>
                 <input
                   type="password"
                   id="confirm-password"
-                  className="bg-gray-50 border border-gray-300 ml-[20px] sm:ml-[0px] w-[280px] sm:w-[350px] text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-gray-700  sm:ml-[0px]  w-[280px] sm:w-[350px] text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block  p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="••••••••"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}

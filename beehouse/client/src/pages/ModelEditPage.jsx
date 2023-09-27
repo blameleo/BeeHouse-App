@@ -149,7 +149,7 @@ export default function ModelEditPage() {
     // console.log(formInfo);
     try {
       const response = await axios.put(
-        "https://beehouse-backend-api.onrender.com/profile/user",
+        "http://localhost:4000/profile/user",
         formInfo,
         {
           headers: {
@@ -233,7 +233,7 @@ export default function ModelEditPage() {
                   />
                 ) : (
                   <img
-                    src={`https://beehouse-backend-api.onrender.com/${user?.displayPicUrl?.replace(
+                    src={`http://localhost:4000/${user?.displayPicUrl?.replace(
                       "public/",
                       ""
                     )}`}
@@ -422,7 +422,7 @@ export default function ModelEditPage() {
                       />
                     ) : (
                       <img
-                        src={`https://beehouse-backend-api.onrender.com/${user?.imageUrl1?.replace(
+                        src={`http://localhost:4000/${user?.imageUrl1?.replace(
                           "public/",
                           ""
                         )}`}
@@ -453,7 +453,7 @@ export default function ModelEditPage() {
                       />
                     ) : (
                       <img
-                        src={`https://beehouse-backend-api.onrender.com/${user?.imageUrl2?.replace(
+                        src={`http://localhost:4000/${user?.imageUrl2?.replace(
                           "public/",
                           ""
                         )}`}
@@ -484,7 +484,7 @@ export default function ModelEditPage() {
                       />
                     ) : (
                       <img
-                        src={`https://beehouse-backend-api.onrender.com/${user?.imageUrl3?.replace(
+                        src={`http://localhost:4000/${user?.imageUrl3?.replace(
                           "public/",
                           ""
                         )}`}

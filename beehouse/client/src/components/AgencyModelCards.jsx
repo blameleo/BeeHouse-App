@@ -25,7 +25,7 @@ function AgencyModelCards() {
   const getApplications = async () => {
     try {
       const response = await axios.get(
-        `https://beehouse-backend-api.onrender.com/jobs/model/applications/${user?._id}`
+        `http://localhost:4000/jobs/model/applications/${user?._id}`
       );
 
       if (response.status === 200) {
@@ -47,11 +47,11 @@ function AgencyModelCards() {
   }, [user]);
 
   return (
-    <div>
+    <div className="">
       {loading ? (
-        <Loader loaderStyle="h-full  flex justify-center pt-20" />
+        <Loader loaderStyle="h-[100vh] grid place-items-center" />
       ) : (
-        <div className=" gap-10 grid grid-cols-1 ml-[5%] sm:grid-cols-2    md:grid-cols-2 lg:grid-cols-3 ">
+        <div className=" gap-10 grid   sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-3 place-items-center pb-28">
           {applications.length === 0 ? (
             <p className="pt-20 ">You have no applications</p>
           ) : (
@@ -74,13 +74,13 @@ function AgencyModelCards() {
               );
 
               return (
-                <div className="lg:">
-                  <div className="   border mt-5 rounded-2xl bg-white shadow-2xl  w-[95%] sm:w[100%]  p-2  ">
+                <div className="">
+                  <div className="border mt-5 rounded-2xl bg-white shadow-2xl max-w-[400px] p-2  ">
                     <div className="flex justify-between">
                       <div className="   ">
                         <div className="flex flex-col place-items-center  ">
                           <img
-                            src={`https://beehouse-backend-api.onrender.com/${newUrl}`}
+                            src={`http://localhost:4000/${newUrl}`}
                             className="w-10 h-10  mt-2  rounded-full object-cover"
                             alt=""
                           />
@@ -156,17 +156,17 @@ function AgencyModelCards() {
                         >
                           <img
                             className="rounded-xl shadow-xl border "
-                            src={`https://beehouse-backend-api.onrender.com/${url1}`}
+                            src={`http://localhost:4000/${url1}`}
                           />
 
                           <img
                             className="rounded-xl shadow-xl border"
-                            src={`https://beehouse-backend-api.onrender.com/${url2}`}
+                            src={`http://localhost:4000/${url2}`}
                           />
 
                           <img
                             className="rounded-xl shadow-xl border"
-                            src={`https://beehouse-backend-api.onrender.com/${url3}`}
+                            src={`http://localhost:4000/${url3}`}
                           />
                         </Carousel>
                       </div>

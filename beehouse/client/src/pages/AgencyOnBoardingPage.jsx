@@ -121,7 +121,7 @@ export default function AgencyOnBoardingPage() {
     console.log("Submitting form data...");
     try {
       const response = await axios.put(
-        "https://beehouse-backend-api.onrender.com/profile/user",
+        "http://localhost:4000/profile/user",
         formInfo,
         {
           headers: {
@@ -139,22 +139,18 @@ export default function AgencyOnBoardingPage() {
   };
 
   return (
-    <div className="bg-black font-volkhorn  ">
+    <div className="bg-black   pb-36">
       <SecNavbar />
-      <div className="flex justify-center mb-12">
-        <h1 className="text-4xl text-yellow-500 mt-40 text-bold">
-          Create Account
-        </h1>
-      </div>
-      <form
-        action=""
-        className="px-20 text-white flex flex-col md:flex-row  justify-between "
-      >
+
+      <h1 className="text-4xl text-center text-yellow-500 mt-10 py-10  font-bold">
+        Create Account
+      </h1>
+      <form action="" className="px-10 text-white grid sm:place-items-center ">
         <div>
           <label htmlFor="">Agency Name :</label>
           <br />
           <input
-            className={`border px-3 mb-3 outline-none mt-1 w-[400px] md:w-[500px] h-14 rounded-lg ${
+            className={`border px-3 mb-3 outline-none mt-1 w-full sm:w-[400px]  h-14 rounded-lg ${
               errors.agencyName ? "border-red-500" : "border-yellow-500"
             } bg-black`}
             type="text"
@@ -172,7 +168,7 @@ export default function AgencyOnBoardingPage() {
           <label htmlFor="">About :</label>
           <br />
           <textarea
-            className={`border px-3 outline-none mt-1 w-[400px] md:w-[500px] h-14 rounded-lg ${
+            className={`border px-3 outline-none mt-1 w-full sm:w-[400px] h-14 rounded-lg ${
               errors.about ? "border-red-500" : "border-yellow-500"
             } bg-black`}
             placeholder="About"
@@ -187,13 +183,12 @@ export default function AgencyOnBoardingPage() {
             <div className="text-red-500 text-xs">{errors.about}</div>
           )}
           <br />
-          <br />
           <label className="" htmlFor="">
             Location :
           </label>
           <br />
           <input
-            className={`border px-3 mb-3 outline-none mt-1 w-[400px] md:w-[500px] h-14 rounded-lg ${
+            className={`border px-3 mb-3 outline-none sm:w-[400px] mt-1 w-full h-14 rounded-lg ${
               errors.location ? "border-red-500" : "border-yellow-500"
             } bg-black`}
             type="text"
@@ -210,10 +205,10 @@ export default function AgencyOnBoardingPage() {
           )}
 
           <br />
-          <label htmlFor="" className="font-volkhorn">
+          <label htmlFor="" className="">
             Telephone Number:
           </label>
-          <br></br>
+
           <div className="flex">
             <div className="relative ">
               <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -233,7 +228,7 @@ export default function AgencyOnBoardingPage() {
               </div>
             </div>
             <input
-              className={`border outline-none px-3 border-yellow-500 bg-black mt-1 w-full h-14 rounded-r rounded-lg ${
+              className={`border outline-none px-3 border-yellow-500 bg-black mt-1 w-full sm:w-[400px] h-14 rounded-r rounded-lg ${
                 errors.telephone ? "border-red-500" : ""
               }`}
               type="tel"
@@ -251,8 +246,8 @@ export default function AgencyOnBoardingPage() {
             <div className="text-red-500 text-xs mt-2">{errors.telephone}</div>
           )}
         </div>
-
-        <div>
+        <br />
+        <div className="grid place-items-center">
           <label htmlFor="">Profile Picture :</label>
           <br />
           <div className="">
@@ -324,10 +319,10 @@ export default function AgencyOnBoardingPage() {
         </div>
       </form>
 
-      <div className="flex justify-center pb-10">
+      <div className="flex justify-center  ">
         <button
           onClick={handleSubmit}
-          className="mr-5 mt-5 bg-yellow-500  border-2 border-black h-[50px] rounded-lg w-[150px]"
+          className=" mt-5 bg-yellow-500  border-2 border-black h-[50px] rounded-lg w-[150px]"
         >
           Continue
         </button>

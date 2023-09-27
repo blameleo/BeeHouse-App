@@ -34,7 +34,7 @@ function AgencySignUp() {
       setLoading(true);
       try {
         const response = await axios.post(
-          "https://beehouse-backend-api.onrender.com/user/register",
+          "http://localhost:4000/user/register",
           {
             ...values,
             type: "agency", // Set the agency type here
@@ -79,7 +79,7 @@ function AgencySignUp() {
             <input
               type="email"
               name="email"
-              className="mb-5  border p-2 w-96  border-1 border-black rounded-md   "
+              className="mb-5  border p-2 w-64 sm:w-96  border-1 border-black rounded-md   "
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
@@ -101,7 +101,7 @@ function AgencySignUp() {
               onBlur={formik.handleBlur}
               value={formik.values.password}
               placeholder="Password"
-              className="mb-5  border p-2 w-96  border-1 border-black rounded-md  "
+              className="mb-5  border p-2 w-64 sm:w-96  border-1 border-black rounded-md  "
             />
             {formik.touched.password && formik.errors.password && (
               <p className="text-red-500">{formik.errors.password}</p>
@@ -120,7 +120,7 @@ function AgencySignUp() {
               onBlur={formik.handleBlur}
               value={formik.values.confirmPassword}
               placeholder="Confirm Password"
-              className=" mb-5  border p-2 w-96  border-1 border-black rounded-md  "
+              className=" mb-5  border p-2 w-64 sm:w-96  border-1 border-black rounded-md  "
             />
             {formik.touched.confirmPassword &&
               formik.errors.confirmPassword && (

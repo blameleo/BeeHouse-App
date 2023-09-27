@@ -65,12 +65,9 @@ function SecNavbar() {
 
   const getUser = async () => {
     try {
-      const response = await axios.get(
-        "https://beehouse-backend-api.onrender.com/user/getuser",
-        {
-          params: { userId },
-        }
-      );
+      const response = await axios.get("http://localhost:4000/user/getuser", {
+        params: { userId },
+      });
       // setUser(response.data);
       dispatch(setUser(response.data));
       // setCookie("userData", response.data);
@@ -83,7 +80,7 @@ function SecNavbar() {
     console.log(userId);
     try {
       const response = await axios.get(
-        `https://beehouse-backend-api.onrender.com/jobs/notifications/count/${userId}`
+        `http://localhost:4000/jobs/notifications/count/${userId}`
       );
 
       // console.log(response);
@@ -145,7 +142,7 @@ function SecNavbar() {
               <img
                 src={
                   newUrl
-                    ? `https://beehouse-backend-api.onrender.com/${newUrl}`
+                    ? `http://localhost:4000/${newUrl}`
                     : "/img/defaultpic.png"
                 }
                 alt=""

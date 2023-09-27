@@ -3,6 +3,7 @@ import SecNavbar from "../components/SecNavbar";
 import { BsFillPersonBadgeFill, BsGearFill } from "react-icons/bs";
 import { GiPadlock } from "react-icons/gi";
 import { Link, Routes, Route, Outlet, useLocation } from "react-router-dom";
+import BottomNav from "../components/BottomNav";
 
 export default function ModelSettings() {
   const location = useLocation();
@@ -53,6 +54,7 @@ export default function ModelSettings() {
           <Outlet />
         </div>
       </div>
+      <BottomNav />
     </div>
   );
 }

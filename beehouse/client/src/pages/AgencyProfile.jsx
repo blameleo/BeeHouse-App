@@ -77,7 +77,7 @@ export default function AgencyProfile() {
 
     try {
       const response = await axios.put(
-        "https://beehouse-backend-api.onrender.com/profile/user",
+        "http://localhost:4000/profile/user",
         formInfo,
         {
           headers: {
@@ -134,15 +134,19 @@ export default function AgencyProfile() {
     console.log(newUrl);
   }
   return (
-    <div>
+    <div className=" mt-16 sm:ml-[15%] ">
       {loading ? (
         <Loader loaderStyle=" grid place-items-center h-[100vh]" />
       ) : (
         <div className=" font-volkhorn  px-4 pt-">
-          <div className="flex justify-center mt-10">
+          <div className="flex justify-center mt-">
             <h1 className="  text-xl py-4 text-bold">Agency profile</h1>
           </div>
-          <form action="" className=" text-white   " onSubmit={handleSubmit}>
+          <form
+            action=""
+            className=" text-white  pb-20"
+            onSubmit={handleSubmit}
+          >
             <div className="  flex justify-center mb-4">
               <label
                 htmlFor="upload2"
@@ -156,7 +160,7 @@ export default function AgencyProfile() {
                   />
                 ) : (
                   <img
-                    src={`https://beehouse-backend-api.onrender.com/${newUrl}`}
+                    src={`http://localhost:4000/${newUrl}`}
                     alt="preview"
                     className="w-full h-full object-cover rounded-full"
                   />
@@ -180,7 +184,7 @@ export default function AgencyProfile() {
               </label>
 
               <input
-                className=" border px-3 border-gray-400 outline-none text-black  mt-1  h-14 ml-[20px] sm:ml-[0px] w-[280px] sm:w-[350px]   lg:w-[500px]  rounded-lg "
+                className=" border px-3 border-gray-400 outline-none text-black  mt-1  h-14  sm:ml-[0px] w-[280px] sm:w-[350px]   lg:w-[500px]  rounded-lg "
                 type="text"
                 onChange={handleInputChange}
                 value={formInfo.agencyName}
@@ -195,7 +199,7 @@ export default function AgencyProfile() {
                 Telephone:
               </label>
               <input
-                className="border  outline-none px-3 border-gray-400 text-black ml-[20px] sm:ml-[0px] w-[280px] sm:w-[350px]  lg:w-[500px] mt-1  h-14  rounded-lg"
+                className="border  outline-none px-3 border-gray-400 text-black  sm:ml-[0px] w-[280px] sm:w-[350px]  lg:w-[500px] mt-1  h-14  rounded-lg"
                 type="tel"
                 placeholder="+233 Phone Number"
                 name="telephone"
@@ -213,7 +217,7 @@ export default function AgencyProfile() {
                 Location:
               </label>
               <input
-                className=" outline-none border px-3 border-gray-400 mb-3 text-black ml-[20px] sm:ml-[0px] w-[280px] sm:w-[350px] lg:w-[500px]  mt-1  h-14  rounded-lg "
+                className=" outline-none border px-3 border-gray-400 mb-3 text-black  sm:ml-[0px] w-[280px] sm:w-[350px] lg:w-[500px]  mt-1  h-14  rounded-lg "
                 type="text"
                 placeholder="Location"
                 onChange={handleInputChange}
@@ -226,7 +230,7 @@ export default function AgencyProfile() {
             <div className="flex flex-col items-center text-black">
               <label htmlFor="">About</label>
               <textarea
-                className="outline-none border px-3 border-gray-400 mb-3 text-black ml-[20px] sm:ml-[0px] w-[280px]  sm:w-[350px] lg:w-[500px] mt-1 h-48 rounded-lg"
+                className="outline-none border px-3 border-gray-400 mb-3 text-black  sm:ml-[0px] w-[280px]  sm:w-[350px] lg:w-[500px] mt-1 h-48 rounded-lg"
                 placeholder="About"
                 onChange={handleInputChange}
                 value={formInfo.about}

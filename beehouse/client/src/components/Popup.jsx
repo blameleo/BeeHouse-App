@@ -50,7 +50,7 @@ function Popup(props) {
     <Dialog
       open={openPopup}
       onClose={handleClose}
-      PaperProps={{ sx: { padding: "40px" } }}
+      PaperProps={{ sx: { padding: "5px" } }}
     >
       <DialogTitle>
         <div className="flex justify-center mb-10">
@@ -58,13 +58,13 @@ function Popup(props) {
         </div>
 
         <div>
-          <h1 className="font-volkhorn uppercase">{dialogTitle}</h1>
+          <h1 className="font-bold uppercase  text-center">{dialogTitle}</h1>
         </div>
       </DialogTitle>
 
       <DialogContent className="">
         {!showSignUpForm ? (
-          <div className="flex">
+          <div className="grid place-items-center">
             <button
               className="w-48 bg-white rounded-lg shadow p-6 hover:cursor-pointer mb-8 hover:bg-yellow-500 mr-5"
               onClick={() => {
@@ -87,7 +87,7 @@ function Popup(props) {
                 </div>
               </div>
               <div>
-                <MdAccessibilityNew size={70} />
+                <MdAccessibilityNew size={50} />
               </div>
             </button>
             <button
@@ -112,7 +112,7 @@ function Popup(props) {
                 </div>
               </div>
               <div>
-                <BsBuildingFillCheck size={70} />
+                <BsBuildingFillCheck size={50} />
               </div>
             </button>
           </div>

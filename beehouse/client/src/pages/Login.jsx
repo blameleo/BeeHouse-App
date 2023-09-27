@@ -41,13 +41,10 @@ export default function Login() {
     onSubmit: async (values) => {
       setLoading(true);
       try {
-        const response = await axios.post(
-          "https://beehouse-backend-api.onrender.com/user/login",
-          {
-            email: values.email,
-            password: values.password,
-          }
-        );
+        const response = await axios.post("http://localhost:4000/user/login", {
+          email: values.email,
+          password: values.password,
+        });
 
         if (response.data.type === "model" && response.status === 200) {
           setLoading(false);

@@ -202,7 +202,7 @@ function ModelOnboardingPage() {
     console.log(formInfo);
     try {
       const response = await axios.put(
-        "https://beehouse-backend-api.onrender.com/profile/user",
+        "http://localhost:4000/profile/user",
         formInfo,
         {
           headers: {
@@ -222,20 +222,18 @@ function ModelOnboardingPage() {
     }
   };
   return (
-    <div className="bg-black font-volkhorn ">
+    <div className="bg-black   pb-36">
       {/* <div className=" px-5 py-5  flex">
         <FaForumbee className="text-yellow-500 mr-1 text-3xl" />
         <h1 className="text-yellow-500 text-3xl">BeeHouse</h1>
       </div> */}
       <SecNavbar />
-      <div className="flex justify-center mt-10">
-        <h1 className=" font-volkhorn text-4xl text-yellow-500 mt-12 text-bold">
-          Create Account{" "}
-        </h1>
-      </div>
+      <h1 className="text-4xl text-center text-yellow-500 mt-10 py-10  font-bold">
+        Create Account
+      </h1>
       <form
         action=""
-        className="px-20 text-white flex flex-col md:flex-row justify-between "
+        className="px-5  grid text-white sm:place-items-center"
         onSubmit={handleSubmit}
       >
         <div className="">
@@ -245,7 +243,7 @@ function ModelOnboardingPage() {
           <br></br>
 
           <input
-            className={`border px-3 border-yellow-500 outline-none bg-black mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
+            className={`border px-3 border-yellow-500 outline-none bg-black mt-1 w-full sm:w-[400px] h-14  rounded-lg ${
               errors.firstName ? "border-red-500" : ""
             }`}
             type="text"
@@ -264,7 +262,7 @@ function ModelOnboardingPage() {
           <label htmlFor="">Last Name :</label>
           <br />
           <input
-            className={`border px-3 border-yellow-500 outline-none bg-black mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
+            className={`border px-3 border-yellow-500 outline-none bg-black mt-1 w-full sm:w-[400px] h-14  rounded-lg ${
               errors.lastName ? "border-red-500" : ""
             }`}
             placeholder="Last Name"
@@ -328,14 +326,14 @@ function ModelOnboardingPage() {
           <br></br>
 
           <div className="mb-5">
-            <label htmlFor="telephone" className="font-volkhorn">
+            <label htmlFor="telephone" className="">
               Telephone Number:
             </label>
             <br />
             <div className="flex">
               <div className="relative ">
                 <select
-                  className="border border-yellow-500 mr-3 outline-none pr-8 bg-black mt-1 h-14 rounded-l rounded-lg appearance-none"
+                  className="border border-yellow-500 mr-3 outline-none pr-8 w-[100px] bg-black mt-1 h-14 rounded-l rounded-lg appearance-none"
                   id="countryCode"
                   name="countryCode"
                   value={formInfo.countryCode}
@@ -362,7 +360,7 @@ function ModelOnboardingPage() {
                 </div>
               </div>
               <input
-                className={`border outline-none px-3 border-yellow-500 bg-black mt-1 w-full h-14 rounded-r rounded-lg ${
+                className={`border outline-none px-3 border-yellow-500 bg-black mt-1 w-[200px] h-14 rounded-r rounded-lg ${
                   errors.telephone ? "border-red-500" : ""
                 }`}
                 type="tel"
@@ -391,7 +389,7 @@ function ModelOnboardingPage() {
             {errors.dob_day && <div className="text-red-500 text-xs">*</div>}
             <div className="mr-2">
               <select
-                className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14 rounded rounded-lg"
+                className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14  rounded-lg"
                 type="date"
                 placeholder="DD"
                 name="dob_day"
@@ -410,7 +408,7 @@ function ModelOnboardingPage() {
             {errors.dob_month && <div className="text-red-500 text-xs">*</div>}
             <div className="mr-2">
               <select
-                className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14 rounded rounded-lg"
+                className="border outline-none px-3 border-yellow-500 bg-black  mt-1 w-20 h-14  rounded-lg"
                 type="date"
                 placeholder="MM"
                 name="dob_month"
@@ -450,12 +448,12 @@ function ModelOnboardingPage() {
           </div>
           <br></br>
 
-          <label htmlFor="" className="font-volkhorn">
+          <label htmlFor="" className="">
             Height:
           </label>
           <br></br>
           <input
-            className={`outline-none border px-3 border-yellow-500 bg-black mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
+            className={`outline-none border px-3 border-yellow-500 bg-black mt-1 w-full sm:w-[400px] h-14  mb-5 rounded-lg ${
               errors.height ? "border-red-500" : ""
             }`}
             type="number"
@@ -473,7 +471,7 @@ function ModelOnboardingPage() {
           <label htmlFor="">Location:</label>
           <br></br>
           <input
-            className={`outline-none border px-3 border-yellow-500 mb-3 bg-black mt-1 w-[400px] md:w-[500px] h-14 rounded rounded-lg ${
+            className={`outline-none border px-3 border-yellow-500 mb-10 bg-black mt-1 w-full sm:w-[400px] h-14  rounded-lg ${
               errors.location ? "border-red-500" : ""
             }`}
             type="text"
@@ -530,7 +528,7 @@ function ModelOnboardingPage() {
             <div className="text-red-500 text-xs pb-5">{errors.complexion}</div>
           )}
 
-          <label htmlFor="stature" className="font-volkhorn">
+          <label htmlFor="stature" className="mt-10">
             Stature :
           </label>
           <ul className="grid grid-cols-3 gap-x-5 pb-20  max-w-md ">
@@ -654,7 +652,7 @@ function ModelOnboardingPage() {
 
           <label htmlFor="">Images Upload :</label>
           <br></br>
-          <div className="flex ">
+          <div className="grid sm:grid-cols-3 ">
             <div className="flex items-center mr-5">
               <label
                 htmlFor="upload3"
