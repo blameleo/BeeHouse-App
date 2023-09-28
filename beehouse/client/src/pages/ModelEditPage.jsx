@@ -215,7 +215,7 @@ export default function ModelEditPage() {
       {loading ? (
         <Loader loaderStyle=" grid place-items-center h-[100vh]" />
       ) : (
-        <div className=" font-volkhorn  px-4 pt-">
+        <div className=" font-volkhorn  px-4 pb-20">
           <div className="flex justify-center mt-10">
             <h1 className="  text-xl py-4 text-bold">Update user profile</h1>
           </div>

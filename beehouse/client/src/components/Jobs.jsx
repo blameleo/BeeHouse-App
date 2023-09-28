@@ -23,7 +23,7 @@ function Jobs() {
     dispatch(fetchJobsStart());
     try {
       const response = await axios.get(
-        `https://beehouse-backend-api.onrender.com/models/getjobs`
+        `https://beehouse-backend-api.onrender.com/jobs/models/getjobs`
       );
       dispatch(fetchJobsSuccess(response.data));
       // console.log(response.data);
