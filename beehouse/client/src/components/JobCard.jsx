@@ -83,61 +83,82 @@ export default function JobCard({ job }) {
       setIsLoading(false);
     }
   };
+
+  //bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-blue-700 via-sky-400 to-cyan-600
+  //bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-purple-500 via-violet-500 to-sky-500
+  //bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-green-300 via-blue-500 to-purple-600
+  //bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-indigo-300 to-purple-400
+  //bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-rose-400 via-fuchsia-500 to-indigo-500
+  //bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-yellow-500 via-purple-500 to-blue-500
+  // bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-pink-500 via-red-500 to-yellow-500
+  console.log(job);
+  const newUrl = job?.agencyPic?.replace("public/", "");
   return (
     <div
       key={job._id}
-      className="  w-[300px] sm:w-[280px]   border border-gray-400 shadow-xl rounded-[20px] bg-white hover:scale-105 transition duration-500  mb-10"
+      className={`w-[370px] sm:w-[300px] text-white p-4  ${job.color}  shadow-2xl rounded-[20px] bg-white hover:scale-105 transition duration-500  mb-10`}
     >
-      <div
-        className=" bg-blue-100 rounded-[20px] m-2 p-2"
-        style={{ backgroundColor: job.color }}
-      >
-        <p className="bg-white rounded-lg flex justify-center w-24 py-1 px-8 text-[10px]">
-          {`${day},${month},${year}`}
-        </p>
-
-        <div className="pt-6 flex items-center">
-          <h1 className=" text-gray-700 text-[70%]">{job.agencyName}</h1>
-          <MdVerified className="ml-1 text-yellow-500 text-[90%]" />
+      <div className="flex">
+        <div className="col-span-1   rounded-lg">
+          <div className="bg-white w-12 grid place-items-center py-2 rounded-lg">
+            <img
+              className="w-8 h-8 rounded-full object-cover"
+              src={`http://localhost:4000/${newUrl}`}
+              alt=""
+            />
+          </div>
         </div>
-
-        <div className="py-2">
-          <h1 className="font-black text-md">{job.description}</h1>
-        </div>
-        <div className="flex flex-wrap">
-          {Object.values(job.tags).map((tag, i) => (
-            <p
-              key={i}
-              className="border border-gray-700 mr-2 text-gray-600 text-[14px] rounded-xl px-[5px] my-1"
-            >
-              {tag}
-            </p>
-          ))}
-          {/* // .join(",")} */}
+        <div className=" w-full pl-2">
+          <h1 className="font-bold text-[14px]">{job.description}</h1>
+          <div className="flex items-center">
+            <h1 className="text-white/75 text-[12px]">{job.agencyName}</h1>
+            <MdVerified className="ml-1 text-blue-700 text-[14px]" />
+          </div>
         </div>
       </div>
-      <div className="px-4 pt-2 flex  pb-1 justify-between items-center">
-        <div>
-          <p className="font-black text-md">₵{job.price}</p>
-          <p className="text-gray-500 text-sm">{job.location}</p>
-        </div>
-        {/* <GiBee
+
+      <div className="flex flex-wrap my-2 ">
+        {Object.values(job.tags).map((tag, i) => (
+          <p
+            key={i}
+            className="bg-white/25 px-3 rounded-[12px] text-white/60 mr-2"
+          >
+            {tag}
+          </p>
+        ))}
+        {/* // .join(",")} */}
+      </div>
+
+      {/* <div
+        className=""
+        // style={{ backgroundColor: job.color }}
+      >
+        <p className="">{`${day},${month},${year}`}</p>
+      </div> */}
+
+      <div className="flex justify-between items-center my-2">
+        <p className="text-sm">₵{job.price}</p>
+        <p className="text-sm">{job.location}</p>
+      </div>
+      {/* <GiBee
         onClick={}
         className="text-black text-[32px]  rounded-full cursor-pointer  h-10 w-10"
       /> */}
 
-        <div onClick={() => applyToJob(user?._id, job._id)}>
-          {isLoading ? (
-            <GiHourglass className="text-[12px] rounded-full cursor-pointer h-10 w-10" />
-          ) : isApplied ? (
-            <GiCheckMark className="text-green-500 text-[12px] rounded-full  cursor-not-allowed h-10 w-10" />
-          ) : (
-            <button className=" rounded px-5 hover:bg-purple-600 flex text-gray-100  items-center text-sm bg-yellow-500 py-1  font-bold">
-              <BsFillLightningChargeFill className="mr-2 text-gray-100" /> swift
-              apply
-            </button>
-          )}
-        </div>
+      <div
+        className="flex justify-center mt-4"
+        onClick={() => applyToJob(user?._id, job._id)}
+      >
+        {isLoading ? (
+          <GiHourglass className="text-[12px] rounded-full cursor-pointer h-10 w-6" />
+        ) : isApplied ? (
+          <GiCheckMark className="text-green-500 text-[12px] rounded-full  cursor-not-allowed h-10 w-10" />
+        ) : (
+          <button className=" rounded-lg px-5 hover:bg-purple-600 flex text-gray-100  items-center text-sm bg-black/70 py-1  font-bold">
+            <BsFillLightningChargeFill className="mr-2 text-gray-100" /> swift
+            apply
+          </button>
+        )}
       </div>
     </div>
   );

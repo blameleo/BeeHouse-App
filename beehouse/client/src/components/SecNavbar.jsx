@@ -113,7 +113,7 @@ function SecNavbar() {
   // console.log(user);
 
   return (
-    <div className="bg-black  fixed top-0  text-yellow-500 flex items-center justify-between text-sm p-4  w-full">
+    <div className="bg-black  fixed top-0 z-10  text-yellow-500 flex items-center justify-between text-sm p-4  w-full">
       <div className=" ">
         <Logo />
 
@@ -138,7 +138,7 @@ function SecNavbar() {
             onClick={toggleDropdown}
             ref={dropdownRef}
           >
-            <div className="relative">
+            <div className="relative ">
               <img
                 src={
                   newUrl
@@ -151,7 +151,7 @@ function SecNavbar() {
               {isOpen && (
                 <div
                   id="dropdown"
-                  className="z-10  bg-white absolute top-12 -left-6 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-yellow-500"
+                  className="    bg-white absolute top-12 -left-6 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-yellow-500"
                 >
                   <ul
                     className="py-2 text-sm text-gray-700 dark:text-gray-900"

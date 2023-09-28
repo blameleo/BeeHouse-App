@@ -44,6 +44,8 @@ function Jobs() {
     getJobs();
   }, []);
 
+  console.log(user);
+
   return (
     <div className="mt-40  fixed w-full   grid sm:grid-cols-12 ">
       <div className=" hidden lg:block col-span-3 ">
@@ -109,8 +111,6 @@ function Jobs() {
               </p>
             ) : (
               searchedJobs.map((job, i) => {
-                // const randomColor = getRandomColor();
-
                 return <JobCard key={i} job={job} />;
               })
             )}

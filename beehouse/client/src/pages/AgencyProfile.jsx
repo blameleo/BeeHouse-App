@@ -247,10 +247,9 @@ export default function AgencyProfile() {
               </button>
             </div>
           </form>
-
-          <ToastContainer />
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 }

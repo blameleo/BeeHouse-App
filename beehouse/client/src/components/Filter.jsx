@@ -4,6 +4,7 @@ import { Card } from "flowbite-react";
 export default function Filter() {
   return (
     <div className="border-r border-r-black p-4 ">
+      <h1 className="font-bold">Ads</h1>
       <img
         src="https://pbs.twimg.com/media/Ft6z2NPWcAE2F0y.jpg"
         alt=""

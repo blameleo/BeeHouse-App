@@ -136,6 +136,7 @@ function AgencyJobs() {
       setFormInfo({
         _id: user._id,
         agencyName: user.agencyName,
+        agencyPic: user.displayPicUrl,
         gender: "",
         complexion: "",
         stature: "",
@@ -165,17 +166,20 @@ function AgencyJobs() {
   }, [user?._id]);
 
   function getRandomColor() {
-    const base = 200; //
-    const variance = 55;
-    const red = base + Math.floor(Math.random() * variance);
-    const green = base + Math.floor(Math.random() * variance);
-    const blue = base + Math.floor(Math.random() * variance);
-    const yellow = base + Math.floor(Math.random() * variance);
-    const purple = base + Math.floor(Math.random() * variance);
-    const violet = base + Math.floor(Math.random() * variance);
-    const pink = base + Math.floor(Math.random() * variance);
+    const colors = [
+      "bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-blue-700 via-sky-400 to-cyan-600",
+      "bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-purple-500 via-violet-500 to-sky-500",
+      "bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-green-300 via-blue-500 to-purple-600",
+      "bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-indigo-300 to-purple-400",
+      "bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-rose-400 via-fuchsia-500 to-indigo-500",
+      "bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-yellow-500 via-purple-500 to-blue-500",
+      "bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-pink-500 via-red-500 to-yellow-500",
+    ];
 
-    return `rgb(${red}, ${green}, ${blue})`;
+    const randomIndex = Math.floor(Math.random() * colors.length);
+
+    // Return the element at the random index
+    return colors[randomIndex];
   }
 
   const style = {
@@ -229,7 +233,7 @@ function AgencyJobs() {
   };
 
   return (
-    <div className="border mt-16 border-black  sm:ml-[15%]">
+    <div className=" mt-16  sm:ml-[15%]">
       {/* <div className="flex">
         <h1 className="mt-20 text-xl ">Post an</h1>
         <RiAdvertisementFill className="mt-12 ml-2 text-6xl text-yellow-500" />

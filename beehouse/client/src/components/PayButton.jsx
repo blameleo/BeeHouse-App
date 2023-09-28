@@ -29,8 +29,8 @@ export default function PayButton({
     <div
       className={`rounded w-full p-2 text-sm ${
         buttonAvailability || status === "Approved"
-          ? "bg-yellow-500 text-white font-bold flex items-center cursor-pointer hover:bg-purple-600"
-          : "bg-gray-200 text-gray-400 hover:cursor-not-allowed flex items-center"
+          ? "bg-yellow-500 text-white font-bold flex justify-center items-center cursor-pointer hover:bg-purple-600"
+          : "bg-gray-200 text-gray-400 hover:cursor-not-allowed flex items-center justify-center"
       }`}
       disabled={updatedStep !== "Approved" || buttonAvailability}
     >

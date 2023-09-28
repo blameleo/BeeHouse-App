@@ -51,7 +51,7 @@ function AgencyModelCards() {
       {loading ? (
         <Loader loaderStyle="h-[100vh] grid place-items-center" />
       ) : (
-        <div className=" gap-10 grid   sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-3 place-items-center pb-28">
+        <div className=" gap-10 grid   lg:grid-cols-2 place-items-center lg:place-items-start  pb-28 m-2 ">
           {applications.length === 0 ? (
             <p className="pt-20 ">You have no applications</p>
           ) : (
@@ -75,10 +75,10 @@ function AgencyModelCards() {
 
               return (
                 <div class="bg-gradient-to-r from-yellow-400 to-purple-500 p-[2px] shadow-xl">
-                  <div className="border   bg-white  max-w-[400px] p-3  ">
-                    <div className=" justify-between">
+                  <div className="   bg-white  min-w-[400px] p-3  ">
+                    <div className=" ">
                       <div className="   ">
-                        <div className="grid grid-cols-3">
+                        <div className="grid grid-cols-4">
                           {/* <div></div> */}
                           <Carousel
                             autoPlay="true"
@@ -105,14 +105,14 @@ function AgencyModelCards() {
                               src={`http://localhost:4000/${url3}`}
                             />
                           </Carousel>
-                          <div className=" col-span-2 ">
+                          <div className=" col-span-3 ">
                             {/* <img
                             src={`http://localhost:4000/${newUrl}`}
                             className="w-10 h-10  mt-2  rounded-full object-cover"
                             alt=""
                           /> */}
 
-                            <div className="  ">
+                            <div className="  pl-4">
                               <div className="flex items-center">
                                 <BsPersonCircle className="text-sm" />
                                 <p className="ml-1 text-xs  text-gray-500 hover:text-blue-500">
@@ -141,9 +141,9 @@ function AgencyModelCards() {
                                   </p>
                                 </a>
                               </div>
-                              <div className="  text-gray-700 flex items-center ">
-                                <MdWork className="text-sm" />
-                                <p className="ml-1 text-xs font-bold text-gray-500 hover:text-blue-500">
+                              <div className="   flex items-center ">
+                                <MdWork className="text-md" />
+                                <p className="ml-1 text-xs font-bold text-gray-800 hover:text-blue-500">
                                   {application.jobId.description}
                                 </p>
                               </div>
