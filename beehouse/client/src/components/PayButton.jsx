@@ -27,7 +27,7 @@ export default function PayButton({
   };
   return (
     <div
-      className={`rounded w-full p-2 text-sm ${
+      className={`rounded w-[200px] p-2 text-[12px] sm:text-base  ${
         buttonAvailability || status === "Approved"
           ? "bg-yellow-500 text-white font-bold flex justify-center items-center cursor-pointer hover:bg-purple-600"
           : "bg-gray-200 text-gray-400 hover:cursor-not-allowed flex items-center justify-center"
@@ -35,7 +35,7 @@ export default function PayButton({
       disabled={updatedStep !== "Approved" || buttonAvailability}
     >
       <GiTakeMyMoney className="mr-1 text-xl" />
-      {<PaystackButton {...componentProps}>Pay via momo</PaystackButton>}{" "}
+      {<PaystackButton {...componentProps}>momo pay</PaystackButton>}{" "}
     </div>
   );
 }

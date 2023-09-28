@@ -104,7 +104,7 @@ function Jobs() {
         {loading ? (
           <Loader loaderStyle="  h-[100vh] grid place-items-center " />
         ) : (
-          <div className="grid sm:grid-cols-2  lg:grid-cols-3 place-items-center  w-full overflow-y-auto max-h-[80vh]  py-10">
+          <div className="grid sm:grid-cols-2  lg:grid-cols-3 place-items-center  w-full overflow-y-auto max-h-[80vh]  py-10 pb-28">
             {searchedJobs.length === 0 ? (
               <p className="text-black text-[20px]">
                 You have no jobs available

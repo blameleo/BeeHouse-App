@@ -74,8 +74,8 @@ function AgencyModelCards() {
               );
 
               return (
-                <div class="bg-gradient-to-r from-yellow-400 to-purple-500 p-[2px] shadow-xl">
-                  <div className="   bg-white  min-w-[400px] p-3  ">
+                <div class="bg-gradient-to-r from-yellow-400 sm:w-[400px] to-purple-500 p-[2px] shadow-xl">
+                  <div className="   bg-white   p-3  ">
                     <div className=" ">
                       <div className="   ">
                         <div className="grid grid-cols-4">
@@ -112,7 +112,7 @@ function AgencyModelCards() {
                             alt=""
                           /> */}
 
-                            <div className="  pl-4">
+                            <div className="  pl-8 sm:pl-4">
                               <div className="flex items-center">
                                 <BsPersonCircle className="text-sm" />
                                 <p className="ml-1 text-xs  text-gray-500 hover:text-blue-500">
@@ -150,7 +150,7 @@ function AgencyModelCards() {
 
                               <div className="flex justify-center  w-full  pt-4">
                                 <button
-                                  className="mr-5 bg-red-500 font-bold text-white rounded border-black px-2
+                                  className="mr-5 bg-red-500 w-[200px] font-bold text-[12px] sm:text-base text-white rounded border-black px-2
                 "
                                 >
                                   Reject
