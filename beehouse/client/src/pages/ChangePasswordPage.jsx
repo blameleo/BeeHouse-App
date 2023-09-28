@@ -72,7 +72,7 @@ function ChangePasswordPage() {
       ) : (
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full p-6 bg-white  md:mt-0 sm:max-w-md  sm:p-8">
-            <h2 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl border border-black">
+            <h2 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
               Change Password
             </h2>
             <form
@@ -133,15 +133,14 @@ function ChangePasswordPage() {
               <div className="flex justify-center">
                 <Button
                   name="Reset Password"
-                  style="bg-yellow-500 p-2 rounded-lg hover:bg-purple-600 hover:text-white"
+                  joinStyle="bg-yellow-500 p-2 rounded-lg hover:bg-purple-600 hover:text-white"
                 />
               </div>
             </form>
-
-            <ToastContainer />
           </div>
         </div>
       )}
+      <ToastContainer />
     </section>
   );
 }

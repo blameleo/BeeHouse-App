@@ -2,21 +2,52 @@ import React, { useState } from "react";
 import { BsSearch, BsGeoAlt, BsFillFunnelFill } from "react-icons/bs";
 import { GiBee } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
-import { searchJobs } from "../Redux/slice/jobSlice";
+import { searchResult } from "../Redux/slice/jobSlice";
 
 export default function SearchBar() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState({
+    title: "",
+    location: "",
+    company: "",
+  });
   const dispatch = useDispatch();
 
-  const handleSearch = () => {
-    setSearchTerm("");
-    dispatch(searchJobs(searchTerm));
+  const jobs = useSelector((state) => state.job.jobs);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    const resultsArray = jobs.filter((job) => {
+      console.log(job.location);
+      return (
+        job.description
+          .toLowerCase()
+          .includes(searchTerm.title.toLowerCase()) &&
+        job.location
+          .toLowerCase()
+          .includes(searchTerm.location.toLowerCase()) &&
+        job.agencyName.toLowerCase().includes(searchTerm.company.toLowerCase())
+      );
+    });
+    dispatch(searchResult(resultsArray));
+
+    // console.log(resultsArray);
+    setSearchTerm({
+      title: "",
+      location: "",
+      company: "",
+    });
 
     // alert(searchTerm);
   };
 
   const handleChange = (e) => {
-    setSearchTerm(e.target.value);
+    setSearchTerm((prev) => {
+      return {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+    });
   };
 
   const [expandedInputs, setExpandedInputs] = useState({});
@@ -39,7 +70,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div className=" bg-black  fixed z-20 w-full top-12 text-yellow-500 py-5 grid place-items-center   px-6">
+    <div className=" bg-black  fixed  w-full top-12 text-yellow-500 py-5 grid place-items-center   px-6">
       <form
         action=""
         className={`flex  items-center  ${
@@ -63,7 +94,7 @@ export default function SearchBar() {
             <BsSearch />
           </div>
           <input
-            className={`ml-2 placeholder:text-gray-400 outline-none  bg-black h-10 ${
+            className={`ml-2 placeholder:text-gray-400 outline-none border-none  bg-black h-10 ${
               isInputExpanded("workLocation")
                 ? "hidden"
                 : isInputExpanded("experience")
@@ -74,7 +105,7 @@ export default function SearchBar() {
             }`}
             type="text"
             name="title"
-            value={searchTerm}
+            value={searchTerm.title}
             onChange={handleChange}
             placeholder="Search gig by title"
             onClick={() => handleInputClick("designer")}
@@ -98,7 +129,7 @@ export default function SearchBar() {
             <BsGeoAlt />
           </div>
           <input
-            className={`ml-2 placeholder:text-gray-400 outline-none  bg-black h-10 ${
+            className={`ml-2 placeholder:text-gray-400 outline-none border-none  bg-black h-10 ${
               isInputExpanded("designer")
                 ? "hidden"
                 : isInputExpanded("experience")
@@ -108,6 +139,9 @@ export default function SearchBar() {
                 : ""
             }`}
             type="text"
+            name="location"
+            value={searchTerm.location}
+            onChange={handleChange}
             placeholder=" location"
             onClick={() => handleInputClick("workLocation")}
             onBlur={() => handleInputBlur("workLocation")}
@@ -131,7 +165,7 @@ export default function SearchBar() {
             <BsGeoAlt />
           </div>
           <input
-            className={`ml-2 placeholder:text-gray-400 outline-none  bg-black h-10 ${
+            className={`ml-2 placeholder:text-gray-400 outline-none border-none  bg-black h-10 ${
               isInputExpanded("designer")
                 ? "hidden"
                 : isInputExpanded("workLocation")
@@ -142,6 +176,9 @@ export default function SearchBar() {
             }`}
             type="text"
             placeholder="company"
+            name="company"
+            value={searchTerm.company}
+            onChange={handleChange}
             onClick={() => handleInputClick("experience")}
             onBlur={() => handleInputBlur("experience")}
           />

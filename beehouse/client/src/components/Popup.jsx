@@ -50,7 +50,7 @@ function Popup(props) {
     <Dialog
       open={openPopup}
       onClose={handleClose}
-      PaperProps={{ sx: { padding: "5px" } }}
+      PaperProps={{ sx: { padding: "25px" } }}
     >
       <DialogTitle>
         <div className="flex justify-center mb-10">
@@ -64,16 +64,20 @@ function Popup(props) {
 
       <DialogContent className="">
         {!showSignUpForm ? (
-          <div className="grid place-items-center">
+          <div className="grid sm:grid-cols-2 place-items-center">
             <button
-              className="w-48 bg-white rounded-lg shadow p-6 hover:cursor-pointer mb-8 hover:bg-yellow-500 mr-5"
+              className="w-48 bg-white rounded-lg shadow p-6 hover:cursor-pointer mb-8 hover:bg-yellow-500 sm:mr-5"
               onClick={() => {
                 setSelectedOption("model");
                 setIsModelSelected(true);
               }}
             >
               <div className="flex justify-between items-center mb-3">
+                <div>
+                  <MdAccessibilityNew size={30} />
+                </div>
                 <h1 className="uppercase text-blue-darker">Model</h1>
+
                 <div>
                   <input
                     className=""
@@ -86,9 +90,6 @@ function Popup(props) {
                   />
                 </div>
               </div>
-              <div>
-                <MdAccessibilityNew size={50} />
-              </div>
             </button>
             <button
               className="w-48 bg-white rounded-lg shadow p-6 hover:cursor-pointer mb-8 hover:bg-yellow-500"
@@ -98,7 +99,10 @@ function Popup(props) {
               }}
             >
               <div className="flex justify-between items-center mb-3">
-                <h1 className="uppercase text-blue-darker">Creative Agency</h1>
+                <div>
+                  <BsBuildingFillCheck size={30} />
+                </div>
+                <h1 className="uppercase text-blue-darker ">Agency</h1>
                 <div>
                   <input
                     className=""
@@ -110,9 +114,6 @@ function Popup(props) {
                     checked={selectedOption === "creativeAgency"}
                   />
                 </div>
-              </div>
-              <div>
-                <BsBuildingFillCheck size={50} />
               </div>
             </button>
           </div>

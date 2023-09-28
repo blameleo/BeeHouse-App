@@ -13,7 +13,7 @@ function AgencyDash() {
         <MiniDetailsCard />
         <MiniDetailsCard />
       </div> */}
-      <h1 className="pl-5 font-bold">DASHBOARD</h1>
+      <h1 className="pl-5 py-2 font-bold">Applications</h1>
       <AgencyModelCards />
 
       <ChatButtonFloater />

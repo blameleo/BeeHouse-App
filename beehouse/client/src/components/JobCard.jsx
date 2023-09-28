@@ -4,6 +4,7 @@ import { GiBee, GiCheckMark, GiHourglass } from "react-icons/gi";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { BsFillLightningChargeFill } from "react-icons/bs";
 
 export default function JobCard({ job }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -107,7 +108,7 @@ export default function JobCard({ job }) {
           {Object.values(job.tags).map((tag, i) => (
             <p
               key={i}
-              className="border border-gray-400 mr-2 text-gray-600 text-[14px] rounded-xl px-[5px] my-1"
+              className="border border-gray-700 mr-2 text-gray-600 text-[14px] rounded-xl px-[5px] my-1"
             >
               {tag}
             </p>
@@ -131,7 +132,8 @@ export default function JobCard({ job }) {
           ) : isApplied ? (
             <GiCheckMark className="text-green-500 text-[12px] rounded-full  cursor-not-allowed h-10 w-10" />
           ) : (
-            <button className="border rounded px-5 hover:bg-purple-600 bg-yellow-500 text-white font-bold">
+            <button className=" rounded px-5 hover:bg-purple-600 flex text-gray-100  items-center text-sm bg-yellow-500 py-1  font-bold">
+              <BsFillLightningChargeFill className="mr-2 text-gray-100" /> swift
               apply
             </button>
           )}

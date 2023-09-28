@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   jobs: [],
-  filteredJobs: [],
   loading: false,
   error: null,
+  filteredJobs: [],
 };
 
 const jobSlice = createSlice({
@@ -23,11 +23,9 @@ const jobSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    searchJobs: (state, action) => {
-      const searchTerm = action.payload.toLowerCase();
-      state.filteredJobs = state.jobs.filter((job) =>
-        job.title.toLowerCase().includes(searchTerm)
-      );
+
+    searchResult(state, action) {
+      state.filteredJobs = action.payload;
     },
   },
 });
@@ -36,7 +34,7 @@ export const {
   fetchJobsStart,
   fetchJobsSuccess,
   fetchJobsFailure,
-  searchJobs,
+  searchResult,
 } = jobSlice.actions;
 
 export default jobSlice.reducer;

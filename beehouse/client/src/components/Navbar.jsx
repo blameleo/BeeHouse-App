@@ -19,11 +19,14 @@ export default function Navbar() {
 
         <div className="flex items-center  w-40 justify-between">
           <Link to="/login">
-            <Button name="Sign in" />
+            <Button
+              name="Sign in"
+              joinStyle="bg-purple-500 text-white px-3 py-1 rounded"
+            />
           </Link>
           <Button
             name="Join"
-            joinStyle="border border-black px-3 rounded py-1 hover:bg-yellow-700 hover:border-none hover:text-white font-bold"
+            joinStyle="text-white bg-black hover:bg-purple-500 px-3 rounded py-1  hover:border-none hover:text-white font-bold"
             onClick={() => setOpenPopup(true)}
           />
         </div>

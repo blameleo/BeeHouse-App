@@ -130,15 +130,14 @@ function AgencySecurity() {
               <div className="flex justify-center">
                 <Button
                   name="Reset Password"
-                  style="bg-yellow-500 p-2 rounded-lg hover:bg-purple-600 hover:text-white"
+                  joinStyle="bg-yellow-500 p-2 rounded-lg hover:bg-purple-600 hover:text-white"
                 />
               </div>
             </form>
-
-            <ToastContainer />
           </div>
         </div>
       )}
+      <ToastContainer />
     </section>
   );
 }

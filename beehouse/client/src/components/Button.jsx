@@ -13,21 +13,7 @@ function Button({
 }) {
   return (
     <div>
-      <button
-        onClick={onClick}
-        className={
-          name === "sign up with google"
-            ? googleLoginStyle
-            : name === "Join"
-            ? joinStyle
-            : name === "login"
-            ? loginStyle
-            : name === "Sign in with google"
-            ? googleLoginStyle
-            : style
-        }
-      >
-        {name === "Sign in with google" && <FcGoogle className="mr-3" />}
+      <button onClick={onClick} className={joinStyle}>
         {name}
       </button>
     </div>

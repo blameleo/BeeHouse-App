@@ -74,101 +74,101 @@ function AgencyModelCards() {
               );
 
               return (
-                <div className="">
-                  <div className="border mt-5 rounded-2xl bg-white shadow-2xl max-w-[400px] p-2  ">
-                    <div className="flex justify-between">
+                <div class="bg-gradient-to-r from-yellow-400 to-purple-500 p-[2px] shadow-xl">
+                  <div className="border   bg-white  max-w-[400px] p-3  ">
+                    <div className=" justify-between">
                       <div className="   ">
-                        <div className="flex flex-col place-items-center  ">
-                          <img
+                        <div className="grid grid-cols-3">
+                          {/* <div></div> */}
+                          <Carousel
+                            autoPlay="true"
+                            infiniteLoop="true"
+                            showArrows={false}
+                            showStatus={false}
+                            showIndicators={false}
+                            showThumbs={false}
+                            width={100}
+                            className=" "
+                          >
+                            <img
+                              className="rounded-xl shadow-xl border "
+                              src={`http://localhost:4000/${url1}`}
+                            />
+
+                            <img
+                              className="rounded-xl shadow-xl border"
+                              src={`http://localhost:4000/${url2}`}
+                            />
+
+                            <img
+                              className="rounded-xl shadow-xl border"
+                              src={`http://localhost:4000/${url3}`}
+                            />
+                          </Carousel>
+                          <div className=" col-span-2 ">
+                            {/* <img
                             src={`http://localhost:4000/${newUrl}`}
                             className="w-10 h-10  mt-2  rounded-full object-cover"
                             alt=""
-                          />
+                          /> */}
 
-                          <div className=" ml-1 ">
-                            <div className="flex items-center">
-                              <BsPersonCircle className="text-sm" />
-                              <p className="ml-1  text-sm font-bold">
-                                {`${application.modelUserId.firstName} ${application.modelUserId.lastName}`}
-                              </p>
-                            </div>
-
-                            <div className="flex items-center hover:text-blue-500">
-                              <BiPhoneCall className="text-sm" />
-                              <a
-                                href={`tel:${application.modelUserId.telephone}`}
-                              >
-                                <p className=" ml-1 text-xs  text-gray-500 hover:text-blue-500">
-                                  {application.modelUserId.telephone}
+                            <div className="  ">
+                              <div className="flex items-center">
+                                <BsPersonCircle className="text-sm" />
+                                <p className="ml-1 text-xs  text-gray-500 hover:text-blue-500">
+                                  {`${application.modelUserId.firstName} ${application.modelUserId.lastName}`}
                                 </p>
-                              </a>
-                            </div>
+                              </div>
 
-                            <div className="flex items-center hover:text-blue-500">
-                              <MdEmail className="text-sm" />
-                              <a
-                                href={`mailto:${application.modelUserId.email}`}
-                              >
-                                <p className=" ml-1 text-xs  text-gray-500 hover:text-blue-500">
-                                  {application.modelUserId.email}
+                              <div className="flex items-center hover:text-blue-500">
+                                <BiPhoneCall className="text-sm" />
+                                <a
+                                  href={`tel:${application.modelUserId.telephone}`}
+                                >
+                                  <p className=" ml-1 text-xs  text-gray-500 hover:text-blue-500">
+                                    {application.modelUserId.telephone}
+                                  </p>
+                                </a>
+                              </div>
+
+                              <div className="flex items-center hover:text-blue-500">
+                                <MdEmail className="text-sm" />
+                                <a
+                                  href={`mailto:${application.modelUserId.email}`}
+                                >
+                                  <p className=" ml-1 text-xs  text-gray-500 hover:text-blue-500">
+                                    {application.modelUserId.email}
+                                  </p>
+                                </a>
+                              </div>
+                              <div className="  text-gray-700 flex items-center ">
+                                <MdWork className="text-sm" />
+                                <p className="ml-1 text-xs font-bold text-gray-500 hover:text-blue-500">
+                                  {application.jobId.description}
                                 </p>
-                              </a>
+                              </div>
+
+                              <div className="flex justify-center  w-full  pt-4">
+                                <button
+                                  className="mr-5 bg-red-500 font-bold text-white rounded border-black px-2
+                "
+                                >
+                                  Reject
+                                </button>
+
+                                <PayButton
+                                  status={application.status}
+                                  application={application}
+                                  updatedStep={updatedStep}
+                                  buttonAvailability={
+                                    buttonAvailabilities[application._id] ||
+                                    false
+                                  }
+                                />
+                              </div>
                             </div>
                           </div>
                         </div>
-
-                        <div className="pt-6 px-4  text-gray-700 flex items-start ">
-                          <MdWork className="text-lg" />
-                          <p className="text-[12px] ml-2">
-                            {application.jobId.description}
-                          </p>
-                        </div>
-
-                        <div className="flex justify-center   pt-4">
-                          <button
-                            className="mr-5 bg-red-500 font-bold text-white rounded border-black px-2
-                "
-                          >
-                            Reject
-                          </button>
-
-                          <PayButton
-                            status={application.status}
-                            application={application}
-                            updatedStep={updatedStep}
-                            buttonAvailability={
-                              buttonAvailabilities[application._id] || false
-                            }
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <Carousel
-                          autoPlay="true"
-                          infiniteLoop="true"
-                          showArrows={false}
-                          showStatus={false}
-                          showIndicators={false}
-                          showThumbs={false}
-                          width={100}
-                          className=" "
-                        >
-                          <img
-                            className="rounded-xl shadow-xl border "
-                            src={`http://localhost:4000/${url1}`}
-                          />
-
-                          <img
-                            className="rounded-xl shadow-xl border"
-                            src={`http://localhost:4000/${url2}`}
-                          />
-
-                          <img
-                            className="rounded-xl shadow-xl border"
-                            src={`http://localhost:4000/${url3}`}
-                          />
-                        </Carousel>
                       </div>
                     </div>
 

@@ -149,7 +149,7 @@ export default function Login() {
 
                 <Button
                   name="login"
-                  loginStyle="bg-yellow-500 w-full rounded text-white font-bold py-2  hover:bg-purple-600"
+                  joinStyle="bg-yellow-500 w-full rounded text-white font-bold py-2  hover:bg-purple-600"
                 />
 
                 {/* <Button
@@ -183,9 +183,9 @@ export default function Login() {
             setOpenPopup={setOpenPopup}
             onClose={handleClosePopup}
           ></Popup>
-          <ToastContainer />
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 }
