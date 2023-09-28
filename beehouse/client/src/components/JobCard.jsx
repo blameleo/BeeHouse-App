@@ -46,7 +46,7 @@ export default function JobCard({ job }) {
     };
     try {
       const response = await axios.post(
-        "http://localhost:4000/jobs/apply",
+        "https://beehouse-backend-api.onrender.com/jobs/apply",
         params
       );
 
@@ -103,7 +103,7 @@ export default function JobCard({ job }) {
           <div className="bg-white w-12 grid place-items-center py-2 rounded-lg">
             <img
               className="w-8 h-8 rounded-full object-cover"
-              src={`http://localhost:4000/${newUrl}`}
+              src={`https://beehouse-backend-api.onrender.com/${newUrl}`}
               alt=""
             />
           </div>

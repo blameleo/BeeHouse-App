@@ -121,7 +121,7 @@ export default function AgencyOnBoardingPage() {
     console.log("Submitting form data...");
     try {
       const response = await axios.put(
-        "http://localhost:4000/profile/user",
+        "https://beehouse-backend-api.onrender.com/profile/user",
         formInfo,
         {
           headers: {

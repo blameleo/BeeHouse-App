@@ -26,17 +26,17 @@ export default function ModelCardCarousel() {
               >
                 <img
                   className="rounded-xl shadow-xl border "
-                  src={`http://localhost:4000/${url1}`}
+                  src={`https://beehouse-backend-api.onrender.com/${url1}`}
                 />
 
                 <img
                   className="rounded-xl shadow-xl border"
-                  src={`http://localhost:4000/${url2}`}
+                  src={`https://beehouse-backend-api.onrender.com/${url2}`}
                 />
 
                 <img
                   className="rounded-xl shadow-xl border"
-                  src={`http://localhost:4000/${url3}`}
+                  src={`https://beehouse-backend-api.onrender.com/${url3}`}
                 />
               </Carousel>
             </div>

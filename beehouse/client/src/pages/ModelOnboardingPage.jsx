@@ -202,7 +202,7 @@ function ModelOnboardingPage() {
     console.log(formInfo);
     try {
       const response = await axios.put(
-        "http://localhost:4000/profile/user",
+        "https://beehouse-backend-api.onrender.com/profile/user",
         formInfo,
         {
           headers: {

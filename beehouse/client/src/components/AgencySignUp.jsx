@@ -34,7 +34,7 @@ function AgencySignUp() {
       setLoading(true);
       try {
         const response = await axios.post(
-          "http://localhost:4000/user/register",
+          "https://beehouse-backend-api.onrender.com/user/register",
           {
             ...values,
             type: "agency", // Set the agency type here

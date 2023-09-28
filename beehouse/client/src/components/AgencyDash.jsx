@@ -20,7 +20,7 @@ function AgencyDash() {
   const fetchAgencyJobs = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/jobs/getjobs/${user?._id}`
+        `https://beehouse-backend-api.onrender.com/jobs/getjobs/${user?._id}`
       );
       dispatch(fetchJobsSuccess(response.data));
     } catch (error) {

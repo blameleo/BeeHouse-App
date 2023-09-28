@@ -22,7 +22,7 @@ function Notification({ isVisible, toggleNotification }) {
     // console.log("test");
     try {
       const response = await axios.get(
-        `http://localhost:4000/jobs/notifications/${user?._id}`
+        `https://beehouse-backend-api.onrender.com/jobs/notifications/${user?._id}`
       );
       // console.log(response.data.unreadCount);
       dispatch(fetchNotificationSuccess(response.data.notifications));
@@ -35,7 +35,7 @@ function Notification({ isVisible, toggleNotification }) {
     try {
       // Send an HTTP request to your server to update the read status
       await axios.put(
-        `http://localhost:4000/jobs/notifications/${notificationId}`,
+        `https://beehouse-backend-api.onrender.com/jobs/notifications/${notificationId}`,
         {
           read: true,
         }
