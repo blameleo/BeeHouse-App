@@ -11,6 +11,8 @@ import { BsPersonCircle } from "react-icons/bs";
 import Loader from "./Loader";
 import ProgressBar from "./ProgressBar";
 import PayButton from "./PayButton";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function AgencyModelCards() {
   const [loading, setLoading] = useState(null);
@@ -39,23 +41,43 @@ function AgencyModelCards() {
     }
   };
 
+  const deleteApplication = async (id) => {
+    console.log(id);
+    try {
+      const response = await axios.delete(
+        `http://localhost:4000/jobs/applications/${id}`,
+        user?._id
+      );
+      if (response.status === 200) {
+        getApplications();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     setLoading(true);
     if (user) {
       getApplications();
+      AOS.init();
     }
   }, [user]);
-
+  useEffect(() => {}, []);
   return (
     <div className="">
       {loading ? (
         <Loader loaderStyle="h-[100vh] grid place-items-center" />
       ) : (
-        <div className=" gap-10 grid   lg:grid-cols-2 place-items-center lg:place-items-start  pb-28 m-2 ">
+        <div
+          data-aos="zoom-in"
+          data-aos-duration="1000"
+          className=" gap-10 grid   lg:grid-cols-2 place-items-center lg:place-items-start  pb-28 m-2 "
+        >
           {applications.length === 0 ? (
             <p className="pt-20 ">You have no applications</p>
           ) : (
-            applications.map((application) => {
+            applications?.map((application) => {
               const newUrl = application.modelUserId.displayPicUrl.replace(
                 "public/",
                 ""
@@ -74,8 +96,12 @@ function AgencyModelCards() {
               );
 
               return (
-                <div class="bg-gradient-to-r from-yellow-400 to-purple-500 p-[2px] shadow-xl">
-                  <div className="   bg-white  min-w-[400px] p-3  ">
+                <div
+                  data-aos="zoom-in"
+                  data-aos-duration="100"
+                  class="bg-gradient-to-r from-yellow-400 sm:w-[400px] to-purple-500 p-[2px] shadow-xl"
+                >
+                  <div className="   bg-white   p-3  ">
                     <div className=" ">
                       <div className="   ">
                         <div className="grid grid-cols-4">
@@ -150,6 +176,9 @@ function AgencyModelCards() {
 
                               <div className="flex justify-center  w-full  pt-4">
                                 <button
+                                  onClick={() =>
+                                    deleteApplication(application._id)
+                                  }
                                   className="mr-5 bg-red-500 font-bold text-white rounded border-black px-2
                 "
                                 >

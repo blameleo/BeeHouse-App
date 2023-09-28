@@ -75,7 +75,7 @@ function Notification({ isVisible, toggleNotification }) {
               Notifications
             </p>
             <BsFillXCircleFill
-              className=" text-red-600 cursor-pointer text-lg "
+              className=" text-red-600 hover:text-red-200 cursor-pointer text-lg "
               onClick={toggleNotification}
             />
           </div>

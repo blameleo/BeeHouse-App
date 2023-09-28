@@ -10,6 +10,8 @@ import Popup from "../components/Popup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../components/Loader";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -76,6 +78,10 @@ export default function Login() {
     },
   });
 
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   return (
     <div className="">
       {/* {loading ? (
@@ -100,7 +106,11 @@ export default function Login() {
               <Logo />
             </Link>
 
-            <div className="flex justify-center items-center h-5/6 ">
+            <div
+              data-aos="zoom-in"
+              data-aos-duration="500"
+              className="flex justify-center items-center h-5/6 "
+            >
               <form
                 onSubmit={formik.handleSubmit}
                 className="flex flex-col justify-around h-3/6 w-10/12 sm:w-4/12"

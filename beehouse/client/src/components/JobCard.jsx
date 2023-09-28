@@ -56,7 +56,7 @@ export default function JobCard({ job }) {
 
         setIsApplied(true);
         toast.success(response.data.message, {
-          position: "top-right",
+          position: "bottom-center",
           autoClose: true,
           hideProgressBar: false,
           closeOnClick: true,
@@ -70,7 +70,7 @@ export default function JobCard({ job }) {
       console.log(error);
       setIsLoading(false);
       toast.error(error.response.data.message, {
-        position: "top-right",
+        position: "bottom-center",
         autoClose: true,
         hideProgressBar: false,
         closeOnClick: true,

@@ -13,6 +13,8 @@ import {
 import Loader from "./Loader";
 import JobCard from "./JobCard";
 import { ToastContainer } from "react-toastify";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function Jobs() {
   const dispatch = useDispatch();
@@ -41,6 +43,8 @@ function Jobs() {
   console.log(searchedJobs);
 
   useEffect(() => {
+    AOS.init();
+
     getJobs();
   }, []);
 
@@ -104,7 +108,11 @@ function Jobs() {
         {loading ? (
           <Loader loaderStyle="  h-[100vh] grid place-items-center " />
         ) : (
-          <div className="grid sm:grid-cols-2  lg:grid-cols-3 place-items-center  w-full overflow-y-auto max-h-[80vh]  py-10">
+          <div
+            data-aos="zoom-in"
+            data-aos-duration="1000"
+            className="grid sm:grid-cols-2  lg:grid-cols-3 place-items-center  w-full overflow-y-auto max-h-[80vh]  py-10"
+          >
             {searchedJobs.length === 0 ? (
               <p className="text-black text-[20px]">
                 You have no jobs available
