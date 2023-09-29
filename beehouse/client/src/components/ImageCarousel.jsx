@@ -1,25 +1,33 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+// Import Swiper styles
 
 export default function ImageCarousel() {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
   return (
-    <Carousel
-      autoPlay="true"
-      infiniteLoop="true"
-      showArrows={false}
-      showStatus={false}
-      showIndicators={false}
-      showThumbs={false}
-      width={300}
-    >
-      <img className="rounded-xl shadow-xl border " src="/img/test2.webp" />
+    <Slider {...settings}>
+      <div className="">
+        {" "}
+        <img className="" src="/img/test2.webp" />{" "}
+      </div>
+      <div>
+        {" "}
+        <img className=" " src="/img/test3.jpg" />{" "}
+      </div>
 
-      <img className="rounded-xl shadow-xl border" src="/img/test3.jpg" />
-
-      <img
-        className="rounded-xl shadow-xl border"
-        src="/img/testimonials.png"
-      />
-    </Carousel>
+      <div>
+        {" "}
+        <img className="" src="/img/testimonials.png" />
+      </div>
+    </Slider>
   );
 }

@@ -8,6 +8,7 @@ import { SiUbereats } from "react-icons/si";
 import { GoLogoGithub } from "react-icons/go";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Slider from "react-slick";
 
 export default function Landing() {
   // useEffect(() => {
@@ -31,25 +32,51 @@ export default function Landing() {
     AOS.init();
   }, []);
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    // autoplay: true,
+    // speed: 2000,
+    // autoplaySpeed: 3000,
+  };
+
   return (
     <div className="bg-yellow-500 h-screen px-8">
       <Navbar />
-      <div className="grid sm:grid-cols-2   place-items-center h-[70vh] ">
+      <div className="grid sm:grid-cols-2 h-[70vh]   place-items-center">
         <div
           data-aos="zoom-in"
           data-aos-duration="1500"
-          className=" h-32 w-full "
+          className=" h-32 w-full"
         >
           <p className="font-volkhorn sm:text-6xl text-3xl">
             {text}
             <Cursor cursorColor="white" />
           </p>
         </div>
-        <div data-aos="zoom-in" data-aos-duration="1500" className=" ">
-          <ImageCarousel />
+        <div className="">
+          <img className="   mx-auto" src="/img/prod2.png" />{" "}
+          {/* <Slider {...settings}>
+            <div className="">
+              {" "}
+              <img className="rounded-lg   border " src="/img/prod.png" />{" "}
+            </div>
+            <div>
+              {" "}
+              <img className="rounded-lg " src="/img/test2.jpg" />{" "}
+            </div>
+
+            <div>
+              {" "}
+              <img className="rounded-lg" src="/img/test3.jpg" />
+            </div>
+          </Slider>{" "} */}
         </div>
       </div>
-      <div className="bg-yellow-500 flex justify-around items-center  text-2xl  mt-20    text-gray-700 font-semibold">
+      <div className="flex justify-around items-center  text-xl  pt-28    text-gray-700 ">
         <p>Trusted by :</p>
         <IoLogoAmazon />
         <SiNetflix />

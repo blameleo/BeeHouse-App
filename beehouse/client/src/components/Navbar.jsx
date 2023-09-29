@@ -17,7 +17,7 @@ export default function Navbar() {
       <nav className="py-3 flex justify-between">
         <Logo />
 
-        <div className="flex items-center  w-40 justify-between">
+        <div className="sm:flex items-center  sm:w-40 justify-between ">
           <Link to="/login">
             <Button
               name="Sign in"
@@ -26,7 +26,7 @@ export default function Navbar() {
           </Link>
           <Button
             name="Join"
-            joinStyle="text-white bg-black hover:bg-purple-500 px-3 rounded py-1  hover:border-none hover:text-white font-bold"
+            joinStyle="hidden sm:block text-white bg-black hover:bg-purple-500 px-3 rounded py-1  hover:border-none hover:text-white font-bold"
             onClick={() => setOpenPopup(true)}
           />
         </div>
