@@ -17,12 +17,6 @@ export default function Login() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [openPopup, setOpenPopup] = useState(false);
 
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     setLoading(false);
-  //   }, 1000);
-  // }, []);
-
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email").required("Email is required"),
     password: Yup.string().required("Password is required"),
@@ -51,13 +45,11 @@ export default function Login() {
 
         if (response.data.type === "model" && response.status === 200) {
           setLoading(false);
-          // setCookie("Email", response.data.email);
           setCookie("UserId", response.data.userId);
           setCookie("AuthToken", response.data.token);
 
           navigate("/home");
         } else if (response.data.type === "agency" && response.status === 200) {
-          // setCookie("Email", response.data.email);
           setCookie("UserId", response.data.userId);
           setCookie("AuthToken", response.data.token);
           setLoading(false);
@@ -81,19 +73,6 @@ export default function Login() {
 
   return (
     <div className="">
-      {/* {loading ? (
-        <div className="flex bg-yellow-500 justify-center h-screen items-center">
-          <Audio
-            height="80"
-            width="80"
-            radius="9"
-            color="black"
-            ariaLabel="three-dots-loading"
-            wrapperStyle
-            wrapperClass
-          />{" "}
-        </div>
-      ) : ( */}
       {loading ? (
         <Loader loaderStyle="h-screen flex justify-center items-center bg-yellow-500" />
       ) : (
@@ -106,7 +85,7 @@ export default function Login() {
             <div className="flex justify-center items-center h-5/6 ">
               <form
                 onSubmit={formik.handleSubmit}
-                className="flex flex-col justify-around h-3/6 w-10/12 sm:w-4/12"
+                className="flex flex-col justify-around h-3/6  w-10/12 sm:w-4/12 border p-3 rounded border-black"
               >
                 <div>
                   <h1 className="text-left font-bold text-lg mb-1">Login</h1>
@@ -155,11 +134,6 @@ export default function Login() {
                   joinStyle="bg-yellow-500 w-full rounded text-white font-bold py-2  hover:bg-purple-600"
                 />
 
-                {/* <Button
-                name="Sign in with google"
-                googleLoginStyle=" w-full border rounded py-1 flex justify-center items-center"
-              /> */}
-
                 <p className="text-xs text-center">
                   Don't have an account?{" "}
                   <a
@@ -170,6 +144,9 @@ export default function Login() {
                     Sign up
                   </a>
                 </p>
+                <Link to="/" className="text-xs text-blue-700 underline cursor-pointer mt-3">
+                  back to home page
+                </Link>
               </form>
             </div>
           </div>
