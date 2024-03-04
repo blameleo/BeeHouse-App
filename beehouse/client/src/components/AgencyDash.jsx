@@ -6,6 +6,7 @@ import BottomNav from "./BottomNav";
 import { fetchJobsFailure, fetchJobsSuccess } from "../Redux/slice/jobSlice";
 import axios from "axios";
 import { CiBadgeDollar } from "react-icons/ci";
+import { backend_url } from "../constants";
 
 function AgencyDash() {
   const applications = useSelector((state) => state.application.applications);
@@ -14,6 +15,8 @@ function AgencyDash() {
   const dispatch = useDispatch();
   console.log(applications);
 
+  backend_url;
+
   const auditionsApplications = () => {
     applications.filter((application) => application.status === "Paid");
   };
@@ -21,7 +24,7 @@ function AgencyDash() {
   const fetchAgencyJobs = async () => {
     try {
       const response = await axios.get(
-        `https://beehouse-backend-api.onrender.com/jobs/getjobs/${user?._id}`
+        `${backend_url}/jobs/getjobs/${user?._id}`
       );
       dispatch(fetchJobsSuccess(response.data));
     } catch (error) {
@@ -36,12 +39,6 @@ function AgencyDash() {
   }, [user?._id, applications]);
   return (
     <div className="  mt-16   sm:ml-[15%]  ">
-      {/* <div className="flex sm:flex-row justify-around flex-wrap">
-        <MiniDetailsCard />
-        <MiniDetailsCard />
-        <MiniDetailsCard />
-        <MiniDetailsCard />
-      </div> */}
       <h1 className="pl-5 py-2 font-bold text-lg">Applications</h1>
       <div className="flex justify-center md:justify-start gap-x-2">
         <div className="border   flex items-center justify-around   rounded-lg  bg-slate-700 bg-opacity-100 backdrop-blur-sm  drop-shadow-lg p-2 h-[60px]">
@@ -67,30 +64,8 @@ function AgencyDash() {
         </div>
       </div>
 
-      {/* <div className="flex mb-4  justify-center lg:justify-start border ">
-        <div className=" bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))]  ">
-          <h1 className=" font-bold  sm:text-[35px]">{applications.length}</h1>
-
-          <p className="sm:ml-10 font-bold">Applications Received</p>
-        </div>
-
-        <div className=" bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))]  flex  items-center from-gray-500 via-gray-800 to-black backdrop-blur-sm mr-2 text-white p-2  rounded">
-          <h1 className=" font-bold text-[45px]">{jobs.length}</h1>
-
-          <p className="sm:ml-10 font-bold">Jobs posted</p>
-        </div>
-
-        {/* <div className=" bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))]  flex  items-center from-gray-500 via-gray-800 to-black backdrop-blur-sm mr-2 text-white p-2  rounded">
-          <h1 className=" font-bold text-[45px]">
-            {auditionsApplications.length}
-          </h1>
-
-          <p className="sm:ml-10 font-bold">Auditions</p>
-        </div> */}
-      {/* </div> */}
       <AgencyModelCards />
       <ChatButtonFloater />
-      {/* <BottomNav /> */}
     </div>
   );
 }

@@ -31,7 +31,7 @@ const ProgressBar = ({
 
     try {
       const response = await axios.put(
-        `https://beehouse-backend-api.onrender.com/jobs/${id}/status`,
+        `${backend_url}/jobs/${id}/status`,
         data
       );
 

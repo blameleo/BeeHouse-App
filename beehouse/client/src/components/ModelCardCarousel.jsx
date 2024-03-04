@@ -1,6 +1,7 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import { useSelector } from "react-redux";
+import { backend_url } from "../constants";
 
 export default function ModelCardCarousel() {
   const applications = useSelector((state) => state.application.applications);
@@ -26,17 +27,17 @@ export default function ModelCardCarousel() {
               >
                 <img
                   className="rounded-xl shadow-xl border "
-                  src={`https://beehouse-backend-api.onrender.com/${url1}`}
+                  src={`${backend_url}/${url1}`}
                 />
 
                 <img
                   className="rounded-xl shadow-xl border"
-                  src={`https://beehouse-backend-api.onrender.com/${url2}`}
+                  src={`${backend_url}/${url2}`}
                 />
 
                 <img
                   className="rounded-xl shadow-xl border"
-                  src={`https://beehouse-backend-api.onrender.com/${url3}`}
+                  src={`${backend_url}/${url3}`}
                 />
               </Carousel>
             </div>

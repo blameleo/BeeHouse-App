@@ -8,16 +8,7 @@ import Jobs from "../components/Jobs";
 import BottomNav from "../components/BottomNav";
 
 export default function Home() {
-  // const { user, logOut } = UserAuth();
 
-  // const handleLogout = async () => {
-  //   try {
-  //     await logOut();
-  //     navigate('/')
-  //   } catch (e) {
-  //     console.log(e.message);
-  //   }
-  // };
   return (
     <div>
       <SecNavbar />

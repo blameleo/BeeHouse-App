@@ -10,6 +10,7 @@ import Popup from "../components/Popup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../components/Loader";
+import { backend_url } from "../constants";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -35,13 +36,10 @@ export default function Login() {
     onSubmit: async (values) => {
       setLoading(true);
       try {
-        const response = await axios.post(
-          "https://beehouse-backend-api.onrender.com/user/login",
-          {
-            email: values.email,
-            password: values.password,
-          }
-        );
+        const response = await axios.post(`${backend_url}/user/login`, {
+          email: values.email,
+          password: values.password,
+        });
 
         if (response.data.type === "model" && response.status === 200) {
           setLoading(false);
@@ -144,7 +142,10 @@ export default function Login() {
                     Sign up
                   </a>
                 </p>
-                <Link to="/" className="text-xs text-blue-700 underline cursor-pointer mt-3">
+                <Link
+                  to="/"
+                  className="text-xs text-blue-700 underline cursor-pointer mt-3"
+                >
                   back to home page
                 </Link>
               </form>

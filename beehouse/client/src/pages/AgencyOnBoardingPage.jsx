@@ -3,6 +3,7 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import SecNavbar from "../components/SecNavbar";
 import { useNavigate } from "react-router-dom";
+import { backend_url } from "../constants";
 
 export default function AgencyOnBoardingPage() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
@@ -121,7 +122,7 @@ export default function AgencyOnBoardingPage() {
     console.log("Submitting form data...");
     try {
       const response = await axios.put(
-        "https://beehouse-backend-api.onrender.com/profile/user",
+        `${backend_url}/profile/user`,
         formInfo,
         {
           headers: {

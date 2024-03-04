@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../components/Loader";
+import { backend_url } from "../constants";
 
 function ChangePasswordPage() {
   const [oldPassword, setOldPassword] = useState("");
@@ -26,7 +27,7 @@ function ChangePasswordPage() {
     // console.log(values);
     try {
       const response = await axios.post(
-        "https://beehouse-backend-api.onrender.com/profile/changepassword",
+        `${backend_url}/profile/changepassword`,
         values
       );
 

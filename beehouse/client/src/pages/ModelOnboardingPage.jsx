@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { useCookies } from "react-cookie";
 import SecNavbar from "../components/SecNavbar";
+import { backend_url } from "../constants";
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
 
@@ -86,24 +87,7 @@ function ModelOnboardingPage() {
   const months = Array.from({ length: 12 }, (_, i) => (i + 1).toString());
   const years = Array.from({ length: 65 }, (_, i) => (2023 - i).toString());
 
-  // const handleIdCardChange = (event) => {
-  //   const selectedFile5 = event.target.files[0];
-  //   setIdCardPic(selectedFile5);
 
-  //   setFormInfo((prevData) => ({
-  //     ...prevData,
-  //     idCardUrl: selectedFile5,
-  //   }));
-
-  //   const reader = new FileReader();
-  //   reader.onload = (e) => {
-  //     setImagePreviews((prevPreviews) => ({
-  //       ...prevPreviews,
-  //       idCardUrl: e.target.result,
-  //     }));
-  //   };
-  //   reader.readAsDataURL(selectedFile5);
-  // };
 
   const handleDisplayPicChange = (event) => {
     const selectedFile4 = event.target.files[0];
@@ -202,7 +186,7 @@ function ModelOnboardingPage() {
     console.log(formInfo);
     try {
       const response = await axios.put(
-        "https://beehouse-backend-api.onrender.com/profile/user",
+        `${backend_url}/profile/user`,
         formInfo,
         {
           headers: {
@@ -212,8 +196,7 @@ function ModelOnboardingPage() {
       );
 
       console.log(response.data.message);
-      // console.log(response.data.data);
-      // setCookie("userdata", response.data.data.firstName);
+     
 
       setInfo(response.data.message);
       navigate("/home");
@@ -223,10 +206,7 @@ function ModelOnboardingPage() {
   };
   return (
     <div className="bg-black   pb-36">
-      {/* <div className=" px-5 py-5  flex">
-        <FaForumbee className="text-yellow-500 mr-1 text-3xl" />
-        <h1 className="text-yellow-500 text-3xl">BeeHouse</h1>
-      </div> */}
+     
       <SecNavbar />
       <h1 className="text-4xl text-center text-yellow-500 mt-10 py-10  font-bold">
         Create Account
@@ -590,31 +570,7 @@ function ModelOnboardingPage() {
 
         <br></br>
         <div>
-          {/* <label htmlFor="">Identification Card :</label>
-          <br></br> */}
-          {/* <div className="flex items-center">
-            <label
-              htmlFor="upload1"
-              className="relative rounded-xl p-2 bg-neutral-550 border-dashed border-4  border-yellow-500 h-40 w-32 flex items-center justify-center cursor-pointer"
-            >
-              {imagePreviews.idCardUrl ? (
-                <img
-                  src={imagePreviews.idCardUrl}
-                  alt="Preview"
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <span className="text-gray-400 text-3xl">+</span>
-              )}{" "}
-            </label>
-            <input
-              type="file"
-              id="upload1"
-              name="idCardUrl"
-              className="hidden"
-              onChange={handleIdCardChange}
-            />
-          </div> */}
+        
           <br></br>
 
           <label htmlFor="">Profile pic:</label>

@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { backend_url } from "../constants";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -34,7 +35,7 @@ function AgencySignUp() {
       setLoading(true);
       try {
         const response = await axios.post(
-          "https://beehouse-backend-api.onrender.com/user/register",
+          backend_url,
           {
             ...values,
             type: "agency", // Set the agency type here

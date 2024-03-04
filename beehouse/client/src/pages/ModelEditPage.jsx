@@ -9,6 +9,7 @@ import Loader from "../components/Loader";
 
 import { AiFillCamera } from "react-icons/ai";
 import { clearUser, setUser } from "../Redux/slice/userSlice";
+import { backend_url } from "../constants";
 
 export default function ModelEditPage() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
@@ -149,7 +150,7 @@ export default function ModelEditPage() {
     // console.log(formInfo);
     try {
       const response = await axios.put(
-        "https://beehouse-backend-api.onrender.com/profile/user",
+        `${backend_url}/profile/user`,
         formInfo,
         {
           headers: {
@@ -233,7 +234,7 @@ export default function ModelEditPage() {
                   />
                 ) : (
                   <img
-                    src={`https://beehouse-backend-api.onrender.com/${user?.displayPicUrl?.replace(
+                    src={`${backend_url}/${user?.displayPicUrl?.replace(
                       "public/",
                       ""
                     )}`}
@@ -422,7 +423,7 @@ export default function ModelEditPage() {
                       />
                     ) : (
                       <img
-                        src={`https://beehouse-backend-api.onrender.com/${user?.imageUrl1?.replace(
+                        src={`${backend_url}/${user?.imageUrl1?.replace(
                           "public/",
                           ""
                         )}`}
@@ -453,7 +454,7 @@ export default function ModelEditPage() {
                       />
                     ) : (
                       <img
-                        src={`https://beehouse-backend-api.onrender.com/${user?.imageUrl2?.replace(
+                        src={`${backend_url}/${user?.imageUrl2?.replace(
                           "public/",
                           ""
                         )}`}
@@ -484,7 +485,7 @@ export default function ModelEditPage() {
                       />
                     ) : (
                       <img
-                        src={`https://beehouse-backend-api.onrender.com/${user?.imageUrl3?.replace(
+                        src={`${backend_url}/${user?.imageUrl3?.replace(
                           "public/",
                           ""
                         )}`}

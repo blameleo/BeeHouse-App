@@ -11,6 +11,7 @@ import { BsPersonCircle } from "react-icons/bs";
 import Loader from "./Loader";
 import ProgressBar from "./ProgressBar";
 import PayButton from "./PayButton";
+import { backend_url } from "../constants";
 
 function AgencyModelCards() {
   const [loading, setLoading] = useState(null);
@@ -25,7 +26,7 @@ function AgencyModelCards() {
   const getApplications = async () => {
     try {
       const response = await axios.get(
-        `https://beehouse-backend-api.onrender.com/jobs/model/applications/${user?._id}`
+        `${backend_url}/jobs/model/applications/${user?._id}`
       );
 
       if (response.status === 200) {
@@ -92,17 +93,17 @@ function AgencyModelCards() {
                           >
                             <img
                               className="rounded-xl shadow-xl border "
-                              src={`https://beehouse-backend-api.onrender.com/${url1}`}
+                              src={`${backend_url}/${url1}`}
                             />
 
                             <img
                               className="rounded-xl shadow-xl border"
-                              src={`https://beehouse-backend-api.onrender.com/${url2}`}
+                              src={`${backend_url}/${url2}`}
                             />
 
                             <img
                               className="rounded-xl shadow-xl border"
-                              src={`https://beehouse-backend-api.onrender.com/${url3}`}
+                              src={`${backend_url}/${url3}`}
                             />
                           </Carousel>
                           <div className=" col-span-3 ">
@@ -171,23 +172,6 @@ function AgencyModelCards() {
                         </div>
                       </div>
                     </div>
-
-                    {/* <p className="text-gray-400 ml-5">Tall dark Male model </p> */}
-                    {/* 
-      <div className="grid grid-cols-3 ml-3 ">
-        <div className="border  w-[80px] mt-3 text-center rounded text-gray-500  bg-gray-200">
-          Tall
-        </div>
-        <div className="border  w-[80px] mt-3 text-center rounded text-gray-500  bg-gray-200">
-          Fair
-        </div>
-        <div className="border  w-[80px] mt-3 text-center  rounded text-gray-500  bg-gray-200">
-          Dark
-        </div>
-        <div className="border  w-[80px] mt-3 text-center rounded text-gray-500  bg-gray-200">
-          Ugly
-        </div>
-      </div> */}
 
                     <div className="">
                       <ProgressBar

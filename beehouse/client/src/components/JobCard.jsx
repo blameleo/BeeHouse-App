@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { BsFillLightningChargeFill } from "react-icons/bs";
+import { backend_url } from "../constants";
 
 export default function JobCard({ job }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,7 +14,7 @@ export default function JobCard({ job }) {
 
   const date = new Date(job.createdAt);
 
-  // console.log(user);
+
 
   const day = date.getDate();
 
@@ -46,7 +47,7 @@ export default function JobCard({ job }) {
     };
     try {
       const response = await axios.post(
-        "https://beehouse-backend-api.onrender.com/jobs/apply",
+        `${backend_url}/jobs/apply`,
         params
       );
 
@@ -84,13 +85,7 @@ export default function JobCard({ job }) {
     }
   };
 
-  //bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-blue-700 via-sky-400 to-cyan-600
-  //bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-purple-500 via-violet-500 to-sky-500
-  //bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-green-300 via-blue-500 to-purple-600
-  //bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-indigo-300 to-purple-400
-  //bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-rose-400 via-fuchsia-500 to-indigo-500
-  //bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-yellow-500 via-purple-500 to-blue-500
-  // bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-pink-500 via-red-500 to-yellow-500
+
   console.log(job);
   const newUrl = job?.agencyPic?.replace("public/", "");
   return (
@@ -103,7 +98,7 @@ export default function JobCard({ job }) {
           <div className="bg-white w-12 grid place-items-center py-2 rounded-lg">
             <img
               className="w-8 h-8 rounded-full object-cover"
-              src={`https://beehouse-backend-api.onrender.com/${newUrl}`}
+              src={`${backend_url}/${newUrl}`}
               alt=""
             />
           </div>

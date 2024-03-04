@@ -184,52 +184,7 @@ export default function SearchBar() {
           />
         </div>
 
-        {/* <div
-          className={`md:flex hidden pl-4 items-center border-l transition-all delay-75 duration-100 ease-in-ou border-gray-400 ${
-            isInputExpanded("designer")
-              ? "pl-2 border-none"
-              : isInputExpanded("workLocation")
-              ? "pl-2  border-none"
-              : isInputExpanded("experience")
-              ? "pl-2 border-none"
-              : isInputExpanded("perMonth")
-              ? "pl-2 border-none w-[700px]"
-              : ""
-          }`}
-        >
-          <div className="border p-2 rounded-full border-yellow-500">
-            <BsGeoAlt />
-          </div>
-          <input
-            className={`ml-2 placeholder:text-gray-400 outline-none  bg-black h-10 ${
-              isInputExpanded("designer")
-                ? "hidden"
-                : isInputExpanded("workLocation")
-                ? "hidden"
-                : isInputExpanded("experience")
-                ? "hidden"
-                : ""
-            }`}
-            type="text"
-            placeholder="Per Month"
-            onClick={() => handleInputClick("perMonth")}
-            onBlur={() => handleInputBlur("perMonth")}
-          />
-        </div> */}
-
-        {/* <div className="hidden lg:block mr-6">
-          <label
-            htmlFor="small-range"
-            className="block mb-2 ml-4 text-sm font-medium text-gray-400 dark:text-gray-300"
-          >
-            Pay range
-          </label>
-          <input
-            id="small-range"
-            type="range"
-            className="w-[170px] ml-4 h-1  bg-gray-200 rounded-lg appearance-none cursor-pointer range-sm dark:bg-gray-800"
-          />
-        </div> */}
+     
         <BsFillFunnelFill className="md:hidden block mr-2 text-[20px] text-gray-500" />
         <GiBee
           onClick={handleSearch}

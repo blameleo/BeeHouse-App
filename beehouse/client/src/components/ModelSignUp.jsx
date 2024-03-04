@@ -6,6 +6,9 @@ import Loader from "./Loader";
 import RegistrationButton from "./RegistrationButton";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { backend_url } from "../constants";
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -14,8 +17,6 @@ const validationSchema = Yup.object({
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Confirm Password is required"),
 });
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 function ModelSignUp() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
@@ -32,15 +33,9 @@ function ModelSignUp() {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      // console.log(values);
       setLoading(true);
       try {
-        const response = await axios.post(
-          "https://beehouse-backend-api.onrender.com/user/register",
-          values
-        );
-
-        // console.log(response);
+        const response = await axios.post(backend_url, values);
         setCookie("Email", response.data.email);
         setCookie("UserId", response.data.userId);
         setCookie("AuthToken", response.data.token);
@@ -69,30 +64,6 @@ function ModelSignUp() {
     formik.handleBlur(e);
   };
 
-  //     console.log(response);
-  //     setCookie("Email", response.data.email);
-  //     setCookie("UserId", response.data.userId);
-  //     setCookie("AuthToken", response.data.token);
-  //     // alert("User is registered");
-  //     // navigate("/modelonboarding");
-  //     if (response.status === 200) {
-  //       setLoading(false);
-  //       navigate("/modelonboarding");
-  //     }
-  //   } catch (error) {
-  //     setLoading(false);
-  //     toast.error(error.response.data.message, {
-  //       position: "top-right",
-  //       autoClose: false,
-  //       hideProgressBar: false,
-  //       closeOnClick: true,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "colored",
-  //     });
-  //   }
-  // };
   return (
     <div>
       <form className=" border-black " onSubmit={formik.handleSubmit}>
@@ -152,7 +123,6 @@ function ModelSignUp() {
                 <p className="text-red-500">{formik.errors.confirmPassword}</p>
               )}
             <br></br>
-            {/* <p className="text-center text-xs text-green-500">{info}</p> */}
             <ToastContainer />
             <div className="flex justify-center mt-7">
               <RegistrationButton label="Sign up" />

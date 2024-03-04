@@ -8,6 +8,7 @@ import {
   unreadNotificationsCount,
   markNotificationAsRead,
 } from "../Redux/slice/notificationsSlice";
+import { backend_url } from "../constants";
 
 function Notification({ isVisible, toggleNotification }) {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function Notification({ isVisible, toggleNotification }) {
     // console.log("test");
     try {
       const response = await axios.get(
-        `https://beehouse-backend-api.onrender.com/jobs/notifications/${user?._id}`
+        `${backend_url}/jobs/notifications/${user?._id}`
       );
       // console.log(response.data.unreadCount);
       dispatch(fetchNotificationSuccess(response.data.notifications));
@@ -35,7 +36,7 @@ function Notification({ isVisible, toggleNotification }) {
     try {
       // Send an HTTP request to your server to update the read status
       await axios.put(
-        `https://beehouse-backend-api.onrender.com/jobs/notifications/${notificationId}`,
+        `${backend_url}/jobs/notifications/${notificationId}`,
         {
           read: true,
         }

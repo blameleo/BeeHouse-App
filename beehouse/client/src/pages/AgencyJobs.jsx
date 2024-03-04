@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Loader from "../components/Loader";
 import { useEffect } from "react";
 import { fetchJobsFailure, fetchJobsSuccess } from "../Redux/slice/jobSlice";
+import { backend_url } from "../constants";
 
 function AgencyJobs() {
   const [tags, setTags] = useState([]);
@@ -84,7 +85,7 @@ function AgencyJobs() {
 
     try {
       const response = await axios.post(
-        "https://beehouse-backend-api.onrender.com/jobs/create",
+        `${backend_url}/jobs/create`,
         formWithTags
       );
 
@@ -151,7 +152,7 @@ function AgencyJobs() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://beehouse-backend-api.onrender.com/jobs/getjobs/${user._id}`
+        `${backend_url}/jobs/getjobs/${user._id}`
       );
       dispatch(fetchJobsSuccess(response.data));
       setLoading(false);
@@ -198,7 +199,7 @@ function AgencyJobs() {
     setLoading(true);
     try {
       const response = await axios.delete(
-        `https://beehouse-backend-api.onrender.com/jobs/deletejob/${id}`
+        `${backend_url}/jobs/deletejob/${id}`
       );
 
       if (response.status === 200) {

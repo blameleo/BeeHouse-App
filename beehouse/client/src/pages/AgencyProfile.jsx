@@ -10,6 +10,7 @@ import Loader from "../components/Loader";
 
 import { AiFillCamera } from "react-icons/ai";
 import { clearUser, setUser } from "../Redux/slice/userSlice";
+import { backend_url } from "../constants";
 
 export default function AgencyProfile() {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
@@ -77,7 +78,7 @@ export default function AgencyProfile() {
 
     try {
       const response = await axios.put(
-        "https://beehouse-backend-api.onrender.com/profile/user",
+        `${backend_url}/profile/user`,
         formInfo,
         {
           headers: {
@@ -160,7 +161,7 @@ export default function AgencyProfile() {
                   />
                 ) : (
                   <img
-                    src={`https://beehouse-backend-api.onrender.com/${newUrl}`}
+                    src={`${backend_url}/${newUrl}`}
                     alt="preview"
                     className="w-full h-full object-cover rounded-full"
                   />

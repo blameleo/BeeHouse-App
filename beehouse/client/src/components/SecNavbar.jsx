@@ -13,6 +13,7 @@ import {
   fetchNotificationSuccess,
   unreadNotificationsCount,
 } from "../Redux/slice/notificationsSlice";
+import { backend_url } from "../constants";
 
 function SecNavbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,11 +27,7 @@ function SecNavbar() {
   );
   const dispatch = useDispatch();
 
-  // const notifications = useSelector(
-  //   (state) => state.notification.notifications
-  // );
 
-  // console.log(newNotificationsCount);
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -39,7 +36,6 @@ function SecNavbar() {
     setIsVisible(!isVisible);
   };
 
-  // console.log(user);
 
   const logOut = () => {
     removeCookie("AuthToken");
@@ -60,13 +56,12 @@ function SecNavbar() {
   };
   const userId = cookies.UserId;
 
-  // useEffect(() => {
-  // }, []);
 
   const getUser = async () => {
+    console.log(backend_url);
     try {
       const response = await axios.get(
-        "https://beehouse-backend-api.onrender.com/user/getuser",
+        `${backend_url}/user/getuser`,
         {
           params: { userId },
         }
@@ -83,7 +78,7 @@ function SecNavbar() {
     console.log(userId);
     try {
       const response = await axios.get(
-        `https://beehouse-backend-api.onrender.com/jobs/notifications/count/${userId}`
+        `${backend_url}/jobs/notifications/count/${userId}`
       );
 
       // console.log(response);
@@ -145,7 +140,7 @@ function SecNavbar() {
               <img
                 src={
                   newUrl
-                    ? `https://beehouse-backend-api.onrender.com/${newUrl}`
+                    ? `${backend_url}/${newUrl}`
                     : "/img/defaultpic.png"
                 }
                 alt=""
@@ -161,7 +156,7 @@ function SecNavbar() {
                     aria-labelledby="dropdownDefaultButton"
                   >
                     <li>
-                      <Link to={user.type === "model" ? "/settings" : null}>
+                      <Link to={user?.type === "model" ? "/settings" : null}>
                         <a className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-purple-600 dark:hover:text-white">
                           Settings
                         </a>
